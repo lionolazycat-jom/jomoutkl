@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>JomOutKL — KL Daily Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════ */
+:root{
+  --bg:#FFF3EE; --card:#fff; --warm:#FFF8F2; --warm2:#FFF5EC;
+  --border:rgba(0,0,0,0.07); --border2:rgba(0,0,0,0.11);
+  --orange:#FF6535; --od:#C94410; --amber:#F4A800;
+  --peach:#FFD8C4; --peach2:#FFE8D8;
+  --sg1:#FF8C00; --sg2:#F4C842;
+  --text:#1a1a1a; --t2:#3d3d3d; --muted:#888; --muted2:#aaa;
+  --green:#2d9e5c; --red:#e53e3e; --purple:#7c5cbf; --blue:#3b82f6; --teal:#319795;
+  --sh:0 2px 12px rgba(0,0,0,0.07); --sh2:0 1px 5px rgba(0,0,0,0.05);
+  /* theme overrides */
+  --theme-bg:var(--bg); --theme-text:var(--text);
+}
+
+/* ── TIME-OF-DAY BACKGROUND TRANSITION ── */
+body.morning { --bg-grad: linear-gradient(180deg,#FFE8CC 0%,#FFF3EE 40%); }
+body.afternoon { --bg-grad: linear-gradient(180deg,#FFDDB3 0%,#FFF3EE 35%); }
+body.evening { --bg-grad: linear-gradient(180deg,#FF9A5C 0%,#FFD4AA 20%,#FFF3EE 50%); }
+body.night { --bg-grad: linear-gradient(180deg,#2D1B4E 0%,#4A2060 15%,#FFF3EE 55%); }
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg-grad,var(--bg));
+  color:var(--text);font-family:'DM Sans',sans-serif;
+  font-size:15px;line-height:1.5;
+  max-width:480px;margin:0 auto;min-height:100vh;
+  transition:background 1.5s ease;
+}
+
+/* HEADER */
+.hdr{padding:14px 16px 8px;background:transparent;position:sticky;top:0;z-index:60;}
+.hdr-inner{
+  background:rgba(255,243,238,0.92);backdrop-filter:blur(14px);
+  border-radius:16px;padding:10px 14px 8px;
+  box-shadow:0 2px 12px rgba(255,101,53,0.08);
+  border:1px solid rgba(255,101,53,0.1);
+}
+.hdr-top{display:flex;align-items:flex-start;justify-content:space-between;}
+.logo{font-size:1.5rem;font-weight:700;line-height:1;display:flex;align-items:baseline;}
+.logo .out{color:var(--orange);}
+.logo .kl{font-size:.92rem;font-weight:500;color:var(--t2);margin-left:3px;}
+.demo-badge{
+  display:inline-flex;align-items:center;gap:3px;margin-left:7px;
+  background:var(--warm);border:1px solid var(--peach);
+  border-radius:20px;padding:2px 8px;
+  font-size:.6rem;font-weight:700;color:var(--amber);letter-spacing:.5px;
+  vertical-align:middle;
+}
+.demo-badge::before{content:'●';font-size:.42rem;color:var(--amber);}
+.hdr-date{font-size:.72rem;color:var(--muted);margin-top:2px;}
+.hdr-actions{display:flex;align-items:center;gap:7px;flex-shrink:0;}
+.moon-btn{
+  width:34px;height:34px;border-radius:50%;
+  background:var(--warm);border:1.5px solid var(--peach);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;cursor:pointer;transition:all .2s;
+}
+.moon-btn:hover{background:var(--peach);}
+.ai-btn{
+  background:var(--orange);color:#fff;border:none;
+  padding:7px 13px;border-radius:22px;
+  font-family:'DM Sans',sans-serif;font-weight:600;font-size:.78rem;
+  cursor:pointer;display:flex;align-items:center;gap:4px;
+  box-shadow:0 2px 8px rgba(255,101,53,.3);transition:opacity .2s;
+}
+.ai-btn::before{content:'✦';font-size:.6rem;}
+.ai-btn:hover{opacity:.88;}
+
+/* ALERT */
+.alert-bar{
+  margin:0 16px 6px;
+  background:#FFF5E0;border:1px solid rgba(244,168,0,.25);
+  border-radius:10px;padding:8px 12px;
+  font-size:.74rem;color:#7a5500;
+  display:flex;align-items:center;gap:5px;
+}
+
+/* TABS */
+.tabs-outer{
+  padding:0 16px 0;overflow-x:auto;scrollbar-width:none;
+  position:sticky;top:84px;z-index:50;
+  background:transparent;
+}
+.tabs-outer::-webkit-scrollbar{display:none;}
+.tabs-inner{
+  background:rgba(255,243,238,.92);backdrop-filter:blur(12px);
+  border-bottom:1.5px solid rgba(255,101,53,.1);
+  display:flex;gap:2px;padding:7px 0 7px;
+  white-space:nowrap;overflow-x:auto;scrollbar-width:none;
+}
+.tabs-inner::-webkit-scrollbar{display:none;}
+.tab{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:.78rem;font-weight:500;padding:6px 12px;border-radius:22px;
+  cursor:pointer;border:1.5px solid transparent;
+  color:var(--t2);background:transparent;transition:all .15s;
+  white-space:nowrap;font-family:'DM Sans',sans-serif;
+}
+.tab:hover{background:var(--peach2);color:var(--od);}
+.tab.active{background:var(--orange);color:#fff;border-color:var(--orange);font-weight:600;}
+
+/* PAGES */
+.page{display:none;padding:12px 16px 110px;animation:fadein .3s ease;}
+.page.active{display:block;}
+@keyframes fadein{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
+
+/* SECTION LABEL */
+.sec-lbl{
+  font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin:0 0 12px;display:flex;align-items:center;gap:6px;
+}
+.sec-lbl::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* ══════════════════
+   TODAY PAGE
+══════════════════ */
+/* score card */
+.score-card{
+  background:linear-gradient(135deg,var(--sg1),var(--sg2));
+  border-radius:20px;padding:22px 20px 20px;margin-bottom:12px;
+  position:relative;overflow:hidden;
+  box-shadow:0 4px 20px rgba(255,140,0,.22);
+}
+.score-card::after{
+  content:'';position:absolute;right:16px;top:12px;
+  font-size:3.5rem;opacity:.9;
+}
+.score-weather-emoji{position:absolute;right:16px;top:12px;font-size:3.5rem;line-height:1;}
+.score-num{font-size:5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-2px;}
+.score-denom{font-size:1.4rem;font-weight:400;opacity:.65;}
+.score-hl{font-size:1.15rem;font-weight:700;color:#fff;margin:7px 0 5px;letter-spacing:.2px;}
+.score-sub{font-size:.82rem;color:rgba(255,255,255,.88);line-height:1.55;max-width:250px;}
+
+/* interactive today sliders */
+.today-controls{
+  background:var(--card);border-radius:16px;padding:16px;
+  margin-bottom:12px;box-shadow:var(--sh2);border:1px solid var(--border);
+}
+.today-controls h4{font-size:.78rem;font-weight:700;color:var(--t2);margin-bottom:12px;display:flex;align-items:center;gap:5px;}
+.ctrl-row{margin-bottom:12px;}
+.ctrl-row:last-child{margin-bottom:0;}
+.ctrl-label{font-size:.68rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:flex;justify-content:space-between;}
+.ctrl-label span{color:var(--orange);font-weight:700;text-transform:none;letter-spacing:0;}
+input[type=range]{
+  width:100%;-webkit-appearance:none;height:4px;
+  border-radius:4px;background:var(--peach);outline:none;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:18px;height:18px;border-radius:50%;
+  background:var(--orange);border:2px solid #fff;
+  box-shadow:0 1px 4px rgba(255,101,53,.3);cursor:pointer;
+}
+.activity-pills{display:flex;gap:6px;flex-wrap:wrap;}
+.act-pill{
+  font-size:.72rem;padding:5px 12px;border-radius:20px;cursor:pointer;
+  border:1.5px solid var(--border);color:var(--t2);background:transparent;
+  font-family:'DM Sans',sans-serif;transition:all .15s;
+}
+.act-pill.on{background:var(--orange);color:#fff;border-color:var(--orange);}
+
+/* weather card */
+.wx-card{
+  background:var(--card);border-radius:20px;padding:18px;
+  margin-bottom:12px;box-shadow:var(--sh);border:1px solid var(--border);
+}
+.wx-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px;}
+.wx-ico{font-size:2.6rem;display:block;margin-bottom:5px;}
+.wx-temp{font-size:2.6rem;font-weight:800;color:var(--text);line-height:1;}
+.wx-feels{font-size:.75rem;color:var(--muted);margin-top:2px;}
+.wx-cond{font-size:.84rem;font-weight:600;color:var(--t2);margin-top:2px;}
+.wx-stats{text-align:right;display:flex;flex-direction:column;gap:3px;}
+.wx-stat{font-size:.73rem;color:var(--t2);}
+.aqi{color:var(--amber);font-weight:600;}
+.wx-div{border:none;border-top:1px solid var(--border);margin:12px 0;}
+.wx-hourly{display:flex;justify-content:space-between;}
+.wx-hr{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;}
+.wx-hr-t{font-size:.62rem;color:var(--muted);font-weight:500;}
+.wx-hr-i{font-size:1.1rem;}
+.wx-hr-d{font-size:.76rem;font-weight:600;color:var(--t2);}
+.advisory{
+  margin-top:12px;background:#FFFBF0;
+  border-left:3px solid var(--amber);border-radius:0 8px 8px 0;
+  padding:9px 12px;font-size:.79rem;color:#7a5500;font-weight:500;
+  display:flex;align-items:flex-start;gap:5px;
+}
+
+/* financial snapshot */
+.fin-card{
+  background:var(--card);border-radius:16px;padding:16px;
+  margin-bottom:12px;box-shadow:var(--sh2);border:1px solid var(--border);
+}
+.fin-card h4{font-size:.78rem;font-weight:700;color:var(--t2);margin-bottom:12px;display:flex;align-items:center;gap:5px;}
+.fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.fin-item{
+  background:var(--warm);border-radius:12px;padding:11px 13px;
+  border:1px solid var(--border);
+}
+.fin-item-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:3px;}
+.fin-item-val{font-size:1rem;font-weight:700;color:var(--text);}
+.fin-item-sub{font-size:.68rem;margin-top:2px;display:flex;align-items:center;gap:3px;}
+.fin-up{color:var(--green);}
+.fin-dn{color:var(--red);}
+.fin-nc{color:var(--muted);}
+.fin-note{font-size:.72rem;color:var(--muted);margin-top:8px;line-height:1.5;}
+
+/* ══════════════════
+   FOOD PAGE
+══════════════════ */
+.sub-tabs{display:flex;gap:5px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.sub-tabs::-webkit-scrollbar{display:none;}
+.stab{
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:.76rem;font-weight:500;padding:6px 13px;border-radius:22px;
+  cursor:pointer;border:1.5px solid var(--border);
+  color:var(--t2);background:transparent;white-space:nowrap;
+  font-family:'DM Sans',sans-serif;transition:all .15s;
+}
+.stab.active{background:var(--orange);color:#fff;border-color:var(--orange);font-weight:600;}
+.stab:hover:not(.active){background:var(--peach2);color:var(--od);}
+
+/* place card */
+.pc{
+  background:var(--card);border-radius:16px;padding:14px;
+  margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);
+  display:flex;gap:12px;
+}
+.pc-ico{font-size:2rem;flex-shrink:0;margin-top:2px;}
+.pc-body{flex:1;min-width:0;}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.pc-name{font-size:.93rem;font-weight:700;color:var(--text);line-height:1.2;}
+.open-pill{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:.63rem;font-weight:600;padding:2px 8px;border-radius:20px;
+  background:#f0faf5;color:var(--green);border:1px solid rgba(45,158,92,.2);
+  white-space:nowrap;flex-shrink:0;
+}
+.open-pill::before{content:'●';font-size:.42rem;}
+.pc-area{font-size:.72rem;color:var(--muted);margin:2px 0 6px;}
+.pc-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.stars{color:var(--amber);font-size:.73rem;}
+.reviews{font-size:.7rem;color:var(--muted);}
+.price-bars{display:flex;gap:2px;align-items:center;}
+.pb{width:5px;height:9px;border-radius:2px;background:var(--orange);}
+.pb.dim{background:var(--peach);}
+.price-lbl{font-size:.68rem;color:var(--muted);margin-left:2px;}
+.more{font-size:.7rem;color:var(--muted);cursor:pointer;}
+
+/* ══════════════════
+   EVENTS PAGE
+══════════════════ */
+.filter-banner{
+  background:rgba(255,101,53,.07);border-radius:10px;
+  padding:10px 13px;margin-bottom:12px;
+  font-size:.79rem;color:var(--od);
+  display:flex;align-items:center;gap:6px;
+}
+.source-tabs{display:flex;gap:5px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none;}
+.source-tabs::-webkit-scrollbar{display:none;}
+.src-tab{
+  font-size:.7rem;font-weight:500;padding:5px 11px;border-radius:20px;
+  cursor:pointer;border:1.5px solid var(--border);color:var(--t2);
+  background:transparent;white-space:nowrap;font-family:'DM Sans',sans-serif;transition:all .15s;
+}
+.src-tab.active{background:var(--orange);color:#fff;border-color:var(--orange);}
+.src-tab:hover:not(.active){background:var(--peach2);}
+.ev-card{
+  background:var(--card);border-radius:16px;padding:16px;
+  margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);
+}
+.ev-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.ev-cat{font-size:.69rem;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid;}
+.ev-cat.cultural{background:rgba(124,92,191,.1);color:var(--purple);border-color:rgba(124,92,191,.2);}
+.ev-cat.exhibition{background:rgba(59,130,246,.1);color:var(--blue);border-color:rgba(59,130,246,.2);}
+.ev-cat.night{background:rgba(45,158,92,.1);color:var(--green);border-color:rgba(45,158,92,.2);}
+.ev-cat.social{background:rgba(255,101,53,.1);color:var(--od);border-color:rgba(255,101,53,.2);}
+.ev-cat.tiktok{background:rgba(0,0,0,.06);color:#333;border-color:rgba(0,0,0,.1);}
+.ev-cat.ig{background:rgba(193,53,132,.1);color:#c13584;border-color:rgba(193,53,132,.2);}
+.ev-cat.mall{background:rgba(59,130,246,.08);color:var(--blue);border-color:rgba(59,130,246,.15);}
+.verdict{
+  font-size:.67rem;font-weight:700;padding:3px 9px;border-radius:20px;
+  background:rgba(45,158,92,.1);color:var(--green);border:1px solid rgba(45,158,92,.2);
+  white-space:nowrap;
+}
+.verdict.amber{background:rgba(244,168,0,.1);color:#7a5500;border-color:rgba(244,168,0,.25);}
+.ev-title{font-size:.97rem;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.25;}
+.ev-src{font-size:.68rem;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:3px;}
+.ev-desc{font-size:.81rem;color:var(--t2);line-height:1.5;margin-bottom:9px;}
+.ev-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.ev-tag{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:.69rem;padding:3px 8px;border-radius:20px;
+  border:1px solid var(--border);color:var(--t2);background:var(--warm);
+}
+.ev-tag.indoor{background:rgba(59,130,246,.07);color:var(--blue);border-color:rgba(59,130,246,.2);}
+.ev-tag.outdoor{background:rgba(45,158,92,.07);color:var(--green);border-color:rgba(45,158,92,.2);}
+.ev-tag.free{background:rgba(45,158,92,.07);color:var(--green);border-color:rgba(45,158,92,.2);}
+.ev-tag.price{background:rgba(244,168,0,.07);color:#7a5500;border-color:rgba(244,168,0,.2);}
+.ev-tag.time{background:rgba(255,101,53,.07);color:var(--od);border-color:rgba(255,101,53,.2);}
+
+/* ══════════════════
+   NEWS PAGE
+══════════════════ */
+.news-banner{
+  background:#FFF5E0;border-radius:10px;padding:9px 12px;
+  margin-bottom:12px;font-size:.79rem;color:#7a5500;
+  display:flex;align-items:center;gap:5px;
+}
+.news-card{
+  background:var(--card);border-radius:16px;padding:16px;
+  margin-bottom:10px;box-shadow:var(--sh2);
+  border:1px solid var(--border);border-left:4px solid var(--border);
+}
+.news-card.med{border-left-color:var(--amber);}
+.news-card.high{border-left-color:var(--red);}
+.news-card.low{border-left-color:var(--green);}
+.news-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px;}
+.news-title{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.3;}
+.impact{
+  font-size:.63rem;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;flex-shrink:0;
+}
+.impact.med{background:rgba(244,168,0,.1);color:#7a5500;border:1px solid rgba(244,168,0,.25);}
+.impact.high{background:rgba(229,62,62,.1);color:var(--red);border:1px solid rgba(229,62,62,.25);}
+.impact.low{background:rgba(45,158,92,.1);color:var(--green);border:1px solid rgba(45,158,92,.2);}
+.news-row{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);}
+.news-row:last-of-type{border-bottom:none;}
+.news-ico{font-size:.88rem;flex-shrink:0;margin-top:1px;}
+.n-lbl{font-size:.59rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:1px;}
+.n-val{font-size:.8rem;color:var(--t2);}
+.brain-box{
+  margin-top:10px;background:rgba(255,101,53,.06);
+  border-radius:8px;padding:9px 12px;
+  font-size:.79rem;color:var(--od);line-height:1.55;
+}
+
+/* ══════════════════
+   TRANSIT PAGE
+══════════════════ */
+.transit-card{
+  background:var(--card);border-radius:16px;padding:16px;
+  margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);
+}
+.tc-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:3px;}
+.tc-verdict{font-size:.82rem;color:var(--green);font-weight:600;margin-bottom:7px;display:flex;align-items:center;gap:4px;}
+.tc-note{font-size:.8rem;color:var(--t2);margin-bottom:9px;display:flex;align-items:flex-start;gap:5px;}
+.tc-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.tc-tag{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:.69rem;padding:4px 9px;border-radius:20px;
+  border:1px solid var(--border);color:var(--t2);background:var(--warm);
+}
+.tc-tag.avoid{background:rgba(229,62,62,.07);color:var(--red);border-color:rgba(229,62,62,.2);}
+.jom-tip{
+  background:rgba(59,130,246,.07);border-radius:10px;
+  padding:10px 13px;margin:8px 0;
+  font-size:.79rem;color:var(--blue);line-height:1.55;
+}
+
+/* ══════════════════
+   HIKE PAGE
+══════════════════ */
+.hike-card{
+  background:var(--card);border-radius:16px;padding:16px;
+  margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);
+}
+.hike-diff{
+  display:inline-block;font-size:.67rem;font-weight:700;
+  padding:3px 10px;border-radius:20px;margin-bottom:8px;
+}
+.hike-diff.hard{background:rgba(229,62,62,.1);color:var(--red);border:1px solid rgba(229,62,62,.2);}
+.hike-diff.easy{background:rgba(45,158,92,.1);color:var(--green);border:1px solid rgba(45,158,92,.2);}
+.hike-diff.mod{background:rgba(244,168,0,.1);color:#7a5500;border:1px solid rgba(244,168,0,.2);}
+.hike-name{font-size:1.02rem;font-weight:700;color:var(--text);margin-bottom:3px;}
+.hike-loc{font-size:.73rem;color:var(--muted);margin-bottom:9px;}
+.permit-box{border-radius:10px;padding:10px 12px;margin-bottom:10px;}
+.permit-box.warn{background:#FFFBE8;border:1px solid rgba(244,168,0,.3);}
+.permit-box.ok{background:#F0FAF5;border:1px solid rgba(45,158,92,.25);}
+.p-lbl{font-size:.59rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;display:flex;align-items:center;gap:4px;}
+.p-lbl.warn{color:var(--amber);}
+.p-lbl.ok{color:var(--green);}
+.p-text{font-size:.79rem;color:var(--t2);line-height:1.5;}
+.p-link{color:var(--blue);font-size:.79rem;margin-top:4px;display:block;}
+.hike-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px;}
+.hike-tag{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:.69rem;padding:3px 9px;border-radius:20px;
+  border:1px solid var(--border);color:var(--t2);background:var(--warm);
+}
+.worth{font-size:.81rem;color:var(--t2);margin-bottom:7px;}
+.worth strong{color:var(--green);}
+.warn-strip{
+  background:rgba(255,101,53,.07);border-radius:8px;
+  padding:8px 11px;font-size:.77rem;color:var(--od);
+  display:flex;align-items:flex-start;gap:4px;
+}
+
+/* ══════════════════
+   ESCAPE PAGE
+══════════════════ */
+.esc-card{
+  background:var(--card);border-radius:16px;padding:17px;
+  margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);
+}
+.esc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px;}
+.esc-name{font-size:1.12rem;font-weight:700;color:var(--text);}
+.esc-desc{font-size:.83rem;color:var(--t2);margin-bottom:9px;line-height:1.5;}
+.star-box{
+  background:rgba(244,168,0,.08);border-radius:8px;
+  padding:8px 11px;margin-bottom:9px;
+  font-size:.81rem;color:#7a5500;
+  display:flex;align-items:center;gap:5px;
+}
+.esc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px;}
+.esc-tag{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:.69rem;padding:3px 9px;border-radius:20px;
+  border:1px solid var(--border);background:var(--warm);color:var(--t2);
+}
+.esc-tag.train{background:rgba(59,130,246,.07);color:var(--blue);border-color:rgba(59,130,246,.2);}
+.esc-note{font-size:.77rem;color:var(--muted);font-style:italic;display:flex;align-items:center;gap:4px;}
+
+/* ══════════════════
+   WELLNESS PAGE
+══════════════════ */
+.tip-strip{
+  background:rgba(124,92,191,.08);border-radius:10px;
+  padding:10px 13px;margin:8px 0;
+  font-size:.79rem;color:var(--purple);line-height:1.55;
+}
+
+/* ══════════════════
+   ABOUT PAGE
+══════════════════ */
+.about-hero{
+  background:linear-gradient(135deg,var(--sg1),var(--sg2));
+  border-radius:18px;padding:22px 18px;margin-bottom:12px;
+}
+.about-hero h1{font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:7px;}
+.about-hero p{font-size:.86rem;color:rgba(255,255,255,.9);line-height:1.6;margin-bottom:4px;}
+.about-hero q{font-size:.83rem;color:rgba(255,255,255,.8);font-style:italic;}
+.about-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;}
+.about-pill{
+  font-size:.72rem;padding:4px 11px;border-radius:20px;
+  background:rgba(255,255,255,.2);color:#fff;
+  border:1px solid rgba(255,255,255,.25);font-weight:500;
+}
+.about-card{
+  background:var(--card);border-radius:16px;padding:15px;
+  margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);
+}
+.about-card h3{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:11px;display:flex;align-items:center;gap:5px;}
+.how-row{display:flex;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px solid var(--border);}
+.how-row:last-child{border-bottom:none;}
+.how-ico{font-size:1.15rem;flex-shrink:0;margin-top:1px;}
+.how-lbl{font-size:.83rem;font-weight:600;color:var(--orange);margin-bottom:1px;}
+.how-desc{font-size:.78rem;color:var(--t2);}
+.src-g{margin-bottom:9px;}
+.src-g-lbl{font-size:.59rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;display:flex;align-items:center;gap:4px;}
+.src-g-val{font-size:.8rem;color:var(--t2);}
+.demo-warn{
+  background:#FFF0F0;border:1px solid rgba(229,62,62,.2);
+  border-radius:10px;padding:10px 12px;margin-top:10px;
+  font-size:.77rem;color:var(--red);line-height:1.5;
+  display:flex;align-items:flex-start;gap:5px;
+}
+.fb-card{background:var(--card);border-radius:16px;padding:17px;margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);}
+.fb-card h3{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:3px;display:flex;align-items:center;gap:5px;}
+.fb-card p{font-size:.79rem;color:var(--muted);margin-bottom:13px;}
+.fb-lbl{font-size:.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin:11px 0 5px;}
+.stars-row{display:flex;gap:6px;}
+.star-btn{font-size:1.35rem;cursor:pointer;color:var(--muted2);transition:color .15s;}
+.star-btn.lit{color:var(--amber);}
+.cat-chips{display:flex;flex-wrap:wrap;gap:5px;}
+.cat-chip{
+  font-size:.77rem;padding:6px 11px;border-radius:20px;
+  border:1.5px solid var(--border);color:var(--t2);
+  background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;
+}
+.cat-chip.sel,.cat-chip:hover{border-color:var(--orange);color:var(--orange);background:rgba(255,101,53,.06);}
+.fb-ta{
+  width:100%;background:var(--warm);border:1.5px solid var(--peach);
+  border-radius:12px;padding:11px;font-family:'DM Sans',sans-serif;
+  font-size:.82rem;color:var(--text);resize:none;height:86px;outline:none;margin-bottom:11px;
+}
+.fb-ta::placeholder{color:var(--muted2);}
+.fb-submit{
+  width:100%;background:var(--warm);color:var(--muted);border:none;
+  padding:12px;border-radius:12px;font-family:'DM Sans',sans-serif;
+  font-size:.86rem;font-weight:600;cursor:pointer;
+}
+.footer{text-align:center;padding:14px 0 6px;border-top:1px solid var(--border);margin-top:4px;}
+.foot-logo{font-size:.83rem;color:var(--orange);font-weight:700;}
+.foot-logo span{color:var(--text);}
+.footer p{font-size:.7rem;color:var(--muted);margin-top:2px;}
+
+/* QUALITY CHECK */
+.qc{
+  background:#FFFDF5;border:1px solid #F4D060;
+  border-radius:16px;padding:15px;margin-top:6px;
+}
+.qc-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.qc-title{font-size:.88rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:4px;}
+.qc-conf{font-size:.66rem;font-weight:700;padding:3px 8px;border-radius:20px;background:#FFF0D0;color:#7a5500;border:1px solid rgba(244,168,0,.3);}
+.qc-desc{font-size:.76rem;color:var(--t2);line-height:1.55;margin-bottom:9px;}
+.qc-wlbl{font-size:.59rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:5px;display:flex;align-items:center;gap:4px;}
+.qc-i{font-size:.76rem;color:var(--t2);padding:4px 0;border-bottom:1px solid rgba(244,168,0,.12);display:flex;align-items:flex-start;gap:4px;line-height:1.4;}
+.qc-i:last-child{border-bottom:none;}
+.qc-f{margin-top:8px;}
+.qc-flbl{font-size:.59rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;display:flex;align-items:center;gap:4px;}
+.qc-fi{font-size:.74rem;color:var(--muted2);text-decoration:line-through;padding:3px 0;}
+
+
+/* PLAYFUL NO-DATA */
+.nodata{
+  background:var(--card);border:1.5px dashed var(--peach);
+  border-radius:16px;padding:28px 20px;text-align:center;margin-bottom:10px;
+  box-shadow:var(--sh2);
+}
+.nodata-emoji{font-size:2.4rem;margin-bottom:10px;display:block;}
+.nodata-msg{font-size:.92rem;font-weight:600;color:var(--od);margin-bottom:6px;line-height:1.4;}
+.nodata-sub{font-size:.76rem;color:var(--muted);line-height:1.5;}
+.nodata-status{
+  display:inline-block;margin-top:10px;font-size:.62rem;
+  background:var(--warm);border:1px solid var(--peach);border-radius:20px;
+  padding:3px 10px;color:var(--muted);font-family:monospace;
+}
+
+/* FLOAT */
+.float{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:min(480px,100%);background:rgba(255,243,238,.96);
+  border-top:1px solid var(--border);padding:10px 16px 18px;
+  backdrop-filter:blur(12px);z-index:70;
+}
+.float-inner{
+  display:flex;gap:8px;background:var(--card);
+  border:1.5px solid var(--peach);border-radius:14px;
+  padding:8px 8px 8px 13px;
+}
+.float-inner input{
+  flex:1;background:none;border:none;outline:none;
+  font-family:'DM Sans',sans-serif;font-size:.84rem;color:var(--text);
+}
+.float-inner input::placeholder{color:var(--muted2);}
+.float-send{
+  background:var(--orange);color:#fff;border:none;
+  padding:8px 15px;border-radius:10px;
+  font-family:'DM Sans',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;
+}
+</style>
+</head>
+<body class="morning">
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-inner">
+    <div class="hdr-top">
+      <div>
+        <div class="logo">Jom<span class="out">Out</span><span class="kl"> KL</span><span class="demo-badge">DEMO</span></div>
+        <div class="hdr-date" id="hdr-date">Saturday, 30 May 2026</div>
+      </div>
+      <div class="hdr-actions">
+        <div class="moon-btn" id="modeBtn" title="Theme mode">🌅</div>
+        <button class="ai-btn">AI</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="alert-bar">⚠️ AI refresh failed — using demo data.</div>
+
+<!-- TABS -->
+<div class="tabs-outer">
+  <div class="tabs-inner" id="tabBar">
+    <button class="tab active" onclick="go('today',this)">🏙 Today</button>
+    <button class="tab" onclick="go('food',this)">🍜 Food</button>
+    <button class="tab" onclick="go('wellness',this)">🧘 Wellness</button>
+    <button class="tab" onclick="go('events',this)">🎉 Events</button>
+    <button class="tab" onclick="go('news',this)">📰 News</button>
+    <button class="tab" onclick="go('transit',this)">🚇 Transit</button>
+    <button class="tab" onclick="go('hike',this)">🥾 Hike</button>
+    <button class="tab" onclick="go('escape',this)">🗺 Escape</button>
+    <button class="tab" onclick="go('about',this)">ℹ️ About</button>
+  </div>
+</div>
+
+<!-- ══════════ TODAY ══════════ -->
+<div id="page-today" class="page active">
+
+  <div class="score-card" id="scoreCard">
+    <div class="score-weather-emoji" id="scoreEmoji">☀️</div>
+    <div class="score-num" id="scoreNum">7<span class="score-denom">/10</span></div>
+    <div class="score-hl" id="scoreHl">GO OUT EARLY</div>
+    <div class="score-sub" id="scoreSub">Great morning for breakfast and cafés. Afternoon storm coming — plan around it.</div>
+  </div>
+
+  <!-- Interactive Controls -->
+  <div class="today-controls">
+    <h4>🎛 Customise Your Day</h4>
+    <div class="ctrl-row">
+      <div class="ctrl-label">Departure Time <span id="timeVal">Now (3:00 PM)</span></div>
+      <input type="range" id="timeSlider" min="6" max="24" value="15" oninput="updateTime(this.value)"/>
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-label">Group Size <span id="groupVal">Solo</span></div>
+      <input type="range" id="groupSlider" min="1" max="10" value="1" oninput="updateGroup(this.value)"/>
+    </div>
+    <div class="ctrl-row">
+      <div class="ctrl-label">Activity Mood</div>
+      <div class="activity-pills">
+        <button class="act-pill on" onclick="toggleAct(this)">🍽 Eat</button>
+        <button class="act-pill" onclick="toggleAct(this)">☕ Café</button>
+        <button class="act-pill" onclick="toggleAct(this)">🧘 Chill</button>
+        <button class="act-pill" onclick="toggleAct(this)">🥾 Hike</button>
+        <button class="act-pill" onclick="toggleAct(this)">🎉 Events</button>
+        <button class="act-pill" onclick="toggleAct(this)">🌃 Nightlife</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Weather -->
+  <div class="wx-card">
+    <div class="wx-top">
+      <div>
+        <span class="wx-ico" id="wxIco">☀️</span>
+        <div class="wx-temp">31°<span style="font-size:1.5rem;font-weight:400">c</span></div>
+        <div class="wx-feels">Feels like 37°C</div>
+        <div class="wx-cond">Sunny with afternoon storm risk</div>
+      </div>
+      <div class="wx-stats">
+        <div class="wx-stat">💧 76% humidity</div>
+        <div class="wx-stat">🌬 14 km/h NE</div>
+        <div class="wx-stat">☀️ UV 9 — Very High</div>
+        <div class="wx-stat"><span class="aqi">AQI 52 — Moderate</span></div>
+        <div class="wx-stat">🌅 7:02AM · 🌇 7:14PM</div>
+      </div>
+    </div>
+    <hr class="wx-div"/>
+    <div class="wx-hourly">
+      <div class="wx-hr"><div class="wx-hr-t">7AM</div><div class="wx-hr-i">☀️</div><div class="wx-hr-d">28°</div></div>
+      <div class="wx-hr"><div class="wx-hr-t">10AM</div><div class="wx-hr-i">🌤</div><div class="wx-hr-d">31°</div></div>
+      <div class="wx-hr"><div class="wx-hr-t">1PM</div><div class="wx-hr-i">⛅</div><div class="wx-hr-d">33°</div></div>
+      <div class="wx-hr"><div class="wx-hr-t">4PM</div><div class="wx-hr-i">⛈</div><div class="wx-hr-d">29°</div></div>
+      <div class="wx-hr"><div class="wx-hr-t">7PM</div><div class="wx-hr-i">🌦</div><div class="wx-hr-d">27°</div></div>
+      <div class="wx-hr"><div class="wx-hr-t">10PM</div><div class="wx-hr-i">🌧</div><div class="wx-hr-d">25°</div></div>
+    </div>
+    <div class="advisory">⚡ Plan outdoor activities before 2PM. Thunderstorm 4–6PM.</div>
+  </div>
+
+  <!-- Financial Snapshot -->
+  <div class="fin-card">
+    <h4>💰 Financial Snapshot</h4>
+    <div class="fin-grid">
+      <div class="fin-item">
+        <div class="fin-item-label">Gold (MYR/g)</div>
+        <div class="fin-item-val">RM 412</div>
+        <div class="fin-item-sub fin-up">▲ +1.2% today</div>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-label">USD / MYR</div>
+        <div class="fin-item-val">4.71</div>
+        <div class="fin-item-sub fin-dn">▼ −0.3% today</div>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-label">SGD / MYR</div>
+        <div class="fin-item-val">3.52</div>
+        <div class="fin-item-sub fin-nc">→ No change</div>
+      </div>
+      <div class="fin-item">
+        <div class="fin-item-label">Bitcoin</div>
+        <div class="fin-item-val">$107k</div>
+        <div class="fin-item-sub fin-up">▲ +2.4% today</div>
+      </div>
+      <div class="fin-item" style="grid-column:1/-1">
+        <div class="fin-item-label">RON95</div>
+        <div class="fin-item-val">RM 2.05 / L</div>
+        <div class="fin-item-sub fin-nc">→ Unchanged this week</div>
+      </div>
+    </div>
+    <div class="fin-note">⚠️ Demo data — not connected to live exchange APIs. Verify before making financial decisions.</div>
+  </div>
+
+  <div class="qc">
+    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
+    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, Eventbrite API, MyParks live availability.</div>
+    <div class="qc-wlbl">⚠️ Active Warnings</div>
+    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
+    <div class="qc-i">· MRT/LRT data estimated (no public live API)</div>
+    <div class="qc-i">· Events not verified against live sources today</div>
+    <div class="qc-i">· Permit slots not checked live — pre-book via MPAJ</div>
+    <div class="qc-i">· Financial data is demo — not connected to live APIs</div>
+  </div>
+</div>
+
+<!-- ══════════ FOOD ══════════ -->
+<div id="page-food" class="page">
+  <div class="sec-lbl">🍜 Food Intelligence</div>
+  <div class="sub-tabs">
+    <button class="stab active" onclick="ftab('breakfast',this)">🌅 Breakfast</button>
+    <button class="stab" onclick="ftab('cafes',this)">☕ Cafés</button>
+    <button class="stab" onclick="ftab('lunch',this)">☀️ Lunch</button>
+    <button class="stab" onclick="ftab('dinner',this)">🌆 Dinner</button>
+    <button class="stab" onclick="ftab('street',this)">🚦 Street</button>
+  </div>
+
+  <div id="fd-breakfast">
+    <div class="pc"><div class="pc-ico">🍚</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Nasi Lemak Tanglin</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Jalan Duta · 4.2 km from KLCC</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.7 (2,341)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
+    <div class="pc"><div class="pc-ico">🍲</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Bak Kut Teh (Petaling Street)</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Chinatown · 1.8 km from Masjid Jamek LRT</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.5 (1,089)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
+    <div class="pc"><div class="pc-ico">🫓</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Pelita Nasi Kandar KLCC</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Ampang/KLCC · 0.8 km from KLCC LRT</div><div class="pc-meta"><span class="stars">★★★★</span><span class="reviews">4.2 (3,782)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
+  </div>
+
+  <div id="fd-cafes" style="display:none">
+    <div class="pc"><div class="pc-ico">☕</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Breakfast Thieves</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Bangsar · 4.0 km from KL Sentral</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.6 (890)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
+    <div class="pc"><div class="pc-ico">🧋</div><div class="pc-body"><div class="pc-top"><div class="pc-name">VCR Cafe</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Pudu · 2.1 km from Hang Tuah LRT</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.5 (1,203)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
+    <div class="pc"><div class="pc-ico">🫖</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Pulp by Papa Palheta</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Medan Pasar · 0.9 km from Masjid Jamek LRT</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.7 (764)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
+  </div>
+
+  <div id="fd-lunch" style="display:none">
+    <div class="pc"><div class="pc-ico">🍛</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Village Park Restaurant</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Damansara Uptown · 12 km from KLCC</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.7 (4,512)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
+    <div class="pc"><div class="pc-ico">🥘</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Restoran Syed (Nasi Kandar)</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Bukit Bintang · 0.4 km from Bukit Bintang MRT</div><div class="pc-meta"><span class="stars">★★★★</span><span class="reviews">4.3 (2,100)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
+  </div>
+
+  <div id="fd-dinner" style="display:none">
+    <div class="pc"><div class="pc-ico">🍽</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Enak KL</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Starhill Gallery, Bukit Bintang</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.6 (723)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb"></div><div class="pb dim"></div></div><span class="price-lbl">Pricey</span><span class="more">▼ More</span></div></div></div>
+    <div class="pc"><div class="pc-ico">🏡</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Bijan Bar & Restaurant</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Jalan Ceylon · 1.2 km from Raja Chulan Monorail</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.5 (1,104)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
+  </div>
+
+  <div id="fd-street" style="display:none">
+    <div class="pc"><div class="pc-ico">🌃</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Jalan Alor</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Bukit Bintang · 0.6 km from Bukit Bintang MRT</div><div class="pc-meta"><span class="stars">★★★★</span><span class="reviews">4.3 (6,201)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
+    <div class="pc"><div class="pc-ico">🍜</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Imbi Market</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Imbi · 1.0 km from Imbi Monorail</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.5 (980)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
+    <div class="pc"><div class="pc-ico">🥩</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Gurney Drive (Padang Merbok)</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Chow Kit · 2.3 km from Chow Kit LRT</div><div class="pc-meta"><span class="stars">★★★★</span><span class="reviews">4.2 (1,450)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
+  </div>
+
+  <div class="qc" style="margin-top:8px;">
+    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
+    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, Eventbrite API, MyParks live availability.</div>
+    <div class="qc-wlbl">⚠️ Active Warnings</div>
+    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
+    <div class="qc-i">· MRT/LRT data estimated (no public live API)</div>
+    <div class="qc-i">· Events not verified against Eventbrite today</div>
+    <div class="qc-i">· Permit slots not checked live — pre-book via MPAJ</div>
+    <div class="qc-i">· Google Maps &amp; Foursquare APIs require paid keys</div>
+    <div class="qc-f">
+      <div class="qc-flbl">🗑 Filtered Out</div>
+      <div class="qc-fi">Generic tourism directory content — not decision-relevant</div>
+      <div class="qc-fi">Political news — no transport/cost/safety impact</div>
+      <div class="qc-fi">Unverified hours excluded</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ WELLNESS ══════════ -->
+<div id="page-wellness" class="page">
+  <div class="sec-lbl">🧘 Wellness &amp; Recovery</div>
+  <div class="sub-tabs">
+    <button class="stab active" onclick="wtab('all',this)">🧘 All</button>
+    <button class="stab" onclick="wtab('spa',this)">🛁 Spa</button>
+    <button class="stab" onclick="wtab('yoga',this)">🌿 Yoga</button>
+    <button class="stab" onclick="wtab('massage',this)">💆 Massage</button>
+    <button class="stab" onclick="wtab('gym',this)">🏋 Gym</button>
+  </div>
+  <div id="well-all">
+    <div class="pc"><div class="pc-ico">🛁</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Hammam Spa KL</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 KLCC · 0.3 km from KLCC LRT</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.7 (432)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb"></div><div class="pb"></div></div><span class="price-lbl">Fine Dining</span><span class="more">▼ More</span></div></div></div>
+    <div class="pc"><div class="pc-ico">🧘</div><div class="pc-body"><div class="pc-top"><div class="pc-name">VHI Yoga Studio</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Bangsar · 5.2 km from KLCC</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.8 (654)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
+    <div class="pc"><div class="pc-ico">💆</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Urban Oasis Massage</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Bukit Bintang · 1.5 km from Pavilion KL</div><div class="pc-meta"><span class="stars">★★★★</span><span class="reviews">4.4 (1,120)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
+    <div class="pc"><div class="pc-ico">🏋</div><div class="pc-body"><div class="pc-top"><div class="pc-name">F45 Training KLCC</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 KLCC · 0.5 km from KLCC LRT</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.6 (542)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb"></div><div class="pb dim"></div></div><span class="price-lbl">Pricey</span><span class="more">▼ More</span></div></div></div>
+  </div>
+  <div class="tip-strip">🧘 Booking tip: Spa and yoga should be booked 24–48hrs ahead on weekdays. Walk-ins work for massage.</div>
+  <div class="qc" style="margin-top:6px;">
+    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
+    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, Eventbrite API, MyParks live availability.</div>
+    <div class="qc-wlbl">⚠️ Active Warnings</div>
+    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
+  </div>
+</div>
+
+<!-- ══════════ EVENTS ══════════ -->
+<div id="page-events" class="page">
+  <div class="sec-lbl">🎉 Events &amp; Experiences</div>
+  <div class="filter-banner">🔍 Aggressively filtered. Only high-decision-value events shown.</div>
+  <div class="source-tabs">
+    <button class="src-tab active" onclick="evSrc('all',this)">All Sources</button>
+    <button class="src-tab" onclick="evSrc('verified',this)">✅ Verified</button>
+    <button class="src-tab" onclick="evSrc('tiktok',this)">🎵 TikTok</button>
+    <button class="src-tab" onclick="evSrc('ig',this)">📸 Instagram</button>
+    <button class="src-tab" onclick="evSrc('mall',this)">🏬 Mall</button>
+    <button class="src-tab" onclick="evSrc('klfoodie',this)">🍴 KL Foodie</button>
+  </div>
+
+  <!-- Verified -->
+  <div class="ev-card" data-src="verified">
+    <div class="ev-top"><span class="ev-cat cultural">Cultural</span><span class="verdict">YES</span></div>
+    <div class="ev-title">Central Market Heritage Walk</div>
+    <div class="ev-src">📌 Source: VisitKL.com</div>
+    <div class="ev-desc">Self-guided batik and craft trail through Kasturi Walk. Genuinely curated.</div>
+    <div class="ev-tags"><span class="ev-tag indoor">🏛 Indoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag free">💰 Free</span><span class="ev-tag time">⏳ Ongoing</span></div>
+  </div>
+  <div class="ev-card" data-src="verified">
+    <div class="ev-top"><span class="ev-cat exhibition">Exhibition</span><span class="verdict">YES — go today</span></div>
+    <div class="ev-title">MAP KL — Digital Art Exhibition</div>
+    <div class="ev-src">📌 Source: Ticket2U</div>
+    <div class="ev-desc">Immersive Malaysian digital art. Weekdays: half the weekend crowd.</div>
+    <div class="ev-tags"><span class="ev-tag indoor">🏛 Indoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag price">💰 RM 35</span><span class="ev-tag time">⏳ Until June</span></div>
+  </div>
+  <div class="ev-card" data-src="verified">
+    <div class="ev-top"><span class="ev-cat night">Night Market</span><span class="verdict amber">YES if nearby</span></div>
+    <div class="ev-title">Tong Shin Pasar Malam</div>
+    <div class="ev-src">📌 Source: CloudJoi</div>
+    <div class="ev-desc">Local night market. Real food, zero tourist markup.</div>
+    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag free">💰 Free entry</span><span class="ev-tag time">⏳ Tonight only</span></div>
+  </div>
+
+  <!-- TikTok -->
+  <div class="ev-card" data-src="tiktok" style="display:none">
+    <div class="ev-top"><span class="ev-cat tiktok">🎵 TikTok Trending</span><span class="verdict amber">CHECK FIRST</span></div>
+    <div class="ev-title">Pop-Up Takoyaki Stall @ Chow Kit</div>
+    <div class="ev-src">📌 Source: TikTok @klfoodies · 48K views</div>
+    <div class="ev-desc">Viral Japanese street food pop-up spotted near Chow Kit area. Unverified location — DM the creator for exact spot.</div>
+    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag free">💰 ~RM 8</span><span class="ev-tag time">⏳ This weekend only</span></div>
+  </div>
+  <div class="ev-card" data-src="tiktok" style="display:none">
+    <div class="ev-top"><span class="ev-cat tiktok">🎵 TikTok Trending</span><span class="verdict amber">CHECK FIRST</span></div>
+    <div class="ev-title">KLCC Fountain Light Show</div>
+    <div class="ev-src">📌 Source: TikTok @visitkl.my · 120K views</div>
+    <div class="ev-desc">Fountain light show at Suria KLCC park. Happens nightly — timings vary. Best at 8PM and 9PM.</div>
+    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag free">💰 Free</span><span class="ev-tag time">⏳ Nightly</span></div>
+  </div>
+
+  <!-- Instagram -->
+  <div class="ev-card" data-src="ig" style="display:none">
+    <div class="ev-top"><span class="ev-cat ig">📸 Instagram</span><span class="verdict amber">CHECK FIRST</span></div>
+    <div class="ev-title">Saturday Flea Market @ Taman Tasik Titiwangsa</div>
+    <div class="ev-src">📌 Source: Instagram @kl_fleamarket</div>
+    <div class="ev-desc">Weekend flea market with vintage clothing, local crafts, and food trucks. Usually runs 8AM–2PM on Saturdays.</div>
+    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag free">💰 Free entry</span><span class="ev-tag time">⏳ Every Saturday</span></div>
+  </div>
+
+  <!-- Mall -->
+  <div class="ev-card" data-src="mall" style="display:none">
+    <div class="ev-top"><span class="ev-cat mall">🏬 Mall Event</span><span class="verdict">YES</span></div>
+    <div class="ev-title">Pavilion KL — Japan Festival 2026</div>
+    <div class="ev-src">📌 Source: Pavilion KL official website</div>
+    <div class="ev-desc">Japanese food, culture, and product fair on Level 3 Pavilion KL. Free entry. Running all weekend.</div>
+    <div class="ev-tags"><span class="ev-tag indoor">🏛 Indoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag free">💰 Free entry</span><span class="ev-tag time">⏳ Sat–Sun</span></div>
+  </div>
+  <div class="ev-card" data-src="mall" style="display:none">
+    <div class="ev-top"><span class="ev-cat mall">🏬 Mall Event</span><span class="verdict amber">OPTIONAL</span></div>
+    <div class="ev-title">Mid Valley — School Holiday Carnival</div>
+    <div class="ev-src">📌 Source: Mid Valley Megamall Facebook</div>
+    <div class="ev-desc">Kids activity carnival on Ground Floor. Rides, games, face painting. Can get crowded after 2PM.</div>
+    <div class="ev-tags"><span class="ev-tag indoor">🏛 Indoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag price">💰 Paid activities</span><span class="ev-tag time">⏳ Weekend</span></div>
+  </div>
+
+
+  <!-- KL Foodie -->
+  <div class="ev-card" data-src="klfoodie" style="display:none">
+    <div class="ev-top"><span class="ev-cat social">🍴 KL Foodie</span><span class="verdict">YES</span></div>
+    <div class="ev-title">KITA Food Festival 2026</div>
+    <div class="ev-src">📌 Source: klfoodie.com</div>
+    <div class="ev-desc">Curated multi-vendor food festival featured by KL Foodie. Local chefs, street eats, and tastings in one venue.</div>
+    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag price">💰 From RM 20</span><span class="ev-tag time">⏳ This weekend</span></div>
+  </div>
+  <div class="ev-card" data-src="klfoodie" style="display:none">
+    <div class="ev-top"><span class="ev-cat social">🍴 KL Foodie</span><span class="verdict amber">CHECK FIRST</span></div>
+    <div class="ev-title">adidas World Cup Drone Show</div>
+    <div class="ev-src">📌 Source: KL Foodie (Facebook)</div>
+    <div class="ev-desc">Drone light show spotted by KL Foodie. Timing and venue posted on their social — confirm before heading out.</div>
+    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag free">💰 Free</span><span class="ev-tag time">⏳ Tonight 8:30PM</span></div>
+  </div>
+
+  <div class="qc" style="margin-top:6px;">
+    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
+    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, event APIs, MyParks live availability.</div>
+    <div class="qc-wlbl">⚠️ Active Warnings</div>
+    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
+    <div class="qc-i">· MRT/LRT data estimated (no public live API)</div>
+    <div class="qc-i">· TikTok, Instagram &amp; KL Foodie social events unverified — always check source before going</div>
+  </div>
+</div>
+
+<!-- ══════════ NEWS ══════════ -->
+<div id="page-news" class="page">
+  <div class="sec-lbl">📰 News → Impact Engine</div>
+  <div class="news-banner">⚠️ Raw headlines filtered. Only news affecting movement, money, or safety shown.</div>
+  <div class="news-card med">
+    <div class="news-top"><div class="news-title">RON95 fuel price adjustment</div><span class="impact med">medium</span></div>
+    <div class="news-row"><span class="news-ico">🚗</span><div><div class="n-lbl">Transport</div><div class="n-val">Grab &amp; delivery fees may rise slightly</div></div></div>
+    <div class="news-row"><span class="news-ico">💰</span><div><div class="n-lbl">Cost</div><div class="n-val">RM 0.10–0.20 extra per ride</div></div></div>
+    <div class="news-row"><span class="news-ico">📍</span><div><div class="n-lbl">Who</div><div class="n-val">Drivers, Grab users, delivery customers</div></div></div>
+    <div class="brain-box">🧠 Fill your tank before the new price kicks in. Budget a little more for rides this week.</div>
+  </div>
+  <div class="news-card high">
+    <div class="news-top"><div class="news-title">JPS yellow flood alert — KL low-lying zones</div><span class="impact high">high</span></div>
+    <div class="news-row"><span class="news-ico">🚗</span><div><div class="n-lbl">Transport</div><div class="n-val">Avoid Masjid India underpass &amp; Bangsar low roads after 3PM</div></div></div>
+    <div class="news-row"><span class="news-ico">💰</span><div><div class="n-lbl">Cost</div><div class="n-val">None direct</div></div></div>
+    <div class="news-row"><span class="news-ico">📍</span><div><div class="n-lbl">Who</div><div class="n-val">Anyone near Klang River corridor</div></div></div>
+    <div class="brain-box">🧠 Heavy afternoon rain expected. Stick to elevated routes. Do not drive through floods.</div>
+  </div>
+  <div class="news-card low">
+    <div class="news-top"><div class="news-title">BFM: KL MRT ridership up 12% this quarter</div><span class="impact low">low</span></div>
+    <div class="news-row"><span class="news-ico">🚇</span><div><div class="n-lbl">Transport</div><div class="n-val">More commuters = slightly longer waits at peak hours</div></div></div>
+    <div class="news-row"><span class="news-ico">💰</span><div><div class="n-lbl">Cost</div><div class="n-val">No fare changes</div></div></div>
+    <div class="news-row"><span class="news-ico">📍</span><div><div class="n-lbl">Who</div><div class="n-val">All MRT users</div></div></div>
+    <div class="brain-box">🧠 Leave 5–10 mins earlier at peak time. MRT is still faster than driving.</div>
+  </div>
+  <div class="qc" style="margin-top:6px;">
+    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
+    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, Eventbrite API, MyParks live availability.</div>
+    <div class="qc-wlbl">⚠️ Active Warnings</div>
+    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
+    <div class="qc-i">· MRT/LRT data estimated (no public live API)</div>
+    <div class="qc-i">· Events not verified against Eventbrite today</div>
+    <div class="qc-i">· Permit slots not checked live — pre-book via MPAJ</div>
+    <div class="qc-i">· Google Maps &amp; Foursquare APIs require paid keys</div>
+    <div class="qc-f">
+      <div class="qc-flbl">🗑 Filtered Out</div>
+      <div class="qc-fi">Generic tourism directory content — not decision-relevant</div>
+      <div class="qc-fi">Political news — no transport/cost/safety impact</div>
+      <div class="qc-fi">Unverified hours excluded</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ TRANSIT ══════════ -->
+<div id="page-transit" class="page">
+  <div class="sec-lbl">🚇 Transport Intelligence</div>
+  <div class="transit-card">
+    <div class="tc-name">KLCC / Bukit Bintang</div>
+    <div class="tc-verdict">✓ Worth going — avoid 5:30–7:30PM</div>
+    <div class="tc-note">🚇 Use Bukit Bintang MRT (not KLCC station) for evening — less congested.</div>
+    <div class="tc-tags"><span class="tc-tag">📊 Medium afternoon · High evening</span><span class="tc-tag avoid">🚫 Avoid 5:30PM – 7:30PM</span></div>
+  </div>
+  <div class="transit-card">
+    <div class="tc-name">KL Sentral Hub</div>
+    <div class="tc-verdict">✓ Manageable — no disruptions today</div>
+    <div class="tc-note">🚇 Busy 8–9AM. Use Rapid KL app for live train loads.</div>
+    <div class="tc-tags"><span class="tc-tag">📊 High morning · Low midday</span><span class="tc-tag avoid">🚫 Avoid 8AM – 9AM</span></div>
+  </div>
+  <div class="transit-card">
+    <div class="tc-name">Chow Kit / Titiwangsa</div>
+    <div class="tc-verdict">✓ Clear — normal flow all day</div>
+    <div class="tc-note">🚇 LRT Ampang line running normally. Pasar Malam in area tonight — expect foot traffic near station exit.</div>
+    <div class="tc-tags"><span class="tc-tag">📊 Low all day</span></div>
+  </div>
+  <div class="jom-tip">💡 JomOut tells you "is this area worth going to today?" Use Waze for navigation.</div>
+  <div class="qc" style="margin-top:6px;">
+    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
+    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, Eventbrite API, MyParks live availability.</div>
+    <div class="qc-wlbl">⚠️ Active Warnings</div>
+    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
+    <div class="qc-i">· MRT/LRT data estimated (no public live API)</div>
+    <div class="qc-i">· Events not verified against Eventbrite today</div>
+    <div class="qc-i">· Permit slots not checked live — pre-book via MPAJ</div>
+    <div class="qc-i">· Google Maps &amp; Foursquare APIs require paid keys</div>
+    <div class="qc-f">
+      <div class="qc-flbl">🗑 Filtered Out</div>
+      <div class="qc-fi">Generic tourism directory content — not decision-relevant</div>
+      <div class="qc-fi">Political news — no transport/cost/safety impact</div>
+      <div class="qc-fi">Unverified hours excluded</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ HIKE ══════════ -->
+<div id="page-hike" class="page">
+  <div class="sec-lbl">🥾 Hiking &amp; Trails</div>
+  <div class="hike-card">
+    <div class="hike-diff hard">Hard Trail</div>
+    <div class="hike-name">Bukit Tabur West</div>
+    <div class="hike-loc">📍 Taman Melawati, Ampang</div>
+    <div class="permit-box warn">
+      <div class="p-lbl warn">⚠️ Permit Required · MPAJ (Ampang Jaya Municipal Council)</div>
+      <div class="p-text">MyParks portal (free). Bring IC. Max 30 pax/day.</div>
+      <div class="p-link">🔗 myparks.gov.my</div>
+    </div>
+    <div class="hike-tags"><span class="hike-tag">⏰ Start by 6:30AM</span><span class="hike-tag">🕐 3–4 hrs</span><span class="hike-tag">👥 Low (weekday)</span></div>
+    <div class="worth">Worth it: <strong>YES — KL's best quartzite ridge</strong></div>
+    <div class="warn-strip">⚠️ Exposed drops. Not for beginners. Check JMJH before going.</div>
+  </div>
+  <div class="hike-card">
+    <div class="hike-diff easy">Easy Trail</div>
+    <div class="hike-name">KL Forest Eco Park (Bukit Nanas)</div>
+    <div class="hike-loc">📍 City Centre, near KL Tower</div>
+    <div class="permit-box ok">
+      <div class="p-lbl ok">✅ Free Entry — Open daily 7AM–6PM</div>
+      <div class="p-text">No permit required. Free entry. Open daily.</div>
+    </div>
+    <div class="hike-tags"><span class="hike-tag">⏰ 7AM – 11AM</span><span class="hike-tag">🕐 1–2 hrs</span><span class="hike-tag">👥 Low–Medium</span></div>
+    <div class="worth">Worth it: <strong>YES — world's only city-centre rainforest</strong></div>
+    <div class="warn-strip">⚠️ Slippery after rain. Wear grip shoes.</div>
+  </div>
+  <div class="hike-card">
+    <div class="hike-diff mod">Moderate Trail</div>
+    <div class="hike-name">Broga Hill (Bukit Semenyih)</div>
+    <div class="hike-loc">📍 Semenyih · 45 min drive</div>
+    <div class="permit-box ok">
+      <div class="p-lbl ok">✅ No Permit · Small parking fee</div>
+      <div class="p-text">No permit required. Arrive by 5:30AM for sunrise.</div>
+    </div>
+    <div class="hike-tags"><span class="hike-tag">⏰ 5:30AM start</span><span class="hike-tag">🕐 2–3 hrs</span><span class="hike-tag">👥 Medium</span></div>
+    <div class="worth">Worth it: <strong>YES — best sunrise hike near KL</strong></div>
+    <div class="warn-strip">⚠️ Very crowded weekends. Go weekday if possible.</div>
+  </div>
+</div>
+
+<!-- ══════════ ESCAPE ══════════ -->
+<div id="page-escape" class="page">
+  <div class="sec-lbl">🗺 Weekend Escapes From KL</div>
+  <div class="esc-card">
+    <div class="esc-top"><div class="esc-name">Ipoh</div><span class="verdict">YES</span></div>
+    <div class="esc-desc">White coffee, bean sprout chicken, colonial streets, cave temples.</div>
+    <div class="star-box">⭐ Sin Yoon Loong coffee + Funny Mountain soya</div>
+    <div class="esc-tags"><span class="esc-tag train">🚆 2 hrs · ETS Gold train from KL Sentral</span><span class="esc-tag">Effort: Easy</span></div>
+    <div class="esc-note">📍 <em>Perfect day trip</em></div>
+  </div>
+  <div class="esc-card">
+    <div class="esc-top"><div class="esc-name">Melaka</div><span class="verdict">YES</span></div>
+    <div class="esc-desc">UNESCO heritage, Jonker Walk, Peranakan food.</div>
+    <div class="star-box">⭐ Chicken rice balls + riverside at dusk</div>
+    <div class="esc-tags"><span class="esc-tag train">🚆 2 hrs · Bus from TBS</span><span class="esc-tag">Effort: Easy</span></div>
+    <div class="esc-note">📍 <em>Avoid public holidays — overcrowded</em></div>
+  </div>
+  <div class="esc-card">
+    <div class="esc-top"><div class="esc-name">Penang</div><span class="verdict amber">Long weekend only</span></div>
+    <div class="esc-desc">Malaysia's food capital. Needs 2+ days minimum.</div>
+    <div class="star-box" style="background:rgba(244,168,0,.07)">⭐ Asam laksa at Air Itam + Georgetown street art</div>
+    <div class="esc-tags"><span class="esc-tag train">🚆 4 hrs ETS · or 1 hr flight from KLIA2</span><span class="esc-tag">Effort: Medium</span></div>
+    <div class="esc-note">📍 <em>Not a day trip</em></div>
+  </div>
+  <div class="esc-card">
+    <div class="esc-top"><div class="esc-name">Cameron Highlands</div><span class="verdict amber">Weekend best</span></div>
+    <div class="esc-desc">Cool weather, strawberry farms, tea plantations, jungle trails.</div>
+    <div class="star-box">⭐ BOH Tea Centre + steamboat dinner</div>
+    <div class="esc-tags"><span class="esc-tag train">🚌 3 hrs · Bus from Puduraya</span><span class="esc-tag">Effort: Easy</span></div>
+    <div class="esc-note">📍 <em>Best escape when KL is hot</em></div>
+  </div>
+  <div class="qc" style="margin-top:6px;">
+    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
+    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, Eventbrite API, MyParks live availability.</div>
+    <div class="qc-wlbl">⚠️ Active Warnings</div>
+    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
+  </div>
+</div>
+
+<!-- ══════════ ABOUT ══════════ -->
+<div id="page-about" class="page">
+  <div class="about-hero">
+    <h1>JomOut KL</h1>
+    <p>Your daily Kuala Lumpur decision guide.</p>
+    <p>We exist to answer one question: <strong>what is worth your time in KL today — and what isn't?</strong></p>
+    <q>Not a news site. Not a directory. A decision engine for your day out.</q>
+  </div>
+  <div class="about-card">
+    <h3>🎯 Our Goal</h3>
+    <div class="how-row"><div class="how-ico">🧭</div><div><div class="how-lbl">Help You Decide</div><div class="how-desc">Cut through the noise and tell you where to go, eat, and explore in KL right now.</div></div></div>
+    <div class="how-row"><div class="how-ico">⏰</div><div><div class="how-lbl">Save Your Time</div><div class="how-desc">No endless scrolling. One screen, today's best options, ranked for you.</div></div></div>
+    <div class="how-row"><div class="how-ico">📍</div><div><div class="how-lbl">Local &amp; Real</div><div class="how-desc">Built around real KL places, weather, transit, and events — nothing invented.</div></div></div>
+  </div>
+  <div class="fb-card">
+    <h3>💬 Share Feedback</h3>
+    <p>Help us build the best KL guide for everyone.</p>
+    <div class="fb-lbl">Rate Your Experience</div>
+    <div class="stars-row">
+      <span class="star-btn" onclick="rate(1)">★</span>
+      <span class="star-btn" onclick="rate(2)">★</span>
+      <span class="star-btn" onclick="rate(3)">★</span>
+      <span class="star-btn" onclick="rate(4)">★</span>
+      <span class="star-btn" onclick="rate(5)">★</span>
+    </div>
+    <div class="fb-lbl">Category</div>
+    <div class="cat-chips">
+      <button class="cat-chip" onclick="this.classList.toggle('sel')">Wrong info</button>
+      <button class="cat-chip" onclick="this.classList.toggle('sel')">Missing place</button>
+      <button class="cat-chip" onclick="this.classList.toggle('sel')">Feature idea</button>
+      <button class="cat-chip" onclick="this.classList.toggle('sel')">Bug report</button>
+      <button class="cat-chip" onclick="this.classList.toggle('sel')">Praise 🎉</button>
+    </div>
+    <div class="fb-lbl">Your Message</div>
+    <textarea class="fb-ta" placeholder="What can we do better? Missing a place you love? Tell us..."></textarea>
+    <button class="fb-submit">Submit Feedback</button>
+  </div>
+  <div class="footer">
+    <div class="foot-logo">JomOut <span>KL — Decisions, not content.</span></div>
+    <p>Not affiliated with Rapid KL or Tourism Malaysia.</p>
+  </div>
+</div>
+
+<!-- FLOAT BAR -->
+<div class="float">
+  <div class="float-inner">
+    <input type="text" id="askInput" placeholder="Ask about KL today…"/>
+    <button class="float-send">Jom →</button>
+  </div>
+</div>
+
+<script>
+// ── TAB SWITCHING ──
+function go(name,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── FOOD SUB-TABS ──
+function ftab(name,el){
+  ['breakfast','cafes','lunch','dinner','street'].forEach(n=>{
+    var d=document.getElementById('fd-'+n);
+    if(d)d.style.display='none';
+  });
+  document.getElementById('fd-'+name).style.display='block';
+  document.querySelectorAll('#page-food .stab').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── WELLNESS SUB-TABS ──
+function wtab(name,el){
+  document.querySelectorAll('#page-wellness .stab').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── EVENTS SOURCE FILTER ──
+function evSrc(src,el){
+  document.querySelectorAll('.ev-card').forEach(c=>{
+    if(src==='all'){c.style.display='block';}
+    else{c.style.display=(c.dataset.src===src)?'block':'none';}
+  });
+  document.querySelectorAll('.src-tab').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ── STAR RATING ──
+function rate(n){
+  document.querySelectorAll('.star-btn').forEach((s,i)=>s.classList.toggle('lit',i<n));
+}
+
+// ── ACTIVITY PILLS ──
+function toggleAct(el){el.classList.toggle('on');}
+
+// ── TIME SLIDER ──
+function updateTime(v){
+  var h=parseInt(v);
+  var label=h===24?'Midnight':h>12?(h-12)+':00 PM':h===12?'12:00 PM':h+':00 AM';
+  document.getElementById('timeVal').textContent=label;
+  // update theme
+  var body=document.body;
+  var modeBtn=document.getElementById('modeBtn');
+  if(h>=6&&h<11){body.className='morning';modeBtn.textContent='🌅';updateScore('morning');}
+  else if(h>=11&&h<17){body.className='afternoon';modeBtn.textContent='☀️';updateScore('afternoon');}
+  else if(h>=17&&h<21){body.className='evening';modeBtn.textContent='🌆';updateScore('evening');}
+  else{body.className='night';modeBtn.textContent='🌙';updateScore('night');}
+}
+
+// ── GROUP SLIDER ──
+function updateGroup(v){
+  var labels=['Solo','Just 2','Small group (3)','Group of 4','Group of 5','Group of 6','Group of 7','Large group (8)','Large group (9)','Big group (10+)'];
+  document.getElementById('groupVal').textContent=labels[parseInt(v)-1]||v+' people';
+}
+
+// ── SCORE UPDATE BY TIME ──
+function updateScore(t){
+  var configs={
+    morning:{num:'8',hl:'GO OUT EARLY',sub:'Perfect morning for breakfast and cafés. Beat the heat and the crowd.',emoji:'☀️'},
+    afternoon:{num:'6',hl:'GOOD INDOOR DAY',sub:'Hot and humid. Great for cafés, malls, and wellness. Thunderstorm risk at 4PM.',emoji:'⛅'},
+    evening:{num:'7',hl:'CITY COMES ALIVE',sub:'Evening crowd builds after 6PM. Perfect for dinner, events, and Jalan Alor.',emoji:'🌆'},
+    night:{num:'8',hl:'NIGHT OWL MODE',sub:'KL night scene is on. Street food, nightlife, and late-night walks.',emoji:'🌙'}
+  };
+  var c=configs[t]||configs.morning;
+  document.getElementById('scoreNum').innerHTML=c.num+'<span class="score-denom">/10</span>';
+  document.getElementById('scoreHl').textContent=c.hl;
+  document.getElementById('scoreSub').textContent=c.sub;
+  document.getElementById('scoreEmoji').textContent=c.emoji;
+}
+
+// ── MOON / THEME TOGGLE ──
+document.getElementById('modeBtn').addEventListener('click',function(){
+  var order=['morning','afternoon','evening','night'];
+  var cur=document.body.className||'morning';
+  var idx=(order.indexOf(cur)+1)%order.length;
+  document.body.className=order[idx];
+  var emojis={morning:'🌅',afternoon:'☀️',evening:'🌆',night:'🌙'};
+  this.textContent=emojis[order[idx]];
+  updateScore(order[idx]);
+  // sync slider
+  var sliderVals={morning:8,afternoon:13,evening:18,night:22};
+  var sl=document.getElementById('timeSlider');
+  sl.value=sliderVals[order[idx]];
+  updateTime(sliderVals[order[idx]]);
+});
+
+// ── AUTO TIME ON LOAD ──
+(function(){
+  var h=new Date().getHours();
+  // demo: force to current hour feel
+  var sl=document.getElementById('timeSlider');
+  var realH=h<6?6:h>23?23:h;
+  sl.value=realH;
+  updateTime(realH);
+})();
+</script>
+</body>
+</html>
