@@ -1207,21 +1207,26 @@ document.getElementById('modeBtn').addEventListener('click',function(){
   sl.value=realH;
   updateTime(realH);
 })();
-</script>fetch('data.json?t=' + Date.now())
+
+fetch('data.json?t=' + Date.now())
   .then(r => r.json())
   .then(d => {
     if (d.go_out_score !== undefined)
-      document.getElementById('scoreNum').innerHTML =
+      document.getElementById('scoreNum').innerHTML = 
         d.go_out_score + '<span class="score-denom">/10</span>';
+    
     if (d.ui && d.ui.theme_mode)
       document.body.className = d.ui.theme_mode;
+    
     if (d.today && d.today.summary)
       document.getElementById('scoreSub').textContent = d.today.summary;
+    
     if (d.ui && d.ui.score_headline)
-      document.getElementById('scoreHl').textContent = d.ui.score_headline;
+      document.getElementById('scoreH1').textContent = d.ui.score_headline;
+    
     console.log('Live data loaded', d);
   })
   .catch(e => console.log('Using demo data', e));
-
+</script>
 </body>
 </html>
