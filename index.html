@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -519,7 +519,6 @@ input[type=range]::-webkit-slider-thumb{
 .qc-flbl{font-size:.59rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;display:flex;align-items:center;gap:4px;}
 .qc-fi{font-size:.74rem;color:var(--muted2);text-decoration:line-through;padding:3px 0;}
 
-
 /* PLAYFUL NO-DATA */
 .nodata{
   background:var(--card);border:1.5px dashed var(--peach);
@@ -560,6 +559,92 @@ input[type=range]::-webkit-slider-thumb{
 </style>
 </head>
 <body class="morning">
+
+<script>
+async function loadLiveData() {
+  try {
+    const response = await fetch('data.json?t=' + Date.now());
+    if (!response.ok) throw new Error('data.json not found');
+    
+    const data = await response.json();
+    
+    if (data.status === 'success') {
+      document.getElementById('scoreNum').innerHTML = data.go_out_score + '<span class="score-denom">/10</span>';
+      document.getElementById('scoreHl').textContent = data.ui.score_headline;
+      document.getElementById('scoreSub').textContent = data.today.summary;
+      document.getElementById('scoreEmoji').textContent = data.weather?.hourly?.[0]?.icon || '☀️';
+      
+      document.body.className = data.ui.theme_mode;
+      
+      if (data.weather) {
+        document.getElementById('wxIco').textContent = data.weather?.hourly?.[0]?.icon || '☀️';
+        document.querySelector('.wx-temp').innerHTML = Math.round(data.weather.temp_c) + '°<span style="font-size:1.5rem;font-weight:400">c</span>';
+        document.querySelector('.wx-feels').textContent = `Feels like ${Math.round(data.weather.feels_like_c)}°C`;
+        document.querySelector('.wx-cond').textContent = data.weather.condition;
+        
+        const stats = document.querySelectorAll('.wx-stat');
+        stats[0].innerHTML = `💧 ${data.weather.humidity_pct}% humidity`;
+        stats[1].innerHTML = `🌬 ${data.weather.wind_kmh} km/h`;
+        stats[2].innerHTML = `☀️ UV ${data.weather.uv_index} — ${data.weather.uv_index > 7 ? 'Very High' : 'High'}`;
+        stats[3].innerHTML = `<span class="aqi">AQI ${data.weather.aqi} — ${data.weather.aqi_label}</span>`;
+        stats[4].innerHTML = `🌅 ${data.weather.sunrise} · 🌇 ${data.weather.sunset}`;
+        
+        document.querySelector('.advisory').textContent = data.weather.advisory;
+        
+        const hourlyContainer = document.querySelector('.wx-hourly');
+        hourlyContainer.innerHTML = data.weather.hourly?.map(h => 
+          `<div class="wx-hr"><div class="wx-hr-t">${h.time}</div><div class="wx-hr-i">${h.icon}</div><div class="wx-hr-d">${h.temp_c}°</div></div>`
+        ).join('') || '';
+      }
+      
+      if (data.finance) {
+        const finItems = document.querySelectorAll('.fin-item');
+        const finData = [
+          { label: 'Gold (MYR/g)', val: data.finance.gold_myr_g, change: data.finance.gold_change },
+          { label: 'USD / MYR', val: data.finance.usd_myr, change: data.finance.usd_change },
+          { label: 'SGD / MYR', val: data.finance.sgd_myr, change: data.finance.sgd_change },
+          { label: 'Bitcoin', val: data.finance.btc_usd, change: data.finance.btc_change },
+        ];
+        
+        finData.forEach((item, i) => {
+          if (finItems[i]) {
+            finItems[i].querySelector('.fin-item-label').textContent = item.label;
+            finItems[i].querySelector('.fin-item-val').textContent = item.val;
+            const subEl = finItems[i].querySelector('.fin-item-sub');
+            const isUp = item.change?.includes('+');
+            const isDown = item.change?.includes('−') || item.change?.includes('-');
+            subEl.className = 'fin-item-sub ' + (isUp ? 'fin-up' : isDown ? 'fin-dn' : 'fin-nc');
+            subEl.textContent = item.change || '→ No change';
+          }
+        });
+        
+        if (finItems[4]) {
+          finItems[4].querySelector('.fin-item-label').textContent = 'RON95';
+          finItems[4].querySelector('.fin-item-val').textContent = data.finance.ron95;
+          finItems[4].querySelector('.fin-item-sub').textContent = data.finance.ron95_change;
+        }
+        
+        document.querySelector('.fin-note').innerHTML = 
+          data.quality_check?.data_type === 'Live' 
+            ? `✅ Live data — last updated ${new Date().toLocaleTimeString()}`
+            : '⚠️ Demo data — Make.com workflow may be paused.';
+      }
+      
+      if (data.quality_check?.data_type === 'Live') {
+        document.querySelector('.demo-badge')?.remove();
+        document.querySelector('.alert-bar')?.remove();
+      }
+      
+      console.log('✅ Live data loaded successfully');
+    }
+  } catch (err) {
+    console.warn('⚠️ Using demo data:', err.message);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadLiveData);
+loadLiveData();
+</script>
 
 <!-- HEADER -->
 <div class="hdr">
@@ -701,532 +786,41 @@ input[type=range]::-webkit-slider-thumb{
   </div>
 </div>
 
-<!-- ══════════ FOOD ══════════ -->
-<div id="page-food" class="page">
-  <div class="sec-lbl">🍜 Food Intelligence</div>
-  <div class="sub-tabs">
-    <button class="stab active" onclick="ftab('breakfast',this)">🌅 Breakfast</button>
-    <button class="stab" onclick="ftab('cafes',this)">☕ Cafés</button>
-    <button class="stab" onclick="ftab('lunch',this)">☀️ Lunch</button>
-    <button class="stab" onclick="ftab('dinner',this)">🌆 Dinner</button>
-    <button class="stab" onclick="ftab('street',this)">🚦 Street</button>
-  </div>
-
-  <div id="fd-breakfast">
-    <div class="pc"><div class="pc-ico">🍚</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Nasi Lemak Tanglin</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Jalan Duta · 4.2 km from KLCC</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.7 (2,341)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
-    <div class="pc"><div class="pc-ico">🍲</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Bak Kut Teh (Petaling Street)</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Chinatown · 1.8 km from Masjid Jamek LRT</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.5 (1,089)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
-    <div class="pc"><div class="pc-ico">🫓</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Pelita Nasi Kandar KLCC</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Ampang/KLCC · 0.8 km from KLCC LRT</div><div class="pc-meta"><span class="stars">★★★★</span><span class="reviews">4.2 (3,782)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
-  </div>
-
-  <div id="fd-cafes" style="display:none">
-    <div class="pc"><div class="pc-ico">☕</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Breakfast Thieves</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Bangsar · 4.0 km from KL Sentral</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.6 (890)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
-    <div class="pc"><div class="pc-ico">🧋</div><div class="pc-body"><div class="pc-top"><div class="pc-name">VCR Cafe</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Pudu · 2.1 km from Hang Tuah LRT</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.5 (1,203)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
-    <div class="pc"><div class="pc-ico">🫖</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Pulp by Papa Palheta</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Medan Pasar · 0.9 km from Masjid Jamek LRT</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.7 (764)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
-  </div>
-
-  <div id="fd-lunch" style="display:none">
-    <div class="pc"><div class="pc-ico">🍛</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Village Park Restaurant</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Damansara Uptown · 12 km from KLCC</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.7 (4,512)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
-    <div class="pc"><div class="pc-ico">🥘</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Restoran Syed (Nasi Kandar)</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Bukit Bintang · 0.4 km from Bukit Bintang MRT</div><div class="pc-meta"><span class="stars">★★★★</span><span class="reviews">4.3 (2,100)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
-  </div>
-
-  <div id="fd-dinner" style="display:none">
-    <div class="pc"><div class="pc-ico">🍽</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Enak KL</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Starhill Gallery, Bukit Bintang</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.6 (723)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb"></div><div class="pb dim"></div></div><span class="price-lbl">Pricey</span><span class="more">▼ More</span></div></div></div>
-    <div class="pc"><div class="pc-ico">🏡</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Bijan Bar & Restaurant</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Jalan Ceylon · 1.2 km from Raja Chulan Monorail</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.5 (1,104)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
-  </div>
-
-  <div id="fd-street" style="display:none">
-    <div class="pc"><div class="pc-ico">🌃</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Jalan Alor</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Bukit Bintang · 0.6 km from Bukit Bintang MRT</div><div class="pc-meta"><span class="stars">★★★★</span><span class="reviews">4.3 (6,201)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
-    <div class="pc"><div class="pc-ico">🍜</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Imbi Market</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Imbi · 1.0 km from Imbi Monorail</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.5 (980)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
-    <div class="pc"><div class="pc-ico">🥩</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Gurney Drive (Padang Merbok)</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Chow Kit · 2.3 km from Chow Kit LRT</div><div class="pc-meta"><span class="stars">★★★★</span><span class="reviews">4.2 (1,450)</span><div class="price-bars"><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Budget</span><span class="more">▼ More</span></div></div></div>
-  </div>
-
-  <div class="qc" style="margin-top:8px;">
-    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
-    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, Eventbrite API, MyParks live availability.</div>
-    <div class="qc-wlbl">⚠️ Active Warnings</div>
-    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
-    <div class="qc-i">· MRT/LRT data estimated (no public live API)</div>
-    <div class="qc-i">· Events not verified against Eventbrite today</div>
-    <div class="qc-i">· Permit slots not checked live — pre-book via MPAJ</div>
-    <div class="qc-i">· Google Maps &amp; Foursquare APIs require paid keys</div>
-    <div class="qc-f">
-      <div class="qc-flbl">🗑 Filtered Out</div>
-      <div class="qc-fi">Generic tourism directory content — not decision-relevant</div>
-      <div class="qc-fi">Political news — no transport/cost/safety impact</div>
-      <div class="qc-fi">Unverified hours excluded</div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════ WELLNESS ══════════ -->
-<div id="page-wellness" class="page">
-  <div class="sec-lbl">🧘 Wellness &amp; Recovery</div>
-  <div class="sub-tabs">
-    <button class="stab active" onclick="wtab('all',this)">🧘 All</button>
-    <button class="stab" onclick="wtab('spa',this)">🛁 Spa</button>
-    <button class="stab" onclick="wtab('yoga',this)">🌿 Yoga</button>
-    <button class="stab" onclick="wtab('massage',this)">💆 Massage</button>
-    <button class="stab" onclick="wtab('gym',this)">🏋 Gym</button>
-  </div>
-  <div id="well-all">
-    <div class="pc"><div class="pc-ico">🛁</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Hammam Spa KL</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 KLCC · 0.3 km from KLCC LRT</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.7 (432)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb"></div><div class="pb"></div></div><span class="price-lbl">Fine Dining</span><span class="more">▼ More</span></div></div></div>
-    <div class="pc"><div class="pc-ico">🧘</div><div class="pc-body"><div class="pc-top"><div class="pc-name">VHI Yoga Studio</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Bangsar · 5.2 km from KLCC</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.8 (654)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
-    <div class="pc"><div class="pc-ico">💆</div><div class="pc-body"><div class="pc-top"><div class="pc-name">Urban Oasis Massage</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 Bukit Bintang · 1.5 km from Pavilion KL</div><div class="pc-meta"><span class="stars">★★★★</span><span class="reviews">4.4 (1,120)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb dim"></div><div class="pb dim"></div></div><span class="price-lbl">Moderate</span><span class="more">▼ More</span></div></div></div>
-    <div class="pc"><div class="pc-ico">🏋</div><div class="pc-body"><div class="pc-top"><div class="pc-name">F45 Training KLCC</div><div class="open-pill">Open Now</div></div><div class="pc-area">📍 KLCC · 0.5 km from KLCC LRT</div><div class="pc-meta"><span class="stars">★★★★★</span><span class="reviews">4.6 (542)</span><div class="price-bars"><div class="pb"></div><div class="pb"></div><div class="pb"></div><div class="pb dim"></div></div><span class="price-lbl">Pricey</span><span class="more">▼ More</span></div></div></div>
-  </div>
-  <div class="tip-strip">🧘 Booking tip: Spa and yoga should be booked 24–48hrs ahead on weekdays. Walk-ins work for massage.</div>
-  <div class="qc" style="margin-top:6px;">
-    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
-    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, Eventbrite API, MyParks live availability.</div>
-    <div class="qc-wlbl">⚠️ Active Warnings</div>
-    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
-  </div>
-</div>
-
-<!-- ══════════ EVENTS ══════════ -->
-<div id="page-events" class="page">
-  <div class="sec-lbl">🎉 Events &amp; Experiences</div>
-  <div class="filter-banner">🔍 Aggressively filtered. Only high-decision-value events shown.</div>
-  <div class="source-tabs">
-    <button class="src-tab active" onclick="evSrc('all',this)">All Sources</button>
-    <button class="src-tab" onclick="evSrc('verified',this)">✅ Verified</button>
-    <button class="src-tab" onclick="evSrc('tiktok',this)">🎵 TikTok</button>
-    <button class="src-tab" onclick="evSrc('ig',this)">📸 Instagram</button>
-    <button class="src-tab" onclick="evSrc('mall',this)">🏬 Mall</button>
-    <button class="src-tab" onclick="evSrc('klfoodie',this)">🍴 KL Foodie</button>
-  </div>
-
-  <!-- Verified -->
-  <div class="ev-card" data-src="verified">
-    <div class="ev-top"><span class="ev-cat cultural">Cultural</span><span class="verdict">YES</span></div>
-    <div class="ev-title">Central Market Heritage Walk</div>
-    <div class="ev-src">📌 Source: VisitKL.com</div>
-    <div class="ev-desc">Self-guided batik and craft trail through Kasturi Walk. Genuinely curated.</div>
-    <div class="ev-tags"><span class="ev-tag indoor">🏛 Indoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag free">💰 Free</span><span class="ev-tag time">⏳ Ongoing</span></div>
-  </div>
-  <div class="ev-card" data-src="verified">
-    <div class="ev-top"><span class="ev-cat exhibition">Exhibition</span><span class="verdict">YES — go today</span></div>
-    <div class="ev-title">MAP KL — Digital Art Exhibition</div>
-    <div class="ev-src">📌 Source: Ticket2U</div>
-    <div class="ev-desc">Immersive Malaysian digital art. Weekdays: half the weekend crowd.</div>
-    <div class="ev-tags"><span class="ev-tag indoor">🏛 Indoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag price">💰 RM 35</span><span class="ev-tag time">⏳ Until June</span></div>
-  </div>
-  <div class="ev-card" data-src="verified">
-    <div class="ev-top"><span class="ev-cat night">Night Market</span><span class="verdict amber">YES if nearby</span></div>
-    <div class="ev-title">Tong Shin Pasar Malam</div>
-    <div class="ev-src">📌 Source: CloudJoi</div>
-    <div class="ev-desc">Local night market. Real food, zero tourist markup.</div>
-    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag free">💰 Free entry</span><span class="ev-tag time">⏳ Tonight only</span></div>
-  </div>
-
-  <!-- TikTok -->
-  <div class="ev-card" data-src="tiktok" style="display:none">
-    <div class="ev-top"><span class="ev-cat tiktok">🎵 TikTok Trending</span><span class="verdict amber">CHECK FIRST</span></div>
-    <div class="ev-title">Pop-Up Takoyaki Stall @ Chow Kit</div>
-    <div class="ev-src">📌 Source: TikTok @klfoodies · 48K views</div>
-    <div class="ev-desc">Viral Japanese street food pop-up spotted near Chow Kit area. Unverified location — DM the creator for exact spot.</div>
-    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag free">💰 ~RM 8</span><span class="ev-tag time">⏳ This weekend only</span></div>
-  </div>
-  <div class="ev-card" data-src="tiktok" style="display:none">
-    <div class="ev-top"><span class="ev-cat tiktok">🎵 TikTok Trending</span><span class="verdict amber">CHECK FIRST</span></div>
-    <div class="ev-title">KLCC Fountain Light Show</div>
-    <div class="ev-src">📌 Source: TikTok @visitkl.my · 120K views</div>
-    <div class="ev-desc">Fountain light show at Suria KLCC park. Happens nightly — timings vary. Best at 8PM and 9PM.</div>
-    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag free">💰 Free</span><span class="ev-tag time">⏳ Nightly</span></div>
-  </div>
-
-  <!-- Instagram -->
-  <div class="ev-card" data-src="ig" style="display:none">
-    <div class="ev-top"><span class="ev-cat ig">📸 Instagram</span><span class="verdict amber">CHECK FIRST</span></div>
-    <div class="ev-title">Saturday Flea Market @ Taman Tasik Titiwangsa</div>
-    <div class="ev-src">📌 Source: Instagram @kl_fleamarket</div>
-    <div class="ev-desc">Weekend flea market with vintage clothing, local crafts, and food trucks. Usually runs 8AM–2PM on Saturdays.</div>
-    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag free">💰 Free entry</span><span class="ev-tag time">⏳ Every Saturday</span></div>
-  </div>
-
-  <!-- Mall -->
-  <div class="ev-card" data-src="mall" style="display:none">
-    <div class="ev-top"><span class="ev-cat mall">🏬 Mall Event</span><span class="verdict">YES</span></div>
-    <div class="ev-title">Pavilion KL — Japan Festival 2026</div>
-    <div class="ev-src">📌 Source: Pavilion KL official website</div>
-    <div class="ev-desc">Japanese food, culture, and product fair on Level 3 Pavilion KL. Free entry. Running all weekend.</div>
-    <div class="ev-tags"><span class="ev-tag indoor">🏛 Indoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag free">💰 Free entry</span><span class="ev-tag time">⏳ Sat–Sun</span></div>
-  </div>
-  <div class="ev-card" data-src="mall" style="display:none">
-    <div class="ev-top"><span class="ev-cat mall">🏬 Mall Event</span><span class="verdict amber">OPTIONAL</span></div>
-    <div class="ev-title">Mid Valley — School Holiday Carnival</div>
-    <div class="ev-src">📌 Source: Mid Valley Megamall Facebook</div>
-    <div class="ev-desc">Kids activity carnival on Ground Floor. Rides, games, face painting. Can get crowded after 2PM.</div>
-    <div class="ev-tags"><span class="ev-tag indoor">🏛 Indoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag price">💰 Paid activities</span><span class="ev-tag time">⏳ Weekend</span></div>
-  </div>
-
-
-  <!-- KL Foodie -->
-  <div class="ev-card" data-src="klfoodie" style="display:none">
-    <div class="ev-top"><span class="ev-cat social">🍴 KL Foodie</span><span class="verdict">YES</span></div>
-    <div class="ev-title">KITA Food Festival 2026</div>
-    <div class="ev-src">📌 Source: klfoodie.com</div>
-    <div class="ev-desc">Curated multi-vendor food festival featured by KL Foodie. Local chefs, street eats, and tastings in one venue.</div>
-    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag">👥 Family OK</span><span class="ev-tag price">💰 From RM 20</span><span class="ev-tag time">⏳ This weekend</span></div>
-  </div>
-  <div class="ev-card" data-src="klfoodie" style="display:none">
-    <div class="ev-top"><span class="ev-cat social">🍴 KL Foodie</span><span class="verdict amber">CHECK FIRST</span></div>
-    <div class="ev-title">adidas World Cup Drone Show</div>
-    <div class="ev-src">📌 Source: KL Foodie (Facebook)</div>
-    <div class="ev-desc">Drone light show spotted by KL Foodie. Timing and venue posted on their social — confirm before heading out.</div>
-    <div class="ev-tags"><span class="ev-tag outdoor">🌳 Outdoor</span><span class="ev-tag free">💰 Free</span><span class="ev-tag time">⏳ Tonight 8:30PM</span></div>
-  </div>
-
-  <div class="qc" style="margin-top:6px;">
-    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
-    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, event APIs, MyParks live availability.</div>
-    <div class="qc-wlbl">⚠️ Active Warnings</div>
-    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
-    <div class="qc-i">· MRT/LRT data estimated (no public live API)</div>
-    <div class="qc-i">· TikTok, Instagram &amp; KL Foodie social events unverified — always check source before going</div>
-  </div>
-</div>
-
-<!-- ══════════ NEWS ══════════ -->
-<div id="page-news" class="page">
-  <div class="sec-lbl">📰 News → Impact Engine</div>
-  <div class="news-banner">⚠️ Raw headlines filtered. Only news affecting movement, money, or safety shown.</div>
-  <div class="news-card med">
-    <div class="news-top"><div class="news-title">RON95 fuel price adjustment</div><span class="impact med">medium</span></div>
-    <div class="news-row"><span class="news-ico">🚗</span><div><div class="n-lbl">Transport</div><div class="n-val">Grab &amp; delivery fees may rise slightly</div></div></div>
-    <div class="news-row"><span class="news-ico">💰</span><div><div class="n-lbl">Cost</div><div class="n-val">RM 0.10–0.20 extra per ride</div></div></div>
-    <div class="news-row"><span class="news-ico">📍</span><div><div class="n-lbl">Who</div><div class="n-val">Drivers, Grab users, delivery customers</div></div></div>
-    <div class="brain-box">🧠 Fill your tank before the new price kicks in. Budget a little more for rides this week.</div>
-  </div>
-  <div class="news-card high">
-    <div class="news-top"><div class="news-title">JPS yellow flood alert — KL low-lying zones</div><span class="impact high">high</span></div>
-    <div class="news-row"><span class="news-ico">🚗</span><div><div class="n-lbl">Transport</div><div class="n-val">Avoid Masjid India underpass &amp; Bangsar low roads after 3PM</div></div></div>
-    <div class="news-row"><span class="news-ico">💰</span><div><div class="n-lbl">Cost</div><div class="n-val">None direct</div></div></div>
-    <div class="news-row"><span class="news-ico">📍</span><div><div class="n-lbl">Who</div><div class="n-val">Anyone near Klang River corridor</div></div></div>
-    <div class="brain-box">🧠 Heavy afternoon rain expected. Stick to elevated routes. Do not drive through floods.</div>
-  </div>
-  <div class="news-card low">
-    <div class="news-top"><div class="news-title">BFM: KL MRT ridership up 12% this quarter</div><span class="impact low">low</span></div>
-    <div class="news-row"><span class="news-ico">🚇</span><div><div class="n-lbl">Transport</div><div class="n-val">More commuters = slightly longer waits at peak hours</div></div></div>
-    <div class="news-row"><span class="news-ico">💰</span><div><div class="n-lbl">Cost</div><div class="n-val">No fare changes</div></div></div>
-    <div class="news-row"><span class="news-ico">📍</span><div><div class="n-lbl">Who</div><div class="n-val">All MRT users</div></div></div>
-    <div class="brain-box">🧠 Leave 5–10 mins earlier at peak time. MRT is still faster than driving.</div>
-  </div>
-  <div class="qc" style="margin-top:6px;">
-    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
-    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, Eventbrite API, MyParks live availability.</div>
-    <div class="qc-wlbl">⚠️ Active Warnings</div>
-    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
-    <div class="qc-i">· MRT/LRT data estimated (no public live API)</div>
-    <div class="qc-i">· Events not verified against Eventbrite today</div>
-    <div class="qc-i">· Permit slots not checked live — pre-book via MPAJ</div>
-    <div class="qc-i">· Google Maps &amp; Foursquare APIs require paid keys</div>
-    <div class="qc-f">
-      <div class="qc-flbl">🗑 Filtered Out</div>
-      <div class="qc-fi">Generic tourism directory content — not decision-relevant</div>
-      <div class="qc-fi">Political news — no transport/cost/safety impact</div>
-      <div class="qc-fi">Unverified hours excluded</div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════ TRANSIT ══════════ -->
-<div id="page-transit" class="page">
-  <div class="sec-lbl">🚇 Transport Intelligence</div>
-  <div class="transit-card">
-    <div class="tc-name">KLCC / Bukit Bintang</div>
-    <div class="tc-verdict">✓ Worth going — avoid 5:30–7:30PM</div>
-    <div class="tc-note">🚇 Use Bukit Bintang MRT (not KLCC station) for evening — less congested.</div>
-    <div class="tc-tags"><span class="tc-tag">📊 Medium afternoon · High evening</span><span class="tc-tag avoid">🚫 Avoid 5:30PM – 7:30PM</span></div>
-  </div>
-  <div class="transit-card">
-    <div class="tc-name">KL Sentral Hub</div>
-    <div class="tc-verdict">✓ Manageable — no disruptions today</div>
-    <div class="tc-note">🚇 Busy 8–9AM. Use Rapid KL app for live train loads.</div>
-    <div class="tc-tags"><span class="tc-tag">📊 High morning · Low midday</span><span class="tc-tag avoid">🚫 Avoid 8AM – 9AM</span></div>
-  </div>
-  <div class="transit-card">
-    <div class="tc-name">Chow Kit / Titiwangsa</div>
-    <div class="tc-verdict">✓ Clear — normal flow all day</div>
-    <div class="tc-note">🚇 LRT Ampang line running normally. Pasar Malam in area tonight — expect foot traffic near station exit.</div>
-    <div class="tc-tags"><span class="tc-tag">📊 Low all day</span></div>
-  </div>
-  <div class="jom-tip">💡 JomOut tells you "is this area worth going to today?" Use Waze for navigation.</div>
-  <div class="qc" style="margin-top:6px;">
-    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
-    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, Eventbrite API, MyParks live availability.</div>
-    <div class="qc-wlbl">⚠️ Active Warnings</div>
-    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
-    <div class="qc-i">· MRT/LRT data estimated (no public live API)</div>
-    <div class="qc-i">· Events not verified against Eventbrite today</div>
-    <div class="qc-i">· Permit slots not checked live — pre-book via MPAJ</div>
-    <div class="qc-i">· Google Maps &amp; Foursquare APIs require paid keys</div>
-    <div class="qc-f">
-      <div class="qc-flbl">🗑 Filtered Out</div>
-      <div class="qc-fi">Generic tourism directory content — not decision-relevant</div>
-      <div class="qc-fi">Political news — no transport/cost/safety impact</div>
-      <div class="qc-fi">Unverified hours excluded</div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════ HIKE ══════════ -->
-<div id="page-hike" class="page">
-  <div class="sec-lbl">🥾 Hiking &amp; Trails</div>
-  <div class="hike-card">
-    <div class="hike-diff hard">Hard Trail</div>
-    <div class="hike-name">Bukit Tabur West</div>
-    <div class="hike-loc">📍 Taman Melawati, Ampang</div>
-    <div class="permit-box warn">
-      <div class="p-lbl warn">⚠️ Permit Required · MPAJ (Ampang Jaya Municipal Council)</div>
-      <div class="p-text">MyParks portal (free). Bring IC. Max 30 pax/day.</div>
-      <div class="p-link">🔗 myparks.gov.my</div>
-    </div>
-    <div class="hike-tags"><span class="hike-tag">⏰ Start by 6:30AM</span><span class="hike-tag">🕐 3–4 hrs</span><span class="hike-tag">👥 Low (weekday)</span></div>
-    <div class="worth">Worth it: <strong>YES — KL's best quartzite ridge</strong></div>
-    <div class="warn-strip">⚠️ Exposed drops. Not for beginners. Check JMJH before going.</div>
-  </div>
-  <div class="hike-card">
-    <div class="hike-diff easy">Easy Trail</div>
-    <div class="hike-name">KL Forest Eco Park (Bukit Nanas)</div>
-    <div class="hike-loc">📍 City Centre, near KL Tower</div>
-    <div class="permit-box ok">
-      <div class="p-lbl ok">✅ Free Entry — Open daily 7AM–6PM</div>
-      <div class="p-text">No permit required. Free entry. Open daily.</div>
-    </div>
-    <div class="hike-tags"><span class="hike-tag">⏰ 7AM – 11AM</span><span class="hike-tag">🕐 1–2 hrs</span><span class="hike-tag">👥 Low–Medium</span></div>
-    <div class="worth">Worth it: <strong>YES — world's only city-centre rainforest</strong></div>
-    <div class="warn-strip">⚠️ Slippery after rain. Wear grip shoes.</div>
-  </div>
-  <div class="hike-card">
-    <div class="hike-diff mod">Moderate Trail</div>
-    <div class="hike-name">Broga Hill (Bukit Semenyih)</div>
-    <div class="hike-loc">📍 Semenyih · 45 min drive</div>
-    <div class="permit-box ok">
-      <div class="p-lbl ok">✅ No Permit · Small parking fee</div>
-      <div class="p-text">No permit required. Arrive by 5:30AM for sunrise.</div>
-    </div>
-    <div class="hike-tags"><span class="hike-tag">⏰ 5:30AM start</span><span class="hike-tag">🕐 2–3 hrs</span><span class="hike-tag">👥 Medium</span></div>
-    <div class="worth">Worth it: <strong>YES — best sunrise hike near KL</strong></div>
-    <div class="warn-strip">⚠️ Very crowded weekends. Go weekday if possible.</div>
-  </div>
-</div>
-
-<!-- ══════════ ESCAPE ══════════ -->
-<div id="page-escape" class="page">
-  <div class="sec-lbl">🗺 Weekend Escapes From KL</div>
-  <div class="esc-card">
-    <div class="esc-top"><div class="esc-name">Ipoh</div><span class="verdict">YES</span></div>
-    <div class="esc-desc">White coffee, bean sprout chicken, colonial streets, cave temples.</div>
-    <div class="star-box">⭐ Sin Yoon Loong coffee + Funny Mountain soya</div>
-    <div class="esc-tags"><span class="esc-tag train">🚆 2 hrs · ETS Gold train from KL Sentral</span><span class="esc-tag">Effort: Easy</span></div>
-    <div class="esc-note">📍 <em>Perfect day trip</em></div>
-  </div>
-  <div class="esc-card">
-    <div class="esc-top"><div class="esc-name">Melaka</div><span class="verdict">YES</span></div>
-    <div class="esc-desc">UNESCO heritage, Jonker Walk, Peranakan food.</div>
-    <div class="star-box">⭐ Chicken rice balls + riverside at dusk</div>
-    <div class="esc-tags"><span class="esc-tag train">🚆 2 hrs · Bus from TBS</span><span class="esc-tag">Effort: Easy</span></div>
-    <div class="esc-note">📍 <em>Avoid public holidays — overcrowded</em></div>
-  </div>
-  <div class="esc-card">
-    <div class="esc-top"><div class="esc-name">Penang</div><span class="verdict amber">Long weekend only</span></div>
-    <div class="esc-desc">Malaysia's food capital. Needs 2+ days minimum.</div>
-    <div class="star-box" style="background:rgba(244,168,0,.07)">⭐ Asam laksa at Air Itam + Georgetown street art</div>
-    <div class="esc-tags"><span class="esc-tag train">🚆 4 hrs ETS · or 1 hr flight from KLIA2</span><span class="esc-tag">Effort: Medium</span></div>
-    <div class="esc-note">📍 <em>Not a day trip</em></div>
-  </div>
-  <div class="esc-card">
-    <div class="esc-top"><div class="esc-name">Cameron Highlands</div><span class="verdict amber">Weekend best</span></div>
-    <div class="esc-desc">Cool weather, strawberry farms, tea plantations, jungle trails.</div>
-    <div class="star-box">⭐ BOH Tea Centre + steamboat dinner</div>
-    <div class="esc-tags"><span class="esc-tag train">🚌 3 hrs · Bus from Puduraya</span><span class="esc-tag">Effort: Easy</span></div>
-    <div class="esc-note">📍 <em>Best escape when KL is hot</em></div>
-  </div>
-  <div class="qc" style="margin-top:6px;">
-    <div class="qc-hdr"><div class="qc-title">⚡ Intelligence Quality Check</div><div class="qc-conf">MEDIUM — Demo Data</div></div>
-    <div class="qc-desc">Not connected to live APIs. Production requires: OpenWeatherMap, Rapid KL feed, Eventbrite API, MyParks live availability.</div>
-    <div class="qc-wlbl">⚠️ Active Warnings</div>
-    <div class="qc-i">· Weather simulated — verify before outdoor plans</div>
-  </div>
-</div>
-
-<!-- ══════════ ABOUT ══════════ -->
-<div id="page-about" class="page">
-  <div class="about-hero">
-    <h1>JomOut KL</h1>
-    <p>Your daily Kuala Lumpur decision guide.</p>
-    <p>We exist to answer one question: <strong>what is worth your time in KL today — and what isn't?</strong></p>
-    <q>Not a news site. Not a directory. A decision engine for your day out.</q>
-  </div>
-  <div class="about-card">
-    <h3>🎯 Our Goal</h3>
-    <div class="how-row"><div class="how-ico">🧭</div><div><div class="how-lbl">Help You Decide</div><div class="how-desc">Cut through the noise and tell you where to go, eat, and explore in KL right now.</div></div></div>
-    <div class="how-row"><div class="how-ico">⏰</div><div><div class="how-lbl">Save Your Time</div><div class="how-desc">No endless scrolling. One screen, today's best options, ranked for you.</div></div></div>
-    <div class="how-row"><div class="how-ico">📍</div><div><div class="how-lbl">Local &amp; Real</div><div class="how-desc">Built around real KL places, weather, transit, and events — nothing invented.</div></div></div>
-  </div>
-  <div class="fb-card">
-    <h3>💬 Share Feedback</h3>
-    <p>Help us build the best KL guide for everyone.</p>
-    <div class="fb-lbl">Rate Your Experience</div>
-    <div class="stars-row">
-      <span class="star-btn" onclick="rate(1)">★</span>
-      <span class="star-btn" onclick="rate(2)">★</span>
-      <span class="star-btn" onclick="rate(3)">★</span>
-      <span class="star-btn" onclick="rate(4)">★</span>
-      <span class="star-btn" onclick="rate(5)">★</span>
-    </div>
-    <div class="fb-lbl">Category</div>
-    <div class="cat-chips">
-      <button class="cat-chip" onclick="this.classList.toggle('sel')">Wrong info</button>
-      <button class="cat-chip" onclick="this.classList.toggle('sel')">Missing place</button>
-      <button class="cat-chip" onclick="this.classList.toggle('sel')">Feature idea</button>
-      <button class="cat-chip" onclick="this.classList.toggle('sel')">Bug report</button>
-      <button class="cat-chip" onclick="this.classList.toggle('sel')">Praise 🎉</button>
-    </div>
-    <div class="fb-lbl">Your Message</div>
-    <textarea class="fb-ta" placeholder="What can we do better? Missing a place you love? Tell us..."></textarea>
-    <button class="fb-submit">Submit Feedback</button>
-  </div>
-  <div class="footer">
-    <div class="foot-logo">JomOut <span>KL — Decisions, not content.</span></div>
-    <p>Not affiliated with Rapid KL or Tourism Malaysia.</p>
-  </div>
-</div>
-
-<!-- FLOAT BAR -->
-<div class="float">
-  <div class="float-inner">
-    <input type="text" id="askInput" placeholder="Ask about KL today…"/>
-    <button class="float-send">Jom →</button>
-  </div>
-</div>
-
 <script>
-// ── TAB SWITCHING ──
-function go(name,el){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('page-'+name).classList.add('active');
-  el.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+function go(page, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  btn.classList.add('active');
 }
-
-// ── FOOD SUB-TABS ──
-function ftab(name,el){
-  ['breakfast','cafes','lunch','dinner','street'].forEach(n=>{
-    var d=document.getElementById('fd-'+n);
-    if(d)d.style.display='none';
-  });
-  document.getElementById('fd-'+name).style.display='block';
-  document.querySelectorAll('#page-food .stab').forEach(s=>s.classList.remove('active'));
-  el.classList.add('active');
+function ftab(tab, btn) {
+  document.querySelectorAll('#page-food div[id^="fd-"]').forEach(t => t.style.display = 'none');
+  document.querySelectorAll('.sub-tabs .stab').forEach(t => t.classList.remove('active'));
+  document.getElementById('fd-' + tab).style.display = 'block';
+  btn.classList.add('active');
 }
-
-// ── WELLNESS SUB-TABS ──
-function wtab(name,el){
-  document.querySelectorAll('#page-wellness .stab').forEach(s=>s.classList.remove('active'));
-  el.classList.add('active');
+function wtab(tab, btn) {
+  document.querySelectorAll('#page-wellness div[id^="well-"]').forEach(t => t.style.display = 'none');
+  document.querySelectorAll('#page-wellness .sub-tabs .stab').forEach(t => t.classList.remove('active'));
+  document.getElementById('well-' + tab).style.display = 'block';
+  btn.classList.add('active');
 }
-
-// ── EVENTS SOURCE FILTER ──
-function evSrc(src,el){
-  document.querySelectorAll('.ev-card').forEach(c=>{
-    if(src==='all'){c.style.display='block';}
-    else{c.style.display=(c.dataset.src===src)?'block':'none';}
-  });
-  document.querySelectorAll('.src-tab').forEach(s=>s.classList.remove('active'));
-  el.classList.add('active');
+function updateTime(val) { const h = parseInt(val); const period = h < 12 ? 'AM' : 'PM'; document.getElementById('timeVal').textContent = `${h % 12 || 12}:00 ${period}`; }
+function updateGroup(val) { const sizes = ['Solo', 'Partner', '3-4', '5+', '10+']; document.getElementById('groupVal').textContent = sizes[Math.floor((val-1) / 2)]; }
+function toggleAct(el) { el.classList.toggle('on'); }
+function evSrc(src, btn) {
+  document.querySelectorAll('.ev-card').forEach(c => c.style.display = src === 'all' ? 'block' : 'none');
+  if (src !== 'all') document.querySelectorAll(`.ev-card[data-src="${src}"]`).forEach(c => c.style.display = 'block');
+  document.querySelectorAll('.src-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
 }
-
-// ── STAR RATING ──
-function rate(n){
-  document.querySelectorAll('.star-btn').forEach((s,i)=>s.classList.toggle('lit',i<n));
-}
-
-// ── ACTIVITY PILLS ──
-function toggleAct(el){el.classList.toggle('on');}
-
-// ── TIME SLIDER ──
-function updateTime(v){
-  var h=parseInt(v);
-  var label=h===24?'Midnight':h>12?(h-12)+':00 PM':h===12?'12:00 PM':h+':00 AM';
-  document.getElementById('timeVal').textContent=label;
-  // update theme
-  var body=document.body;
-  var modeBtn=document.getElementById('modeBtn');
-  if(h>=6&&h<11){body.className='morning';modeBtn.textContent='🌅';updateScore('morning');}
-  else if(h>=11&&h<17){body.className='afternoon';modeBtn.textContent='☀️';updateScore('afternoon');}
-  else if(h>=17&&h<21){body.className='evening';modeBtn.textContent='🌆';updateScore('evening');}
-  else{body.className='night';modeBtn.textContent='🌙';updateScore('night');}
-}
-
-// ── GROUP SLIDER ──
-function updateGroup(v){
-  var labels=['Solo','Just 2','Small group (3)','Group of 4','Group of 5','Group of 6','Group of 7','Large group (8)','Large group (9)','Big group (10+)'];
-  document.getElementById('groupVal').textContent=labels[parseInt(v)-1]||v+' people';
-}
-
-// ── SCORE UPDATE BY TIME ──
-function updateScore(t){
-  var configs={
-    morning:{num:'8',hl:'GO OUT EARLY',sub:'Perfect morning for breakfast and cafés. Beat the heat and the crowd.',emoji:'☀️'},
-    afternoon:{num:'6',hl:'GOOD INDOOR DAY',sub:'Hot and humid. Great for cafés, malls, and wellness. Thunderstorm risk at 4PM.',emoji:'⛅'},
-    evening:{num:'7',hl:'CITY COMES ALIVE',sub:'Evening crowd builds after 6PM. Perfect for dinner, events, and Jalan Alor.',emoji:'🌆'},
-    night:{num:'8',hl:'NIGHT OWL MODE',sub:'KL night scene is on. Street food, nightlife, and late-night walks.',emoji:'🌙'}
-  };
-  var c=configs[t]||configs.morning;
-  document.getElementById('scoreNum').innerHTML=c.num+'<span class="score-denom">/10</span>';
-  document.getElementById('scoreHl').textContent=c.hl;
-  document.getElementById('scoreSub').textContent=c.sub;
-  document.getElementById('scoreEmoji').textContent=c.emoji;
-}
-
-// ── MOON / THEME TOGGLE ──
-document.getElementById('modeBtn').addEventListener('click',function(){
-  var order=['morning','afternoon','evening','night'];
-  var cur=document.body.className||'morning';
-  var idx=(order.indexOf(cur)+1)%order.length;
-  document.body.className=order[idx];
-  var emojis={morning:'🌅',afternoon:'☀️',evening:'🌆',night:'🌙'};
-  this.textContent=emojis[order[idx]];
-  updateScore(order[idx]);
-  // sync slider
-  var sliderVals={morning:8,afternoon:13,evening:18,night:22};
-  var sl=document.getElementById('timeSlider');
-  sl.value=sliderVals[order[idx]];
-  updateTime(sliderVals[order[idx]]);
+document.getElementById('modeBtn').addEventListener('click', () => {
+  const modes = ['morning', 'afternoon', 'evening', 'night'];
+  const current = modes.find(m => document.body.classList.contains(m));
+  const next = modes[(modes.indexOf(current) + 1) % modes.length];
+  document.body.className = next;
 });
-
-// ── AUTO TIME ON LOAD ──
-(function(){
-  var h=new Date().getHours();
-  // demo: force to current hour feel
-  var sl=document.getElementById('timeSlider');
-  var realH=h<6?6:h>23?23:h;
-  sl.value=realH;
-  updateTime(realH);
-})();
-
-fetch('data.json?t=' + Date.now())
-  .then(r => r.json())
-  .then(d => {
-    if (d.go_out_score !== undefined)
-      document.getElementById('scoreNum').innerHTML = 
-        d.go_out_score + '<span class="score-denom">/10</span>';
-    
-    if (d.ui && d.ui.theme_mode)
-      document.body.className = d.ui.theme_mode;
-    
-    if (d.today && d.today.summary)
-      document.getElementById('scoreSub').textContent = d.today.summary;
-    
-    if (d.ui && d.ui.score_headline)
-      document.getElementById('scoreH1').textContent = d.ui.score_headline;
-    
-    console.log('Live data loaded', d);
-  })
-  .catch(e => console.log('Using demo data', e));
 </script>
+
 </body>
 </html>
