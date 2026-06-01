@@ -1,0 +1,56 @@
+name: Update JomOutKL Guide
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-guide:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch weather data
+        run: |
+          curl -s "https://api.openweathermap.org/data/2.5/weather?q=Kuala+Lumpur&units=metric&appid=${{ secrets.OPENWEATHER_API_KEY }}" > weather.json
+
+      - name: Fetch forex data
+        run: |
+          curl -s "https://v6.exchangerate-api.com/v6/${{ secrets.FOREX_API_KEY }}/latest/USD" > forex.json
+
+      - name: Fetch Bitcoin price
+        run: |
+          curl -s "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd" > bitcoin.json
+
+      - name: Generate guide with Claude
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          WEATHER=$(cat weather.json)
+          FOREX=$(cat forex.json)
+          BITCOIN=$(cat bitcoin.json)
+          
+          curl -s https://api.anthropic.com/v1/messages/create \
+            -H "x-api-key: $ANTHROPIC_API_KEY" \
+            -H "anthropic-version: 2023-06-01" \
+            -H "content-type: application/json" \
+            -d "{
+              \"model\": \"claude-opus-4-1-20250805\",
+              \"max_tokens\": 4000,
+              \"messages\": [{
+                \"role\": \"user\",
+                \"content\": \"Build JomOutKL guide. Weather: $WEATHER Forex: $FOREX Bitcoin: $BITCOIN Output ONLY JSON.\"
+              }]
+            }" | jq -r '.content[0].text' > data.json
+
+      - name: Commit changes
+        run: |
+          git config user.name "jomoutkl-bot"
+          git config user.email "bot@jomoutkl.local"
+          git add data.json
+          git commit -m "chore: update JomOutKL guide [$(date)]" || true
+          git push
