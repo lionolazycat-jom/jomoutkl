@@ -1,636 +1,441 @@
 ```json
 {
-  "status": "success",
-  "location_context": "Kuala Lumpur",
-  "go_out_score": 7,
-  "today": {
-    "mood": "Cloudy night vibes, perfect for mamak and night markets",
-    "best_time_to_go_out": "Now till midnight - weather's cool, crowds manageable",
-    "summary": "Overcast evening at 27°C with low humidity makes it comfortable for outdoor dining and night exploration. Not too hot, not raining - ideal mamak weather."
-  },
+  "city": "Kuala Lumpur",
+  "date": "2026-06-04",
+  "timestamp": "2026-06-04T17:29:11+08:00",
+  "score_headline": "CLOUDY BUT POWER ON",
   "weather": {
-    "temp_c": 27,
-    "feels_like_c": 27,
-    "condition": "Overcast clouds",
-    "humidity_pct": 39,
-    "wind_kmh": "0.7",
-    "uv_index": 0,
-    "aqi": 55,
-    "aqi_label": "Moderate",
-    "sunrise": "07:09 AM",
-    "sunset": "07:27 PM",
-    "advisory": "Comfortable night temperature with low humidity - great for outdoor activities. No rain expected.",
-    "hourly": [
-      {"time": "9PM", "icon": "☁️", "temp_c": 27},
-      {"time": "10PM", "icon": "☁️", "temp_c": 27},
-      {"time": "11PM", "icon": "☁️", "temp_c": 26},
-      {"time": "12AM", "icon": "☁️", "temp_c": 26},
-      {"time": "1AM", "icon": "☁️", "temp_c": 26},
-      {"time": "2AM", "icon": "☁️", "temp_c": 25}
-    ]
+    "condition": "overcast clouds",
+    "temp": 28.45,
+    "feels_like": 29.52,
+    "humidity": 55,
+    "verdict": "Cloudy skies, comfortable temps — perfect for indoor markets and malls, or evening outdoor dining"
   },
-  "finance": {
-    "gold_myr_g": "RM 383.50",
-    "gold_change": "+0.8%",
-    "usd_myr": "RM 3.965",
-    "usd_change": "Stable",
-    "sgd_myr": "RM 3.10",
-    "sgd_change": "Stable",
-    "btc_usd": "$66,184",
-    "btc_change": "+2.1%",
-    "ron95": "RM 2.05/L",
-    "ron95_change": "Unchanged",
-    "plain_english": "Gold crept up slightly but won't affect your dinner plans. Ringgit holding steady at RM3.965 to USD - imported goods prices stable. RON95 unchanged at RM2.05, so your Grab fare predictable. Bitcoin pumping but that's for the crypto bros, not your teh tarik budget."
+  "exchange_rates": {
+    "usd_to_myr": 3.9918,
+    "sgd_to_myr": 3.11,
+    "eur_to_myr": 4.63,
+    "updated": "2026-06-04T08:00:01+08:00"
   },
-  "ui": {
-    "theme_mode": "night",
-    "time_context": "night",
-    "score_headline": "NIGHT OWL MODE",
-    "alert": ""
-  },
-  "modules": {
-    "food": [
+  "bitcoin_myr": 252339.77,
+  "ron95_price": "RM 2.05/L (unchanged)",
+  "food": {
+    "breakfast": [
       {
         "name": "Village Park Restaurant",
-        "area": "Damansara Uptown",
-        "type": "dinner",
-        "vibe": "Legendary nasi lemak, always packed",
+        "area": "Damansara Utama",
+        "type": "Kopitiam",
+        "vibe": "legendary nasi lemak pilgrimage",
         "price_range": "RM 8-15",
-        "open_now": true,
-        "why_now": "Their famous nasi lemak ayam goreng hits different at night",
-        "latitude": 3.1331,
-        "longitude": 101.6259
+        "open_now": false,
+        "why_now": "Opens 6:30am tomorrow — queue early for the famous nasi lemak ayam goreng",
+        "latitude": 3.1352,
+        "longitude": 101.6193
       },
       {
-        "name": "Jalan Alor Food Street",
-        "area": "Bukit Bintang",
-        "type": "street_food",
-        "vibe": "Tourist-friendly hawker street, buzzing atmosphere",
-        "price_range": "RM 10-30",
+        "name": "Yut Kee",
+        "area": "Dang Wangi",
+        "type": "Hainanese Kopitiam",
+        "vibe": "heritage breakfast since 1928",
+        "price_range": "RM 10-18",
+        "open_now": false,
+        "why_now": "Closed by now, but book tomorrow for roti babi and marble toast",
+        "latitude": 3.1569,
+        "longitude": 101.7017
+      },
+      {
+        "name": "Old Malaya Kopitiam",
+        "area": "KLCC",
+        "type": "Modern Kopitiam",
+        "vibe": "heritage vibes, contemporary comfort",
+        "price_range": "RM 12-25",
         "open_now": true,
-        "why_now": "Peak hour now - full energy, all stalls open till 2AM",
+        "why_now": "Open till late — grab kaya toast and teh tarik for evening tea",
+        "latitude": 3.1578,
+        "longitude": 101.7115
+      }
+    ],
+    "cafe": [
+      {
+        "name": "VCR",
+        "area": "Pudu",
+        "type": "Specialty Coffee",
+        "vibe": "industrial-chic, third-wave coffee",
+        "price_range": "RM 15-30",
+        "open_now": true,
+        "why_now": "Perfect cloudy afternoon for flat whites and avocado toast",
+        "latitude": 3.1386,
+        "longitude": 101.7113
+      },
+      {
+        "name": "Feeka Coffee Roasters",
+        "area": "Jalan Mesui",
+        "type": "Cafe",
+        "vibe": "bright, instagrammable, brunch all day",
+        "price_range": "RM 18-35",
+        "open_now": true,
+        "why_now": "Great for late afternoon work sessions with excellent wifi",
         "latitude": 3.1466,
-        "longitude": 101.7048
-      },
-      {
-        "name": "Pelita Nasi Kandar",
-        "area": "Multiple locations",
-        "type": "dinner",
-        "vibe": "24-hour mamak, KL institution",
-        "price_range": "RM 8-20",
-        "open_now": true,
-        "why_now": "Classic mamak vibes, perfect for late night cravings",
-        "latitude": 3.1478,
         "longitude": 101.7099
       },
       {
-        "name": "Wong Ah Wah",
-        "area": "Jalan Alor",
-        "type": "dinner",
-        "vibe": "Famous chicken wings, outdoor seating",
-        "price_range": "RM 15-35",
+        "name": "Lisette's Cafe & Bakery",
+        "area": "Bangsar",
+        "type": "Bakery Cafe",
+        "vibe": "cozy French-inspired pastries",
+        "price_range": "RM 15-28",
         "open_now": true,
-        "why_now": "Wings and beer under the stars - quintessential KL",
-        "latitude": 3.1469,
-        "longitude": 101.7052
-      },
+        "why_now": "Evening pastry run — croissants and coffee before dinner",
+        "latitude": 3.1289,
+        "longitude": 101.6704
+      }
+    ],
+    "lunch": [
       {
-        "name": "Madras Lane Yong Tau Foo",
-        "area": "Chinatown",
-        "type": "dinner",
-        "vibe": "Hidden gem, local favorite",
-        "price_range": "RM 8-15",
-        "open_now": true,
-        "why_now": "Cool evening perfect for outdoor hawker dining",
-        "latitude": 3.1451,
-        "longitude": 101.6954
-      },
-      {
-        "name": "Lot 10 Hutong",
-        "area": "Bukit Bintang",
-        "type": "dinner",
-        "vibe": "Heritage hawker food court, air-conditioned",
-        "price_range": "RM 10-25",
-        "open_now": true,
-        "why_now": "All the legendary stalls under one roof till 10PM",
-        "latitude": 3.1478,
-        "longitude": 101.7117
-      },
-      {
-        "name": "Capital Cafe",
-        "area": "TTDI",
-        "type": "dinner",
-        "vibe": "Popular kopitiam, always full",
+        "name": "Nasi Kandar Pelita",
+        "area": "Multiple locations",
+        "type": "Mamak",
+        "vibe": "24-hour institution, curry explosion",
         "price_range": "RM 10-20",
         "open_now": true,
-        "why_now": "Their char kuey teow and Hokkien mee best enjoyed now",
-        "latitude": 3.1368,
-        "longitude": 101.6280
-      },
-      {
-        "name": "Restoran Yut Kee",
-        "area": "Dang Wangi",
-        "type": "breakfast",
-        "vibe": "Hainanese kopitiam since 1928",
-        "price_range": "RM 8-18",
-        "open_now": false,
-        "why_now": "Closed now, but legendary roti babi for tomorrow's breakfast",
-        "latitude": 3.1543,
-        "longitude": 101.7013
-      },
-      {
-        "name": "Merchant's Lane",
-        "area": "Petaling Street",
-        "type": "cafe",
-        "vibe": "Hipster cafe in heritage building",
-        "price_range": "RM 15-30",
-        "open_now": false,
-        "why_now": "Closed now - day cafe only, great for brunch tomorrow",
-        "latitude": 3.1457,
-        "longitude": 101.6961
-      },
-      {
-        "name": "Taman Connaught Night Market",
-        "area": "Cheras",
-        "type": "street_food",
-        "vibe": "Longest night market in KL, Wednesday only",
-        "price_range": "RM 5-15",
-        "open_now": false,
-        "why_now": "Only operates Wednesday - check schedule",
-        "latitude": 3.0830,
-        "longitude": 101.7533
-      },
-      {
-        "name": "Soho KL",
-        "area": "Solaris Mont Kiara",
-        "type": "dinner",
-        "vibe": "Trendy FreeStyle dining, rooftop vibes",
-        "price_range": "RM 30-80",
-        "open_now": true,
-        "why_now": "Happy hour vibes, cool evening for rooftop dining",
-        "latitude": 3.1687,
-        "longitude": 101.6524
-      },
-      {
-        "name": "Restoran Oversea",
-        "area": "Imbi",
-        "type": "street_food",
-        "vibe": "Legendary char kuey teow since 1950s",
-        "price_range": "RM 12-25",
-        "open_now": true,
-        "why_now": "Night shift cooks are on - peak wok hei hours",
-        "latitude": 3.1442,
-        "longitude": 101.7110
-      },
-      {
-        "name": "Fierce Curry House",
-        "area": "Damansara Utama",
-        "type": "dinner",
-        "vibe": "Modern mamak, Instagram-worthy",
-        "price_range": "RM 15-30",
-        "open_now": true,
-        "why_now": "Their butter chicken and garlic naan perfect now",
-        "latitude": 3.1358,
-        "longitude": 101.6232
-      },
-      {
-        "name": "Salut Restaurant & Bar",
-        "area": "Bangsar",
-        "type": "dinner",
-        "vibe": "Cozy French bistro, date night spot",
-        "price_range": "RM 50-120",
-        "open_now": true,
-        "why_now": "Romantic cloudy night, perfect for wine and steak",
-        "latitude": 3.1305,
-        "longitude": 101.6669
-      },
-      {
-        "name": "Huckleberry Food & Fare",
-        "area": "Bukit Damansara",
-        "type": "cafe",
-        "vibe": "Brunch spot, Western comfort food",
-        "price_range": "RM 20-45",
-        "open_now": false,
-        "why_now": "Closed - day operation only, save for weekend brunch",
-        "latitude": 3.1445,
-        "longitude": 101.6554
+        "why_now": "Always open — perfect for late lunch or early dinner",
+        "latitude": 3.1319,
+        "longitude": 101.6841
       },
       {
         "name": "Kim Lian Kee",
         "area": "Petaling Street",
-        "type": "dinner",
-        "vibe": "Heritage Hokkien mee, been around since 1920s",
-        "price_range": "RM 10-18",
-        "open_now": true,
-        "why_now": "Cool night perfect for their claypot Hokkien mee",
-        "latitude": 3.1450,
-        "longitude": 101.6965
-      },
-      {
-        "name": "Aunty Gaik Lean's Old School Eatery",
-        "area": "Taman Paramount",
-        "type": "dinner",
-        "vibe": "Peranakan home cooking, cozy setting",
-        "price_range": "RM 25-50",
+        "type": "Hokkien Mee",
+        "vibe": "old-school hawker legend",
+        "price_range": "RM 12-18",
         "open_now": false,
-        "why_now": "Closes early - catch them for lunch tomorrow",
-        "latitude": 3.0938,
-        "longitude": 101.6262
+        "why_now": "Closed for dinner, but visit tomorrow for iconic KL hokkien mee",
+        "latitude": 3.1443,
+        "longitude": 101.6958
       },
       {
-        "name": "Nasi Lemak Antarabangsa",
-        "area": "Kampung Baru",
-        "type": "street_food",
-        "vibe": "Late night institution, outdoor seating",
-        "price_range": "RM 8-20",
+        "name": "Precious Old China",
+        "area": "Central Market",
+        "type": "Peranakan",
+        "vibe": "vintage Nyonya in heritage shophouse",
+        "price_range": "RM 25-45",
         "open_now": true,
-        "why_now": "The midnight nasi lemak crowd is gathering now",
-        "latitude": 3.1667,
-        "longitude": 101.7035
+        "why_now": "Open for dinner — beautiful setting for ayam pongteh and pai tee",
+        "latitude": 3.1455,
+        "longitude": 101.6950
+      }
+    ],
+    "dinner": [
+      {
+        "name": "Jalan Alor",
+        "area": "Bukit Bintang",
+        "type": "Street Food Strip",
+        "vibe": "neon-lit hawker chaos",
+        "price_range": "RM 15-40",
+        "open_now": true,
+        "why_now": "Prime dinner hour — hit the street stalls for BBQ wings, claypot lou shu fun, and grilled fish",
+        "latitude": 3.1466,
+        "longitude": 101.7055
       },
       {
-        "name": "Seks Mamak",
-        "area": "Section 17 PJ",
-        "type": "dinner",
-        "vibe": "24-hour mamak, local hangout",
+        "name": "Bijan Bar & Restaurant",
+        "area": "KLCC",
+        "type": "Fine Malay",
+        "vibe": "upscale traditional, romantic",
+        "price_range": "RM 80-150",
+        "open_now": true,
+        "why_now": "Perfect cloudy evening for indoor fine dining — rendang tok and bunga kantan",
+        "latitude": 3.1524,
+        "longitude": 101.7116
+      },
+      {
+        "name": "Hakka Restaurant",
+        "area": "Ampang",
+        "type": "Hakka Chinese",
+        "vibe": "family-style sharing plates",
+        "price_range": "RM 25-50",
+        "open_now": true,
+        "why_now": "Evening crowd gathering — abacus seeds and yong tau foo in claypot",
+        "latitude": 3.1577,
+        "longitude": 101.7615
+      },
+      {
+        "name": "Atmosphere 360",
+        "area": "KL Tower",
+        "type": "Revolving Buffet",
+        "vibe": "sky-high views, tourist favorite",
+        "price_range": "RM 100-150",
+        "open_now": true,
+        "why_now": "Cloudy skies clearing by evening — catch sunset views over KL",
+        "latitude": 3.1529,
+        "longitude": 101.7033
+      }
+    ],
+    "street_food": [
+      {
+        "name": "Imbi Market",
+        "area": "Imbi",
+        "type": "Wet Market Hawker",
+        "vibe": "local breakfast/lunch chaos",
+        "price_range": "RM 5-12",
+        "open_now": false,
+        "why_now": "Morning market — closed by evening, visit tomorrow for curry mee",
+        "latitude": 3.1426,
+        "longitude": 101.7090
+      },
+      {
+        "name": "Madras Lane Hokkien Mee",
+        "area": "Chinatown",
+        "type": "Hawker Stall",
+        "vibe": "smoky wok hei, evening only",
+        "price_range": "RM 8-12",
+        "open_now": true,
+        "why_now": "Evening service just starting — charcoal hokkien mee in the alley",
+        "latitude": 3.1467,
+        "longitude": 101.6968
+      },
+      {
+        "name": "Taman Connaught Night Market",
+        "area": "Cheras",
+        "type": "Pasar Malam",
+        "vibe": "Wednesday night market madness",
+        "price_range": "RM 3-15",
+        "open_now": false,
+        "why_now": "Only operates Wednesday — not tonight, but one of KL's longest night markets",
+        "latitude": 3.0742,
+        "longitude": 101.7564
+      },
+      {
+        "name": "SS2 Wai Sek Kai",
+        "area": "Petaling Jaya",
+        "type": "Food Court",
+        "vibe": "bustling hawker hub",
         "price_range": "RM 8-18",
         "open_now": true,
-        "why_now": "Always open, maggi goreng hits different at night",
-        "latitude": 3.0932,
-        "longitude": 101.6092
+        "why_now": "Dinner crowd heating up — BBQ chicken wings, pan mee, chee cheong fun",
+        "latitude": 3.1113,
+        "longitude": 101.6253
       },
       {
-        "name": "Ben's Independent Grocer",
-        "area": "Multiple locations",
-        "type": "cafe",
-        "vibe": "Upscale grocer with bistro",
-        "price_range": "RM 25-60",
+        "name": "Restoran Yusoof Dan Zakhir",
+        "area": "Kampung Baru",
+        "type": "Malay Nasi Campur",
+        "vibe": "authentic village vibes in the city",
+        "price_range": "RM 10-20",
         "open_now": true,
-        "why_now": "Late shopping + dinner combo till 10PM",
-        "latitude": 3.1571,
-        "longitude": 101.7124
-      }
-    ],
-    "wellness": [
+        "why_now": "Evening nasi campur rush — ayam percik, pucuk paku, sambal belacan",
+        "latitude": 3.1667,
+        "longitude": 101.7006
+      },
       {
-        "name": "Hammam Spa KLCC",
-        "area": "KLCC",
-        "type": "spa",
-        "vibe": "Moroccan-style hammam, luxury experience",
-        "price_range": "RM 280-500",
+        "name": "Soong Kee Beef Noodles",
+        "area": "Pudu",
+        "type": "Beef Noodle Specialist",
+        "vibe": "late-night comfort bowl",
+        "price_range": "RM 12-18",
         "open_now": true,
-        "booking": "Walk-in or call ahead",
-        "why_now": "Last slot 9PM - book now for relaxation session"
-      },
-      {
-        "name": "Thai Odyssey",
-        "area": "Multiple locations",
-        "type": "massage",
-        "vibe": "Reliable Thai massage chain",
-        "price_range": "RM 98-250",
-        "open_now": true,
-        "booking": "Walk-in friendly",
-        "why_now": "Open till 11PM most outlets - post-dinner massage"
-      },
-      {
-        "name": "Tanamera Spa",
-        "area": "Damansara Heights",
-        "type": "spa",
-        "vibe": "Traditional Malay wellness",
-        "price_range": "RM 180-400",
-        "open_now": false,
-        "booking": "Appointment required",
-        "why_now": "Closed - book for tomorrow's pampering session"
-      },
-      {
-        "name": "The Yoga House",
-        "area": "Bangsar",
-        "type": "yoga",
-        "vibe": "Community studio, all levels",
-        "price_range": "RM 35-50/class",
-        "open_now": false,
-        "booking": "Check schedule online",
-        "why_now": "Last class done - morning sessions available tomorrow"
-      },
-      {
-        "name": "Chi Fitness",
-        "area": "Multiple locations",
-        "type": "gym",
-        "vibe": "24-hour fitness chain",
-        "price_range": "RM 99-199/month",
-        "open_now": true,
-        "booking": "Walk-in anytime",
-        "why_now": "24 hours - night owls can hit gym now, less crowded"
-      },
-      {
-        "name": "Auriga Spa",
-        "area": "Bukit Bintang",
-        "type": "spa",
-        "vibe": "Urban sanctuary, full service",
-        "price_range": "RM 200-450",
-        "open_now": true,
-        "booking": "Reservation recommended",
-        "why_now": "Open till 10PM - squeeze in evening relaxation"
-      },
-      {
-        "name": "Taman Botani Perdana",
-        "area": "Lake Gardens",
-        "type": "outdoor",
-        "vibe": "Free jogging track, night-friendly",
-        "price_range": "Free",
-        "open_now": true,
-        "booking": "Public park",
-        "why_now": "Cool night perfect for evening jog, well-lit paths"
-      },
-      {
-        "name": "Breeze Reflexology",
-        "area": "Midvalley",
-        "type": "massage",
-        "vibe": "Foot reflexology, mall-based",
-        "price_range": "RM 68-180",
-        "open_now": true,
-        "booking": "Walk-in",
-        "why_now": "Mall open till 10PM - post-shopping foot relief"
-      }
-    ],
-    "events": [
-      {
-        "title": "Pasar Malam Sri Hartamas",
-        "venue": "Sri Hartamas",
-        "date": "Tonight",
-        "time": "6PM - 11PM",
-        "price": "Free entry",
-        "indoor_outdoor": "outdoor",
-        "family_friendly": true,
-        "source": "Local community (Tuesday weekly)",
-        "verified": false,
-        "verdict": "CHECK FIRST - weekly pasar malam, weather-dependent",
-        "worth_it": "Classic KL pasar malam experience, food and clothes"
-      },
-      {
-        "title": "KLCC Park Symphony Lake Water Show",
-        "venue": "KLCC Park",
-        "date": "Daily",
-        "time": "8PM, 9PM, 10PM",
-        "price": "Free",
-        "indoor_outdoor": "outdoor",
-        "family_friendly": true,
-        "source": "KLCC official",
-        "verified": true,
-        "verdict": "GO - free show with Twin Towers backdrop",
-        "worth_it": "Romantic evening activity, catch the 9PM show"
-      },
-      {
-        "title": "Live Jazz at Razz Bar",
-        "venue": "Razz Bar Bukit Bintang",
-        "date": "Tonight",
-        "time": "9:30PM onwards",
-        "price": "Free entry, buy drinks",
-        "indoor_outdoor": "indoor",
-        "family_friendly": false,
-        "source": "Venue website",
-        "verified": true,
-        "verdict": "GO - legendary KL jazz spot",
-        "worth_it": "Must-visit for jazz lovers, laid-back vibe"
-      },
-      {
-        "title": "Night Market Setapak",
-        "venue": "Jalan Genting Klang",
-        "date": "Tuesday nights",
-        "time": "6PM - 11PM",
-        "price": "Free entry",
-        "indoor_outdoor": "outdoor",
-        "family_friendly": true,
-        "source": "Local community",
-        "verified": false,
-        "verdict": "CHECK FIRST - operates Tuesday only",
-        "worth_it": "Massive selection, locals' favorite"
-      },
-      {
-        "title": "Pavilion KL Late Night Shopping",
-        "venue": "Pavilion KL",
-        "date": "Daily",
-        "time": "Till 10PM",
-        "price": "Free entry",
-        "indoor_outdoor": "indoor",
-        "family_friendly": true,
-        "source": "Pavilion KL official",
-        "verified": true,
-        "verdict": "GO - air-con comfort, dining + shopping",
-        "worth_it": "Extended hours tonight, beat the heat"
-      },
-      {
-        "title": "Petaling Street Night Bazaar",
-        "venue": "Chinatown",
-        "date": "Daily",
-        "time": "5PM - 11PM",
-        "price": "Free entry",
-        "indoor_outdoor": "outdoor",
-        "family_friendly": true,
-        "source": "VisitKL",
-        "verified": true,
-        "verdict": "GO - tourist classic but fun atmosphere",
-        "worth_it": "Bargain shopping and street food combo"
-      }
-    ],
-    "news": [
-      {
-        "title": "MRT Kajang Line Running Smoothly",
-        "impact_level": "low",
-        "transport": "MRT operating normal hours",
-        "cost": "No change",
-        "who": "MRT commuters",
-        "plain_english": "All good on the rails - MRT running on time tonight. Get around KL hassle-free."
-      },
-      {
-        "title": "RON95 Price Unchanged This Week",
-        "impact_level": "low",
-        "transport": "Fuel costs stable",
-        "cost": "RM 2.05/L maintained",
-        "who": "Drivers, Grab users",
-        "plain_english": "Your Grab fare won't spike - petrol holding at RM2.05. Budget stays predictable."
-      },
-      {
-        "title": "Ringgit Holding Steady Against USD",
-        "impact_level": "low",
-        "transport": "No impact",
-        "cost": "Imported goods stable",
-        "who": "Everyone",
-        "plain_english": "Exchange rate chilling at RM3.965 to USD. Your brunch prices won't suddenly jump."
-      }
-    ],
-    "transit": [
-      {
-        "line": "MRT Kajang Line",
-        "status": "Operating",
-        "verdict": "Fast and reliable - use it to hit KLCC, Bukit Bintang tonight",
-        "peak_hours": "Past peak, comfortable now",
-        "worth_going": "YES - beats traffic, air-conditioned"
-      },
-      {
-        "line": "LRT Kelana Jaya Line",
-        "status": "Operating",
-        "verdict": "Connects you to Pavilion, Bangsar - solid option",
-        "peak_hours": "Off-peak, smooth rides",
-        "worth_going": "YES - reliable for shopping districts"
-      },
-      {
-        "line": "KTM Komuter",
-        "status": "Operating",
-        "verdict": "Less frequent at night but runs till midnight",
-        "peak_hours": "Quiet now",
-        "worth_going": "MAYBE - check schedule, less frequent"
-      },
-      {
-        "line": "Grab/Taxi",
-        "status": "Available",
-        "verdict": "Plenty of drivers, normal fares - comfortable night option",
-        "peak_hours": "No surge pricing now",
-        "worth_going": "YES - door-to-door convenience, split with friends"
-      },
-      {
-        "line": "Monorail",
-        "status": "Operating",
-        "verdict": "Great for Bukit Bintang to KL Sentral corridor",
-        "peak_hours": "Quiet rides",
-        "worth_going": "YES - quick hops in Golden Triangle"
-      }
-    ],
-    "hike": [
-      {
-        "trail": "Bukit Tabur (East)",
-        "area": "Taman Melawati",
-        "difficulty": "Advanced",
-        "duration": "3-4 hours",
-        "status": "CLOSED NOW",
-        "reason": "Night hiking not permitted - start 6AM tomorrow",
-        "permit": "Required via MyParks app",
-        "worth_it": "Legendary KL hike but only morning/dawn starts allowed"
-      },
-      {
-        "trail": "Broga Hill",
-        "area": "Semenyih",
-        "difficulty": "Moderate",
-        "duration": "2-3 hours",
-        "status": "CLOSED NOW",
-        "reason": "Too late - start before sunrise for best experience",
-        "permit": "Not required",
-        "worth_it": "Popular sunrise spot, plan for 5AM start tomorrow"
-      },
-      {
-        "trail": "FRIM Canopy Walkway",
-        "area": "Kepong",
-        "difficulty": "Easy",
-        "duration": "2 hours",
-        "status": "CLOSED",
-        "reason": "Park closes at 5PM - come tomorrow 9AM-5PM",
-        "permit": "Entry fee RM 3",
-        "worth_it": "Family-friendly forest walk, weekday less crowded"
-      },
-      {
-        "trail": "Taman Tugu",
-        "area": "Off Jalan Tun Razak",
-        "difficulty": "Easy",
-        "duration": "1-2 hours",
-        "status": "OPEN",
-        "reason": "Night-friendly trails, well-lit paths till 10PM",
-        "permit": "Free entry",
-        "worth_it": "ONLY hike option now - urban forest, safe for night walks"
-      },
-      {
-        "trail": "Apek Hill (Bukit Apek)",
-        "area": "Cheras",
-        "difficulty": "Easy-Moderate",
-        "duration": "1.5 hours",
-        "duration": "1.5 hours",
-        "status": "NOT RECOMMENDED NOW",
-        "reason": "No lighting, unsafe after dark - dawn hike better",
-        "permit": "Not required",
-        "worth_it": "Quick city view hike but only in daylight"
-      }
-    ],
-    "escape": [
-      {
-        "destination": "Genting Highlands",
-        "distance": "50km, 1 hour drive",
-        "vibe": "Casino, theme park, cool weather",
-        "best_for": "Tonight escape - casino open 24hrs, dining till late",
-        "transport": "Drive or Grab (~RM80-120)",
-        "worth_it": "YES - cool highland air, entertainment open late"
-      },
-      {
-        "destination": "Batu Caves",
-        "distance": "13km, 30 mins",
-        "vibe": "Hindu temple, iconic limestone caves",
-        "best_for": "NOT NOW - closes at 9PM, come tomorrow morning",
-        "transport": "KTM Komuter or Grab",
-        "worth_it": "TOMORROW - iconic spot, best before noon to avoid heat"
-      },
-      {
-        "destination": "Melaka",
-        "distance": "150km, 2 hours",
-        "vibe": "Heritage city, night market, river cruise",
-        "best_for": "Weekend trip - too far for tonight",
-        "transport": "Drive or bus",
-        "worth_it": "PLAN AHEAD - UNESCO site, rich food scene, needs full day"
-      },
-      {
-        "destination": "Port Dickson",
-        "distance": "90km, 1.5 hours",
-        "vibe": "Beach town, seafood, resorts",
-        "best_for": "Weekend getaway - arrive tomorrow for beach day",
-        "transport": "Drive",
-        "worth_it": "MAYBE - quick beach fix but better as overnight trip"
-      },
-      {
-        "destination": "Ipoh",
-        "distance": "200km, 2.5 hours",
-        "vibe": "Heritage town, white coffee, cave temples",
-        "best_for": "Long weekend - too far for tonight",
-        "transport": "Drive or ETS train",
-        "worth_it": "PLAN AHEAD - food paradise, needs 2-3 days to explore"
-      },
-      {
-        "destination": "Sekinchan",
-        "distance": "90km, 1.5 hours",
-        "vibe": "Fishing village, paddy fields, seafood",
-        "best_for": "Day trip tomorrow - sunset and seafood dinner",
-        "transport": "Drive (no public transport)",
-        "worth_it": "MAYBE - scenic but needs daylight for paddy field views"
-      },
-      {
-        "destination": "Putrajaya",
-        "distance": "30km, 40 mins",
-        "vibe": "Federal administrative capital, modern architecture",
-        "best_for": "Tonight possible - night sightseeing, lakeside dining",
-        "transport": "ERL train or Grab",
-        "worth_it": "YES - illuminated buildings beautiful at night, less crowded"
+        "why_now": "Open late — perfect cloudy evening for hot beef broth",
+        "latitude": 3.1372,
+        "longitude": 101.7095
       }
     ]
   },
-  "quality_check": {
-    "confidence": "HIGH",
-    "data_type": "Live",
-    "sources_used": [
-      "OpenWeather API (live)",
-      "ExchangeRate-API (live)",
-      "CoinGecko Bitcoin price (live)",
-      "RON95 official pricing",
-      "Verified KL venue databases",
-      "Transit operator schedules",
-      "Local knowledge base"
+  "wellness": [
+    {
+      "name": "Hammam Spa at Weil Hotel",
+      "area": "Bukit Bintang",
+      "type": "Turkish Hammam",
+      "vibe": "authentic steam & scrub ritual",
+      "price_range": "RM 250-500",
+      "open_now": true
+    },
+    {
+      "name": "Tanamera Tropical Spa",
+      "area": "KLCC",
+      "type": "Malay Traditional Spa",
+      "vibe": "heritage recipes, post-natal focus",
+      "price_range": "RM 180-380",
+      "open_now": true
+    },
+    {
+      "name": "Thai Odyssey",
+      "area": "Multiple locations",
+      "type": "Thai Massage Chain",
+      "vibe": "reliable, affordable, walk-ins ok",
+      "price_range": "RM 80-180",
+      "open_now": true
+    },
+    {
+      "name": "The Yoga House",
+      "area": "Bangsar",
+      "type": "Yoga Studio",
+      "vibe": "community vibe, evening classes",
+      "price_range": "RM 35-50/class",
+      "open_now": true
+    },
+    {
+      "name": "Seeing Hands",
+      "area": "Taman Paramount",
+      "type": "Blind Massage",
+      "vibe": "social enterprise, skilled therapists",
+      "price_range": "RM 60-120",
+      "open_now": true
+    },
+    {
+      "name": "Yunomori Onsen & Spa",
+      "area": "Bangsar South",
+      "type": "Japanese Onsen",
+      "vibe": "hot springs, sauna, communal baths",
+      "price_range": "RM 68-250",
+      "open_now": true
+    }
+  ],
+  "events": [
+    {
+      "title": "Art Expo Malaysia 2026",
+      "venue": "Matrade Exhibition Centre",
+      "area": "Jalan Sultan Haji Ahmad Shah",
+      "date": "June 1-7, 2026",
+      "time": "10:00-20:00",
+      "price": "RM 30-50",
+      "source": "ticket2u",
+      "verified": true,
+      "why": "Final days of Southeast Asia's largest art fair"
+    },
+    {
+      "title": "Publika Night Market",
+      "venue": "Publika Shopping Gallery",
+      "area": "Dutamas",
+      "date": "Every Thursday",
+      "time": "17:00-22:00",
+      "price": "Free entry",
+      "source": "instagram",
+      "verified": true,
+      "why": "Artisan market with local designers and food trucks — happening tonight"
+    },
+    {
+      "title": "Jazz at The Bee",
+      "venue": "The Bee Publika",
+      "area": "Dutamas",
+      "date": "June 4, 2026",
+      "time": "20:30-23:00",
+      "price": "Free",
+      "source": "kl_foodie",
+      "verified": true,
+      "why": "Live jazz every Wednesday — smooth vibes for cloudy evening"
+    },
+    {
+      "title": "Pasar Seni Alive",
+      "venue": "Central Market",
+      "area": "Chinatown",
+      "date": "Daily",
+      "time": "10:00-22:00",
+      "price": "Free entry",
+      "source": "cloudjoi",
+      "verified": true,
+      "why": "Cultural performances and craft demonstrations ongoing"
+    }
+  ],
+  "news": [
+    {
+      "headline": "RON95 Petrol Price Unchanged at RM 2.05/L",
+      "impact": "neutral",
+      "relevance": "Good for drivers — no price hike this week"
+    },
+    {
+      "headline": "Overcast Skies Expected Through Evening",
+      "impact": "positive",
+      "relevance": "Comfortable temps, no rain — good for outdoor dining and markets"
+    },
+    {
+      "headline": "MRT Putrajaya Line Operating Normally",
+      "impact": "positive",
+      "relevance": "No delays reported on all LRT/MRT lines"
+    }
+  ],
+  "transit": {
+    "mrt_lrt": {
+      "status": "smooth",
+      "verdict": "All lines operating normally — best option for KLCC, Bukit Bintang, Bangsar"
+    },
+    "ktm": {
+      "status": "smooth",
+      "verdict": "KTM Komuter running on time — good for Mid Valley, Sentul"
+    },
+    "grab": {
+      "status": "moderate",
+      "verdict": "Evening surge starting in Bukit Bintang and KLCC — expect 1.2-1.5x pricing"
+    },
+    "general": "Cloudy weather means no rain delays — public transport recommended for city center"
+  },
+  "hike": {
+    "status": "open",
+    "trails": [
+      {
+        "name": "Bukit Nanas Forest Reserve",
+        "distance": "1.5km loop",
+        "difficulty": "easy",
+        "status": "open",
+        "verdict": "City jungle in the heart of KL — safe till 18:30, closes at sunset"
+      },
+      {
+        "name": "Taman Tugu",
+        "distance": "2-5km trails",
+        "difficulty": "easy-moderate",
+        "status": "open",
+        "verdict": "Urban forest park — open till 19:00, beautiful under cloudy skies"
+      },
+      {
+        "name": "Bukit Gasing",
+        "distance": "3-6km",
+        "difficulty": "moderate",
+        "status": "open but late",
+        "verdict": "Open but getting dark soon — better for early morning tomorrow"
+      }
     ],
-    "warnings": [
-      "Social media events marked as unverified - user should check before visiting",
-      "Hike trails closed at night for safety - dawn starts recommended",
-      "Some restaurants may have varying hours - call ahead for specific outlets"
-    ],
-    "filtered_out": [
-      "Invented venues",
-      "Unverifiable social media claims without source labels",
-      "Events outside Klang Valley",
-      "Outdated pricing information"
-    ]
+    "general": "Cloudy but no rain — trails dry and safe, but sunset at 19:00 means limited time"
+  },
+  "escape": [
+    {
+      "destination": "Genting Highlands",
+      "distance": "50km",
+      "travel_time": "1 hour",
+      "vibe": "cool mountain air, casinos, theme parks",
+      "verdict": "Cloudy weather makes cable car views misty but atmospheric"
+    },
+    {
+      "destination": "Batu Caves",
+      "distance": "13km",
+      "travel_time": "30 mins",
+      "vibe": "iconic Hindu temple, 272 steps, monkeys",
+      "verdict": "Cloudy skies perfect for climbing stairs without harsh sun"
+    },
+    {
+      "destination": "Sekinchan",
+      "distance": "90km",
+      "travel_time": "1.5 hours",
+      "vibe": "paddy fields, seafood village, sunset views",
+      "verdict": "Day trip for fresh seafood and golden rice fields"
+    },
+    {
+      "destination": "Melaka",
+      "distance": "150km",
+      "travel_time": "2 hours",
+      "vibe": "UNESCO heritage city, Peranakan culture, Jonker Street",
+      "verdict": "Weekend-worthy — explore colonial architecture and night market"
+    },
+    {
+      "destination": "Port Dickson",
+      "distance": "90km",
+      "travel_time": "1.5 hours",
+      "vibe": "beach escape, seafood, water sports",
+      "verdict": "Cloudy day still good for beachside seafood and sunset walks"
+    }
+  ],
+  "vibe_check": {
+    "overall": "chill-productive",
+    "energy": "6.5/10",
+    "summary": "Cloudy skies take the edge off KL heat — perfect for roaming markets, indoor cafes, and evening street food. Not too hot, not raining, just right for exploring."
   }
 }
 ```
