@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-<title>JomOutKL — KL Daily Guide</title>
+<title>JomOutKL — KL Daily Guide for Creators</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-:root{--bg:#FFF3EE;--card:#fff;--warm:#FFF8F2;--border:rgba(0,0,0,0.07);--orange:#FF6535;--od:#C94410;--amber:#F4A800;--peach:#FFD8C4;--peach2:#FFE8D8;--sg1:#FF8C00;--sg2:#F4C842;--text:#1a1a1a;--t2:#3d3d3d;--muted:#888;--green:#2d9e5c;--red:#e53e3e;--purple:#7c5cbf;--blue:#3b82f6;--sh:0 2px 12px rgba(0,0,0,0.07);--sh2:0 1px 5px rgba(0,0,0,0.05);}
+:root{--bg:#FFF3EE;--card:#fff;--warm:#FFF8F2;--border:rgba(0,0,0,0.07);--orange:#FF6535;--od:#C94410;--amber:#F4A800;--peach:#FFD8C4;--sg1:#FF8C00;--sg2:#F4C842;--text:#1a1a1a;--t2:#3d3d3d;--muted:#888;--green:#2d9e5c;--red:#e53e3e;--purple:#7c5cbf;--blue:#3b82f6;--sh:0 2px 12px rgba(0,0,0,0.07);--sh2:0 1px 5px rgba(0,0,0,0.05);}
 body.morning{--bg-grad:linear-gradient(180deg,#FFE8CC 0%,#FFF3EE 40%);}
 body.afternoon{--bg-grad:linear-gradient(180deg,#FFDDB3 0%,#FFF3EE 35%);}
 body.evening{--bg-grad:linear-gradient(180deg,#FF9A5C 0%,#FFD4AA 20%,#FFF3EE 50%);}
@@ -20,11 +20,8 @@ body{background:var(--bg-grad,var(--bg));color:var(--text);font-family:'DM Sans'
 .logo{font-size:1.5rem;font-weight:700;line-height:1;display:flex;align-items:baseline;}
 .logo .out{color:var(--orange);}
 .logo .kl{font-size:.92rem;font-weight:500;color:var(--t2);margin-left:3px;}
-.demo-badge{display:inline-flex;align-items:center;gap:3px;margin-left:7px;background:var(--warm);border:1px solid var(--peach);border-radius:20px;padding:2px 8px;font-size:.6rem;font-weight:700;color:var(--amber);}
-.demo-badge::before{content:'●';font-size:.42rem;}
-.live-badge{display:none;align-items:center;gap:3px;margin-left:7px;background:#e6fff0;border:1px solid rgba(45,158,92,.25);border-radius:20px;padding:2px 8px;font-size:.6rem;font-weight:700;color:var(--green);}
-.live-badge::before{content:'●';font-size:.42rem;}
 .hdr-date{font-size:.72rem;color:var(--muted);margin-top:2px;}
+.loc-status{font-size:.62rem;color:var(--muted);margin-top:1px;}
 .hdr-actions{display:flex;align-items:center;gap:7px;flex-shrink:0;}
 .moon-btn{width:34px;height:34px;border-radius:50%;background:var(--warm);border:1.5px solid var(--peach);display:flex;align-items:center;justify-content:center;font-size:.95rem;cursor:pointer;}
 .ai-btn{background:var(--orange);color:#fff;border:none;padding:7px 13px;border-radius:22px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.78rem;cursor:pointer;}
@@ -41,16 +38,35 @@ body{background:var(--bg-grad,var(--bg));color:var(--text);font-family:'DM Sans'
 .score-denom{font-size:1.4rem;font-weight:400;opacity:.65;}
 .score-hl{font-size:1.15rem;font-weight:700;color:#fff;margin:7px 0 5px;}
 .score-sub{font-size:.82rem;color:rgba(255,255,255,.88);line-height:1.55;}
-.gen-day-btn{background:var(--orange);color:#fff;border:none;padding:10px 16px;border-radius:18px;font-size:.85rem;font-weight:700;width:100%;margin-bottom:12px;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-group{display:flex;gap:8px;margin-bottom:12px;}
+.gen-day-btn{background:var(--orange);color:#fff;border:none;padding:12px 16px;border-radius:18px;font-size:.9rem;font-weight:700;flex:1;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 3px 12px rgba(255,101,53,.25);}
+.gen-day-btn:active{opacity:.85;}
+.share-btn{background:var(--purple);color:#fff;border:none;padding:12px 16px;border-radius:18px;font-size:.9rem;font-weight:700;flex:1;cursor:pointer;font-family:'DM Sans',sans-serif;box-shadow:0 3px 12px rgba(124,92,191,.25);}
+.share-btn:active{opacity:.85;}
+.gen-result{background:var(--card);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:var(--sh);border:1px solid var(--border);border-left:4px solid var(--orange);}
+.gen-result h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:4px;}
+.gen-result .gen-sub{font-size:.76rem;color:var(--muted);margin-bottom:12px;}
+.gen-block{margin-bottom:12px;}
+.gen-block-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--orange);margin-bottom:6px;}
+.gen-item{font-size:.83rem;color:var(--t2);padding:5px 0;border-bottom:1px solid var(--border);}
+.gen-item:last-child{border-bottom:none;}
+.gen-item b{color:var(--text);font-weight:600;}
+.gen-item .gd{font-size:.68rem;color:var(--od);background:rgba(255,101,53,.08);padding:1px 6px;border-radius:10px;margin-left:5px;}
 .sub-tabs{display:flex;gap:5px;margin-bottom:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
 .stab{display:inline-flex;align-items:center;gap:4px;font-size:.76rem;font-weight:500;padding:6px 13px;border-radius:22px;cursor:pointer;border:1.5px solid var(--border);color:var(--t2);background:transparent;white-space:nowrap;font-family:'DM Sans',sans-serif;}
 .stab.active{background:var(--orange);color:#fff;border-color:var(--orange);}
 .pc{background:var(--card);border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);border-left:3px solid var(--orange);}
 .pc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px;}
+.pc-badges{display:flex;gap:3px;flex-wrap:wrap;}
+.pc-badge{display:inline-flex;align-items:center;gap:2px;font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:12px;background:rgba(255,101,53,.1);color:var(--od);border:1px solid rgba(255,101,53,.2);}
+.badge-trending{background:rgba(255,107,107,.12);color:#e53e3e;border-color:rgba(255,107,107,.25);}
+.badge-new{background:rgba(76,175,80,.12);color:var(--green);border-color:rgba(76,175,80,.25);}
 .pc-name{font-size:.95rem;font-weight:700;color:var(--text);}
-.pc-dist{font-size:.68rem;background:rgba(255,101,53,.08);color:var(--od);padding:2px 7px;border-radius:14px;white-space:nowrap;flex-shrink:0;}
+.pc-dist{font-size:.68rem;background:rgba(255,101,53,.08);color:var(--od);padding:2px 7px;border-radius:14px;white-space:nowrap;flex-shrink:0;font-weight:600;}
 .pc-area{font-size:.72rem;color:var(--muted);margin-bottom:6px;}
 .pc-vibe{font-size:.8rem;color:var(--t2);line-height:1.5;margin-bottom:7px;}
+.photogenic{font-size:.73rem;background:#FFF5E6;border-radius:8px;padding:6px 10px;margin-bottom:7px;color:#7a5500;border-left:2px solid var(--amber);}
+.signature{font-size:.73rem;background:#E8F5E9;border-radius:8px;padding:6px 10px;margin-bottom:7px;color:#2d5016;border-left:2px solid var(--green);}
 .pc-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:5px;}
 .open-pill{display:inline-flex;align-items:center;gap:3px;font-size:.63rem;font-weight:600;padding:2px 8px;border-radius:20px;background:#f0faf5;color:var(--green);border:1px solid rgba(45,158,92,.2);}
 .open-pill::before{content:'●';font-size:.42rem;}
@@ -79,26 +95,27 @@ body{background:var(--bg-grad,var(--bg));color:var(--text);font-family:'DM Sans'
 .fin-item{background:var(--warm);border-radius:12px;padding:11px 13px;border:1px solid var(--border);}
 .fin-item-label{font-size:.6rem;font-weight:700;text-transform:uppercase;color:var(--muted);}
 .fin-item-val{font-size:1rem;font-weight:700;color:var(--text);margin-top:3px;}
-.fin-item-sub{font-size:.68rem;margin-top:2px;}
-.ev-card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);}
-.ev-card.verified{border-left:3px solid var(--orange);}
-.ev-card.unverified{border-left:3px solid var(--amber);}
+.fin-item-sub{font-size:.68rem;margin-top:2px;color:var(--muted);}
+.ev-card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);border-left:3px solid var(--orange);}
+.ev-badges{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:8px;}
 .ev-title{font-size:.97rem;font-weight:700;color:var(--text);margin-bottom:4px;}
 .ev-venue{font-size:.72rem;color:var(--muted);margin-bottom:3px;}
 .ev-time{font-size:.72rem;color:var(--t2);margin-bottom:6px;}
+.ev-angle{font-size:.73rem;background:#E3F2FD;border-radius:8px;padding:6px 10px;margin-bottom:6px;color:#1565c0;border-left:2px solid var(--blue);}
 .verdict{font-size:.67rem;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(45,158,92,.1);color:var(--green);border:1px solid rgba(45,158,92,.2);white-space:nowrap;}
 .news-card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);border-left:4px solid var(--border);}
 .news-card.med{border-left-color:var(--amber);}
 .news-card.high{border-left-color:var(--red);}
 .news-card.low{border-left-color:var(--green);}
-.news-title{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:6px;}
-.impact{font-size:.63rem;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;}
+.news-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.news-title{font-size:.95rem;font-weight:700;color:var(--text);}
+.impact{font-size:.63rem;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap;height:fit-content;}
 .impact.med{background:rgba(244,168,0,.1);color:#7a5500;border:1px solid rgba(244,168,0,.25);}
 .impact.high{background:rgba(229,62,62,.1);color:var(--red);border:1px solid rgba(229,62,62,.25);}
 .impact.low{background:rgba(45,158,92,.1);color:var(--green);border:1px solid rgba(45,158,92,.2);}
 .brain-box{margin-top:8px;background:rgba(255,101,53,.06);border-radius:8px;padding:8px 11px;font-size:.78rem;color:var(--od);line-height:1.55;}
 .transit-card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);}
-.tc-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:3px;}
+.tc-name{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:3px;text-transform:uppercase;}
 .tc-status{font-size:.8rem;color:var(--green);font-weight:600;margin-bottom:5px;}
 .tc-verdict{font-size:.82rem;color:var(--t2);line-height:1.5;margin-top:6px;}
 .hike-card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);}
@@ -107,30 +124,44 @@ body{background:var(--bg-grad,var(--bg));color:var(--text);font-family:'DM Sans'
 .hike-tag{display:inline-block;font-size:.69rem;padding:3px 9px;border-radius:20px;border:1px solid var(--border);color:var(--t2);background:var(--warm);margin-right:4px;margin-bottom:4px;}
 .well-card{background:var(--card);border-radius:16px;padding:14px;margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);border-left:3px solid var(--purple);}
 .well-name{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:2px;}
+.well-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
 .well-area{font-size:.72rem;color:var(--muted);margin-bottom:5px;}
 .well-type{display:inline-block;font-size:.65rem;font-weight:700;color:var(--purple);background:rgba(124,92,191,.1);padding:2px 8px;border-radius:20px;margin-bottom:6px;}
 .well-vibe{font-size:.8rem;color:var(--t2);line-height:1.5;}
-.well-maps{background:var(--orange);color:#fff;border:none;padding:4px 10px;border-radius:14px;font-size:.7rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:6px;}
+.well-maps{background:var(--orange);color:#fff;border:none;padding:4px 10px;border-radius:14px;font-size:.7rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:8px;}
 .esc-card{background:var(--card);border-radius:16px;padding:17px;margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);}
+.esc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
 .esc-name{font-size:1.12rem;font-weight:700;color:var(--text);margin-bottom:3px;}
 .esc-dist{font-size:.72rem;color:var(--muted);margin-bottom:6px;}
 .esc-vibe{font-size:.83rem;color:var(--t2);margin-bottom:7px;}
 .nodata{background:var(--card);border:1.5px dashed var(--peach);border-radius:16px;padding:28px 20px;text-align:center;}
 .nodata-emoji{font-size:2.4rem;margin-bottom:10px;}
-.nodata-msg{font-size:.92rem;font-weight:600;color:var(--od);margin-bottom:6px;}
+.nodata-msg{font-size:.92rem;font-weight:600;color:var(--od);}
 .qc{background:#FFFDF5;border:1px solid #F4D060;border-radius:16px;padding:15px;margin-top:6px;}
 .qc-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
 .qc-title{font-size:.88rem;font-weight:700;color:var(--text);}
 .qc-conf{font-size:.66rem;font-weight:700;padding:3px 8px;border-radius:20px;background:#FFF0D0;color:#7a5500;border:1px solid rgba(244,168,0,.3);}
+.qc-i{font-size:.76rem;color:var(--t2);padding:4px 0;}
 .float{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);background:rgba(255,243,238,.96);border-top:1px solid var(--border);padding:10px 16px 18px;backdrop-filter:blur(12px);z-index:70;}
 .float-inner{display:flex;gap:8px;background:var(--card);border:1.5px solid var(--peach);border-radius:14px;padding:8px 8px 8px 13px;}
 .float-inner input{flex:1;background:none;border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:.84rem;color:var(--text);}
 .float-send{background:var(--orange);color:#fff;border:none;padding:8px 15px;border-radius:10px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;}
+.about-hero{background:linear-gradient(135deg,var(--sg1),var(--sg2));border-radius:18px;padding:22px 18px;margin-bottom:12px;}
+.about-hero h1{font-size:1.75rem;font-weight:800;color:#fff;margin-bottom:7px;}
+.about-hero p{font-size:.86rem;color:rgba(255,255,255,.92);line-height:1.6;}
+.about-card{background:var(--card);border-radius:16px;padding:15px;margin-bottom:10px;box-shadow:var(--sh2);border:1px solid var(--border);}
+.about-card h3{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:8px;}
+.about-card p{font-size:.82rem;color:var(--t2);line-height:1.6;}
+.how-row{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid var(--border);}
+.how-row:last-child{border-bottom:none;}
+.how-ico{font-size:1.15rem;flex-shrink:0;}
+.how-lbl{font-size:.83rem;font-weight:600;color:var(--orange);}
+.how-desc{font-size:.78rem;color:var(--t2);}
 </style>
 </head>
 <body class="morning">
 
-<div class="hdr"><div class="hdr-inner"><div class="hdr-top"><div><div class="logo">Jom<span class="out">Out</span><span class="kl"> KL</span></div><div class="hdr-date" id="hdr-date">Loading...</div></div><div class="hdr-actions"><div class="moon-btn" id="modeBtn">🌅</div><button class="ai-btn">AI</button></div></div></div></div>
+<div class="hdr"><div class="hdr-inner"><div class="hdr-top"><div><div class="logo">Jom<span class="out">Out</span><span class="kl"> KL</span></div><div class="hdr-date" id="hdr-date">Loading...</div><div class="loc-status" id="locStatus">📍 Locating…</div></div><div class="hdr-actions"><div class="moon-btn" id="modeBtn">🌅</div><button class="ai-btn">AI</button></div></div></div></div>
 
 <div class="tabs-outer"><div class="tabs-inner">
 <button class="tab active" onclick="go('today',this)">🏙 Today</button>
@@ -146,7 +177,8 @@ body{background:var(--bg-grad,var(--bg));color:var(--text);font-family:'DM Sans'
 
 <div id="page-today" class="page active">
 <div class="score-card"><div class="score-weather-emoji" id="scoreEmoji">☀️</div><div class="score-num" id="scoreNum">7<span class="score-denom">/10</span></div><div class="score-hl" id="scoreHl">GO OUT EARLY</div><div class="score-sub" id="scoreSub">Loading...</div></div>
-<button class="gen-day-btn" onclick="alert('Coming soon')">✨ Generate My Day</button>
+<div class="btn-group"><button class="gen-day-btn" onclick="generateMyDay()">✨ Generate My Day</button><button class="share-btn" onclick="shareToday()">📸 Share Today</button></div>
+<div id="genResult"></div>
 <div class="wx-card"><div class="wx-top"><div><span class="wx-ico" id="wxIco">☀️</span><div class="wx-temp" id="wxTemp">30°<span style="font-size:1.5rem;font-weight:400">c</span></div><div class="wx-feels" id="wxFeels">Feels like 31C</div><div class="wx-cond" id="wxCond">Few clouds</div></div><div class="wx-stats"><div class="wx-stat" id="ws0">💧 50%</div><div class="wx-stat" id="ws1">🌬 9km/h</div><div class="wx-stat" id="ws2">☀️ UV 0</div><div class="wx-stat" id="ws3"><span class="aqi">AQI —</span></div><div class="wx-stat" id="ws4">🌅 7:09 · 🌇 7:19</div></div></div><div style="border-top:1px solid var(--border);margin:12px 0"></div><div class="wx-hourly" id="wxHourly"></div><div class="advisory" id="wxAdvisory">Loading weather...</div></div>
 <div class="fin-card"><h4>💰 Financial Snapshot</h4><div class="fin-grid"><div class="fin-item"><div class="fin-item-label">Gold</div><div class="fin-item-val" id="fv0">—</div><div class="fin-item-sub" id="fs0">—</div></div><div class="fin-item"><div class="fin-item-label">USD</div><div class="fin-item-val" id="fv1">—</div><div class="fin-item-sub" id="fs1">—</div></div><div class="fin-item"><div class="fin-item-label">SGD</div><div class="fin-item-val" id="fv2">—</div><div class="fin-item-sub" id="fs2">—</div></div><div class="fin-item"><div class="fin-item-label">BTC</div><div class="fin-item-val" id="fv3">—</div><div class="fin-item-sub" id="fs3">—</div></div><div class="fin-item" style="grid-column:1/-1"><div class="fin-item-label">RON95</div><div class="fin-item-val" id="fv4">RM 2.05</div><div class="fin-item-sub" id="fs4">Unchanged</div></div></div></div>
 <div class="qc"><div class="qc-hdr"><div class="qc-title">⚡ Quality Check</div><div class="qc-conf" id="qcConf">LOADING</div></div><div id="qcWarnings"><div class="qc-i">Loading...</div></div></div>
@@ -170,42 +202,125 @@ body{background:var(--bg-grad,var(--bg));color:var(--text);font-family:'DM Sans'
 <div id="page-escape" class="page"><div style="font-size:.6rem;font-weight:700;letter-spacing:2px;color:#888;margin:12px 0;">WEEKEND GETAWAYS</div><div id="escape-list"><div class="nodata"><div class="nodata-emoji">✈️</div><div class="nodata-msg">Loading escapes...</div></div></div></div>
 
 <div id="page-about" class="page">
-<div style="text-align:center;padding:14px 0;"><div style="font-size:.83rem;color:#FF6535;font-weight:700;">JomOutKL</div><p style="font-size:.7rem;color:#888;margin-top:2px;">Your local guide to Kuala Lumpur · Powered by Claude AI</p></div>
+<div class="about-hero">
+<div style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);border-radius:20px;padding:4px 10px;font-size:.68rem;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:.3px;">🔄 Updated 2× daily · Morning & Evening</div>
+<h1>JomOut<span style="opacity:.8">KL</span></h1><p>Your local friend who knows Kuala Lumpur — and tells you exactly where to go, right now.</p></div>
+<div class="about-card" style="border-left:3px solid var(--orange);"><h3>🎯 Our Mission</h3><p>KL has endless options but no time to sift through them. JomOutKL cuts the noise. Every day we read the weather, traffic, events, and prices — then tell you the smart move, whether you're a local deciding where to makan, a tourist figuring out the city, or friends catching up and need somewhere good, fast.</p></div>
+<div class="about-card" style="border-left:3px solid var(--purple);"><h3>📖 The Story</h3><p>Built by a KL local tired of group chats asking "where to makan?" every single day. JomOutKL is the answer that never sleeps — a daily guide that knows the city's rhythm, from mamak runs to hidden cafés to weekend escapes up to Cameron or down to Melaka.</p></div>
+<div style="background:#F3E5F5;border-radius:12px;padding:12px;margin-top:4px;border-left:3px solid var(--purple);"><div style="font-size:.82rem;font-weight:700;color:var(--purple);margin-bottom:6px;">💡 Have a spot to suggest?</div><div style="font-size:.75rem;color:#6a3d7f;margin-bottom:8px;">Tell us what's new, trending, or worth visiting in KL</div><a href="https://tally.so/r/3j8WL2" target="_blank" style="display:inline-block;background:var(--purple);color:#fff;padding:7px 13px;border-radius:10px;text-decoration:none;font-size:.73rem;font-weight:700;">Suggest a Spot</a></div>
+<div style="text-align:center;padding:20px 0 4px;"><div style="font-size:.83rem;color:#FF6535;font-weight:700;">JomOutKL</div><p style="font-size:.7rem;color:#888;margin-top:2px;">Made with ❤️ for Kuala Lumpur</p></div>
 </div>
 
-<div class="float"><div class="float-inner"><input id="askInput" placeholder="Ask JomOutKL..."/><button class="float-send" onclick="alert('Search coming soon')">🔍</button></div></div>
+<div class="float"><div class="float-inner"><input id="askInput" placeholder="Ask JomOutKL..."/><button class="float-send" onclick="openFeedback()">📝</button></div></div>
 
 <script>
-var userLat=null,userLng=null;
-if(navigator.geolocation){navigator.geolocation.getCurrentPosition(function(p){userLat=p.coords.latitude;userLng=p.coords.longitude;},function(){});}
+var userLat=null,userLng=null,DATA=null;
+
+function openFeedback(){window.open('https://tally.so/r/3j8WL2','_blank');}
+function setLoc(txt){var el=document.getElementById('locStatus');if(el)el.textContent=txt;}
+if(navigator.geolocation){
+  navigator.geolocation.getCurrentPosition(
+    function(p){userLat=p.coords.latitude;userLng=p.coords.longitude;setLoc('📍 Sorted by your location');if(DATA)renderAll(DATA);},
+    function(){setLoc('📍 Location off · showing default order');}
+  );
+}else{setLoc('📍 Location unavailable');}
 
 function calcDist(lat,lng){
-  if(!userLat||!userLng||!lat||!lng)return null;
+  if(!userLat||!userLng||lat==null||lng==null)return null;
   var R=6371,dLat=(lat-userLat)*Math.PI/180,dLng=(lng-userLng)*Math.PI/180;
   var a=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(userLat*Math.PI/180)*Math.cos(lat*Math.PI/180)*Math.sin(dLng/2)*Math.sin(dLng/2);
   return Math.round(R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))*10)/10;
 }
+function withDist(arr){
+  arr.forEach(function(it){var la=parseFloat(it.latitude),lo=parseFloat(it.longitude);if(!isNaN(la)&&!isNaN(lo)){it._dist=calcDist(la,lo);}else{it._dist=null;}});
+  if(userLat&&userLng){arr.sort(function(a,b){if(a._dist==null)return 1;if(b._dist==null)return -1;return a._dist-b._dist;});}
+  return arr;
+}
 function openMaps(n,a){window.open('https://www.google.com/maps/search/'+encodeURIComponent(n+' '+a+' Kuala Lumpur'),'_blank');}
-function go(page,btn){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});document.getElementById('page-'+page).classList.add('active');btn.classList.add('active');}
+function go(page,btn){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});document.getElementById('page-'+page).classList.add('active');if(btn)btn.classList.add('active');}
 function ftab(tab,btn){['all','breakfast','cafe','lunch','dinner','street_food'].forEach(function(t){var el=document.getElementById('fd-'+t);if(el)el.style.display=t===tab?'block':'none';});document.querySelectorAll('#page-food .stab').forEach(function(t){t.classList.remove('active');});btn.classList.add('active');}
 function noData(msg){return '<div class="nodata"><div class="nodata-emoji">😴</div><div class="nodata-msg">'+msg+'</div></div>';}
 document.getElementById('modeBtn').addEventListener('click',function(){var m=['morning','afternoon','evening','night'];var c=m.find(function(x){return document.body.classList.contains(x);})||'morning';document.body.className=m[(m.indexOf(c)+1)%4];});
 
+function distBadge(it){return it._dist!=null?'<div class="pc-dist">📍 '+it._dist+' km</div>':(it.area?'<div class="pc-dist">📍 '+it.area+'</div>':'');}
+
+function creatorBadges(it){
+  var badges='';
+  if(it.trending)badges+='<span class="pc-badge badge-trending">🔥 Trending</span>';
+  if(it.new_opening)badges+='<span class="pc-badge badge-new">✨ New</span>';
+  return badges;
+}
+
 function foodCard(it){
   var open=it.open_now!==false;
-  var dist=it.dist?'📍 '+it.dist+'km':(it.area?'📍 '+it.area:'');
-  var nm=(it.name||'').replace(/'/g,'');
-  var ar=(it.area||'').replace(/'/g,'');
+  var nm=(it.name||'').replace(/'/g,'');var ar=(it.area||'').replace(/'/g,'');
   var maps=(nm&&ar)?'<button class="maps-btn" onclick="openMaps(\''+nm+'\',\''+ar+'\')">🗺 Maps</button>':'';
-  return '<div class="pc"><div class="pc-header"><div class="pc-name">'+(it.name||'')+'</div>'+(dist?'<div class="pc-dist">'+dist+'</div>':'')+'</div><div class="pc-area">'+(it.area||'')+'</div><div class="pc-vibe">'+(it.vibe||it.note||'')+'</div><div class="pc-meta"><span class="'+(open?'open-pill':'closed-pill')+'">'+(open?'Open':'Closed')+'</span><span class="price-lbl">'+(it.price_range||'')+'</span>'+maps+'</div>'+(it.why_now?'<div class="why-now">💡 '+it.why_now+'</div>':'')+'</div>';
+  var badges=creatorBadges(it);
+  var photogenic=it.photogenic?'<div class="photogenic">📸 '+it.photogenic+' · Best at '+it.best_time+'</div>':'';
+  var sig=it.signature_dish?'<div class="signature">🍽 Must try: '+it.signature_dish+'</div>':'';
+  return '<div class="pc"><div class="pc-header"><div class="pc-name">'+(it.name||'')+'</div>'+distBadge(it)+'</div>'+(badges?'<div class="pc-badges">'+badges+'</div>':'')+'<div class="pc-area">'+(it.area||'')+'</div><div class="pc-vibe">'+(it.vibe||it.note||'')+'</div>'+photogenic+sig+'<div class="pc-meta"><span class="'+(open?'open-pill':'closed-pill')+'">'+(open?'Open':'Closed')+'</span><span class="price-lbl">'+(it.price_range||'')+'</span>'+maps+'</div>'+(it.why_now?'<div class="why-now">💡 '+it.why_now+'</div>':'')+'</div>';
 }
-function renderFood(items){var all=document.getElementById('fd-all');if(!all)return;items.forEach(function(it){if(it.latitude&&it.longitude)it.dist=calcDist(parseFloat(it.latitude),parseFloat(it.longitude));});all.innerHTML=items.map(foodCard).join('');['breakfast','cafe','lunch','dinner','street_food'].forEach(function(t){var el=document.getElementById('fd-'+t);if(!el)return;var f=items.filter(function(i){return(i.type||'').indexOf(t)>-1;});el.innerHTML=f.length?f.map(foodCard).join(''):noData('No '+t.replace('_',' '));});}
-function renderWellness(items){var el=document.getElementById('well-all');if(!el)return;el.innerHTML=items.map(function(it){var nm=(it.name||'').replace(/'/g,'');var ar=(it.area||'').replace(/'/g,'');var maps=(nm&&ar)?'<button class="well-maps" onclick="openMaps(\''+nm+'\',\''+ar+'\')">🗺 Maps</button>':'';return '<div class="well-card"><div class="well-name">'+(it.name||'')+'</div><div class="well-area">📍 '+(it.area||'')+'</div><span class="well-type">'+(it.type||'Wellness')+'</span><div class="well-vibe">'+(it.vibe||'')+'</div><div style="font-size:.72rem;color:var(--muted);margin-top:5px">'+(it.hours||'')+' · '+(it.price_range||'')+'</div>'+maps+'</div>';}).join('');}
-function renderEvents(items){var el=document.getElementById('ev-all');if(!el)return;var filtered=items.filter(function(i){return i.title&&!i.title.includes('No verified');});el.innerHTML=filtered.length?filtered.map(function(it){return '<div class="ev-card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:8px"><span class="verdict">'+(it.verdict||'WORTH IT')+'</span></div><div class="ev-title">'+(it.title||'')+'</div><div class="ev-venue">📍 '+(it.venue||'')+'</div><div class="ev-time">🗓 '+(it.date||'')+' · ⏰ '+(it.time||'')+'</div></div>';}).join(''):noData('No verified events today');}
-function renderNews(items){var el=document.getElementById('news-list');if(!el)return;el.innerHTML=items.length?items.map(function(it){return '<div class="news-card '+(it.impact_level||'low')+'"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px"><div class="news-title">'+(it.title||'')+'</div><span class="impact '+(it.impact_level||'low')+'">'+((it.impact_level||'low').toUpperCase())+'</span></div><div class="brain-box">💬 '+(it.plain_english||'')+'</div></div>';}).join(''):noData('No news updates');}
-function renderTransit(items){var el=document.getElementById('transit-list');if(!el)return;var list=Array.isArray(items)?items:Object.keys(items).map(function(k){return{line:k,status:items[k].status||'',verdict:items[k].verdict||''};});el.innerHTML=list.length?list.map(function(it){return '<div class="transit-card"><div class="tc-name">🚇 '+(it.line||'')+'</div><div class="tc-status">'+(it.status||'Operational')+'</div>'+(it.verdict?'<div class="tc-verdict">'+it.verdict+'</div>':'')+'</div>';}).join(''):noData('No transit data');}
-function renderHike(items){var el=document.getElementById('hike-list');if(!el)return;el.innerHTML=items.length?items.map(function(it){return '<div class="hike-card"><div class="hike-name">🥾 '+(it.trail||it.name||'')+'</div><div class="hike-loc">📍 '+(it.area||it.location||'')+'</div><div><span class="hike-tag">'+(it.difficulty||'')+'</span><span class="hike-tag">⏱ '+(it.duration||'')+'</span></div>'+((it.why_tonight||it.reason)?'<div style="margin-top:6px;font-size:.78rem;color:var(--t2)">'+(it.why_tonight||it.reason)+'</div>':'')+'</div>';}).join(''):noData('No trails available');}
-function renderEscape(items){var el=document.getElementById('escape-list');if(!el)return;el.innerHTML=items.length?items.map(function(it){return '<div class="esc-card"><div class="esc-name">✈️ '+(it.destination||'')+'</div><div class="esc-dist">🚗 '+(it.distance_km||it.distance||'')+' · '+(it.drive_time||'')+'</div><div class="esc-vibe">'+(it.vibe||'')+'</div>'+((it.why_tonight||it.best_for)?'<div style="background:rgba(255,101,53,.06);border-radius:8px;padding:7px 10px;font-size:.78rem;color:var(--od);margin-top:6px;">💡 '+(it.why_tonight||it.best_for)+'</div>':'')+'</div>';}).join(''):noData('No escapes available');}
+function renderFood(items){
+  withDist(items);
+  var all=document.getElementById('fd-all');if(all)all.innerHTML=items.map(foodCard).join('');
+  ['breakfast','cafe','lunch','dinner','street_food'].forEach(function(t){var el=document.getElementById('fd-'+t);if(!el)return;var f=items.filter(function(i){return(i.type||'').indexOf(t)>-1;});el.innerHTML=f.length?f.map(foodCard).join(''):noData('No '+t.replace('_',' ')+' right now');});
+}
+function renderWellness(items){
+  withDist(items);
+  var el=document.getElementById('well-all');if(!el)return;
+  el.innerHTML=items.map(function(it){var nm=(it.name||'').replace(/'/g,'');var ar=(it.area||'').replace(/'/g,'');var maps=(nm&&ar)?'<button class="well-maps" onclick="openMaps(\''+nm+'\',\''+ar+'\')">🗺 Maps</button>':'';var db=it._dist!=null?'<span class="pc-dist">📍 '+it._dist+' km</span>':'';return '<div class="well-card"><div class="well-head"><div class="well-name">'+(it.name||'')+'</div>'+db+'</div><div class="well-area">📍 '+(it.area||'')+'</div><span class="well-type">'+(it.type||'Wellness')+'</span><div class="well-vibe">'+(it.vibe||'')+'</div><div style="font-size:.72rem;color:var(--muted);margin-top:5px">'+(it.hours||'')+' · '+(it.price_range||'')+'</div>'+maps+'</div>';}).join('');
+}
+function renderEvents(items){var el=document.getElementById('ev-all');if(!el)return;var f=items.filter(function(i){return i.title&&i.title.toLowerCase().indexOf('no verified')<0&&i.title.toLowerCase().indexOf('no major')<0;});el.innerHTML=f.length?f.map(function(it){var badges='';if(it.trending)badges+='<span class="pc-badge badge-trending">🔥 Trending</span>';if(it.new_opening)badges+='<span class="pc-badge badge-new">✨ New</span>';var angle=it.creator_angle?'<div class="ev-angle">📹 '+it.creator_angle+'</div>':'';return '<div class="ev-card">'+(badges?'<div class="ev-badges">'+badges+'</div>':'')+'<div class="ev-title">'+(it.title||'')+'</div><div class="ev-venue">📍 '+(it.venue||'')+'</div><div class="ev-time">🗓 '+(it.date||'')+' · ⏰ '+(it.time||'')+(it.price?' · 🎟 '+it.price:'')+'</div>'+angle+'<div style="margin-top:6px;"><span class="verdict">'+(it.verdict||'WORTH IT')+'</span></div></div>';}).join(''):noData('No verified events today — check social media for pop-ups');}
+function renderNews(items){var el=document.getElementById('news-list');if(!el)return;el.innerHTML=items.length?items.map(function(it){var lvl=it.impact_level||'low';var msg=it.plain_english||it.verdict||'';return '<div class="news-card '+lvl+'"><div class="news-head"><div class="news-title">'+(it.title||'')+'</div><span class="impact '+lvl+'">'+lvl.toUpperCase()+'</span></div>'+(msg?'<div class="brain-box">💬 '+msg+'</div>':'')+'</div>';}).join(''):noData('No news updates');}
+function renderTransit(data){var el=document.getElementById('transit-list');if(!el)return;var list=Array.isArray(data)?data:Object.keys(data).filter(function(k){return typeof data[k]==='object'||k!=='verdict';}).map(function(k){var v=data[k];if(typeof v==='string')return{line:k,status:v,verdict:''};return{line:k,status:v.status||'',verdict:v.verdict||''};});el.innerHTML=list.length?list.map(function(it){return '<div class="transit-card"><div class="tc-name">🚇 '+(it.line||'')+'</div><div class="tc-status">'+(it.status||'Operational')+'</div>'+(it.verdict?'<div class="tc-verdict">'+it.verdict+'</div>':'')+'</div>';}).join(''):noData('No transit data');}
+function renderHike(data){var el=document.getElementById('hike-list');if(!el)return;var items=[],topVerdict='';if(Array.isArray(data)){items=data;}else if(data&&Array.isArray(data.trails)){items=data.trails;topVerdict=data.verdict||'';}else if(data){items=[data];}var html='';if(topVerdict)html+='<div style="background:#FFFBF0;border-left:3px solid var(--amber);padding:9px 12px;font-size:.79rem;color:#7a5500;border-radius:8px;margin-bottom:10px;">'+topVerdict+'</div>';html+=items.length?items.map(function(it){return '<div class="hike-card"><div class="hike-name">🥾 '+(it.trail||it.name||'')+'</div>'+((it.area||it.location)?'<div class="hike-loc">📍 '+(it.area||it.location)+'</div>':'')+'<div>'+(it.difficulty?'<span class="hike-tag">'+it.difficulty+'</span>':'')+(it.duration?'<span class="hike-tag">⏱ '+it.duration+'</span>':'')+(it.status?'<span class="hike-tag">'+it.status+'</span>':'')+'</div>'+((it.why_tonight||it.reason||it.why)?'<div style="margin-top:6px;font-size:.78rem;color:var(--t2)">'+(it.why_tonight||it.reason||it.why)+'</div>':'')+'</div>';}).join(''):noData('No trails available');el.innerHTML=html;}
+function renderEscape(items){var el=document.getElementById('escape-list');if(!el)return;el.innerHTML=items.length?items.map(function(it){return '<div class="esc-card"><div class="esc-head"><div class="esc-name">✈️ '+(it.destination||'')+'</div></div><div class="esc-dist">🚗 '+(it.distance_km?it.distance_km+' km':(it.distance||''))+(it.drive_time?' · '+it.drive_time:'')+'</div><div class="esc-vibe">'+(it.vibe||'')+'</div>'+((it.why_tonight||it.why_now||it.best_for)?'<div style="background:rgba(255,101,53,.06);border-radius:8px;padding:7px 10px;font-size:.78rem;color:var(--od);">💡 '+(it.why_tonight||it.why_now||it.best_for)+'</div>':'')+'</div>';}).join(''):noData('No escapes available');}
+
+function generateMyDay(){
+  if(!DATA||!DATA.modules){return;}
+  var hour=new Date().getHours(),label,blocks=[];
+  var food=DATA.modules.food||[],well=DATA.modules.wellness||[],ev=(DATA.modules.events||[]).filter(function(i){return i.title&&i.title.toLowerCase().indexOf('no verified')<0&&i.title.toLowerCase().indexOf('no major')<0;});
+  withDist(food);withDist(well);
+  function pick(arr,n){return arr.slice(0,n);}
+  function fItems(types){return food.filter(function(f){return types.indexOf(f.type)>-1&&f.open_now!==false;});}
+  if(hour>=5&&hour<11){label='🌅 Your Morning';blocks=[['Breakfast & Coffee',pick(fItems(['breakfast','cafe']),3),'food'],['Move your body',pick(well.filter(function(w){return['yoga','gym','outdoor'].indexOf(w.type)>-1;}),2),'well']];}
+  else if(hour>=11&&hour<15){label='☀️ Your Afternoon';blocks=[['Lunch spots',pick(fItems(['lunch','cafe']),3),'food'],['Wellness break',pick(well,2),'well'],['Happening now',pick(ev,2),'ev']];}
+  else if(hour>=15&&hour<19){label='🌆 Your Evening';blocks=[['Coffee or early dinner',pick(fItems(['cafe','dinner']),3),'food'],['Tonight\u2019s events',pick(ev,3),'ev']];}
+  else{label='🌙 Your Night';blocks=[['Dinner & street food',pick(fItems(['dinner','street_food']),4),'food'],['Late events',pick(ev,2),'ev']];}
+  var html='<div class="gen-result"><h3>'+label+'</h3><div class="gen-sub">'+(userLat?'Sorted by distance from you':'Top picks for right now')+'</div>';
+  blocks.forEach(function(b){var title=b[0],arr=b[1],kind=b[2];if(!arr.length)return;html+='<div class="gen-block"><div class="gen-block-title">'+title+'</div>';arr.forEach(function(it){if(kind==='ev'){html+='<div class="gen-item"><b>'+(it.title||'')+'</b> · '+(it.time||'')+' @ '+(it.venue||'')+'</div>';}else{var d=it._dist!=null?'<span class="gd">'+it._dist+' km</span>':'';html+='<div class="gen-item"><b>'+(it.name||'')+'</b> · '+(it.area||'')+d+'</div>';}});html+='</div>';});
+  html+='</div>';
+  document.getElementById('genResult').innerHTML=html;
+  document.getElementById('genResult').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function shareToday(){
+  if(!DATA)return;
+  var headline=document.getElementById('scoreHl').textContent;
+  var score=document.getElementById('scoreNum').textContent;
+  var summary=document.getElementById('scoreSub').textContent;
+  var text='📲 *JomOutKL Today*\n\n'+headline+'\nScore: '+score+'\n\n'+summary+'\n\n_Go out and explore KL!_';
+  var elem=document.createElement('a');
+  elem.setAttribute('href','data:text/plain;charset=utf-8,'+encodeURIComponent(text));
+  elem.setAttribute('download','jomoutkl-today.txt');
+  elem.style.display='none';
+  document.body.appendChild(elem);
+  elem.click();
+  document.body.removeChild(elem);
+  alert('Daily plan exported! Share it with creators or post on social media.');
+}
+
+function renderAll(d){
+  if(d.modules){
+    if(d.modules.food&&d.modules.food.length)renderFood(d.modules.food.slice());
+    if(d.modules.wellness&&d.modules.wellness.length)renderWellness(d.modules.wellness.slice());
+    if(d.modules.events&&d.modules.events.length)renderEvents(d.modules.events);
+    if(d.modules.news&&d.modules.news.length)renderNews(d.modules.news);
+    if(d.modules.transit)renderTransit(d.modules.transit);
+    if(d.modules.hike)renderHike(d.modules.hike);
+    if(d.modules.escape&&d.modules.escape.length)renderEscape(d.modules.escape);
+  }
+}
 
 function loadLiveData(){
   var basePath=window.location.origin+window.location.pathname.replace(/\/$/,'');
@@ -213,10 +328,9 @@ function loadLiveData(){
     .then(function(r){return r.text();})
     .then(function(raw){
       raw=raw.replace(/```json/g,'').replace(/```/g,'').trim();
-      var s=raw.indexOf('{');
-      var e=raw.lastIndexOf('}');
+      var s=raw.indexOf('{'),e=raw.lastIndexOf('}');
       if(s===-1||e===-1)throw new Error('no json');
-      var d=JSON.parse(raw.slice(s,e+1));
+      var d=JSON.parse(raw.slice(s,e+1));DATA=d;
       document.getElementById('scoreNum').innerHTML=d.go_out_score+'<span class="score-denom">/10</span>';
       document.getElementById('scoreHl').textContent=(d.ui&&d.ui.score_headline)||'GO OUT';
       document.getElementById('scoreSub').textContent=(d.today&&d.today.summary)||'';
@@ -225,9 +339,9 @@ function loadLiveData(){
       document.getElementById('hdr-date').textContent=new Date().toLocaleDateString('en-MY',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
       if(d.weather){var wx=d.weather;document.getElementById('wxIco').textContent=(wx.hourly&&wx.hourly[0]&&wx.hourly[0].icon)||'☀️';document.getElementById('wxTemp').innerHTML=Math.round(wx.temp_c)+'°<span style="font-size:1.5rem;font-weight:400">c</span>';document.getElementById('wxFeels').textContent='Feels like '+Math.round(wx.feels_like_c)+'°C';document.getElementById('wxCond').textContent=wx.condition||'';document.getElementById('ws0').innerHTML='💧 '+wx.humidity_pct+'%';document.getElementById('ws1').innerHTML='🌬 '+wx.wind_kmh;document.getElementById('ws2').innerHTML='☀️ UV '+wx.uv_index;document.getElementById('ws3').innerHTML='<span class="aqi">AQI '+(wx.aqi||'—')+'</span>';document.getElementById('ws4').innerHTML='🌅 '+wx.sunrise+' · 🌇 '+wx.sunset;document.getElementById('wxAdvisory').textContent=wx.advisory||'';var he=document.getElementById('wxHourly');if(he&&wx.hourly)he.innerHTML=wx.hourly.map(function(h){return'<div class="wx-hr"><div class="wx-hr-t">'+h.time+'</div><div class="wx-hr-i">'+h.icon+'</div><div class="wx-hr-d">'+h.temp_c+'°</div></div>';}).join('');}
       if(d.finance){var f=d.finance;document.getElementById('fv0').textContent=f.gold_myr_g||'—';document.getElementById('fs0').textContent=f.gold_change||'—';document.getElementById('fv1').textContent=f.usd_myr||'—';document.getElementById('fs1').textContent=f.usd_change||'—';document.getElementById('fv2').textContent=f.sgd_myr||'—';document.getElementById('fs2').textContent=f.sgd_change||'—';document.getElementById('fv3').textContent=f.btc_usd||'—';document.getElementById('fs3').textContent=f.btc_change||'—';document.getElementById('fv4').textContent=f.ron95||'RM 2.05';document.getElementById('fs4').textContent=f.ron95_change||'Unchanged';}
-      if(d.quality_check){var qc=d.quality_check;document.getElementById('qcConf').textContent=(qc.confidence||'—')+' — '+(qc.data_type||'Demo');}
-      if(d.modules){if(d.modules.food&&d.modules.food.length)renderFood(d.modules.food);if(d.modules.wellness&&d.modules.wellness.length)renderWellness(d.modules.wellness);if(d.modules.events&&d.modules.events.length)renderEvents(d.modules.events);if(d.modules.news&&d.modules.news.length)renderNews(d.modules.news);if(d.modules.transit)renderTransit(d.modules.transit);if(d.modules.hike&&d.modules.hike.length)renderHike(d.modules.hike);if(d.modules.escape&&d.modules.escape.length)renderEscape(d.modules.escape);}
-      console.log('JomOutKL: Data loaded');
+      if(d.quality_check){var qc=d.quality_check;document.getElementById('qcConf').textContent=(qc.confidence||'—');var qw=document.getElementById('qcWarnings');if(qw){if(qc.warnings&&qc.warnings.length){qw.innerHTML=qc.warnings.map(function(w){return '<div class="qc-i">· '+w+'</div>';}).join('');}else{qw.innerHTML='<div class="qc-i">All data sources verified ✓</div>';}}}
+      renderAll(d);
+      console.log('JomOutKL loaded');
     })
     .catch(function(err){console.error('Error:',err.message);});
 }
