@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JomOut KL</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; background: #FFF3EE; color: #333; line-height: 1.5; }
+    .container { max-width: 480px; margin: 0 auto; padding: 16px; }
+    header { text-align: center; padding: 20px 0; }
+    .logo { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .logo .out { color: #FF6535; }
+    .tabs { display: flex; gap: 8px; margin: 20px 0; overflow-x: auto; }
+    .tab { padding: 8px 16px; border-radius: 20px; background: #f0f0f0; border: none; cursor: pointer; white-space: nowrap; font-weight: 600; }
+    .tab.active { background: #FF6535; color: white; }
+    .score-card { background: linear-gradient(135deg, #FF6535 0%, #F4A800 100%); color: white; padding: 30px; border-radius: 16px; margin: 20px 0; text-align: center; }
+    .score-num { font-size: 48px; font-weight: 700; }
+    .score-headline { font-size: 18px; font-weight: 600; margin-top: 8px; }
+    .section { margin: 20px 0; }
+    .section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+    .card { background: white; padding: 16px; border-radius: 12px; margin-bottom: 12px; border: 1px solid #FFE8D8; }
+    .card-name { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+    .card-area { font-size: 14px; color: #666; margin-bottom: 4px; }
+    .card-vibe { font-size: 13px; color: #888; margin-bottom: 8px; }
+    .card-meta { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; }
+    .badge { background: #FFF3EE; padding: 4px 8px; border-radius: 6px; color: #FF6535; }
+    .weather-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .weather-item { background: white; padding: 12px; border-radius: 12px; text-align: center; }
+    .weather-item .label { font-size: 12px; color: #888; }
+    .weather-item .value { font-size: 18px; font-weight: 700; margin-top: 4px; }
+    .news-card { background: white; padding: 16px; border-radius: 12px; margin-bottom: 12px; border-left: 4px solid #FF6535; }
+    .news-title { font-weight: 700; margin-bottom: 4px; }
+    .news-source { font-size: 12px; color: #888; }
+    .transit-item { background: white; padding: 12px; border-radius: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; }
+    .transit-line { font-weight: 600; }
+    .transit-status { font-size: 12px; color: #666; }
+    .nodata { background: #FFF3EE; padding: 20px; border-radius: 12px; text-align: center; color: #888; }
+    .buttons { display: flex; gap: 12px; margin: 20px 0; }
+    .btn { flex: 1; padding: 12px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px; }
+    .btn-primary { background: #FF6535; color: white; }
+    .btn-secondary { background: #7C3AED; color: white; }
+    .page { display: none; }
+    .page.active { display: block; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo"><span class="out">Jom</span><span class="out">Out</span> <strong>KL</strong></div>
+      <div style="font-size: 12px; color: #888;">Daily Kuala Lumpur Guide</div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('today')">📍 Today</button>
+      <button class="tab" onclick="switchTab('food')">🍜 Food</button>
+      <button class="tab" onclick="switchTab('events')">🎉 Events</button>
+      <button class="tab" onclick="switchTab('news')">📰 News</button>
+      <button class="tab" onclick="switchTab('transit')">🚇 Transit</button>
+      <button class="tab" onclick="switchTab('wellness')">🧘 Wellness</button>
+      <button class="tab" onclick="switchTab('hike')">🥾 Hike</button>
+      <button class="tab" onclick="switchTab('escape')">✈️ Escape</button>
+    </div>
+
+    <!-- TODAY PAGE -->
+    <div id="today" class="page active">
+      <div class="score-card">
+        <div class="score-num" id="scoreNum">-</div>
+        <div class="score-headline" id="scoreHeadline">Loading...</div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">☁️ Weather</div>
+        <div class="weather-grid">
+          <div class="weather-item">
+            <div class="label">Temperature</div>
+            <div class="value" id="tempC">-</div>
+          </div>
+          <div class="weather-item">
+            <div class="label">Feels Like</div>
+            <div class="value" id="feelsLike">-</div>
+          </div>
+          <div class="weather-item">
+            <div class="label">Humidity</div>
+            <div class="value" id="humidity">-</div>
+          </div>
+          <div class="weather-item">
+            <div class="label">Wind</div>
+            <div class="value" id="wind">-</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">💰 Finance</div>
+        <div class="weather-grid">
+          <div class="weather-item">
+            <div class="label">USD/MYR</div>
+            <div class="value" id="usdMyr">-</div>
+          </div>
+          <div class="weather-item">
+            <div class="label">SGD/MYR</div>
+            <div class="value" id="sgdMyr">-</div>
+          </div>
+          <div class="weather-item">
+            <div class="label">BTC/USD</div>
+            <div class="value" id="btcUsd" style="font-size: 14px;">-</div>
+          </div>
+          <div class="weather-item">
+            <div class="label">RON95</div>
+            <div class="value" id="ron95">-</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button class="btn btn-primary" onclick="alert('Feature coming soon')">✨ Generate My Day</button>
+        <button class="btn btn-secondary" onclick="alert('Feature coming soon')">📤 Share Today</button>
+      </div>
+    </div>
+
+    <!-- FOOD PAGE -->
+    <div id="food" class="page">
+      <div id="foodList"></div>
+    </div>
+
+    <!-- EVENTS PAGE -->
+    <div id="events" class="page">
+      <div id="eventsList"></div>
+    </div>
+
+    <!-- NEWS PAGE -->
+    <div id="news" class="page">
+      <div id="newsList"></div>
+    </div>
+
+    <!-- TRANSIT PAGE -->
+    <div id="transit" class="page">
+      <div id="transitList"></div>
+    </div>
+
+    <!-- WELLNESS PAGE -->
+    <div id="wellness" class="page">
+      <div id="wellnessList"></div>
+    </div>
+
+    <!-- HIKE PAGE -->
+    <div id="hike" class="page">
+      <div id="hikeList"></div>
+    </div>
+
+    <!-- ESCAPE PAGE -->
+    <div id="escape" class="page">
+      <div id="escapeList"></div>
+    </div>
+  </div>
+
+  <script>
+    let DATA = null;
+
+    async function init() {
+      try {
+        const resp = await fetch('data.json');
+        const text = await resp.text();
+        DATA = JSON.parse(text);
+        render();
+      } catch (err) {
+        console.error('Error:', err);
+      }
+    }
+
+    function switchTab(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(page).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function render() {
+      if (!DATA) return;
+      const t = DATA.today || {};
+      const w = DATA.weather || {};
+      const f = DATA.finance || {};
+      const ui = DATA.ui || {};
+
+      document.getElementById('scoreNum').textContent = DATA.go_out_score + '/10';
+      document.getElementById('scoreHeadline').textContent = ui.score_headline || 'GO OUT';
+      document.getElementById('tempC').textContent = w.temp_c ? Math.round(w.temp_c) + '°' : '-';
+      document.getElementById('feelsLike').textContent = w.feels_like_c ? Math.round(w.feels_like_c) + '°' : '-';
+      document.getElementById('humidity').textContent = w.humidity_pct ? w.humidity_pct + '%' : '-';
+      document.getElementById('wind').textContent = w.wind_kmh ? Math.round(w.wind_kmh) + ' km/h' : '-';
+      document.getElementById('usdMyr').textContent = f.usd_myr || '-';
+      document.getElementById('sgdMyr').textContent = f.sgd_myr || '-';
+      document.getElementById('btcUsd').textContent = f.btc_usd ? '$' + f.btc_usd : '-';
+      document.getElementById('ron95').textContent = f.ron95 || '-';
+
+      renderFood(DATA.modules?.food || []);
+      renderEvents(DATA.modules?.events || []);
+      renderNews(DATA.modules?.news || []);
+      renderTransit(DATA.modules?.transit || []);
+      renderWellness(DATA.modules?.wellness || []);
+      renderHike(DATA.modules?.hike || []);
+      renderEscape(DATA.modules?.escape || []);
+    }
+
+    function renderFood(items) {
+      document.getElementById('foodList').innerHTML = items.length ? items.map(f => `<div class="card"><div class="card-name">${f.name}</div><div class="card-area">📍 ${f.area}</div><div class="card-vibe">${f.vibe}</div><div class="card-meta"><span class="badge">${f.price_range}</span><span class="badge">${f.type}</span></div>${f.why_now ? '<div style="margin-top:8px;font-size:12px;color:#666;">💡 ' + f.why_now + '</div>' : ''}</div>`).join('') : '<div class="nodata">No food data</div>';
+    }
+
+    function renderEvents(items) {
+      document.getElementById('eventsList').innerHTML = items.length ? items.map(e => `<div class="card"><div class="card-name">${e.title}</div><div class="card-area">📍 ${e.venue}</div><div style="font-size:12px;color:#666;margin-top:6px;">🗓 ${e.date} · 💰 ${e.price || 'Free'}</div>${e.verdict ? '<div style="margin-top:8px;font-weight:600;color:#FF6535;">' + e.verdict + '</div>' : ''}</div>`).join('') : '<div class="nodata">No events</div>';
+    }
+
+    function renderNews(items) {
+      document.getElementById('newsList').innerHTML = items.length ? items.map(n => `<div class="news-card"><div class="news-title">${n.title}</div><div style="font-size:13px;margin:6px 0;color:#666;">${n.plain_english || n.summary || ''}</div><div class="news-source">📡 ${n.source}</div></div>`).join('') : '<div class="nodata">No news</div>';
+    }
+
+    function renderTransit(items) {
+      document.getElementById('transitList').innerHTML = items.length ? items.map(tr => `<div class="transit-item"><div class="transit-line">🚇 ${tr.line}</div><div class="transit-status">${tr.status}</div></div>`).join('') : '<div class="nodata">No transit data</div>';
+    }
+
+    function renderWellness(items) {
+      document.getElementById('wellnessList').innerHTML = items.length ? items.map(w => `<div class="card"><div class="card-name">${w.name}</div><div class="card-area">📍 ${w.area}</div><div style="font-size:12px;color:#666;">${w.type} · ${w.hours || ''} · ${w.price_range || ''}</div>${w.vibe ? '<div style="margin-top:6px;font-size:13px;color:#666;">' + w.vibe + '</div>' : ''}</div>`).join('') : '<div class="nodata">No wellness spots</div>';
+    }
+
+    function renderHike(items) {
+      document.getElementById('hikeList').innerHTML = items.length ? items.map(h => `<div class="card"><div class="card-name">🥾 ${h.name}</div><div class="card-area">📍 ${h.area}</div><div style="font-size:12px;color:#666;margin-top:6px;">${h.difficulty} · ${h.duration} · ${h.status}</div>${h.why ? '<div style="margin-top:8px;font-size:13px;color:#666;">' + h.why + '</div>' : ''}</div>`).join('') : '<div class="nodata">No hikes</div>';
+    }
+
+    function renderEscape(items) {
+      document.getElementById('escapeList').innerHTML = items.length ? items.map(e => `<div class="card"><div class="card-name">✈️ ${e.destination}</div><div style="font-size:12px;color:#666;margin-top:6px;">🚗 ${e.distance_km}km · ${e.drive_time}</div><div style="margin-top:6px;font-size:13px;color:#666;">${e.vibe}</div>${e.why_now ? '<div style="margin-top:8px;font-size:12px;color:#666;">💡 ' + e.why_now + '</div>' : ''}</div>`).join('') : '<div class="nodata">No escapes</div>';
+    }
+
+    init();
+  </script>
+</body>
+</html>
