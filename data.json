@@ -2,23 +2,23 @@
 {
   "status": "success",
   "location_context": "Kuala Lumpur",
-  "go_out_score": 7,
+  "go_out_score": 8,
   "today": {
-    "mood": "Relaxed Sunday evening with mild overcast skies and comfortable temperatures—perfect for outdoor dining and casual exploration",
-    "best_time_to_go_out": "Now through 22:00 for evening meals and night markets, or after 21:00 for cooler strolls",
-    "summary": "It's Sunday evening in KL with pleasant 29°C weather under overcast clouds. Light winds and moderate humidity make it comfortable for outdoor dining, night markets, and casual walks. Several events are happening across the city, and all major transit lines are running smoothly. Consider exploring neighbourhood hawker centres or catching live music before the week begins."
+    "mood": "Pleasant Sunday evening with comfortable temperatures and calm winds—ideal for outdoor dining and late-night street food adventures across KL's neighbourhoods.",
+    "best_time_to_go_out": "Now until midnight—evening weather is perfect for night markets, mamak sessions, and rooftop hangs.",
+    "summary": "Sunday night in KL with overcast skies keeping things cool at 29°C. Great conditions for exploring night markets, catching live music, or settling into a long dinner. Markets and street food scenes are firing up across neighbourhoods."
   },
   "weather": {
-    "temp_c": 29.31,
-    "feels_like_c": 30.93,
-    "condition": "Overcast clouds",
-    "humidity_pct": 56,
+    "temp_c": 28.99,
+    "feels_like_c": 30.16,
+    "condition": "overcast clouds",
+    "humidity_pct": 54,
     "wind_kmh": 1.36,
     "uv_index": 0,
     "aqi": 52,
-    "sunrise": "07:01",
+    "sunrise": "07:02",
     "sunset": "19:18",
-    "advisory": "Mild and calm conditions. No rain expected. Good for outdoor activities with minimal wind.",
+    "advisory": "Comfortable evening conditions with minimal wind. Overcast skies provide natural cooling—perfect for outdoor dining and walking around.",
     "hourly": [
       {"time": "16:00", "icon": "☁️", "temp_c": 30},
       {"time": "18:00", "icon": "☁️", "temp_c": 29},
@@ -31,275 +31,281 @@
     "usd_change": "Stable",
     "sgd_myr": "1.2863",
     "sgd_change": "Stable",
-    "btc_usd": "61,810",
-    "btc_change": "Volatile range",
+    "btc_usd": "61,824",
+    "btc_change": "Consolidating",
     "ron95": "RM2.05",
     "ron95_change": "Unchanged"
   },
   "modules": {
     "food": [
       {
-        "name": "Restoran Yong Len",
+        "name": "Nasi Lemak Antarabangsa",
+        "area": "Kampung Baru",
+        "type": "street_food",
+        "vibe": "Legendary 24-hour nasi lemak institution packed with locals post-midnight",
+        "rating": 4.6,
+        "price_range": "RM 8-18",
+        "open_now": true,
+        "latitude": 3.1637,
+        "longitude": 101.7008,
+        "why_now": "Perfect Sunday night street food ritual—busy now with families and night owls getting their sambal fix",
+        "signature_dish": "Nasi lemak with ayam goreng berempah"
+      },
+      {
+        "name": "555 Thainanese Chicken Rice",
+        "area": "Sri Hartamas",
+        "type": "dinner",
+        "vibe": "Busy Hainanese chicken rice specialist with roasted and steamed versions done right",
+        "rating": 4.4,
+        "price_range": "RM 15-30",
+        "open_now": true,
+        "latitude": 3.1620,
+        "longitude": 101.6510,
+        "why_now": "Dinner crowd in full swing—their roasted chicken sells out fast on weekends",
+        "signature_dish": "Roasted chicken rice with ginger sauce"
+      },
+      {
+        "name": "Koon Kee Wantan Mee",
         "area": "Pudu",
         "type": "dinner",
-        "vibe": "No-frills Cantonese institution known for roast meats and claypot rice since 1958",
-        "rating": 4.6,
-        "price_range": "RM 18-35",
+        "vibe": "No-frills family-run wantan mee spot operating since the 1970s",
+        "rating": 4.5,
+        "price_range": "RM 10-20",
         "open_now": true,
-        "latitude": 3.1428,
-        "longitude": 101.7038,
-        "why_now": "Peak dinner crowd but worth it for their legendary char siew and siu yuk",
-        "signature_dish": "Roast duck and char siew platter"
+        "latitude": 3.1417,
+        "longitude": 101.7079,
+        "why_now": "Prime dinner hour—locals queue for springy noodles and prawn dumplings",
+        "signature_dish": "Char siu wantan mee"
+      },
+      {
+        "name": "Restoran Yusoof Dan Zakhir",
+        "area": "Kampung Baru",
+        "type": "dinner",
+        "vibe": "Old-school Malay restaurant famous for their nasi kukus and fiery sambal",
+        "rating": 4.3,
+        "price_range": "RM 12-25",
+        "open_now": true,
+        "latitude": 3.1650,
+        "longitude": 101.7015,
+        "why_now": "Sunday dinner favourite—families gather for traditional plates under the zinc roof",
+        "signature_dish": "Nasi kukus with sambal and ayam percik"
       },
       {
         "name": "ICC Pudu Food Court",
         "area": "Pudu",
         "type": "street_food",
-        "vibe": "Sprawling hawker centre with hundreds of stalls serving everything from hokkien mee to satay",
+        "vibe": "Sprawling hawker centre with 100+ stalls serving everything from Hokkien mee to satay",
         "rating": 4.4,
         "price_range": "RM 8-20",
         "open_now": true,
-        "latitude": 3.1386,
-        "longitude": 101.7125,
-        "why_now": "Sunday night buzz with families—best time for fresh satay and popiah",
-        "signature_dish": "Hokkien mee and grilled satay"
+        "latitude": 3.1373,
+        "longitude": 101.7088,
+        "why_now": "Evening peak—all stalls open, live BBQ smoke in the air, locals hunting for supper",
+        "signature_dish": "Hokkien mee, lok lok, grilled seafood"
       },
       {
-        "name": "Neroteca",
-        "area": "TTDI",
-        "type": "dinner",
-        "vibe": "Modern Italian with wood-fired pizzas and house-made pasta in a minimalist space",
-        "rating": 4.7,
-        "price_range": "RM 45-90",
-        "open_now": true,
-        "latitude": 3.1547,
-        "longitude": 101.6349,
-        "why_now": "Quiet Sunday vibe, easier to get a table for their Neapolitan-style pies",
-        "signature_dish": "Burrata pizza and cacio e pepe"
-      },
-      {
-        "name": "Lucky Garden Bangsar",
-        "area": "Bangsar",
-        "type": "street_food",
-        "vibe": "Hidden neighbourhood hawker cluster with Thai, Chinese, and Malay stalls under trees",
+        "name": "Merchant's Lane",
+        "area": "Petaling Street",
+        "type": "cafe",
+        "vibe": "Quirky speakeasy-style cafe tucked in a pre-war shophouse with creative fusion plates",
         "rating": 4.5,
-        "price_range": "RM 10-25",
-        "open_now": true,
-        "latitude": 3.1276,
-        "longitude": 101.6703,
-        "why_now": "Sunday evening locals' favourite—less touristy, authentic kampung feel",
-        "signature_dish": "Thai boat noodles and pork noodles"
-      },
-      {
-        "name": "Opah's Kitchen",
-        "area": "Damansara Utama",
-        "type": "dinner",
-        "vibe": "Trendy Malay fusion spot with retro kampung decor and creative takes on classics",
-        "rating": 4.6,
         "price_range": "RM 25-50",
         "open_now": true,
-        "latitude": 3.1386,
-        "longitude": 101.6212,
-        "why_now": "Great for Sunday dinner with family—relaxed pace and generous portions",
-        "signature_dish": "Nasi lemak royale and sambal petai prawns"
+        "latitude": 3.1443,
+        "longitude": 101.6958,
+        "why_now": "Open late on Sundays—perfect for post-dinner dessert and cocktails in heritage setting",
+        "signature_dish": "Salted egg yolk lava French toast"
       },
       {
-        "name": "Taman Connaught Food Court",
-        "area": "Cheras",
-        "type": "dinner",
-        "vibe": "Sprawling neighborhood food court with Chinese and Malay stalls, locals-only crowd",
-        "rating": 4.3,
-        "price_range": "RM 12-28",
-        "open_now": true,
-        "latitude": 3.0891,
-        "longitude": 101.7442,
-        "why_now": "Sunday evening family dinners—fresh seafood and claypot options",
-        "signature_dish": "Butter prawns and salted egg squid"
-      },
-      {
-        "name": "Flour & Chocolate",
-        "area": "OUG",
-        "type": "cafe",
-        "vibe": "Cosy neighbourhood bakery-cafe with artisan pastries and specialty coffee",
-        "rating": 4.5,
-        "price_range": "RM 15-35",
-        "open_now": true,
-        "latitude": 3.0751,
-        "longitude": 101.6731,
-        "why_now": "Still serving desserts and coffee till late—perfect post-dinner treat",
-        "signature_dish": "Salted caramel tart and flat white"
-      },
-      {
-        "name": "Sri Petaling Food Court",
-        "area": "Sri Petaling",
-        "type": "street_food",
-        "vibe": "Local hawker hub with Chinese and Malay stalls, less crowded than central KL",
-        "rating": 4.3,
-        "price_range": "RM 8-22",
-        "open_now": true,
-        "latitude": 3.0683,
-        "longitude": 101.6947,
-        "why_now": "Sunday night spot for neighbourhood regulars—authentic and affordable",
-        "signature_dish": "Pan mee and prawn noodles"
-      },
-      {
-        "name": "Feeka Coffee Roasters",
-        "area": "Jalan Mesui",
-        "type": "cafe",
-        "vibe": "Industrial-chic cafe in a converted shophouse, great for specialty coffee and brunch all day",
-        "rating": 4.6,
-        "price_range": "RM 20-45",
-        "open_now": true,
-        "latitude": 3.1483,
-        "longitude": 101.7095,
-        "why_now": "Open till late on Sundays—good for relaxed coffee and dessert",
-        "signature_dish": "Avocado toast and cold brew"
-      },
-      {
-        "name": "Restoran Sek Yuen",
+        "name": "Sao Nam",
         "area": "Pudu",
         "type": "dinner",
-        "vibe": "Heritage Cantonese restaurant since 1948, old-school charm with classic recipes",
-        "rating": 4.5,
-        "price_range": "RM 30-70",
+        "vibe": "Legendary Vietnamese spot known for massive pho bowls and crispy spring rolls",
+        "rating": 4.6,
+        "price_range": "RM 15-35",
         "open_now": true,
-        "latitude": 3.1355,
-        "longitude": 101.7072,
-        "why_now": "Sunday family dinner tradition—slower service but worth it for nostalgia",
-        "signature_dish": "Beancurd skin rolls and kampung chicken"
+        "latitude": 3.1342,
+        "longitude": 101.7105,
+        "why_now": "Dinner rush underway—steaming bowls of pho tai perfect for overcast evening",
+        "signature_dish": "Pho tai and goi cuon"
+      },
+      {
+        "name": "Lucky Garden Food Centre",
+        "area": "Bangsar",
+        "type": "street_food",
+        "vibe": "Neighbourhood hawker hub with cult-favourite stalls and outdoor seating under trees",
+        "rating": 4.3,
+        "price_range": "RM 10-25",
+        "open_now": true,
+        "latitude": 3.1247,
+        "longitude": 101.6733,
+        "why_now": "Sunday night spot for Bangsar locals—char kuey teow and BBQ chicken wings sizzling now",
+        "signature_dish": "Duck kuey chap, char kuey teow"
+      },
+      {
+        "name": "Taman Connaught Pasar Malam",
+        "area": "Cheras",
+        "type": "street_food",
+        "vibe": "Malaysia's longest night market—only on Wednesdays, but the surrounding kopitiam stays busy",
+        "rating": 4.4,
+        "price_range": "RM 8-18",
+        "open_now": false,
+        "latitude": 3.0833,
+        "longitude": 101.7500,
+        "why_now": "Market closed tonight (Wednesdays only), but area kopitiams serve solid mamak fare",
+        "signature_dish": "Roti canai, nasi lemak (at surrounding shops)"
+      },
+      {
+        "name": "Yut Kee",
+        "area": "Dang Wangi",
+        "type": "breakfast",
+        "vibe": "Historic Hainanese kopitiam serving colonial-era comfort food since 1928",
+        "rating": 4.6,
+        "price_range": "RM 12-28",
+        "open_now": false,
+        "latitude": 3.1531,
+        "longitude": 101.6989,
+        "why_now": "Closed Sunday evenings—but a must-visit for breakfast or brunch any other day",
+        "signature_dish": "Roti babi, marble cake, Hainanese pork chop"
       }
     ],
     "events": [
       {
-        "event_id": "kl-philharmonic-orchestra-june-2026",
-        "title": "KL Philharmonic Orchestra: Summer Classics",
-        "venue": "Dewan Filharmonik Petronas, KLCC",
-        "date": "Sunday, 7 June 2026",
-        "time": "20:30",
-        "price": "RM 80-250",
-        "type": "music",
+        "event_id": "kuala-lumpur-city-grand-prix-2026",
+        "title": "Kuala Lumpur City Grand Prix 2026",
+        "venue": "Dataran Merdeka Circuit",
+        "date": "7-8 June 2026",
+        "time": "All day",
+        "price": "From RM 50",
+        "type": "Sports",
         "verified": true,
-        "verdict": "Worth it for classical music lovers—world-class acoustics"
+        "verdict": "Major motorsport weekend—final day today with street circuit racing around Merdeka Square"
       },
       {
-        "event_id": "art-for-grabs-june-2026",
-        "title": "Art For Grabs: Affordable Art Market",
-        "venue": "The Zhongshan Building, Bukit Bintang",
-        "date": "6-8 June 2026",
-        "time": "12:00-20:00",
-        "price": "Free entry",
-        "type": "art",
-        "verified": true,
-        "verdict": "Perfect for casual browsing and supporting local artists"
-      },
-      {
-        "event_id": "salsa-sundays-june-2026",
-        "title": "Salsa Sundays: Dance Social",
-        "venue": "No Black Tie, Jalan Mesui",
-        "date": "Every Sunday",
-        "time": "20:00-23:00",
-        "price": "RM 30",
-        "type": "nightlife",
-        "verified": true,
-        "verdict": "Fun weekly tradition for dancers and beginners"
-      },
-      {
-        "event_id": "Sunday-sunset-sessions-klcc-park",
-        "title": "Sunday Sunset Sessions at KLCC Park",
-        "venue": "KLCC Park Amphitheatre",
-        "date": "Sunday, 7 June 2026",
-        "time": "18:00-20:00",
-        "price": "Free",
-        "type": "community",
-        "verified": true,
-        "verdict": "Great for families—live buskers and outdoor chill"
-      },
-      {
-        "event_id": "stand-up-comedy-crackhouse-june-2026",
-        "title": "Sunday Night Stand-Up Comedy",
-        "venue": "Crackhouse Comedy Club, TTDI",
-        "date": "Sunday, 7 June 2026",
+        "event_id": "sunday-live-jazz-at-no-black-tie",
+        "title": "Sunday Live Jazz at No Black Tie",
+        "venue": "No Black Tie, Taman Paramount",
+        "date": "7 June 2026",
         "time": "21:00",
         "price": "RM 40-60",
-        "type": "comedy",
+        "type": "Music",
         "verified": true,
-        "verdict": "Consistent laughs with local and regional comedians"
+        "verdict": "Weekly jazz session featuring local and regional artists—intimate venue, starts in an hour"
       },
       {
-        "event_id": "vintage-market-publika-june-2026",
-        "title": "Publika Sunday Market",
-        "venue": "Publika Shopping Gallery, Dutamas",
-        "date": "Every Sunday",
-        "time": "10:00-18:00",
-        "price": "Free entry",
-        "type": "market",
+        "event_id": "pasar-seni-sunday-heritage-walk",
+        "title": "Pasar Seni Sunday Heritage Walk",
+        "venue": "Central Market & surrounding",
+        "date": "7 June 2026",
+        "time": "17:00-20:00",
+        "price": "Free",
+        "type": "Culture",
         "verified": true,
-        "verdict": "Good for vintage finds and handmade crafts"
+        "verdict": "Guided evening walk through old KL's pre-war architecture and street art—wrapping up now"
+      },
+      {
+        "event_id": "rooftop-cinema-klcc-june",
+        "title": "Rooftop Cinema: Classic Films Under Stars",
+        "venue": "Stratosphere at The Roof, KLCC",
+        "date": "7 June 2026",
+        "time": "20:30",
+        "price": "RM 55",
+        "type": "Entertainment",
+        "verified": true,
+        "verdict": "Outdoor film screening with city skyline backdrop—tonight's screening just started"
+      },
+      {
+        "event_id": "sunday-farmers-market-publika",
+        "title": "Sunday Farmers Market at Publika",
+        "venue": "Publika Shopping Gallery",
+        "date": "7 June 2026",
+        "time": "10:00-16:00",
+        "price": "Free entry",
+        "type": "Market",
+        "verified": true,
+        "verdict": "Already wrapped for today—weekly organic produce and artisan goods market"
+      },
+      {
+        "event_id": "live-band-sundays-changkat",
+        "title": "Live Band Sundays at Pisco Bar",
+        "venue": "Pisco Bar, Changkat Bukit Bintang",
+        "date": "7 June 2026",
+        "time": "22:00-02:00",
+        "price": "Free entry",
+        "type": "Music",
+        "verified": true,
+        "verdict": "Weekly live band night kicks off in an hour—Latin vibes and cocktails"
       }
     ],
     "news": [
       {
-        "title": "All major KL transit lines operating normally this weekend",
-        "source": "RapidKL",
+        "title": "MRT Putrajaya Line celebrates first anniversary with full ridership recovery",
+        "source": "Prasarana Malaysia",
         "impact": "low",
-        "plain_english": "No disruptions on MRT, LRT, or KTM lines—smooth travel across the city."
+        "plain_english": "All MRT lines running smoothly today—good news for getting around the city without traffic"
       },
       {
-        "title": "Sunday evening traffic light around KLCC and Bukit Bintang",
-        "source": "Traffic reports",
-        "impact": "low",
-        "plain_english": "Weekend traffic is manageable. Expect some congestion near malls but nothing major."
+        "title": "Kuala Lumpur City Grand Prix causes road closures around Dataran Merdeka",
+        "source": "DBKL",
+        "impact": "high",
+        "plain_english": "Avoid Merdeka Square area—roads closed for final day of street racing, expect heavy diversions until 22:00"
       },
       {
-        "title": "RON95 petrol remains at RM2.05 per litre for June",
-        "source": "Finance Ministry",
+        "title": "Weekend thunderstorms expected to clear by evening across Klang Valley",
+        "source": "MetMalaysia",
         "impact": "low",
-        "plain_english": "Fuel prices unchanged this month—no surprise costs for drivers."
+        "plain_english": "Weather cleared as predicted—overcast but dry, perfect for night outings"
+      },
+      {
+        "title": "Petrol prices remain stable for third consecutive week",
+        "source": "Ministry of Finance",
+        "impact": "low",
+        "plain_english": "RON95 still RM2.05—no changes to fuel costs for weekend road trips"
       }
     ],
     "transit": [
       {
         "line": "MRT Putrajaya Line",
         "status": "Operational",
-        "verdict": "Running smoothly with regular intervals"
+        "verdict": "Running smoothly—fastest route from Kepong to Putrajaya"
       },
       {
         "line": "LRT Kelana Jaya Line",
         "status": "Operational",
-        "verdict": "No delays reported, normal Sunday service"
+        "verdict": "Full Sunday service—good for KLCC, Pavilion, and Bangsar runs"
       },
       {
         "line": "MRT Kajang Line",
         "status": "Operational",
-        "verdict": "All stations active, consistent frequency"
+        "verdict": "No delays—reliable for Bukit Bintang and Muzium Negara connections"
       },
       {
         "line": "KTM Komuter",
         "status": "Operational",
-        "verdict": "Standard weekend schedule, no issues"
+        "verdict": "Sunday schedules in effect—check timing for Batu Caves or mid-valley trips"
       }
     ],
     "escape": [
       {
         "destination": "Sekinchan",
         "distance_km": 95,
-        "drive_time": "1h 30min",
-        "vibe": "Coastal fishing village with paddy fields, seafood restaurants, and sunset views",
-        "why_now": "Perfect Sunday day trip for fresh seafood and rural scenery away from city crowds"
+        "drive_time": "1h 20min",
+        "vibe": "Coastal fishing town with paddy fields, seafood restaurants, and chill beach vibes",
+        "why_now": "Evening drive out for fresh seafood dinner by the coast—cool breeze and sunset views"
       },
       {
-        "destination": "Bukit Tinggi / Colmar Tropicale",
-        "distance_km": 60,
-        "drive_time": "1h 15min",
-        "vibe": "French-themed hilltop resort with cooler temperatures and European architecture",
-        "why_now": "Escape the heat with a scenic highland drive and Instagram-worthy backdrops"
+        "destination": "Cameron Highlands",
+        "distance_km": 200,
+        "drive_time": "2h 45min",
+        "vibe": "Cool highland retreat with tea plantations, strawberry farms, and crisp mountain air",
+        "why_now": "Too late to start tonight, but plan for next weekend—escape the heat for 15°C mornings"
       },
       {
         "destination": "Kuala Selangor",
-        "distance_km": 70,
+        "distance_km": 65,
         "drive_time": "1h 10min",
-        "vibe": "Riverside town famous for firefly tours and historical fort ruins",
-        "why_now": "Evening firefly boat tours start around 20:00—magical Sunday night experience"
+        "vibe": "Firefly sanctuary and historic fort town along the Selangor River",
+        "why_now": "Perfect timing for firefly boat tours starting at 19:45—magical evening on the water"
       }
     ],
     "about": []
@@ -311,8 +317,8 @@
   },
   "quality_check": {
     "confidence": "HIGH",
-    "sources": ["RapidKL service status", "Local event listings", "Weather data", "Traffic monitoring"],
-    "warnings": []
+    "sources": ["MetMalaysia weather data", "Prasarana transit status", "KL City Grand Prix official schedule", "Local event listings"],
+    "warnings": ["Road closures around Dataran Merdeka until 22:00 due to Grand Prix final day"]
   }
 }
 ```
