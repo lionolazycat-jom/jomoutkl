@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+w<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -408,11 +408,12 @@ function runCustomDay(){
 
 // ===== SHARE TODAY — WHATSAPP PREVIEW =====
 function shareToday(){
+function shareToday(){
   var plan=LAST_PLAN;
   var score=document.getElementById('scoreNum')?document.getElementById('scoreNum').textContent.replace('/10','').trim():'';
   var wx=DATA&&DATA.weather?Math.round(DATA.weather.temp_c)+'°C, '+(DATA.weather.condition||''):'';
   var bestTime=DATA&&DATA.today?DATA.today.best_time_to_go_out||'':'';
-  var siteUrl='jomoutkl.github.io';
+  var siteUrl='https://lionolazycat-jom.github.io/jomoutkl';
   var msg='';
   if(plan){
     msg+=plan.timeLabel+' plan · '+plan.paxNote+'\n\n';
@@ -429,18 +430,22 @@ function shareToday(){
     if(wx)msg+='☁️ '+wx+'\n';
     msg+='\nPlan your own day here 👇\n'+siteUrl;
   }
-  document.getElementById('sharePreview').textContent=msg;
-  document.getElementById('shareOverlay').classList.add('open');
+  var previewEl=document.getElementById('sharePreview');
+  var overlayEl=document.getElementById('shareOverlay');
+  if(previewEl)previewEl.textContent=msg;
+  if(overlayEl){
+    overlayEl.classList.add('open');
+    overlayEl.style.display='flex';
+  }
 }
-function sendWhatsApp(){
-  var msg=document.getElementById('sharePreview').textContent;
-  var a=document.createElement('a');
-  a.href='https://wa.me/?text='+encodeURIComponent(msg);
-  a.target='_blank';a.rel='noopener';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);
+
+function closeShare(){
+  var overlayEl=document.getElementById('shareOverlay');
+  if(overlayEl){
+    overlayEl.classList.remove('open');
+    overlayEl.style.display='none';
+  }
 }
-function closeShare(){document.getElementById('shareOverlay').classList.remove('open');}
-document.getElementById('shareOverlay').addEventListener('click',function(e){if(e.target===this)closeShare();});
 
 // ===== SEARCH TOGGLE =====
 function toggleSearch(){
@@ -538,11 +543,10 @@ function renderWellness(items){
   var el=document.getElementById('well-all');if(!el)return;
   el.innerHTML=items.map(function(it){var nm=(it.name||'').replace(/'/g,'');var ar=(it.area||'').replace(/'/g,'');var maps=(nm&&ar)?'<button class="well-maps" onclick="openMaps(\''+nm+'\',\''+ar+'\')">🗺 Maps</button>':'';var db=it._dist!=null?'<span class="pc-dist">📍 '+it._dist+' km</span>':'';return '<div class="well-card"><div class="well-head"><div class="well-name">'+(it.name||'')+'</div>'+db+'</div><div class="well-area">📍 '+(it.area||'')+'</div><span class="well-type">'+(it.type||'Wellness')+'</span><div class="well-vibe">'+(it.vibe||'')+'</div><div style="font-size:.72rem;color:var(--muted);margin-top:5px">'+(it.hours||'')+' · '+(it.price_range||'')+'</div>'+maps+'</div>';}).join('');
 }
-function renderEvents(items){var el=document.getElementById('ev-all');if(!el)return;items=items.map(function(i){if(!i.title&&i.name)i.title=i.name;return i;});var f=items.filter(function(i){return i.title&&i.title.toLowerCase().indexOf('no verified')<0&&i.title.toLowerCase().indexOf('no major')<0;});el.innerHTML=f.length?f.map(function(it){var badges='';if(it.trending)badges+='<span class="pc-badge badge-trending">🔥 Trending</span>';if(it.new_opening)badges+='<span class="pc-badge badge-new">✨ New</span>';if(!it.verified)badges+='<span class="pc-badge" style="background:rgba(248,196,0,.15);color:#7a5500;border-color:rgba(248,196,0,.3);">⚠️ Unverified</span>';var angle=it.creator_angle?'<div class="ev-angle">📹 '+it.creator_angle+'</div>':'';return '<div class="ev-card">'+(badges?'<div class="ev-badges">'+badges+'</div>':'')+'<div class="ev-title">'+(it.title||'')+'</div><div class="ev-venue">📍 '+(it.venue||'')+'</div><div class="ev-time">🗓 '+(it.date||'')+' · ⏰ '+(it.time||'')+(it.price?' · 🎟 '+it.price:'')+'</div>'+angle+'<div style="margin-top:6px;"><span class="verdict">'+(it.verdict||'WORTH IT')+'</span></div></div>';}).join(''):noData('No verified events today — check social media for pop-ups');}
-
+function renderEvents(items){var el=document.getElementById('ev-all');if(!el)return;items=items.map(function(i){if(!i.title&&i.name)i.title=i.name;return i;});var f=items.filter(function(i){return i.title&&i.title.toLowerCase().indexOf('no verified')<0&&i.title.toLowerCase().indexOf('no major')<0;});el.innerHTML=f.length?f.map(function(it){var badges='';if(it.trending)badges+='<span class="pc-badge badge-trending">🔥 Trending</span>';if(it.new_opening)badges+='<span class="pc-badge badge-new">✨ New</span>';if(!it.verified)badges+='<span class="pc-badge" style="background:rgba(248,196,0,.15);color:#7a5500;border-color:rgba(248,196,0,.3);">⚠️ Unverified</span>';var angle=it.creator_angle?'<div class="ev-angle">📹 '+it.creator_angle+'</div>':'';var nm=(it.venue||'').replace(/'/g,'');var maps=(nm)?'<button class="maps-btn" onclick="openMaps(\''+nm+'\')">🗺 Maps</button>':'';return '<div class="ev-card">'+(badges?'<div class="ev-badges">'+badges+'</div>':'')+'<div class="ev-title">'+(it.title||'')+'</div><div class="ev-venue">📍 '+(it.venue||'')+'</div><div class="ev-time">🗓 '+(it.date||'')+' · ⏰ '+(it.time||'')+(it.price?' · 🎟 '+it.price:'')+'</div>'+angle+'<div style="margin-top:6px;"><span class="verdict">'+(it.verdict||'WORTH IT')+'</span> '+maps+'</div></div>';}).join(''):noData('No verified events today — check social media for pop-ups');}
 function renderNews(items){var el=document.getElementById('news-list');if(!el)return;if(!items.length){el.innerHTML=noData('No news updates');return;}el.innerHTML=items.map(function(it){var title=it.title||it.headline||'';var msg=it.plain_english||it.summary||it.verdict||'';var lvl=(it.impact_level||it.impact||'low').toLowerCase().replace('moderate','med').replace('high','high').replace('medium','med');if(lvl!=='high'&&lvl!=='med')lvl='low';return'<div class="news-card '+lvl+'"><div class="news-head"><div class="news-title">'+title+'</div><span class="impact '+lvl+'">'+lvl.toUpperCase()+'</span></div>'+(msg?'<div class="brain-box">💬 '+msg+'</div>':'')+(it.source?'<div style="font-size:.68rem;color:var(--muted);margin-top:4px;">📡 '+it.source+'</div>':'')+'</div>';}).join('');}
 function renderTransit(data){var el=document.getElementById('transit-list');if(!el)return;var list=[];if(Array.isArray(data)){list=data;}else if(data&&Array.isArray(data.lines)){list=data.lines.map(function(l){return{line:l.name||l.line||'',status:l.status||'Operational',verdict:l.issues||l.verdict||''};});if(data.advisory)el.insertAdjacentHTML&&(el._advisory=data.advisory);}else if(data&&typeof data==='object'){list=Object.keys(data).filter(function(k){return k!=='verdict'&&k!=='advisory'&&k!=='status'&&k!=='alternatives';}).map(function(k){var v=data[k];if(typeof v==='string')return{line:k,status:v,verdict:''};return{line:v.name||k,status:v.status||'',verdict:v.verdict||v.issues||''};});}if(!list.length){el.innerHTML=noData('No transit data');return;}var advisory=data&&data.advisory?'<div style="background:rgba(59,130,246,.07);border-radius:10px;padding:10px 13px;margin-bottom:12px;font-size:.79rem;color:#3b82f6;">🚇 '+data.advisory+'</div>':'';el.innerHTML=advisory+list.map(function(it){var isOk=(it.status||'').toLowerCase().indexOf('operational')>-1||(it.status||'').toLowerCase().indexOf('normal')>-1;var isDown=(it.status||'').toLowerCase().indexOf('not yet')>-1||(it.status||'').toLowerCase().indexOf('disruption')>-1;return'<div class="transit-card"><div class="tc-name">🚇 '+(it.line||'')+'</div><div class="tc-status" style="color:'+(isDown?'var(--red)':isOk?'var(--green)':'var(--amber)');'">'+(it.status||'Operational')+'</div>'+(it.verdict?'<div class="tc-verdict">'+it.verdict+'</div>':'')+'</div>';}).join('');}
-function renderHike(data){var el=document.getElementById('hike-list');if(!el)return;var items=[],topVerdict='';if(Array.isArray(data)){items=data;}else if(data&&Array.isArray(data.trails)){items=data.trails;topVerdict=data.verdict||data.status||data.recommendation||'';}else if(data&&(data.verdict||data.status||data.recommendation)){topVerdict=data.verdict||data.status||data.recommendation;}var html='';if(topVerdict){var isWarn=topVerdict.toLowerCase().indexOf('not recommended')>-1||topVerdict.toLowerCase().indexOf('closed')>-1||topVerdict.toLowerCase().indexOf('avoid')>-1||topVerdict.toLowerCase().indexOf('skip')>-1;html+='<div style="background:'+(isWarn?'#FFF0F0':'#FFFBF0')+';border-left:4px solid '+(isWarn?'var(--red)':'var(--amber)')+';padding:12px 14px;font-size:.82rem;font-weight:600;color:'+(isWarn?'var(--red)':'#7a5500')+';border-radius:10px;margin-bottom:12px;">'+(isWarn?'⛔ ':'⚠️ ')+topVerdict+'</div>';}html+=items.length?items.map(function(it){var trailName=it.trail||it.name||'';var closed=(it.status||'').toLowerCase().indexOf('closed')>-1||(it.status||'').toLowerCase().indexOf('not recommended')>-1||(it.status||'').toLowerCase().indexOf('not safe')>-1;return'<div class="hike-card" style="'+(closed?'opacity:.6':'')+'"><div class="hike-name">🥾 '+trailName+'</div>'+((it.area||it.location)?'<div class="hike-loc">📍 '+(it.area||it.location)+'</div>':'')+'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:5px;">'+(it.difficulty?'<span class="hike-tag">'+it.difficulty+'</span>':'')+(it.duration?'<span class="hike-tag">⏱ '+it.duration+'</span>':'')+(it.status?'<span class="hike-tag" style="'+(closed?'background:#fff0f0;color:var(--red)':'')+'">'+it.status+'</span>':'')+'</div>'+((it.why_tonight||it.reason||it.why)?'<div style="margin-top:6px;font-size:.78rem;color:var(--t2)">'+(it.why_tonight||it.reason||it.why)+'</div>':'')+'</div>';}).join(''):noData('No trail data available');el.innerHTML=html;}
+function renderHike(data){var el=document.getElementById('hike-list');if(!el)return;var items=[],topVerdict='';if(Array.isArray(data)){items=data;}else if(data&&Array.isArray(data.trails)){items=data.trails;topVerdict=data.verdict||data.status||data.recommendation||'';}else if(data&&(data.verdict||data.status||data.recommendation)){topVerdict=data.verdict||data.status||data.recommendation;}var html='';if(topVerdict){var isWarn=topVerdict.toLowerCase().indexOf('not recommended')>-1||topVerdict.toLowerCase().indexOf('closed')>-1||topVerdict.toLowerCase().indexOf('avoid')>-1||topVerdict.toLowerCase().indexOf('skip')>-1;html+='<div style="background:'+(isWarn?'#FFF0F0':'#FFFBF0')+';border-left:4px solid '+(isWarn?'var(--red)':'var(--amber)')+';padding:12px 14px;font-size:.82rem;font-weight:600;color:'+(isWarn?'var(--red)':'#7a5500')+';border-radius:10px;margin-bottom:12px;">'+(isWarn?'⛔ ':'⚠️ ')+topVerdict+'</div>';}html+=items.length?items.map(function(it){var trailName=it.trail||it.name||'';var trailArea=it.area||it.location||'';var closed=(it.status||'').toLowerCase().indexOf('closed')>-1||(it.status||'').toLowerCase().indexOf('not recommended')>-1||(it.status||'').toLowerCase().indexOf('not safe')>-1;var nm=(trailName).replace(/'/g,'');var maps=(nm)?'<button class="maps-btn" onclick="openMaps(\''+nm+'\',\''+trailArea+'\')">🗺 Maps</button>':'';return'<div class="hike-card" style="'+(closed?'opacity:.6':'')+'"><div class="hike-name">🥾 '+trailName+'</div>'+((trailArea)?'<div class="hike-loc">📍 '+trailArea+'</div>':'')+'<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:5px;">'+(it.difficulty?'<span class="hike-tag">'+it.difficulty+'</span>':'')+(it.duration?'<span class="hike-tag">⏱ '+it.duration+'</span>':'')+(it.status?'<span class="hike-tag" style="'+(closed?'background:#fff0f0;color:var(--red)':'')+'">'+it.status+'</span>':'')+'</div>'+((it.why_tonight||it.reason||it.why)?'<div style="margin-top:6px;font-size:.78rem;color:var(--t2);margin-bottom:6px;">'+(it.why_tonight||it.reason||it.why)+'</div>':'')+maps+'</div>';}).join(''):noData('No trail data available');el.innerHTML=html;}
 function renderEscape(items){var el=document.getElementById('escape-list');if(!el)return;el.innerHTML=items.length?items.map(function(it){var dest=encodeURIComponent((it.destination||'')+(', Malaysia'));var driveUrl='https://www.google.com/maps/dir/Kuala+Lumpur/'+dest;var transitUrl='https://www.google.com/maps/dir/Kuala+Lumpur/'+dest+'/@3.1390,101.6869,11z/data=!4m2!4m1!3e3';return '<div class="esc-card"><div class="esc-head"><div class="esc-name">✈️ '+(it.destination||'')+'</div></div><div class="esc-dist">🚗 '+(it.distance_km?it.distance_km+' km':(it.distance||''))+(it.drive_time?' · '+it.drive_time:'')+'</div><div class="esc-vibe">'+(it.vibe||'')+'</div>'+((it.why_tonight||it.why_now||it.best_for)?'<div style="background:rgba(255,101,53,.06);border-radius:8px;padding:7px 10px;font-size:.78rem;color:var(--od);">💡 '+(it.why_tonight||it.why_now||it.best_for)+'</div>':'')+'<div class="esc-dirs"><button class="esc-dir-btn" onclick="window.open(\''+driveUrl+'\',\'_blank\')">🚗 Drive there</button><button class="esc-dir-btn" onclick="window.open(\''+transitUrl+'\',\'_blank\')">🚌 Transit route</button></div></div>';}).join(''):noData('No escapes available');}
 
 function renderAll(d){
