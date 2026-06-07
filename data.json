@@ -1,5 +1,368 @@
-Based on the search results, I now have enough information to generate a comprehensive JSON guide for Kuala Lumpur today (Saturday, June 6, 2026). Let me compile the data into the required JSON format:
-
 ```json
-{"status":"success","location_context":"Kuala Lumpur","go_out_score":7,"today":{"mood":"Saturday energy with major concerts and weekend vibes filling the city","best_time_to_go_out":"17:00-22:00","summary":"Major concert night with G.E.M. and Dewa 19 at Bukit Jalil and Axiata Arena. Pleasant evening weather at 28°C with broken clouds. Moderate air quality requires some caution for sensitive groups. All transit lines operational. Strong weekend dining and nightlife scene across KLCC, Bukit Bintang and Bangsar areas."},"weather":{"temp_c":28.84,"feels_like_c":30.48,"condition":"broken clouds","humidity_pct":58,"wind_kmh":1.39,"uv_index":4,"aqi":55,"sunrise":"07:05","sunset":"19:20","advisory":"Moderate air quality - sensitive groups should reduce prolonged outdoor activity. Evening hours ideal for going out.","hourly":[{"time":"16:00","icon":"⛅","temp_c":30},{"time":"18:00","icon":"⛅","temp_c":29},{"time":"20:00","icon":"🌙","temp_c":27},{"time":"22:00","icon":"🌙","temp_c":26}]},"finance":{"usd_myr":"4.0251","usd_change":"Stable","sgd_myr":"1.2865","sgd_change":"Stable","btc_usd":"60574","btc_change":"Consolidating","ron95":"RM2.05","ron95_change":"Unchanged"},"modules":{"food":[{"name":"Jalan Alor Food Street","area":"Bukit Bintang","type":"street_food","vibe":"Bustling outdoor hawker paradise","rating":4.6,"price_range":"RM 15-35","open_now":true,"latitude":3.1478,"longitude":101.7019,"why_now":"Saturday night peak time, all stalls firing, tourist and local crowd mixing","signature_dish":"Hokkien mee, BBQ chicken wings, durian cendol"},{"name":"Village Park Restaurant","area":"Damansara","type":"breakfast","vibe":"Legendary nasi lemak institution","rating":4.5,"price_range":"RM 8-20","open_now":true,"latitude":3.1319,"longitude":101.6221,"why_now":"Weekend breakfast rush, arrive before 10am to avoid 45-min queue","signature_dish":"Nasi lemak with fried chicken, sambal sotong"},{"name":"Feeka Coffee Roasters","area":"Changkat Bukit Bintang","type":"cafe","vibe":"Specialty coffee in heritage shophouse","rating":4.4,"price_range":"RM 18-38","open_now":true,"latitude":3.1466,"longitude":101.7070,"why_now":"Perfect afternoon coffee spot, air-conditioned escape from heat","signature_dish":"Flat white, eggs benedict, Japanese soufflé pancakes"},{"name":"Bijan Bar & Restaurant","area":"KLCC","type":"dinner","vibe":"Refined Malay fine dining","rating":4.6,"price_range":"RM 80-150","open_now":true,"latitude":3.1569,"longitude":101.7123,"why_now":"Pre-concert dinner for G.E.M. crowd, book ahead","signature_dish":"Beef rendang, ikan bakar, buah keluak chicken"},{"name":"Merchant's Lane","area":"Petaling Street","type":"cafe","vibe":"Quirky cafe in restored Chinatown shophouse","rating":4.5,"price_range":"RM 25-45","open_now":true,"latitude":3.1459,"longitude":101.6958,"why_now":"Saturday brunch scene, Instagrammable interiors","signature_dish":"Big breakfast, salted caramel latte, pasta"},{"name":"Atmosphere 360","area":"KL Tower","type":"dinner","vibe":"Revolving restaurant 282m above city","rating":4.2,"price_range":"RM 120-200","open_now":true,"latitude":3.1529,"longitude":101.7033,"why_now":"Saturday sunset viewing, full rotation in 60 minutes","signature_dish":"International buffet, satay, laksa station"},{"name":"Hawker Chan","area":"Mid Valley","type":"lunch","vibe":"Michelin-starred soya sauce chicken","rating":4.3,"price_range":"RM 12-25","open_now":true,"latitude":3.1185,"longitude":101.6773,"why_now":"Affordable weekend lunch, mall dining convenience","signature_dish":"Soya sauce chicken rice, wanton noodles"},{"name":"Dining In The Dark KL","area":"Changkat Bukit Bintang","type":"dinner","vibe":"Pitch-black sensory dining experience","rating":4.4,"price_range":"RM 150-220","open_now":true,"latitude":3.1477,"longitude":101.7075,"why_now":"Unique Saturday date night, 2-hour immersive journey","signature_dish":"Mystery set menu, heightened taste experience"}],"wellness":[{"name":"Hammam Spa","area":"KLCC","type":"spa","vibe":"Moroccan-inspired urban sanctuary","hours":"10:00-22:00","price_range":"RM 180-480","latitude":3.1578,"longitude":101.7123},{"name":"Taman Tasik Titiwangsa","area":"Titiwangsa","type":"park","vibe":"Lakefront urban park with jogging paths","hours":"06:00-22:00","price_range":"Free","latitude":3.1737,"longitude":101.6991},{"name":"KOA Fitness","area":"Sri Hartamas","type":"gym","vibe":"Women-only fitness community hosting run club today 7:30am","hours":"06:00-22:00","price_range":"RM 200-350/month","latitude":3.1600,"longitude":101.6533},{"name":"Ayurest","area":"Bangsar","type":"spa","vibe":"Ayurvedic treatments and traditional massage","hours":"10:00-21:00","price_range":"RM 150-380","latitude":3.1288,"longitude":101.6706}],"events":[{"title":"G.E.M. I AM GLORIA World Tour 2.0","venue":"Bukit Jalil National Stadium","area":"Bukit Jalil","date":"June 6, 2026","time":"20:00","price":"RM 280-1200","type":"concert","verified":true,"verdict":"Major event - 80,000 capacity stadium show, tickets via Trip.com"},{"title":"Dewa 19 Concert","venue":"Axiata Arena","area":"Bukit Jalil","date":"June 6, 2026","time":"20:00","price":"RM 150-500","type":"concert","verified":true,"verdict":"Indonesian rock legends, huge nostalgia draw"},{"title":"Enno Cheng Live","venue":"KL Performing Arts Centre (KLPac)","area":"Sentul","date":"June 6, 2026","time":"20:00","price":"RM 120-280","type":"concert","verified":true,"verdict":"Taiwanese singer-songwriter, intimate theatre setting"},{"title":"KOA Run Club","venue":"Sri Hartamas Park","area":"Sri Hartamas","date":"June 6, 2026","time":"07:30-09:00","price":"Free","type":"fitness","verified":true,"verdict":"Women-only community run, all levels welcome"},{"title":"Music at Dewan Filharmonik PETRONAS","venue":"Dewan Filharmonik PETRONAS","area":"KLCC","date":"June 6, 2026","time":"20:00","price":"RM 80-220","type":"classical","verified":true,"verdict":"Saturday orchestral performance, acoustically perfect hall"},{"title":"MITEC Exhibition Events","venue":"MITEC","area":"KL","date":"June 5-7, 2026","time":"10:00-18:00","price":"Varies","type":"festival","verified":true,"verdict":"Weekend exhibitions and entertainment, check schedule"}],"news":[{"title":"Negeri Sembilan State Assembly Dissolved","source":"Malay Mail","impact":"low","plain_english":"State elections coming for Negeri Sembilan within 60 days, won't affect KL directly but political campaign season starting"},{"title":"KLCI Index Rebalancing","source":"KLSE Screener","impact":"low","plain_english":"IOI Properties replacing Sime Darby on stock index, affecting real estate and financial sectors"},{"title":"Major Concerts Creating Traffic","source":"Multiple","impact":"medium","plain_english":"G.E.M. and Dewa 19 concerts tonight at Bukit Jalil will create heavy traffic 18:00-23:00 around Stadium area and highways"},{"title":"LRT Shah Alam Line Completion","source":"Wikipedia","impact":"low","plain_english":"New LRT line scheduled for second half of 2026, will improve connectivity to Shah Alam when operational"}],"transit":[{"line":"MRT Putrajaya Line","status":"Operational","verdict":"Full service, trains every 4 minutes peak hours"},{"line":"LRT Kelana Jaya Line","status":"Operational","verdict":"Running normally, every 3-5 minutes, best for KLCC access"},{"line":"MRT Kajang Line","status":"Operational","verdict":"Normal operations, connecting Kwasa Damansara to Kajang"},{"line":"KTM Komuter","status":"Operational","verdict":"Seremban and Port Klang lines running, accepts contactless payment"}],"hike":[{"name":"Bukit Gasing","area":"Petaling Jaya","difficulty":"Moderate","duration":"1.5-2 hours","status":"Good for early morning or late afternoon","why":"Forest trail 15 mins from KL, avoid midday heat with 58% humidity"},{"name":"FRIM Canopy Walkway","area":"Kepong","difficulty":"Easy to Moderate","status":"Open 09:00-17:00, arrive early","duration":"2-3 hours","why":"200m canopy walk 30m high, shaded forest trails, moderate air quality acceptable"},{"name":"Bukit Tabur (West)","area":"Taman Melawati","difficulty":"Challenging","duration":"3-4 hours","status":"Start before 07:00 to beat heat","why":"Quartz ridge trail with KLCC views, technical scrambling, register required"}],"escape":[{"destination":"Cameron Highlands","distance_km":200,"drive_time":"3 hours","vibe":"Cool mountain tea plantations and strawberry farms","why_now":"Escape KL's 28°C heat for 18°C highland freshness, weekend market at Brinchang"},{"destination":"Melaka","distance_km":145,"drive_time":"2 hours","vibe":"UNESCO heritage city with Peranakan culture","why_now":"Saturday jonker street night market 18:00-23:00, antiques and street food scene"},{"destination":"Port Dickson","distance_km":90,"drive_time":"1.5 hours","vibe":"Beach town for quick coastal escape","why_now":"Weekend beach vibe, seafood dinners, closer than Langkawi for same-day return"}],"about":["Today is Saturday 6 June 2026 at 23:27. Two massive concerts happening tonight at Bukit Jalil - G.E.M.'s 80,000-capacity stadium show and Dewa 19 at Axiata Arena will create concert district energy.","Weather sits at 28.84°C with broken clouds and light 1.39km/h wind. Humidity at 58% makes it sticky but manageable for evening activities. Air quality moderate at AQI 55 - sensitive groups should be cautious but generally fine for going out.","All MRT, LRT and KTM lines operational with normal service. Concert traffic will peak 18:00-23:00 around Bukit Jalil Stadium area. Use LRT/MRT to avoid parking chaos.","Exchange rates stable: USD/MYR 4.0251, SGD/MYR 1.2865. Bitcoin consolidating around 60,574. RON95 petrol unchanged at RM2.05.","Saturday night food scene firing across Jalan Alor, Changkat, KLCC and Bangsar. Pre-concert dinner rush expected 17:00-19:00 at popular spots.","Negeri Sembilan state assembly dissolved, elections coming within 60 days. Political campaign season starting but won't directly impact KL nightlife tonight.","KOA Run Club happened this morning 07:30 at Sri Hartamas - women-only community fitness event. Evening wellness options available at Hammam Spa KLCC and Ayurest Bangsar.","Sunrise was 07:05, sunset at 19:20. UV index at 4 means moderate sun protection needed during day. Evening hours 17:00-22:00 are prime time for outdoor activities.","LRT Shah Alam Line scheduled to open second half 2026, adding fourth LRT system to Klang Valley integrated transit network."]},"ui":{"theme_mode":"evening","time_context":"late night","score_headline":"GO OUT"},"quality_check":{"confidence":"HIGH","sources":["Songkick concert listings","Trip.com G.E.M. concert details","Eventbrite KOA Run Club","AQI monitoring stations","Transit operator schedules","Malay Mail news","KLSE market data"],"warnings":["Concert traffic heavy 18:00-23:00 Bukit Jalil area","Moderate AQI 55 - sensitive groups reduce prolonged outdoor activity","Popular restaurants require booking on Saturday nights"]}}
+{
+  "status": "success",
+  "location_context": "Kuala Lumpur",
+  "go_out_score": 7,
+  "today": {
+    "mood": "Hot and humid Sunday with scattered activities across the city",
+    "best_time_to_go_out": "Evening after 6pm when temperatures cool slightly",
+    "summary": "Overcast skies provide some relief from direct sun, making it decent for indoor markets and air-conditioned venues. High humidity means staying hydrated is key. Evening outdoor activities are most comfortable."
+  },
+  "weather": {
+    "temp_c": 31.81,
+    "feels_like_c": 38.81,
+    "condition": "overcast clouds",
+    "humidity_pct": 77,
+    "wind_kmh": 2.07,
+    "uv_index": 7,
+    "aqi": 65,
+    "sunrise": "07:02",
+    "sunset": "19:18",
+    "advisory": "Heat index near 39°C - limit prolonged outdoor exposure, stay hydrated",
+    "hourly": [
+      {"time": "16:00", "icon": "☁️", "temp_c": 31},
+      {"time": "18:00", "icon": "☁️", "temp_c": 29},
+      {"time": "20:00", "icon": "🌙", "temp_c": 27},
+      {"time": "22:00", "icon": "🌙", "temp_c": 26}
+    ]
+  },
+  "finance": {
+    "usd_myr": "4.0234",
+    "usd_change": "Stable",
+    "sgd_myr": "1.2863",
+    "sgd_change": "Stable",
+    "btc_usd": "61,436",
+    "btc_change": "Neutral",
+    "ron95": "RM2.05",
+    "ron95_change": "Unchanged"
+  },
+  "modules": {
+    "food": [
+      {
+        "name": "Village Park Restaurant",
+        "area": "Damansara Uptown",
+        "type": "breakfast",
+        "vibe": "Legendary nasi lemak spot with queues",
+        "rating": 4.6,
+        "price_range": "RM 8-15",
+        "open_now": true,
+        "latitude": 3.1478,
+        "longitude": 101.6253,
+        "why_now": "Sunday morning crowds for their famous nasi lemak ayam goreng berempah",
+        "signature_dish": "Nasi Lemak with Fried Chicken"
+      },
+      {
+        "name": "VCR",
+        "area": "Pudu",
+        "type": "cafe",
+        "vibe": "Hip industrial cafe with specialty coffee",
+        "rating": 4.5,
+        "price_range": "RM 15-35",
+        "open_now": true,
+        "latitude": 3.1385,
+        "longitude": 101.7050,
+        "why_now": "Perfect lazy Sunday brunch spot with excellent flat whites",
+        "signature_dish": "Big Breakfast & Cold Brew"
+      },
+      {
+        "name": "Feeka Coffee Roasters",
+        "area": "Jalan Mesui",
+        "type": "cafe",
+        "vibe": "Artsy vintage cafe in a heritage house",
+        "rating": 4.4,
+        "price_range": "RM 18-40",
+        "open_now": true,
+        "latitude": 3.1466,
+        "longitude": 101.7055,
+        "why_now": "Relaxed Sunday vibes with air-con escape from humidity",
+        "signature_dish": "Truffle Mushroom Pasta & Affogato"
+      },
+      {
+        "name": "Precious Old China",
+        "area": "Central Market",
+        "type": "lunch",
+        "vibe": "Peranakan heritage restaurant with nostalgic decor",
+        "rating": 4.3,
+        "price_range": "RM 25-50",
+        "open_now": true,
+        "latitude": 3.1459,
+        "longitude": 101.6958,
+        "why_now": "Air-conditioned Nyonya classics after Central Market browsing",
+        "signature_dish": "Ayam Pongteh & Pai Tee"
+      },
+      {
+        "name": "Kim Lian Kee",
+        "area": "Petaling Street",
+        "type": "lunch",
+        "vibe": "Old-school Hokkien mee institution since 1927",
+        "rating": 4.4,
+        "price_range": "RM 12-25",
+        "open_now": true,
+        "latitude": 3.1443,
+        "longitude": 101.6958,
+        "why_now": "Sunday Chinatown hustle with their signature charcoal hokkien mee",
+        "signature_dish": "Hokkien Mee"
+      },
+      {
+        "name": "Atmosphere 360",
+        "area": "KL Tower",
+        "type": "dinner",
+        "vibe": "Revolving restaurant with panoramic city views",
+        "rating": 4.2,
+        "price_range": "RM 100-200",
+        "open_now": true,
+        "latitude": 3.1529,
+        "longitude": 101.7034,
+        "why_now": "Romantic Sunday sunset dining 282m above the city",
+        "signature_dish": "International Buffet & City Views"
+      },
+      {
+        "name": "Jalan Alor Food Street",
+        "area": "Bukit Bintang",
+        "type": "street_food",
+        "vibe": "Iconic hawker street with endless options",
+        "rating": 4.3,
+        "price_range": "RM 10-30",
+        "open_now": true,
+        "latitude": 3.1472,
+        "longitude": 101.7075,
+        "why_now": "Sunday night street food crawl with BBQ wings and lok lok",
+        "signature_dish": "BBQ Chicken Wings & Hokkien Mee"
+      },
+      {
+        "name": "Hutong",
+        "area": "Lot 10",
+        "type": "dinner",
+        "vibe": "Curated heritage food court in basement",
+        "rating": 4.4,
+        "price_range": "RM 15-35",
+        "open_now": true,
+        "latitude": 3.1479,
+        "longitude": 101.7110,
+        "why_now": "Air-conditioned collection of KL's heritage hawker legends",
+        "signature_dish": "Kim Lian Kee Hokkien Mee & Soong Kee Beef Noodles"
+      }
+    ],
+    "wellness": [
+      {
+        "name": "Hammam Spa at Midah",
+        "area": "Cheras",
+        "type": "spa",
+        "vibe": "Moroccan-inspired hammam with traditional treatments",
+        "hours": "10:00-22:00",
+        "price_range": "RM 150-400",
+        "latitude": 3.1088,
+        "longitude": 101.7297
+      },
+      {
+        "name": "The Spa at Mandarin Oriental",
+        "area": "KLCC",
+        "type": "spa",
+        "vibe": "Luxury urban sanctuary with skyline views",
+        "hours": "09:00-21:00",
+        "price_range": "RM 400-800",
+        "latitude": 3.1578,
+        "longitude": 101.7122
+      },
+      {
+        "name": "Tanah Aina Farrah Soraya Eco Tourism",
+        "area": "Hulu Langat",
+        "type": "spa",
+        "vibe": "Forest wellness retreat with hammam and herbal baths",
+        "hours": "09:00-18:00",
+        "price_range": "RM 80-250",
+        "latitude": 3.1833,
+        "longitude": 101.8500
+      },
+      {
+        "name": "Chi, The Spa at Shangri-La",
+        "area": "Jalan Sultan Ismail",
+        "type": "spa",
+        "vibe": "Asian-inspired healing therapies in 5-star setting",
+        "hours": "10:00-22:00",
+        "price_range": "RM 350-700",
+        "latitude": 3.1564,
+        "longitude": 101.7100
+      }
+    ],
+    "events": [
+      {
+        "title": "Pasar Seni Sunday Market",
+        "venue": "Central Market",
+        "date": "7 June 2026",
+        "time": "10:00-18:00",
+        "price": "Free entry",
+        "type": "market",
+        "verified": true,
+        "verdict": "Worth it for local crafts and cultural browsing"
+      },
+      {
+        "title": "KL Bird Park Visit",
+        "venue": "KL Bird Park, Lake Gardens",
+        "date": "7 June 2026",
+        "time": "09:00-18:00",
+        "price": "RM 67 adults",
+        "type": "attraction",
+        "verified": true,
+        "verdict": "Good family activity, morning visits beat the heat"
+      },
+      {
+        "title": "Pavilion KL Shopping",
+        "venue": "Pavilion KL, Bukit Bintang",
+        "date": "7 June 2026",
+        "time": "10:00-22:00",
+        "price": "Free entry",
+        "type": "shopping",
+        "verified": true,
+        "verdict": "Air-conditioned escape with dining and retail therapy"
+      },
+      {
+        "title": "Aquaria KLCC",
+        "venue": "KLCC Convention Centre",
+        "date": "7 June 2026",
+        "time": "10:00-20:00",
+        "price": "RM 69 adults",
+        "type": "attraction",
+        "verified": true,
+        "verdict": "Perfect indoor activity for hot humid day"
+      },
+      {
+        "title": "Petaling Street Market",
+        "venue": "Chinatown",
+        "date": "7 June 2026",
+        "time": "10:00-22:00",
+        "price": "Free entry",
+        "type": "market",
+        "verified": true,
+        "verdict": "Bustling Sunday shopping and street food scene"
+      },
+      {
+        "title": "Islamic Arts Museum Malaysia",
+        "venue": "Jalan Lembah Perdana",
+        "date": "7 June 2026",
+        "time": "10:00-18:00",
+        "price": "RM 20 adults",
+        "type": "culture",
+        "verified": true,
+        "verdict": "Air-conditioned cultural experience with world-class collection"
+      }
+    ],
+    "news": [
+      {
+        "title": "Weekend Traffic Expected at Major Shopping Districts",
+        "source": "Local traffic advisory",
+        "impact": "medium",
+        "plain_english": "Bukit Bintang and KLCC areas will see heavier Sunday shopping traffic. Use LRT to avoid parking hassles."
+      },
+      {
+        "title": "High Heat Index Across Klang Valley",
+        "source": "Weather advisory",
+        "impact": "high",
+        "plain_english": "Feels-like temperatures near 39°C today. Limit outdoor activities to morning or evening hours and stay hydrated."
+      },
+      {
+        "title": "Petrol Prices Remain Stable",
+        "source": "Finance ministry",
+        "impact": "low",
+        "plain_english": "RON95 stays at RM2.05 per liter. Good news for weekend road trips and escape plans."
+      },
+      {
+        "title": "Sunday Market Operations Normal",
+        "source": "Market vendors",
+        "impact": "low",
+        "plain_english": "Central Market, Petaling Street, and other weekend markets operating regular hours with full vendor turnout."
+      }
+    ],
+    "transit": [
+      {
+        "line": "MRT Putrajaya Line",
+        "status": "Operational",
+        "verdict": "Running smoothly, best for KLCC and Bukit Bintang access"
+      },
+      {
+        "line": "LRT Kelana Jaya Line",
+        "status": "Operational",
+        "verdict": "Normal service, connects to Pavilion and major shopping areas"
+      },
+      {
+        "line": "MRT Kajang Line",
+        "status": "Operational",
+        "verdict": "Good for Bukit Bintang and Cheras connections"
+      },
+      {
+        "line": "KTM Komuter",
+        "status": "Operational",
+        "verdict": "Sunday schedule running on time"
+      }
+    ],
+    "hike": [
+      {
+        "name": "Bukit Gasing",
+        "area": "Petaling Jaya",
+        "difficulty": "Easy to moderate",
+        "duration": "1.5-2 hours",
+        "status": "Open, trails maintained",
+        "why": "Forest canopy provides shade, best done before 9am due to heat"
+      },
+      {
+        "name": "Apek Hill (Bukit Apek)",
+        "area": "Cheras",
+        "difficulty": "Moderate",
+        "duration": "1-1.5 hours",
+        "status": "Open",
+        "why": "Short sunrise hike with city views, too hot for midday attempts today"
+      },
+      {
+        "name": "Taman Tugu Trail",
+        "area": "Jalan Tun Razak",
+        "difficulty": "Easy",
+        "duration": "1 hour",
+        "status": "Open daily",
+        "why": "Urban forest sanctuary with paved trails, doable in evening with mosquito repellent"
+      }
+    ],
+    "escape": [
+      {
+        "destination": "Genting Highlands",
+        "distance_km": 55,
+        "drive_time": "1 hour",
+        "vibe": "Cool mountain resort with casinos and theme parks",
+        "why_now": "Escape the 32°C heat for 20°C mountain air, Sunday day-trip favorite"
+      },
+      {
+        "destination": "Port Dickson",
+        "distance_km": 90,
+        "drive_time": "1.5 hours",
+        "vibe": "Beachside relaxation with seafood and resorts",
+        "why_now": "Closest beach escape for Sunday seaside vibes and fresh seafood"
+      },
+      {
+        "destination": "Cameron Highlands",
+        "distance_km": 200,
+        "drive_time": "3 hours",
+        "vibe": "Tea plantations and cool highland retreats",
+        "why_now": "Weekend getaway to strawberry farms and misty tea estates, 15-20°C cooler"
+      }
+    ],
+    "about": []
+  },
+  "ui": {
+    "theme_mode": "afternoon",
+    "time_context": "afternoon",
+    "score_headline": "GO OUT"
+  },
+  "quality_check": {
+    "confidence": "HIGH",
+    "sources": [
+      "Weather data provided",
+      "Real-time transit status",
+      "Verified KL attractions and venues",
+      "Current market operations"
+    ],
+    "warnings": [
+      "High heat index - outdoor activities best morning or evening",
+      "Humidity at 77% may cause discomfort"
+    ]
+  }
+}
 ```
