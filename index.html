@@ -265,10 +265,11 @@ body.night .srch-inner input::placeholder{color:#c0b0e0;}
 <div id="page-today" class="page active">
 <div class="score-card"><div class="score-weather-emoji" id="scoreEmoji">☀️</div><img id="remyImg" src="mascots/remy-jom.png" alt="" style="position:absolute;bottom:0;right:10px;height:88px;width:auto;object-fit:contain;display:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.15));" onerror="this.style.display='none'"/><div class="score-num" id="scoreNum">7<span class="score-denom">/10</span></div><div class="score-hl" id="scoreHl">GO OUT EARLY</div><div class="score-sub" id="scoreSub">Loading...</div><div id="scoreBest" style="display:none"><span class="score-best" id="scoreBestText"></span></div></div>
 <div id="alertBanner"></div>
+<div style="display:flex;align-items:center;gap:12px;background:var(--warm);border:1px solid var(--peach);border-radius:16px;padding:10px 14px;margin-bottom:12px;box-shadow:var(--sh2);"><img src="mascots/nala.png" alt="Nala" style="height:58px;width:auto;flex-shrink:0;object-fit:contain;" onerror="this.style.display='none'"/><div style="font-family:'DM Sans',sans-serif;font-size:.82rem;color:var(--t2);line-height:1.45;"><b style="font-family:Arvo,serif;color:var(--od);">Nala</b> here — I lined up today's makan picks. Tap <b style="color:var(--orange);">Food</b> when you're hungry. 🍚</div></div>
 <div id="nearYouSection" style="display:none;margin-bottom:12px;"><div style="font-size:.6rem;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;">📍 Near You</div><div id="nearYouList" style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;"></div></div>
 <div class="btn-group"><button class="gen-day-btn" onclick="openCustomizer()">✨ Generate My Day</button><button class="share-btn" onclick="shareToday()">📸 Share Today</button></div>
 <div id="genResult"></div>
-<div class="wx-card"><div class="wx-top"><div><span class="wx-ico" id="wxIco">☀️</span><div class="wx-temp" id="wxTemp">30°<span style="font-size:1.5rem;font-weight:400">c</span></div><div class="wx-feels" id="wxFeels">Feels like 31C</div><div class="wx-cond" id="wxCond">Few clouds</div></div><div class="wx-stats"><div class="wx-stat" id="ws0">💧 50%</div><div class="wx-stat" id="ws1">🌬 9km/h</div><div class="wx-stat" id="ws2">☀️ UV 0</div><div class="wx-stat" id="ws3"><span class="aqi">AQI —</span></div><div class="wx-stat" id="ws4">🌅 7:09 · 🌇 7:19</div></div></div><div style="border-top:1px solid var(--border);margin:12px 0"></div><div class="wx-hourly" id="wxHourly"></div><div class="advisory" id="wxAdvisory">Loading weather...</div></div>
+<div class="wx-card"><div class="wx-top"><div><span class="wx-ico" id="wxIco">☀️</span><div class="wx-temp" id="wxTemp">30°<span style="font-size:1.5rem;font-weight:400">c</span></div><div class="wx-feels" id="wxFeels">Feels like 31C</div><div class="wx-cond" id="wxCond">Few clouds</div></div><div class="wx-stats"><div class="wx-stat" id="ws0">💧 50%</div><div class="wx-stat" id="ws1">🌬 9km/h</div><div class="wx-stat" id="ws2">☀️ UV 0</div><div class="wx-stat" id="ws3"><span class="aqi">AQI —</span></div><div class="wx-stat" id="ws4">🌅 7:09 · 🌇 7:19</div></div></div><div style="border-top:1px solid var(--border);margin:12px 0"></div><div class="wx-hourly" id="wxHourly"></div><div style="display:flex;align-items:center;gap:10px;margin-top:6px;"><img src="mascots/taffy.png" alt="Taffy" style="height:50px;width:auto;flex-shrink:0;object-fit:contain;" onerror="this.style.display='none'"/><div class="advisory" id="wxAdvisory">Loading weather...</div></div></div>
 <div class="fin-card"><h4>💰 Financial Snapshot</h4><div class="fin-grid" style="grid-template-columns:1fr 1fr;"><div class="fin-item"><div class="fin-item-label">USD/MYR</div><div class="fin-item-val" id="fv1">—</div><div class="fin-item-sub" id="fs1">—</div></div><div class="fin-item"><div class="fin-item-label">SGD/MYR</div><div class="fin-item-val" id="fv2">—</div><div class="fin-item-sub" id="fs2">—</div></div></div></div>
 <div class="qc"><div class="qc-hdr"><div class="qc-title">⚡ Quality Check</div><div class="qc-conf" id="qcConf">LOADING</div></div><div id="qcWarnings"><div class="qc-i">Loading...</div></div></div>
 </div>
@@ -433,9 +434,7 @@ function renderNews(items){var el=document.getElementById('news-list');if(!el)re
 // ── MASCOT SYSTEM ──────────────────────────────────────
 var MASCOT_CHARS={breakfast:'☕',cafe:'☕',lunch:'🍜',dinner:'🍽',street_food:'🌮'};
 function getMascotSrc(score){
-  if(score>=7)return'mascots/remy-jom.png';
-  if(score>=4)return'mascots/remy-lepak.png';
-  return'mascots/remy-hot.png';
+  return'mascots/remy-jom.png';
 }
 function updateMascot(score){
   var img=document.getElementById('remyImg');
@@ -467,7 +466,7 @@ function renderNearYou(foodItems){
     var char=MASCOT_CHARS[f.type]||'🍴';
     var nm=(f.name||'').replace(/'/g,'');
     var area=(f.area||'').replace(/'/g,'');
-    var mapsBtn=nm?('<button onclick="openMaps(\\"'+nm+'\\",\\"'+area+'\\")" style="margin-top:6px;width:100%;background:var(--orange);color:#fff;border:none;border-radius:8px;padding:4px;font-size:.65rem;font-weight:700;cursor:pointer;font-family:DM Sans,sans-serif;">\ud83d\uddfa Directions</button>'):''; 
+    var mapsBtn=nm?('<button onclick="openMaps(\''+nm+'\',\''+area+'\')" style="margin-top:6px;width:100%;background:var(--orange);color:#fff;border:none;border-radius:8px;padding:4px;font-size:.65rem;font-weight:700;cursor:pointer;font-family:DM Sans,sans-serif;">\ud83d\uddfa Directions</button>'):''; 
     return'<div class="near-card"><div class="near-card-char">'+char+'</div><div class="near-card-name">'+(f.name||'')+'</div><div class="near-card-dist">📍 '+dist+' away</div><div class="near-card-area">'+(f.area||'')+'</div>'+mapsBtn+'</div>';
   }).join('');
   sec.style.display='block';
