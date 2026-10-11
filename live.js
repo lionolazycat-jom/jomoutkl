@@ -11,7 +11,7 @@
   ];
   var RADIUS_M = 1200, DENSE_RADIUS_M = 500, LIMIT = 300;
   var MOVE_KM = 0.5;
-  var MIN_GAP_MS = 15000;
+  var MIN_GAP_MS = 3000;
   var CACHE_TTL = 6 * 3600 * 1000, CACHE_MAX = 8, CELL = 0.005;
   var KEEP_TAGS = ['name', 'amenity', 'shop', 'leisure', 'sport', 'cuisine', 'opening_hours', 'phone',
     'contact:phone', 'contact:mobile', 'mobile', 'website', 'contact:website', 'diet:halal',
@@ -211,7 +211,7 @@
       'nwr' + a + '[leisure~"^(fitness_centre|sauna|yoga)$"][name];nwr' + a + '[sport=yoga][name];' +
       ');out tags center ' + LIMIT + ';';
   }
-  function fetchEls(pos, r) {
+  function fetchElsOverpass(pos, r) {
     var q = buildQuery(pos, r), i = 0;
     function next(lastErr) {
       if (i >= ENDPOINTS.length) return Promise.reject(lastErr || new Error('all map servers failed'));
@@ -228,6 +228,40 @@
         }).catch(function (e) { clearTimeout(to); return next(e); });
     }
     return next();
+  }
+  var ALLP = null;
+  function placesUrl() {
+    var d = ''; try { d = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kuala_Lumpur' }); } catch (e) {}
+    return 'places.tsv?d=' + d;
+  }
+  function parseTSV(txt) {
+    var lines = String(txt).split('\n'), head = lines[0].split('\t'), out = [], i, j, c, t, lat, lon;
+    if (head[0] !== '@lat') throw new Error('bad places file');
+    for (i = 1; i < lines.length; i++) {
+      c = lines[i].split('\t'); if (c.length < 3) continue;
+      lat = parseFloat(c[0]); lon = parseFloat(c[1]); if (isNaN(lat) || isNaN(lon)) continue;
+      t = {}; for (j = 2; j < head.length; j++) if (c[j]) t[head[j]] = c[j].replace(/\r$/, '');
+      out.push({ lat: lat, lon: lon, tags: t });
+    }
+    return out;
+  }
+  function loadAllPlaces() {
+    if (ALLP) return ALLP;
+    var ctl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var to = setTimeout(function () { if (ctl) ctl.abort(); }, 20000);
+    ALLP = fetch(placesUrl(), { signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { clearTimeout(to); if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+      .then(parseTSV)
+      .catch(function (e) { clearTimeout(to); ALLP = null; throw e; });
+    return ALLP;
+  }
+  function fetchEls(pos, r) {
+    var km = r / 1000, dLat = km / 111, dLng = km / (111 * Math.cos(pos.lat * Math.PI / 180));
+    return loadAllPlaces().then(function (all) {
+      return all.filter(function (e) {
+        return Math.abs(e.lat - pos.lat) <= dLat && Math.abs(e.lon - pos.lng) <= dLng && hav(pos.lat, pos.lng, e.lat, e.lon) <= km;
+      });
+    });
   }
   function slim(els) {
     return els.map(function (e) {
@@ -444,7 +478,7 @@
 })();
 
 (function(){
-  var st=document.createElement('style');st.textContent=".act-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.act-btn{flex:1 1 0;min-width:84px;text-align:center;padding:9px 10px;border-radius:12px;font-size:.78rem;font-weight:700;text-decoration:none;border:1px solid var(--border);background:var(--card);color:var(--text);font-family:inherit}.act-call{background:var(--orange);border-color:var(--orange);color:#fff}.act-wa{background:#25D366;border-color:#25D366;color:#fff}.act-dir{background:var(--card);color:var(--orange);border-color:var(--orange)}.nophone{font-size:.68rem;color:var(--muted);align-self:center;padding:0 4px}.live-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.7rem;color:var(--muted);margin:0 0 10px}.live-refresh{border:1px solid var(--border);background:var(--card);color:var(--orange);border-radius:100px;padding:5px 12px;font-size:.7rem;font-weight:700;cursor:pointer;font-family:inherit}.osm-attr{font-size:.62rem;color:var(--muted);margin-top:10px;text-align:center}.osm-attr a{color:inherit}";document.head.appendChild(st);
+  var st=document.createElement('style');st.textContent=".act-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.act-btn{flex:1 1 0;min-width:84px;text-align:center;padding:9px 10px;border-radius:12px;font-size:.78rem;font-weight:700;text-decoration:none;border:1px solid var(--border);background:var(--card);color:var(--text);font-family:inherit}.act-call{background:var(--orange);border-color:var(--orange);color:#fff}.act-wa{background:#25D366;border-color:#25D366;color:#fff}.act-dir{background:var(--card);color:var(--orange);border-color:var(--orange)}.nophone{font-size:.68rem;color:var(--muted);align-self:center;padding:0 4px}.live-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.7rem;color:var(--muted);margin:0 0 10px}body.night .live-bar{color:#E8D5F0}.live-refresh{border:1px solid var(--border);background:var(--card);color:var(--orange);border-radius:100px;padding:5px 12px;font-size:.7rem;font-weight:700;cursor:pointer;font-family:inherit}.osm-attr{font-size:.62rem;color:var(--muted);margin-top:10px;text-align:center}.osm-attr a{color:inherit}";document.head.appendChild(st);
   function e(x){return String(x==null?'':x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
   var oN=window.renderNearYou;
   window.renderNearYou=function(items){
