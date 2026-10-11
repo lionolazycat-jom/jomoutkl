@@ -1,26 +1,14 @@
-T0 23:16:43.077
-DE 504 T1 23:16:48.761
-KUMI 500 T2 23:16:48.911
-PC 500 T3 23:16:49.052
-=====DE
-<?xml version="1.0" encoding="UTF-8"?>
+DE 504 len 695 | MAILRU 200 len 573631 | PC 500 len 646
+DE head: <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" lang="en"/>
-  <title>OSM3S Response</title>
-</head>
-<body>
-
-<p>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</p>
-<p><strong style="color:#FF0000">Error</strong>: runtime error: open64: 0 Success /osm3s_osm_base Dispatcher_Client::request_read_and_idx::timeout. The server is probably too busy to handle your request. </p>
-
-</body>
-</html>
-
-=====KUMI
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" lan
+MAILRU head: @lat	@lon	name	amenity	shop	leisure	sport	cuisine	opening_hours	phone	contact:phone	contact:mobile	website	contact:website	diet:halal	reservation	addr:street	addr:suburb	addr:city
+3.0365141	101.7063618	KFC	fast_food				chicken							yes				
+3.0620102	101.5575067	Rejab Tomyam	restaurant				malaysian	
+PC head: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
 <title>500 Internal Server Error</title>
 </head><body>
@@ -28,29 +16,4 @@ PC 500 T3 23:16:49.052
 <p>The server encountered an internal error or
 misconfiguration and was unable to complete
 your request.</p>
-<p>Please contact the server administrator at 
- webmaster@localhost to inform them of the time this error occurred,
- and the actions you performed just before this error.</p>
-<p>More information about this error may be available
-in the server error log.</p>
-<hr>
-<address>Apache/2.4.66 (Debian) Server at overpass Port 80</address>
-</body></html>
-
-=====PC
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html><head>
-<title>500 Internal Server Error</title>
-</head><body>
-<h1>Internal Server Error</h1>
-<p>The server encountered an internal error or
-misconfiguration and was unable to complete
-your request.</p>
-<p>Please contact the server administrator at 
- webmaster@localhost to inform them of the time this error occurred,
- and the actions you performed just before this error.</p>
-<p>More information about this error may be available
-in the server error log.</p>
-<hr>
-<address>Apache/2.4.66 (Debian) Server at overpass Port 80</address>
-</body></html>
+<
