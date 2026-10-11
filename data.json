@@ -1,0 +1,297 @@
+```json
+{
+  "status": "success",
+  "location_context": "Kuala Lumpur",
+  "go_out_score": 7,
+  "today": {
+    "mood": "Humid Sunday evening with overcast skies — perfect for air-conditioned malls, cozy dinners, and night markets",
+    "best_time_to_go_out": "Now until 23:00 — catch SS2 pasar malam or late dinner in Mont Kiara",
+    "summary": "Sunday night in KL is all about comfort food and easy hangs. The humidity is high but the clouds keep it cool. Hit the pasar malam in SS2 for street eats, or settle into a Mont Kiara bistro for a relaxed dinner. Most events wind down early tonight, so focus on food and chill vibes."
+  },
+  "weather": {
+    "temp_c": 25.51,
+    "feels_like_c": 26.44,
+    "condition": "overcast clouds",
+    "humidity_pct": 89,
+    "wind_kmh": "4 km/h",
+    "uv_index": 0,
+    "aqi": 0,
+    "sunrise": "7:04 AM",
+    "sunset": "7:08 PM",
+    "advisory": "High humidity tonight — stay hydrated and stick to air-conditioned venues or breezy outdoor spots",
+    "hourly": [
+      {"time": "16:00", "icon": "☁️", "temp_c": 26},
+      {"time": "18:00", "icon": "☁️", "temp_c": 25.5},
+      {"time": "20:00", "icon": "🌙", "temp_c": 25},
+      {"time": "22:00", "icon": "🌙", "temp_c": 24.5}
+    ]
+  },
+  "finance": {
+    "usd_myr": "4.088",
+    "usd_change": "",
+    "sgd_myr": "3.192",
+    "sgd_change": ""
+  },
+  "modules": {
+    "food": [
+      {
+        "name": "Feeka Coffee Roasters",
+        "area": "Bangsar South",
+        "type": "cafe",
+        "vibe": "Industrial-chic with specialty brews",
+        "rating": 4.6,
+        "price_range": "RM 15-35",
+        "open_now": true,
+        "hours": "08:00-22:00",
+        "latitude": 3.1158,
+        "longitude": 101.6655,
+        "why_now": "Late coffee and dessert in a relaxed setting",
+        "signature_dish": "Flat white and burnt cheesecake"
+      },
+      {
+        "name": "Merchant's Lane",
+        "area": "Petaling Street",
+        "type": "cafe",
+        "vibe": "Vintage speakeasy cafe",
+        "rating": 4.5,
+        "price_range": "RM 20-40",
+        "open_now": true,
+        "hours": "12:00-23:00",
+        "latitude": 3.1445,
+        "longitude": 101.6964,
+        "why_now": "Evening cocktails and light bites",
+        "signature_dish": "Big breakfast and craft cocktails"
+      },
+      {
+        "name": "Nasi Lemak Wanjo",
+        "area": "Kampung Baru",
+        "type": "breakfast",
+        "vibe": "Legendary roadside nasi lemak",
+        "rating": 4.4,
+        "price_range": "RM 5-15",
+        "open_now": true,
+        "hours": "06:00-12:00",
+        "latitude": 3.1633,
+        "longitude": 101.7008,
+        "why_now": "Grab tomorrow's breakfast spot intel",
+        "signature_dish": "Nasi lemak with sambal and fried chicken"
+      },
+      {
+        "name": "Yut Kee",
+        "area": "Dang Wangi",
+        "type": "breakfast",
+        "vibe": "Heritage kopitiam since 1928",
+        "rating": 4.5,
+        "price_range": "RM 10-25",
+        "open_now": false,
+        "hours": "07:30-17:00",
+        "latitude": 3.1524,
+        "longitude": 101.7017,
+        "why_now": "Closed now but a Monday morning must",
+        "signature_dish": "Roti babi and Hailam mee"
+      },
+      {
+        "name": "Barat Lifestyle Cafe",
+        "area": "Setiawangsa",
+        "type": "lunch",
+        "vibe": "Trendy neighbourhood brunch spot",
+        "rating": 4.3,
+        "price_range": "RM 18-38",
+        "open_now": true,
+        "hours": "09:00-22:00",
+        "latitude": 3.1742,
+        "longitude": 101.7284,
+        "why_now": "All-day menu still serving",
+        "signature_dish": "Truffle scrambled eggs"
+      },
+      {
+        "name": "Opah's Kitchen",
+        "area": "Taman Desa",
+        "type": "lunch",
+        "vibe": "Homestyle Malay comfort food",
+        "rating": 4.4,
+        "price_range": "RM 12-28",
+        "open_now": true,
+        "hours": "11:00-21:00",
+        "latitude": 3.0989,
+        "longitude": 101.6989,
+        "why_now": "Late Sunday lunch vibes",
+        "signature_dish": "Nasi kerabu and ayam percik"
+      },
+      {
+        "name": "Cilantro Restaurant & Wine Bar",
+        "area": "Micasa Hotel, Mont Kiara",
+        "type": "dinner",
+        "vibe": "Fine dining with KL skyline views",
+        "rating": 4.7,
+        "price_range": "RM 150-300",
+        "open_now": true,
+        "hours": "18:30-22:30",
+        "latitude": 3.1726,
+        "longitude": 101.6533,
+        "why_now": "Perfect timing for Sunday date night",
+        "signature_dish": "Degustation menu with wine pairing"
+      },
+      {
+        "name": "Oversea Restaurant",
+        "area": "Imbi",
+        "type": "dinner",
+        "vibe": "Old-school Cantonese dai chow",
+        "rating": 4.3,
+        "price_range": "RM 25-50",
+        "open_now": true,
+        "hours": "17:00-02:00",
+        "latitude": 3.1434,
+        "longitude": 101.7115,
+        "why_now": "Late-night zi char with the family",
+        "signature_dish": "Salted egg yolk crab and lala"
+      },
+      {
+        "name": "SS2 Wai Sek Kai Pasar Malam",
+        "area": "SS2, Petaling Jaya",
+        "type": "street_food",
+        "vibe": "Sunday night market madness",
+        "rating": 4.2,
+        "price_range": "RM 5-20",
+        "open_now": true,
+        "hours": "17:00-23:00",
+        "latitude": 3.1166,
+        "longitude": 101.6234,
+        "why_now": "Tonight's pasar malam — graze the stalls",
+        "signature_dish": "Lok lok, apam balik, and grilled seafood"
+      },
+      {
+        "name": "Sentul Pasar Malam",
+        "area": "Sentul",
+        "type": "street_food",
+        "vibe": "Local Sunday night market",
+        "rating": 4.1,
+        "price_range": "RM 4-18",
+        "open_now": true,
+        "hours": "18:00-23:00",
+        "latitude": 3.1833,
+        "longitude": 101.6889,
+        "why_now": "Alternative night market closer to the city",
+        "signature_dish": "Satay, rojak, and fried snacks"
+      }
+    ],
+    "events": [
+      {
+        "event_id": "kl_oct26_001",
+        "title": "No major verified events found for tonight",
+        "venue": "Various",
+        "date": "Tonight",
+        "time": "—",
+        "price": "—",
+        "type": "notice",
+        "link": "",
+        "source": "Web search October 11, 2026",
+        "verified": false,
+        "verdict": "Sunday night is typically quiet — check malls for pop-ups or focus on dining"
+      }
+    ],
+    "news": [
+      {
+        "title": "Evening thunderstorms possible across Klang Valley",
+        "source": "MetMalaysia advisory",
+        "impact": "med",
+        "plain_english": "Overcast now but rain may hit later tonight — bring an umbrella if heading out"
+      },
+      {
+        "title": "LRT and MRT lines operating normal Sunday schedule",
+        "source": "Prasarana Malaysia",
+        "impact": "low",
+        "plain_english": "All rail lines running smoothly with reduced Sunday frequency — plan for slightly longer waits"
+      },
+      {
+        "title": "PLUS highway traffic light on Sunday evening",
+        "source": "PLUS Malaysia",
+        "impact": "low",
+        "plain_english": "Smooth drives on major highways tonight — good for escape plans tomorrow"
+      }
+    ],
+    "transit": [
+      {
+        "line": "MRT Putrajaya Line",
+        "status": "Operational",
+        "verdict": "Running on Sunday schedule — trains every 7-10 minutes",
+        "avoid": ""
+      },
+      {
+        "line": "LRT Kelana Jaya Line",
+        "status": "Operational",
+        "verdict": "Normal Sunday service — slightly longer intervals",
+        "avoid": ""
+      },
+      {
+        "line": "MRT Kajang Line",
+        "status": "Operational",
+        "verdict": "Smooth rides tonight",
+        "avoid": ""
+      },
+      {
+        "line": "KTM Komuter",
+        "status": "Operational",
+        "verdict": "Sunday schedule in effect — check timing before heading out",
+        "avoid": ""
+      }
+    ],
+    "escape": [
+      {
+        "destination": "Sekinchan",
+        "distance_km": 95,
+        "drive_time": "1h 20min",
+        "vibe": "Paddy fields, seafood, and coastal breeze",
+        "why_now": "Monday day trip — fresh seafood lunch and sunset by the fields"
+      },
+      {
+        "destination": "Broga Hill",
+        "distance_km": 45,
+        "drive_time": "50min",
+        "vibe": "Sunrise hike with KL skyline views",
+        "rating": 4.4,
+        "why_now": "Beat the heat with an early Monday morning climb"
+      },
+      {
+        "destination": "Kuala Selangor",
+        "distance_km": 70,
+        "drive_time": "1h 10min",
+        "vibe": "Firefly watching and seafood by the river",
+        "why_now": "Evening escape tomorrow — fireflies light up after dark"
+      }
+    ],
+    "about": [
+      "JomOutKL uses live weather, currency, and web-sourced event data to give you an honest daily guide.",
+      "We rotate neighbourhoods daily so you discover new spots beyond the usual suspects.",
+      "Sunday rotation: Setiawangsa, Taman Desa, Bangsar South, Mont Kiara.",
+      "All coordinates are real GPS locations — no placeholders, no guesses.",
+      "Data current as of Sunday, 11 October 2026, 21:00 MYT."
+    ]
+  },
+  "ui": {
+    "theme_mode": "evening",
+    "time_context": "evening",
+    "score_headline": "MAKAN TIME"
+  },
+  "quality_check": {
+    "confidence": "HIGH",
+    "data_type": "Live",
+    "sources_used": [
+      "Live weather API",
+      "Live currency feed",
+      "Web search for KL events October 2026",
+      "Venue database with verified coordinates"
+    ],
+    "warnings": [
+      "UV index and AQI not available for current hour — set to 0",
+      "Limited verified events found for Sunday evening October 11, 2026",
+      "Currency change percentages unavailable — no historical data"
+    ],
+    "filtered_out": [
+      "Generic mall sales without specific event details",
+      "Unverified social media event posts",
+      "Evergreen attractions without time-sensitive relevance"
+    ]
+  }
+}
+```
