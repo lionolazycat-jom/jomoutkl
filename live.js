@@ -363,7 +363,7 @@
   function pill(it) {
     if (it.open_now === true) return '<span class="open-pill">Open</span>';
     if (it.open_now === false) return '<span class="closed-pill">Closed</span>';
-    return '<span class="closed-pill" style="background:rgba(244,168,0,.15);color:#7a5500;border-color:rgba(244,168,0,.35)">Hours unverified</span>';
+    return '<button class="closed-pill" onclick="JomLive.gcheck(this)" data-n="' + esc(it.name) + '" data-la="' + it.latitude + '" data-lo="' + it.longitude + '" style="background:rgba(26,115,232,.08);color:#1a73e8;border:1px solid rgba(26,115,232,.35);cursor:pointer;font-family:inherit;font-weight:700">🔎 Tap to check hours</button>';
   }
   function resBadge(it) {
     if (it.reservation === 'required') return '<span class="pc-badge" style="background:rgba(232,85,85,.1);color:#a33;">Reservation required</span>';
