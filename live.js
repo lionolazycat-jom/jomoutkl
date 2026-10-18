@@ -357,6 +357,7 @@
     h.push('<a class="act-btn act-dir" href="https://www.google.com/maps/dir/?api=1&destination=' + it.latitude.toFixed(6) + ',' + it.longitude.toFixed(6) + '" target="_blank" rel="noopener">🧭 Directions</a>');
     h.push('<a class="act-btn" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(it.name + ' ' + (it.area || '') + ' Kuala Lumpur') + '" target="_blank" rel="noopener">🗺 Maps</a>');
     var note = (!it.phone && !it.website) ? '<div class="nophone">No phone listed — open Maps to find contact or booking options.</div>' : '';
+    h.push('<button class="act-btn act-g" onclick="JomLive.gcheck(this)" data-n="' + esc(it.name) + '" data-la="' + it.latitude + '" data-lo="' + it.longitude + '">🔎 Live hours</button>');
     return '<div class="act-row">' + h.join('') + '</div>' + note;
   }
   function pill(it) {
@@ -493,5 +494,61 @@
       sec.style.display='block';
     }catch(x){if(oN)try{oN(items);}catch(y){} }
   };
+  (function(){
+    var GKEY='AIzaSyBONZvoOhh9WlwgTyaCVqaX0Ek-YN0o1ZU', DAYMAX=5;
+    var st2=document.createElement('style');
+    st2.textContent='.act-g{background:#fff;color:#1a73e8;border-color:#1a73e8;cursor:pointer}.act-g[disabled]{opacity:.6}.gres{margin-top:8px;padding:9px 11px;border-radius:10px;background:rgba(26,115,232,.07);border:1px solid rgba(26,115,232,.2);font-size:.74rem;color:var(--text);line-height:1.45}.gres a{color:#1a73e8;font-weight:700}.gsrc{font-size:.62rem;color:var(--muted);margin-top:4px}.tlive{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.tnote{font-size:.68rem;color:var(--muted);margin-top:6px}';
+    document.head.appendChild(st2);
+    function klDay(){try{return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Kuala_Lumpur'});}catch(x){return 'd';} }
+    function takeQuota(){try{var k='jomg:'+klDay(),n=+(localStorage.getItem(k)||0);if(n>=DAYMAX)return false;localStorage.setItem(k,String(n+1));return true;}catch(x){return true;} }
+    function box(card){var o=card.querySelector('.gres');if(!o){o=document.createElement('div');o.className='gres';card.appendChild(o);}return o;}
+    window.JomLive.gcheck=function(btn){
+      var card=btn.closest?btn.closest('.pc,.well-card'):btn.parentNode.parentNode, out=box(card);
+      if(!takeQuota()){out.innerHTML='Live check limit reached for today on this phone — call to confirm.';return;}
+      btn.disabled=true; out.textContent='Checking Google Maps…';
+      fetch('https://places.googleapis.com/v1/places:searchText',{method:'POST',
+        headers:{'Content-Type':'application/json','X-Goog-Api-Key':GKEY,
+          'X-Goog-FieldMask':'places.displayName,places.businessStatus,places.currentOpeningHours.openNow,places.currentOpeningHours.weekdayDescriptions,places.nationalPhoneNumber,places.googleMapsUri'},
+        body:JSON.stringify({textQuery:btn.getAttribute('data-n'),maxResultCount:1,
+          locationBias:{circle:{center:{latitude:+btn.getAttribute('data-la'),longitude:+btn.getAttribute('data-lo')},radius:200} } })
+      }).then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
+      .then(function(res){
+        btn.disabled=false;
+        if(!res.ok){out.innerHTML='Live check unavailable right now — call to confirm.';return;}
+        var p=res.j&&res.j.places&&res.j.places[0];
+        if(!p){out.innerHTML='Not found on Google Maps — call to confirm.';return;}
+        var h=[], bs=p.businessStatus, oh=p.currentOpeningHours;
+        h.push('<b>'+e(p.displayName&&p.displayName.text)+'</b>');
+        if(bs==='CLOSED_PERMANENTLY')h.push('⛔ <b>Permanently closed</b>');
+        else if(bs==='CLOSED_TEMPORARILY')h.push('⚠️ <b>Temporarily closed</b>');
+        else if(oh&&oh.openNow===true)h.push('✅ <b>Open now</b>');
+        else if(oh&&oh.openNow===false)h.push('❌ <b>Closed now</b>');
+        else h.push('Hours not listed on Google');
+        if(oh&&oh.weekdayDescriptions&&bs!=='CLOSED_PERMANENTLY'){var di=(new Date().getDay()+6)%7;if(oh.weekdayDescriptions[di])h.push('Today: '+e(oh.weekdayDescriptions[di].replace(/^[^:]+:\s*/,'')));}
+        if(p.nationalPhoneNumber)h.push('📞 <a href="tel:'+e(p.nationalPhoneNumber.replace(/[^\d+]/g,''))+'">'+e(p.nationalPhoneNumber)+'</a>');
+        if(p.googleMapsUri&&/^https:\/\//.test(p.googleMapsUri))h.push('<a href="'+e(p.googleMapsUri)+'" target="_blank" rel="noopener">Open in Google Maps ↗</a>');
+        out.innerHTML=h.join('<br>')+'<div class="gsrc">Source: Google Maps</div>';
+      }).catch(function(){btn.disabled=false;out.innerHTML='Live check unavailable right now — call to confirm.';});
+    };
+    function transitLinks(){
+      var cards=document.querySelectorAll('.transit-card'),i,c,nm,ktm,html;
+      for(i=0;i<cards.length;i++){c=cards[i]; if(c.querySelector('.tlive'))continue;
+        nm=(c.querySelector('.tc-name')||{}).textContent||''; ktm=/ktm|komuter|ets/i.test(nm);
+        html='<div class="tnote">Based on this morning’s news check — not live. Tap for official updates.</div><div class="tlive">'+
+          (ktm?'<a class="act-btn act-dir" href="https://www.ktmb.com.my/" target="_blank" rel="noopener">🚆 KTMB official ↗</a>'
+              :'<a class="act-btn act-dir" href="https://myrapid.com.my/" target="_blank" rel="noopener">🚇 MyRapid official ↗</a><a class="act-btn" href="https://x.com/MyRapidKL" target="_blank" rel="noopener">Live alerts on X ↗</a>')+'</div>';
+        c.insertAdjacentHTML('beforeend',html);}
+    }
+    var wazeAt=null;
+    function wazeCenter(){
+      var S=window.JomLive._t._S; if(!S.pos||S.usingDefault)return;
+      if(wazeAt&&hv(wazeAt.lat,wazeAt.lng,S.pos.lat,S.pos.lng)<1)return;
+      var f=document.querySelector('iframe[src*="embed.waze.com"]'); if(!f)return;
+      f.src='https://embed.waze.com/iframe?zoom=14&lat='+S.pos.lat.toFixed(5)+'&lon='+S.pos.lng.toFixed(5)+'&ct=livemap&pin=1';
+      wazeAt={lat:S.pos.lat,lng:S.pos.lng};
+    }
+    function hv(a,b,c,d){var R=6371,p=Math.PI/180,x=Math.sin((c-a)*p/2),y=Math.sin((d-b)*p/2);return 2*R*Math.asin(Math.sqrt(x*x+Math.cos(a*p)*Math.cos(c*p)*y*y));}
+    setInterval(function(){try{transitLinks();}catch(x){}try{wazeCenter();}catch(x){} },3000);
+  })();
   setInterval(function(){try{var d=window.DATA,t=document.getElementById('updatedText');if(d&&d.generated_at&&t){var n=new Date(d.generated_at);if(!isNaN(n.getTime())){var s='Events updated '+n.toLocaleTimeString('en-MY',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'Asia/Kuala_Lumpur'});if(t.textContent!==s)t.textContent=s;} } }catch(x){} },1000);
 })();
