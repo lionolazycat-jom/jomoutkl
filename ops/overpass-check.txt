@@ -1,19 +1,39 @@
-DE 504 len 695 | MAILRU 200 len 573631 | PC 500 len 646
-DE head: <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" lan
-MAILRU head: @lat	@lon	name	amenity	shop	leisure	sport	cuisine	opening_hours	phone	contact:phone	contact:mobile	website	contact:website	diet:halal	reservation	addr:street	addr:suburb	addr:city
-3.0365141	101.7063618	KFC	fast_food				chicken							yes				
-3.0620102	101.5575067	Rejab Tomyam	restaurant				malaysian	
-PC head: <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html><head>
-<title>500 Internal Server Error</title>
-</head><body>
-<h1>Internal Server Error</h1>
-<p>The server encountered an internal error or
-misconfiguration and was unable to complete
-your request.</p>
-<
+WITH REFERER: 200
+{
+  "places": [
+    {
+      "nationalPhoneNumber": "03-2118 8833",
+      "businessStatus": "OPERATIONAL",
+      "displayName": {
+        "text": "Pavilion Kuala Lumpur",
+        "languageCode": "en"
+      },
+      "currentOpeningHours": {
+        "openNow": true
+      }
+    }
+  ]
+}
+
+
+NO REFERER: 403
+{
+  "error": {
+    "code": 403,
+    "message": "Requests from referer \u003cempty\u003e are blocked.",
+    "status": "PERMISSION_DENIED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "API_KEY_HTTP_REFERRER_BLOCKED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "httpReferrer": "\u003cempty\u003e",
+          "service": "places.googleapis.com",
+          "consumer": "projects/741861438852"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.LocalizedMessage",
+        "locale": "en-US",
+      
