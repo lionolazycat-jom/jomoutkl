@@ -119,7 +119,9 @@
 
   var FOODAM = { restaurant: 1, cafe: 1, fast_food: 1, food_court: 1, ice_cream: 1 };
   var AMLABEL = { restaurant: 'Restaurant', cafe: 'Cafe', fast_food: 'Fast food', food_court: 'Food court / hawker', ice_cream: 'Ice cream' };
+  var ADULT = /brothel|stripclub|swingerclub|love_hotel|sex/i;
   function kindOf(t) {
+    if (ADULT.test((t.amenity || '') + ' ' + (t.shop || '')) || /florist|flower/i.test((t.shop || '') + ' ' + (t.name || ''))) return null;
     if (t.amenity && FOODAM[t.amenity]) return 'food';
     if (t.shop === 'massage' || t.amenity === 'spa' || t.leisure === 'sauna' || t.leisure === 'fitness_centre' || t.sport === 'yoga' || t.leisure === 'yoga') return 'wellness';
     return null;
@@ -136,13 +138,16 @@
       x = x.trim().replace(/_/g, ' '); return x.charAt(0).toUpperCase() + x.slice(1);
     }).filter(Boolean).join(' · ');
   }
-  function foodTabs(t, oh, day) {
-    var known = !!oh, a = t.amenity, tabs = [];
+  var HAWKER = /medan selera|food ?court|hawker|gerai|warung|stall|pasar|kedai makan|mamak|nasi kandar|char kuey|laksa|satay|kopitiam|food centre|food center|street food/;
+  var BFAST = /kopitiam|dim sum|nasi lemak|roti|bakery|bakehouse|breakfast|brunch|bak kut teh|congee|porridge|mamak|toast|coffee|kopi|bread|pancake|egg/;
+  function foodTabs(t, oh, day, chain) {
+    var known = !!oh, a = t.amenity, txt = ((t.name || '') + ' ' + (t.cuisine || '')).toLowerCase(), tabs = [];
     var b = openStateAt(oh, day, 510).open, l = openStateAt(oh, day, 780).open, d = openStateAt(oh, day, 1170).open;
-    if (a === 'cafe' || a === 'ice_cream') { tabs.push('cafe'); if (known && b) tabs.push('breakfast'); }
-    else if (a === 'food_court' || a === 'fast_food') { tabs.push('street_food'); if (!known || l) tabs.push('lunch'); if (!known || d) tabs.push('dinner'); }
-    else if (known) { if (b) tabs.push('breakfast'); if (l) tabs.push('lunch'); if (d) tabs.push('dinner'); if (!tabs.length) tabs.push('dinner'); }
-    else tabs.push('lunch', 'dinner');
+    if (!chain && a !== 'fast_food' && a !== 'ice_cream' && (a === 'food_court' || HAWKER.test(txt))) tabs.push('street_food');
+    if (a === 'cafe' || a === 'ice_cream') tabs.push('cafe');
+    if (!chain && a !== 'fast_food' && a !== 'ice_cream' && known && b && (a === 'cafe' || BFAST.test(txt))) tabs.push('breakfast');
+    if (a !== 'ice_cream' && a !== 'cafe') { if (!known || l) tabs.push('lunch'); if (!known || d) tabs.push('dinner'); }
+    if (!tabs.length) tabs.push(a === 'cafe' || a === 'ice_cream' ? 'cafe' : 'dinner');
     return tabs;
   }
   function makeItem(el, now) {
@@ -157,7 +162,7 @@
     var oh = parseOH(t.opening_hours), st = openStateAt(oh, day, cur);
     var ph = normPhone(t.phone || t['contact:phone'] || t['contact:mobile'] || t.mobile);
     var openText = st.open === true ? (st.always ? 'Open 24 hours' : (st.until != null ? 'Open until ' + fmtTime(st.until) : 'Open now'))
-      : st.open === false ? 'Closed now' : 'Hours not listed — call to confirm';
+      : st.open === false ? 'Closed now' : 'Hours not listed';
     var it = {
       kind: kind, name: String(t.name).slice(0, 120), latitude: lat, longitude: lon,
       area: [t['addr:street'], t['addr:suburb'] || t['addr:neighbourhood'] || t['addr:city']].filter(Boolean).join(', ').slice(0, 120),
@@ -168,9 +173,10 @@
       price_range: '', rating: null
     };
     if (kind === 'food') {
-      it.tabs = foodTabs(t, oh, day);
+      it.chain = isChain(t.name);
+      it.tabs = foodTabs(t, oh, day, it.chain);
       it.type = (t.amenity === 'cafe' || t.amenity === 'ice_cream') ? 'cafe'
-        : (t.amenity === 'food_court' || t.amenity === 'fast_food') ? 'street_food'
+        : (t.amenity === 'food_court') ? 'street_food'
         : (it.tabs.indexOf('dinner') > -1 ? 'dinner' : it.tabs[0]);
       var bits = [AMLABEL[t.amenity] || 'Food'];
       var cu = prettyCuisine(t.cuisine); if (cu) bits.push(cu);
@@ -197,7 +203,7 @@
     }
     function rank(a, b) {
       var ra = a.open_now === true ? 0 : a.open_now === null ? 1 : 2, rb = b.open_now === true ? 0 : b.open_now === null ? 1 : 2;
-      return ra - rb || a._d - b._d;
+      return (a.chain ? 1 : 0) - (b.chain ? 1 : 0) || ra - rb || a._d - b._d;
     }
     food.sort(rank); well.sort(rank);
     return { food: food, well: well };
@@ -229,7 +235,8 @@
     }
     return next();
   }
-  var ALLP = null;
+  var ALLP = null, CHAINS = {};
+  function isChain(n) { return (CHAINS[String(n || '').toLowerCase().trim()] || 0) >= 4; }
   function placesUrl() {
     var d = ''; try { d = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kuala_Lumpur' }); } catch (e) {}
     return 'places.tsv?d=' + d;
@@ -241,6 +248,7 @@
       c = lines[i].split('\t'); if (c.length < 3) continue;
       lat = parseFloat(c[0]); lon = parseFloat(c[1]); if (isNaN(lat) || isNaN(lon)) continue;
       t = {}; for (j = 2; j < head.length; j++) if (c[j]) t[head[j]] = c[j].replace(/\r$/, '');
+      if (t.name) { var kn = t.name.toLowerCase().trim(); CHAINS[kn] = (CHAINS[kn] || 0) + 1; }
       out.push({ lat: lat, lon: lon, tags: t });
     }
     return out;
@@ -301,7 +309,7 @@
       return;
     }
     if (!force) {
-      var c = cacheGet(pos);
+      var c = null;
       if (c) {
         S.els = c.els; S.radius = c.radius; S.qPos = { lat: pos.lat, lng: pos.lng }; S.qAt = now;
         S.status = 'ok'; S.updated = c.ts; rebuild(); renderAll(); return;
@@ -350,20 +358,20 @@
   }
   var ATTR = '<div class="osm-attr">Places from OpenStreetMap contributors. Hours and phone numbers are volunteer-maintained — call to confirm before you go.</div>';
   function actions(it) {
-    var h = [];
-    if (it.phone) h.push('<a class="act-btn act-call" href="tel:' + esc(it.phone) + '">📞 ' + (it.kind === 'food' ? 'Call to reserve' : 'Call') + '</a>');
-    if (it.wa) h.push('<a class="act-btn act-wa" href="https://wa.me/' + esc(it.wa) + '" target="_blank" rel="noopener">💬 WhatsApp</a>');
-    if (!it.phone && it.website) h.push('<a class="act-btn" href="' + esc(it.website) + '" target="_blank" rel="noopener">🔗 Website</a>');
+    var h = [], q = encodeURIComponent(it.name + ' ' + (it.area || '') + ' Kuala Lumpur');
+    if (it.phone) h.push('<a class="act-btn act-call" href="tel:' + esc(it.phone) + '">📞 Call</a>');
+    else if (it.website) h.push('<a class="act-btn" href="' + esc(it.website) + '" target="_blank" rel="noopener">🔗 Website</a>');
+    else h.push('<a class="act-btn" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener">🗺 Maps</a>');
     h.push('<a class="act-btn act-dir" href="https://www.google.com/maps/dir/?api=1&destination=' + it.latitude.toFixed(6) + ',' + it.longitude.toFixed(6) + '" target="_blank" rel="noopener">🧭 Directions</a>');
-    h.push('<a class="act-btn" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(it.name + ' ' + (it.area || '') + ' Kuala Lumpur') + '" target="_blank" rel="noopener">🗺 Maps</a>');
-    var note = (!it.phone && !it.website) ? '<div class="nophone">No phone listed — open Maps to find contact or booking options.</div>' : '';
-    h.push('<button class="act-btn act-g" onclick="JomLive.gcheck(this)" data-n="' + esc(it.name) + '" data-la="' + it.latitude + '" data-lo="' + it.longitude + '">🔎 Live hours</button>');
-    return '<div class="act-row">' + h.join('') + '</div>' + note;
+    h.push('<button class="act-btn act-g" onclick="JomLive.gcheck(this)" data-n="' + esc(it.name) + '" data-la="' + it.latitude + '" data-lo="' + it.longitude + '">🕒 Check hours</button>');
+    var wa = it.wa ? '<a class="wa-link" href="https://wa.me/' + esc(it.wa) + '" target="_blank" rel="noopener">💬 WhatsApp to reserve</a>' : '';
+    return '<div class="act-row">' + h.join('') + '</div>' + wa;
   }
+
   function pill(it) {
     if (it.open_now === true) return '<span class="open-pill">Open</span>';
     if (it.open_now === false) return '<span class="closed-pill">Closed</span>';
-    return '<button class="closed-pill" onclick="JomLive.gcheck(this)" data-n="' + esc(it.name) + '" data-la="' + it.latitude + '" data-lo="' + it.longitude + '" style="background:rgba(26,115,232,.08);color:#1a73e8;border:1px solid rgba(26,115,232,.35);cursor:pointer;font-family:inherit;font-weight:700">🔎 Tap to check hours</button>';
+    return '';
   }
   function resBadge(it) {
     if (it.reservation === 'required') return '<span class="pc-badge" style="background:rgba(232,85,85,.1);color:#a33;">Reservation required</span>';
@@ -497,7 +505,7 @@
   (function(){
     var GKEY='AIzaSyBONZvoOhh9WlwgTyaCVqaX0Ek-YN0o1ZU', DAYMAX=5;
     var st2=document.createElement('style');
-    st2.textContent='.act-g{background:#fff;color:#1a73e8;border-color:#1a73e8;cursor:pointer}.act-g[disabled]{opacity:.6}.gres{margin-top:8px;padding:9px 11px;border-radius:10px;background:rgba(26,115,232,.07);border:1px solid rgba(26,115,232,.2);font-size:.74rem;color:var(--text);line-height:1.45}.gres a{color:#1a73e8;font-weight:700}.gsrc{font-size:.62rem;color:var(--muted);margin-top:4px}.tlive{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.tnote{font-size:.68rem;color:var(--muted);margin-top:6px}';
+    st2.textContent='.act-g{background:#fff;color:#1a73e8;border-color:#1a73e8;cursor:pointer}.act-g[disabled]{opacity:.6}.gres{margin-top:8px;padding:9px 11px;border-radius:10px;background:rgba(26,115,232,.07);border:1px solid rgba(26,115,232,.2);font-size:.74rem;color:var(--text);line-height:1.45}.gres a{color:#1a73e8;font-weight:700}.gsrc{font-size:.62rem;color:var(--muted);margin-top:4px}.tlive{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.tnote{font-size:.68rem;color:var(--muted);margin-top:6px}.act-row{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.act-row .act-btn{min-width:0;padding:10px 4px;font-size:.74rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}.act-row .act-dir,.act-row .act-g{background:var(--card);color:var(--text);border:1px solid var(--border)}.wa-link{display:inline-block;margin-top:8px;font-size:.74rem;color:#128C7E;font-weight:700;text-decoration:none}.nophone{display:none}';
     document.head.appendChild(st2);
     function klDay(){try{return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Kuala_Lumpur'});}catch(x){return 'd';} }
     function takeQuota(){try{var k='jomg:'+klDay(),n=+(localStorage.getItem(k)||0);if(n>=DAYMAX)return false;localStorage.setItem(k,String(n+1));return true;}catch(x){return true;} }
