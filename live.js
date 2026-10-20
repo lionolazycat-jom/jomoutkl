@@ -122,7 +122,9 @@
   var ADULT = /brothel|stripclub|swingerclub|love_hotel|sex/i;
   function kindOf(t) {
     if (ADULT.test((t.amenity || '') + ' ' + (t.shop || '')) || /florist|flower/i.test((t.shop || '') + ' ' + (t.name || ''))) return null;
+    if (/sports? ?toto|magnum 4d|da ?ma ?cai|\b4d\b|lottery|karaoke|\bktv\b|\bpub\b|lounge bar/i.test(t.name || '')) return null;
     if (t.amenity && FOODAM[t.amenity]) return 'food';
+    if (t.shop === 'massage' && t.amenity !== 'spa' && !/spa|reflex|foot|thai|wellness|therap|physio|traditional|urut|tui ?na/i.test(t.name || '')) return null;
     if (t.shop === 'massage' || t.amenity === 'spa' || t.leisure === 'sauna' || t.leisure === 'fitness_centre' || t.sport === 'yoga' || t.leisure === 'yoga') return 'wellness';
     return null;
   }
@@ -138,17 +140,20 @@
       x = x.trim().replace(/_/g, ' '); return x.charAt(0).toUpperCase() + x.slice(1);
     }).filter(Boolean).join(' · ');
   }
-  var HAWKER = /medan selera|food ?court|hawker|gerai|warung|stall|pasar|kedai makan|mamak|nasi kandar|char kuey|laksa|satay|kopitiam|food centre|food center|street food/;
-  var BFAST = /kopitiam|dim sum|nasi lemak|roti|bakery|bakehouse|breakfast|brunch|bak kut teh|congee|porridge|mamak|toast|coffee|kopi|bread|pancake|egg/;
+  var BFAST = /kopitiam|kopi ?tiam|dim ?sum|nasi lemak|roti canai|roti|bakery|bakehouse|boulangerie|breakfast|brunch|bak kut teh|congee|porridge|chee cheong fun|cheong fun|toast|kaya|half.boiled|pau\b|yong tau foo/;
+  var HAWKER = /medan selera|food ?court|hawker|gerai|warung|stall|pasar|kedai makan|mamak|nasi kandar|char kuey|kuey teow|laksa|satay|food centre|food center|street food|hutong|ikan bakar|lok lok/;
+  var LUNCH = /nasi campur|economy rice|mixed rice|chap fan|chicken rice|banana leaf|nasi padang|nasi kerabu|curry house|claypot|wantan|wan tan|noodle|mee|pan mee|lunch|bento|biryani|thali|vegetarian buffet|set meal/;
   function foodTabs(t, oh, day, chain) {
-    var known = !!oh, a = t.amenity, txt = ((t.name || '') + ' ' + (t.cuisine || '')).toLowerCase(), tabs = [];
+    var known = !!oh, a = t.amenity, txt = ((t.name || '') + ' ' + (t.cuisine || '')).toLowerCase();
     var b = openStateAt(oh, day, 510).open, l = openStateAt(oh, day, 780).open, d = openStateAt(oh, day, 1170).open;
-    if (!chain && a !== 'fast_food' && a !== 'ice_cream' && (a === 'food_court' || HAWKER.test(txt))) tabs.push('street_food');
-    if (a === 'cafe' || a === 'ice_cream') tabs.push('cafe');
-    if (!chain && a !== 'fast_food' && a !== 'ice_cream' && known && b && (a === 'cafe' || BFAST.test(txt))) tabs.push('breakfast');
-    if (a !== 'ice_cream' && a !== 'cafe') { if (!known || l) tabs.push('lunch'); if (!known || d) tabs.push('dinner'); }
-    if (!tabs.length) tabs.push(a === 'cafe' || a === 'ice_cream' ? 'cafe' : 'dinner');
-    return tabs;
+    if (a === 'fast_food' || chain) return a === 'cafe' || a === 'ice_cream' ? ['cafe'] : [];   // chains/fast food: never in curated tabs (cafe chains only under Cafe)
+    if (BFAST.test(txt) && !(known && b === false)) return ['breakfast'];
+    if (a === 'food_court' || HAWKER.test(txt)) return ['street_food'];
+    if (a === 'cafe' || a === 'ice_cream') return /brunch|breakfast/.test(txt) && !(known && b === false) ? ['breakfast'] : ['cafe'];
+    if (known && l && d === false) return ['lunch'];
+    if (known && d && l === false) return ['dinner'];
+    if (LUNCH.test(txt)) return ['lunch'];
+    return ['dinner'];
   }
   function makeItem(el, now) {
     var t = el.tags || {};
@@ -175,9 +180,7 @@
     if (kind === 'food') {
       it.chain = isChain(t.name);
       it.tabs = foodTabs(t, oh, day, it.chain);
-      it.type = (t.amenity === 'cafe' || t.amenity === 'ice_cream') ? 'cafe'
-        : (t.amenity === 'food_court') ? 'street_food'
-        : (it.tabs.indexOf('dinner') > -1 ? 'dinner' : it.tabs[0]);
+      it.type = it.tabs[0] || 'quick_bite';
       var bits = [AMLABEL[t.amenity] || 'Food'];
       var cu = prettyCuisine(t.cuisine); if (cu) bits.push(cu);
       if (t['diet:halal'] === 'yes') bits.push('Halal');
@@ -195,7 +198,7 @@
     for (i = 0; i < els.length; i++) {
       it = makeItem(els[i], now);
       if (!it) continue;
-      k = it.name.toLowerCase() + '|' + it.latitude.toFixed(4) + '|' + it.longitude.toFixed(4);
+      k = it.name.toLowerCase().replace(/\s+/g, ' ').trim() + '|' + it.latitude.toFixed(3) + '|' + it.longitude.toFixed(3);
       if (seen[k]) continue; seen[k] = 1;
       it._d = hav(pos.lat, pos.lng, it.latitude, it.longitude);
       it._dist = real ? Math.round(it._d * 10) / 10 : null;
@@ -398,7 +401,43 @@
     return '<div class="nodata"><div class="nodata-emoji">' + emoji + '</div><div class="nodata-msg">' + esc(title) + '</div>' +
       (sub ? '<div style="font-size:.8rem;color:var(--muted);margin-top:8px">' + esc(sub) + '</div>' : '') + '</div>';
   }
-  var TABLABEL = { breakfast: 'breakfast', cafe: 'cafe', lunch: 'lunch', dinner: 'dinner', street_food: 'street food / hawker' };
+  var TABLABEL = { breakfast: 'breakfast', cafe: 'cafe', lunch: 'lunch', dinner: 'dinner', street_food: 'hawker / food court' };
+  var PM = [
+    { n: 'Bangsar Baru Sunday Market', d: 0, a: 'Jalan Telawi area, Bangsar Baru', h: 'about 4:30 PM – 9 PM', la: 3.1322, lo: 101.6712, src: 'https://www.loopme.my/post/best-pasar-malam-kl/' },
+    { n: 'Pasar Malam TTDI', d: 0, a: 'Jalan Tun Mohd Fuad, Taman Tun Dr Ismail', h: 'Sunday evening', la: 3.1407, lo: 101.6294, src: 'https://www.loopme.my/post/best-pasar-malam-kl/' },
+    { n: 'Pasar Malam SS2', d: 1, a: 'Jalan SS 2/60–2/64, SS2, Petaling Jaya', h: 'about 5 PM – 10 PM', la: 3.1185, lo: 101.6211, src: 'https://klfoodie.com/night-market-kl-klang-valley/' },
+    { n: 'Pasar Malam Sri Petaling', d: 2, a: 'Jalan Radin Anum, Bandar Baru Sri Petaling', h: 'about 5 PM – 10:30 PM', la: 3.0691, lo: 101.6920, src: 'https://klfoodie.com/night-market-kl-klang-valley/' },
+    { n: 'Pasar Malam Taman Connaught', d: 3, a: 'Jalan Cerdas, Taman Connaught, Cheras', h: 'about 5 PM – late (KL’s biggest)', la: 3.0769, lo: 101.7420, src: 'https://www.timeout.com/kuala-lumpur/shops/taman-connaught-night-market' },
+    { n: 'Pasar Malam OUG', d: 4, a: 'Jalan Hujan Emas / Hujan Rahmat, Taman OUG', h: 'about 5 PM – midnight', la: 3.0710, lo: 101.6771, src: 'https://erisgoesto.com/2022/06/12/pasar-malam-oug-oug-night-market-kuala-lumpur/' },
+    { n: 'Pasar Malam Lorong TAR', d: 6, a: 'Lorong Tuanku Abdul Rahman, City Centre', h: 'about 5 PM – late', la: 3.1605, lo: 101.6973, src: 'https://www.thestar.com.my/metro/metro-news/2024/01/13/saturday-night-fever-in-the-city' },
+    { n: 'Pasar Malam Setia Alam', d: 6, a: 'Jalan Setia Prima A U13/A, Setia Alam, Shah Alam', h: 'about 5 PM – 10 PM', la: null, lo: null, src: 'https://klfoodie.com/night-market-kl-klang-valley/' }
+  ];
+  var DAYN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  function pmList(onlyTonight) {
+    var now = new Date(), today = now.getDay(), late = now.getHours() >= 23;
+    var arr = PM.map(function (p) {
+      var inDays = (p.d - today + 7) % 7; if (inDays === 0 && late) inDays = 7;
+      var dist = (S.pos && !S.usingDefault && p.la != null) ? hav(S.pos.lat, S.pos.lng, p.la, p.lo) : null;
+      return { p: p, inDays: inDays, dist: dist };
+    }).filter(function (x) { return !onlyTonight || x.inDays === 0; });
+    arr.sort(function (a, b) { return a.inDays - b.inDays || (a.dist == null ? 99 : a.dist) - (b.dist == null ? 99 : b.dist); });
+    return arr;
+  }
+  function pmCard(x) {
+    var p = x.p, when = x.inDays === 0 ? '<span class="pm-tonight">TONIGHT</span>' : x.inDays === 1 ? '<span class="pm-soon">Tomorrow</span>' : '<span class="pm-day">' + DAYN[p.d] + '</span>';
+    var q = encodeURIComponent(p.n + ' ' + p.a);
+    return '<div class="pc pm-card"><div class="pc-header"><div class="pc-name">🏮 ' + esc(p.n) + '</div>' + (x.dist != null ? '<div class="pc-dist">📍 ' + fmtDist(x.dist) + '</div>' : '') + '</div>' +
+      '<div class="pc-area">' + esc(p.a) + '</div>' +
+      '<div class="pc-meta">' + when + '<span class="price-lbl">Every ' + DAYN[p.d] + ' · ' + esc(p.h) + '</span></div>' +
+      '<div class="act-row"><a class="act-btn act-call" href="https://www.google.com/maps/search/?api=1&query=' + q + '" target="_blank" rel="noopener">📍 Map</a>' +
+      '<a class="act-btn act-dir" href="https://www.google.com/maps/dir/?api=1&destination=' + q + '" target="_blank" rel="noopener">🧭 Directions</a>' +
+      '<a class="act-btn act-g" href="' + esc(p.src) + '" target="_blank" rel="noopener">ℹ️ Source</a></div></div>';
+  }
+  function pmSection(onlyTonight) {
+    var arr = pmList(onlyTonight); if (!arr.length) return '';
+    return '<div class="pm-head">🏮 ' + (onlyTonight ? 'Pasar malam tonight' : 'Pasar malam this week') + '</div>' + arr.map(pmCard).join('') +
+      '<div class="osm-attr">Weekly schedules from Time Out KL, KL Foodie, LoopMe and others. Markets can close on public holidays or in heavy rain — check before going.</div>';
+  }
   function renderFoodLive() {
     var all = $('fd-all'); if (!all) return;
     var ids = ['breakfast', 'cafe', 'lunch', 'dinner', 'street_food'];
@@ -412,11 +451,11 @@
       all.innerHTML = html; ids.forEach(function (t) { var e = $('fd-' + t); if (e) e.innerHTML = html; }); return;
     }
     if (S.status === 'idle') return;
-    all.innerHTML = bar() + (S.food.length ? S.food.slice(0, 40).map(foodCard).join('') : msgBox('🍽', 'No food places mapped within ' + (S.radius / 1000) + ' km', 'Try Refresh after moving.')) + ATTR;
+    all.innerHTML = bar() + pmSection(true) + (S.food.length ? S.food.slice(0, 40).map(foodCard).join('') : msgBox('🍽', 'No food places mapped within ' + (S.radius / 1000) + ' km', 'Try Refresh after moving.')) + ATTR;
     ids.forEach(function (t) {
       var e = $('fd-' + t); if (!e) return;
       var f = S.food.filter(function (i) { return i.tabs.indexOf(t) > -1; }).slice(0, 25);
-      e.innerHTML = bar() + (f.length ? f.map(foodCard).join('') : msgBox('🍽', 'No ' + TABLABEL[t] + ' spots nearby', 'Try another tab or move a little.')) + ATTR;
+      e.innerHTML = bar() + (t === 'street_food' ? pmSection(false) + '<div class="pm-head">🍢 Hawkers & food courts near you</div>' : '') + (f.length ? f.map(foodCard).join('') : msgBox('🍽', 'No ' + TABLABEL[t] + ' spots nearby', 'Try another tab or move a little.')) + ATTR;
     });
   }
   var origWell = null;
@@ -494,7 +533,7 @@
     try{
       if(!window.USER_LAT||!window.USER_LNG||!items||!items.length)return;
       var el=document.getElementById('nearYouList'),sec=document.getElementById('nearYouSection');if(!el||!sec)return;
-      var arr=items.filter(function(f){return f.latitude&&f.longitude;}).map(function(f){return{f:f,d:haversine(window.USER_LAT,window.USER_LNG,f.latitude,f.longitude)};}).sort(function(a,b){return a.d-b.d;}).slice(0,3);
+      var arr=items.filter(function(f){return f.latitude&&f.longitude&&!f.chain&&f.open_now!==false&&f.type!=='quick_bite';}).map(function(f){return{f:f,d:haversine(window.USER_LAT,window.USER_LNG,f.latitude,f.longitude)};}).sort(function(a,b){return a.d-b.d;}).slice(0,3);
       if(!arr.length)return;
       el.innerHTML=arr.map(function(o){var f=o.f,d=o.d;var dist=d<1?(d*1000).toFixed(0)+'m':d.toFixed(1)+'km';
         var q='https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(f.latitude+','+f.longitude);
@@ -558,5 +597,55 @@
     function hv(a,b,c,d){var R=6371,p=Math.PI/180,x=Math.sin((c-a)*p/2),y=Math.sin((d-b)*p/2);return 2*R*Math.asin(Math.sqrt(x*x+Math.cos(a*p)*Math.cos(c*p)*y*y));}
     setInterval(function(){try{transitLinks();}catch(x){}try{wazeCenter();}catch(x){} },3000);
   })();
-  setInterval(function(){try{var d=window.DATA,t=document.getElementById('updatedText');if(d&&d.generated_at&&t){var n=new Date(d.generated_at);if(!isNaN(n.getTime())){var s='Events updated '+n.toLocaleTimeString('en-MY',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'Asia/Kuala_Lumpur'});if(t.textContent!==s)t.textContent=s;} } }catch(x){} },1000);
+  function parseKL(str){if(!str)return null;var m=String(str).match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}):(\d{2})/);if(!m)return null;var d=new Date(m[1]+'T'+m[2]+':'+m[3]+':00+08:00');return isNaN(d.getTime())?null:d;}
+  function klDateStr(d){try{return d.toLocaleDateString('en-MY',{weekday:'short',day:'numeric',month:'short',timeZone:'Asia/Kuala_Lumpur'})+', '+d.toLocaleTimeString('en-MY',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:'Asia/Kuala_Lumpur'});}catch(x){return '';} }
+  function klToday2(){try{return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Kuala_Lumpur'});}catch(x){return '';} }
+  function guideAgeH(d){var g=parseKL(d&&d.generated_at);return g?(Date.now()-g.getTime())/3600000:999;}
+  function sanitize(d){
+    if(!d||!d.modules)return d;var m=d.modules,today=klToday2(),stale=guideAgeH(d)>20;
+    m.events=(m.events||[]).filter(function(ev){var end=(ev.end_iso||ev.date_iso||'');return /^https?:\/\//.test(ev.link||'')&&(!end||end>=today);});
+    m.news=stale?[]:(m.news||[]).filter(function(n){return /^https?:\/\//.test(n.url||'');});
+    (m.transit||[]).forEach(function(t){if(stale||!/^https?:\/\//.test(t.url||'')){t.status='No disruption reported';t.verdict='';} });
+    if(d.quality_check)d.quality_check.warnings=[];
+    d._stale=stale;return d;
+  }
+  var oRA=window.renderAll;
+  if(oRA){window.renderAll=function(d){try{sanitize(d);}catch(x){}oRA(d);try{afterRender(d);}catch(x){} };}
+  function afterRender(d){
+    var qc=document.getElementById('qcConf');if(qc){var card=qc.closest?qc.closest('div[class*="qc"],.card,section'):null;var p=qc.parentNode&&qc.parentNode.parentNode;(card||p).style.display='none';}
+    var ab=document.getElementById('alertBanner');if(ab&&d&&d._stale)ab.style.display='none';
+    applyWx();
+  }
+  setInterval(function(){try{var d=window.DATA,t=document.getElementById('updatedText'),b=document.getElementById('updatedBadge');if(!d||!t)return;var g=parseKL(d.events_checked_at||d.generated_at);if(!g)return;var s=(d._stale?'⚠️ Last updated ':'Events checked ')+klDateStr(g);if(t.textContent!==s)t.textContent=s;if(b){b.style.background=d._stale?'rgba(232,85,85,.15)':'';} }catch(x){} },1000);
+  /* live weather from Open-Meteo (free, no key) */
+  var WX=null,WMO={0:['☀️','Clear sky'],1:['🌤','Mainly clear'],2:['⛅','Partly cloudy'],3:['☁️','Overcast'],45:['🌫','Fog'],48:['🌫','Fog'],51:['🌦','Light drizzle'],53:['🌦','Drizzle'],55:['🌧','Heavy drizzle'],61:['🌦','Light rain'],63:['🌧','Rain'],65:['🌧','Heavy rain'],80:['🌦','Rain showers'],81:['🌧','Rain showers'],82:['⛈','Violent showers'],95:['⛈','Thunderstorm'],96:['⛈','Thunderstorm, hail'],99:['⛈','Thunderstorm, hail']};
+  function wmo(c,night){var w=WMO[c]||['☁️','Cloudy'];if(night&&(c<=2))return['🌙',w[1]];return w;}
+  function aqiLbl(a){return a<=50?'Good':a<=100?'Moderate':a<=150?'Unhealthy (sensitive)':a<=200?'Unhealthy':'Very unhealthy';}
+  function hm(iso){var m=String(iso).match(/T(\d{2}):(\d{2})/);if(!m)return'';var h=+m[1],ap=h>=12?'PM':'AM';return ((h%12)||12)+':'+m[2]+' '+ap;}
+  function loadWx(){
+    var la=3.1390,lo=101.6869;try{var S=window.JomLive._t._S;if(S.pos&&!S.usingDefault){la=S.pos.lat;lo=S.pos.lng;} }catch(x){}
+    var f='https://api.open-meteo.com/v1/forecast?latitude='+la.toFixed(3)+'&longitude='+lo.toFixed(3)+'&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,is_day&hourly=temperature_2m,weather_code&daily=sunrise,sunset&timezone=Asia%2FKuala_Lumpur&forecast_days=2';
+    var a='https://air-quality-api.open-meteo.com/v1/air-quality?latitude='+la.toFixed(3)+'&longitude='+lo.toFixed(3)+'&current=us_aqi,uv_index&timezone=Asia%2FKuala_Lumpur';
+    Promise.all([fetch(f).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;}),fetch(a).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;})]).then(function(r){if(r[0]&&r[0].current){WX={f:r[0],a:r[1]};applyWx();} });
+  }
+  function applyWx(){
+    if(!WX)return;var c=WX.f.current,night=!c.is_day,w=wmo(c.weather_code,night),$=function(id){return document.getElementById(id);};
+    if($('wxIco'))$('wxIco').textContent=w[0];
+    if($('wxTemp'))$('wxTemp').innerHTML=Math.round(c.temperature_2m)+'°<span style="font-size:1.5rem;font-weight:400">c</span>';
+    if($('wxFeels'))$('wxFeels').textContent='Feels like '+Math.round(c.apparent_temperature)+'°C';
+    if($('wxCond'))$('wxCond').textContent=w[1];
+    if($('ws0'))$('ws0').innerHTML='💧 '+Math.round(c.relative_humidity_2m)+'%';
+    if($('ws1'))$('ws1').innerHTML='🌬 '+Math.round(c.wind_speed_10m)+' km/h';
+    var ac=WX.a&&WX.a.current;
+    if(ac&&$('ws2')&&ac.uv_index!=null)$('ws2').innerHTML='☀️ UV '+Math.round(ac.uv_index);
+    if(ac&&$('ws3')&&ac.us_aqi!=null)$('ws3').innerHTML='<span class="aqi">AQI '+Math.round(ac.us_aqi)+' · '+aqiLbl(ac.us_aqi)+'</span>';
+    var dl=WX.f.daily;if(dl&&$('ws4'))$('ws4').innerHTML='🌅 '+hm(dl.sunrise[0])+' · 🌇 '+hm(dl.sunset[0]);
+    var hr=WX.f.hourly,he=$('wxHourly');
+    if(hr&&he){var nowIso=c.time,start=0,i,out=[];for(i=0;i<hr.time.length;i++){if(hr.time[i]>=nowIso.slice(0,13)){start=i;break;} }
+      for(i=start;i<hr.time.length&&out.length<6;i+=3){var h=+hr.time[i].slice(11,13),nt=h<7||h>=19,ww=wmo(hr.weather_code[i],nt);out.push('<div class="wx-hr"><div class="wx-hr-t">'+(((h%12)||12)+(h>=12?'PM':'AM'))+'</div><div class="wx-hr-i">'+ww[0]+'</div><div class="wx-hr-d">'+Math.round(hr.temperature_2m[i])+'°</div></div>');}
+      he.innerHTML=out.join('');}
+    if($('wxAdvisory')&&$('wxAdvisory').getAttribute('data-live')!=='1'){$('wxAdvisory').setAttribute('data-live','1');$('wxAdvisory').textContent='Live weather for your area · Open-Meteo';}
+  }
+  setTimeout(loadWx,1500);setInterval(loadWx,20*60000);
+  var st3=document.createElement('style');st3.textContent='.pm-head{font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:14px 2px 8px}.pm-card{border-left-color:#7c3aed!important}.pm-tonight{background:#7c3aed;color:#fff;border-radius:100px;padding:3px 10px;font-size:.66rem;font-weight:800;letter-spacing:.5px}.pm-soon{background:rgba(124,58,237,.12);color:#5b21b6;border-radius:100px;padding:3px 10px;font-size:.66rem;font-weight:700}.pm-day{background:var(--bg2,#f2ece6);color:var(--muted);border-radius:100px;padding:3px 10px;font-size:.66rem;font-weight:700}';document.head.appendChild(st3);
 })();
