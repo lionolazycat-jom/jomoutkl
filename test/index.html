@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>JomOut KL Tonight (test)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF3EE;--card:#fff;--warm:#FFF8F2;--orange:#FF6535;--dorange:#C94410;--amber:#F4A800;--peach:#FFD8C4;--ink:#1F1A17;--muted:#7A6E66;--line:#F0E2DA;--green:#1F8A4C;--purple:#6D3FD6;--sh:0 2px 14px rgba(201,68,16,.08)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-size:15px;line-height:1.45;padding-bottom:40px}
+a{color:inherit}
+.wrap{max-width:520px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;z-index:20;background:rgba(255,243,238,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+.logo{font-weight:800;font-size:1.25rem;letter-spacing:-.5px}.logo b{color:var(--orange)}.logo small{font-size:.8rem;color:var(--muted);font-weight:700;margin-left:2px}
+.test{font-size:.62rem;font-weight:800;background:#FFF0B8;color:#8A6200;border:1px solid #F4D060;border-radius:99px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+.loc{font-size:.75rem;color:var(--muted);text-align:right;max-width:52%}
+.loc button{border:none;background:none;color:var(--orange);font:inherit;font-weight:700;cursor:pointer;padding:0}
+.hero{margin-top:14px;border-radius:22px;padding:18px;color:#fff;background:linear-gradient(135deg,#FF8C00,#F4C842);box-shadow:0 10px 30px rgba(255,120,0,.25);position:relative;overflow:hidden}
+.hero.rain{background:linear-gradient(135deg,#4F6A8F,#8FA9C9)}.hero.night{background:linear-gradient(135deg,#2E2457,#7A4FB5)}
+.hrow{display:flex;gap:14px;align-items:center}
+.remy{flex:0 0 76px;height:76px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:2.6rem;position:relative}
+.remy i{position:absolute;right:-4px;bottom:-2px;font-size:1.5rem;font-style:normal}
+.bubble{background:#fff;color:var(--ink);border-radius:16px 16px 16px 4px;padding:10px 12px;font-size:.88rem;font-weight:500;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.score{display:flex;align-items:baseline;gap:10px;margin-top:14px}
+.num{font-family:Arvo,serif;font-size:3.6rem;line-height:1}.num small{font-size:1.2rem;opacity:.8}
+.hl{font-weight:800;font-size:1.15rem;letter-spacing:.5px;text-transform:uppercase}
+.why{font-size:.8rem;opacity:.95;margin-top:4px}
+.bars{display:flex;gap:4px;margin-top:14px;align-items:flex-end}
+.bar{flex:1;text-align:center;font-size:.66rem}
+.bar span{display:block;background:rgba(255,255,255,.28);border-radius:6px;margin-bottom:3px;position:relative;height:34px;overflow:hidden}
+.bar span b{position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,.9)}
+.sec{margin-top:22px}
+.sh{display:flex;align-items:center;gap:8px;font-size:.72rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin:0 2px 10px}
+.sh:after{content:'';flex:1;height:1px;background:var(--line)}
+.card{background:var(--card);border-radius:18px;padding:14px;box-shadow:var(--sh);margin-bottom:10px;border-left:4px solid var(--orange)}
+.card.pm{border-left-color:var(--purple)}.card.ev{border-left-color:var(--amber)}.card.food{border-left-color:var(--orange)}
+.tag{display:inline-block;font-size:.64rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;border-radius:99px;padding:3px 9px;margin:0 6px 6px 0}
+.t-now{background:var(--purple);color:#fff}.t-soon{background:#EEE7FF;color:#4B2A9E}.t-ev{background:#FFF3D1;color:#8A6200}.t-ok{background:#E3F5EA;color:var(--green)}.t-q{background:#F3EEEA;color:var(--muted)}
+.name{font-weight:800;font-size:1.02rem}
+.meta{font-size:.82rem;color:var(--muted);margin-top:2px}
+.tip{margin-top:8px;font-size:.8rem;background:#FFFBEA;border-left:3px solid var(--amber);border-radius:8px;padding:6px 9px;color:#6B5200}
+.acts{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.btn{flex:1;min-width:0;text-align:center;text-decoration:none;font-weight:700;font-size:.8rem;border-radius:12px;padding:9px 8px;border:1.5px solid var(--peach);background:var(--warm);color:var(--dorange);cursor:pointer;font-family:inherit;white-space:nowrap}
+.btn.p{background:var(--orange);border-color:var(--orange);color:#fff}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 10px;padding:0 16px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1.5px solid var(--peach);background:#fff;border-radius:99px;padding:7px 13px;font:700 .8rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer}
+.chip.on{background:var(--orange);border-color:var(--orange);color:#fff}
+.empty{background:var(--warm);border:1.5px dashed var(--peach);border-radius:18px;padding:18px;text-align:center;font-size:.88rem;color:var(--muted)}
+.empty b{display:block;font-size:1.6rem;margin-bottom:4px}
+.more{display:block;width:100%;margin-top:4px}
+.share{margin-top:22px;display:flex;gap:8px}
+footer{margin-top:26px;font-size:.72rem;color:var(--muted);line-height:1.6}
+footer a{color:var(--dorange)}
+.warn{background:#FFF0E0;border:1px solid #F6C9A0;color:#8A3B00;border-radius:12px;padding:8px 12px;font-size:.8rem;margin-top:12px}
+.skel{height:84px;border-radius:18px;background:linear-gradient(90deg,#fff 0,#FFF8F2 50%,#fff 100%);background-size:200% 100%;animation:sk 1.2s infinite;margin-bottom:10px}
+@keyframes sk{to{background-position:-200% 0} }
+</style>
+</head>
+<body>
+<header><div class="wrap hdr">
+  <div><span class="logo">Jom<b>Out</b><small>KL</small></span><span class="test">TEST</span></div>
+  <div class="loc" id="loc">📍 Finding you…</div>
+</div></header>
+
+<main class="wrap">
+  <section class="hero" id="hero">
+    <div class="hrow"><div class="remy" id="remy">🐯<i id="remyAcc"></i></div><div class="bubble" id="say">Jap ah, tengah check cuaca… ☁️</div></div>
+    <div class="score"><div class="num" id="num">–<small>/10</small></div><div><div class="hl" id="hl">LOADING LAH</div><div class="why" id="why">Checking live weather…</div></div></div>
+    <div class="bars" id="bars"></div>
+  </section>
+  <div id="warn"></div>
+
+  <section class="sec"><div class="sh" id="tonightHead">Tonight in KL</div><div id="tonight"><div class="skel"></div><div class="skel"></div></div></section>
+
+  <section class="sec"><div class="sh" id="makanHead">Makan near you</div><div id="makan"><div class="skel"></div><div class="skel"></div></div></section>
+
+  <section class="sec"><div class="sh">What's on</div>
+    <div class="chips" id="when"></div>
+    <div class="chips" id="kind"></div>
+    <div id="events"><div class="skel"></div></div>
+  </section>
+
+  <section class="sec"><div class="sh">Pasar malam this week</div><div id="week"></div></section>
+
+  <div class="share"><button class="btn p" id="wa">📲 Share tonight on WhatsApp</button></div>
+
+  <footer id="foot"></footer>
+</main>
+
+<script>
+(function(){
+'use strict';
+var BASE='../';
+var KLCC={lat:3.1579,lng:101.7123};
+var POS={lat:KLCC.lat,lng:KLCC.lng,real:false};
+var DATA=null,PLACES=null,WX=null,CHAINS={};
+var WHEN='tonight',KIND='all';
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function $(id){return document.getElementById(id);}
+function hav(a,b,c,d){var R=6371,x=(c-a)*Math.PI/180,y=(d-b)*Math.PI/180,h=Math.sin(x/2)*Math.sin(x/2)+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(y/2)*Math.sin(y/2);return R*2*Math.atan2(Math.sqrt(h),Math.sqrt(1-h));}
+function fmtDist(km){return km<1?Math.max(50,Math.round(km*20)*50)+' m':km.toFixed(1)+' km';}
+function fmtTime(min){var h=Math.floor(min/60)%24,m=min%60,ap=h>=12?'pm':'am',h12=h%12===0?12:h%12;return h12+(m?':'+(m<10?'0':'')+m:'')+ap;}
+/* KL clock, correct even for tourists planning from abroad */
+function klNow(){var p={};new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kuala_Lumpur',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false,weekday:'short'}).formatToParts(new Date()).forEach(function(x){p[x.type]=x.value;});
+  var wd={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6}[p.weekday];var h=+p.hour%24;
+  return{iso:p.year+'-'+p.month+'-'+p.day,h:h,min:h*60+(+p.minute),dow:wd};}
+function addDays(iso,n){var d=new Date(iso+'T12:00:00+08:00');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10);}
+function dayLabel(iso){var d=new Date(iso+'T12:00:00+08:00');return d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'Asia/Kuala_Lumpur'});}
+function mapsDir(lat,lng,name){return 'https://www.google.com/maps/dir/?api=1&destination='+(lat!=null?lat+','+lng:encodeURIComponent(name+' Kuala Lumpur'));}
+function mapsSearch(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);}
+
+/* ── 1. LIVE SCORE (never stale: computed from live weather every visit) ── */
+var WMO={0:['☀️','Clear'],1:['🌤','Mostly clear'],2:['⛅','Partly cloudy'],3:['☁️','Cloudy'],45:['🌫','Hazy'],48:['🌫','Hazy'],51:['🌦','Drizzle'],53:['🌦','Drizzle'],55:['🌦','Drizzle'],61:['🌧','Light rain'],63:['🌧','Rain'],65:['🌧','Heavy rain'],80:['🌦','Showers'],81:['🌧','Heavy showers'],82:['⛈','Violent showers'],95:['⛈','Thunderstorm'],96:['⛈','Thunderstorm'],99:['⛈','Thunderstorm']};
+function loadWx(){
+  var q='latitude='+POS.lat.toFixed(3)+'&longitude='+POS.lng.toFixed(3)+'&timezone=Asia%2FKuala_Lumpur';
+  return Promise.all([
+    fetch('https://api.open-meteo.com/v1/forecast?'+q+'&current=temperature_2m,apparent_temperature,weather_code,is_day&hourly=precipitation_probability,weather_code,temperature_2m&forecast_days=2').then(function(r){return r.json();}),
+    fetch('https://air-quality-api.open-meteo.com/v1/air-quality?'+q+'&current=us_aqi,uv_index').then(function(r){return r.json();}).catch(function(){return{};})
+  ]).then(function(a){WX={f:a[0],a:a[1]||{} };renderHero();}).catch(function(){
+    $('hl').textContent='DATA PAKCIK ON BREAK';$('why').textContent='Weather feed is napping 🦗 Try again in a minute.';$('say').textContent='Aiyo, takde data right now lah 👀';$('num').innerHTML='🙈';});
+}
+function renderHero(){
+  var f=WX.f,c=f.current||{},k=klNow(),hrs=(f.hourly&&f.hourly.time)||[],start=0,i;
+  for(i=0;i<hrs.length;i++){if(+hrs[i].slice(11,13)===k.h&&hrs[i].slice(0,10)===k.iso){start=i;break;} }
+  var next3=0,next6=[];for(i=start;i<start+6&&i<hrs.length;i++){var pp=(f.hourly.precipitation_probability||[])[i]||0;if(i<start+3)next3=Math.max(next3,pp);next6.push({h:+hrs[i].slice(11,13),p:pp});}
+  var code=c.weather_code,feels=Math.round(c.apparent_temperature),aqi=WX.a.current&&WX.a.current.us_aqi,uv=WX.a.current&&WX.a.current.uv_index;
+  var storm=code>=95,wet=(code>=61&&code<=82)||storm;
+  var s=10,why=[];
+  if(storm){s-=5;why.push('thunderstorm now');}else if(wet){s-=3;why.push((WMO[code]||['',''])[1].toLowerCase()+' now');}
+  if(next3>=70){s-=3;why.push(next3+'% rain chance next 3h');}else if(next3>=40){s-=2;why.push(next3+'% rain chance next 3h');}else if(next3>=20){s-=1;why.push(next3+'% rain chance');}else why.push('low rain chance');
+  if(feels>=39){s-=2;why.push('feels '+feels+'°C');}else if(feels>=35){s-=1;why.push('feels '+feels+'°C');}else why.push(feels+'°C');
+  if(aqi>150){s-=3;why.push('AQI '+aqi+' unhealthy');}else if(aqi>100){s-=1;why.push('AQI '+aqi);}else if(aqi!=null)why.push('AQI '+aqi+' ok');
+  s=Math.max(1,Math.min(10,s));
+  var night=k.h>=19||k.h<6,hl,say,acc='';
+  if(storm){hl='DODGE THE STORM';say='Thunder lah. Mall or makan indoors, wait it out ⛈';acc='☂️';}
+  else if(wet){hl=night?'MAMAK WITH A ROOF':'MALL DAY LAH';say='Raining. Go somewhere with a roof, still can jalan-jalan ☔';acc='☂️';}
+  else if(next3>=60){hl='GO NOW, RAIN COMING';say='Rain likely soon. Go out early, bring umbrella ☂️';acc='☂️';}
+  else if(k.h>=22||k.h<5){hl=s>=7?'SUPPER SKY CLEAR LAH':'NIGHT OWL MODE';say='Supper time. Mamak, lok lok or a late kopi? 🌙';acc='🌙';}
+  else if(k.h>=17){hl=s>=7?'CITY COMES ALIVE':'EASY EVENING';say='Evening sorted. Pasar malam or a show tonight? 🎉';acc='😎';}
+  else if(k.h>=11){hl=feels>=35?'GOOD INDOOR DAY':'GOOD DAY TO JALAN';say=feels>=35?'Panas gila. Aircond lunch first, go out after 5 🥵':'Nice out. Lunch somewhere new? 🍜';acc=feels>=35?'🥵':'😎';}
+  else{hl='GO OUT EARLY';say='Morning! Kopi and nasi lemak before it gets hot ☕';acc='☕';}
+  $('num').innerHTML=s+'<small>/10</small>';$('hl').textContent=hl;$('say').textContent=say;$('remyAcc').textContent=acc;
+  var icon=(WMO[code]||['🌤',''])[0];
+  $('why').textContent=icon+' Why: '+why.join(' · ')+(uv!=null&&!night?' · UV '+Math.round(uv):'');
+  var hero=$('hero');hero.className='hero'+(wet||storm?' rain':night?' night':'');
+  $('bars').innerHTML=next6.map(function(x){return '<div class="bar"><span><b style="height:'+x.p+'%"></b></span>'+fmtTime(x.h*60).replace(':00','')+'<br>'+x.p+'%</div>';}).join('')+'<div class="bar" style="flex:0 0 auto;text-align:left;opacity:.9">rain<br>chance</div>';
+}
+
+/* ── 2. EVENTS (only real, linked, upcoming, in Klang Valley) ── */
+var OUT=/genting|resorts world|arena of stars|singapore|penang|johor|melaka|ipoh/i;
+var KINDS=[['all','All'],['concert','🎤 Concerts'],['comedy','😂 Comedy & theatre'],['family','👨‍👩‍👧 Family & fests'],['market','🛍 Markets & expos']];
+function evKind(e){var t=(e.type||'').toLowerCase(),x=(e.title+' '+e.venue).toLowerCase();
+  if(/comedy|talkshow|stand.?up|jokes/.test(x)||t==='theatre')return'comedy';
+  if(t==='market'||t==='exhibition'||/expo|market|convention|bazaar|fair/.test(x))return'market';
+  if(t==='family'||t==='festival'||t==='sports'||/run\b|fest|cosplay|family|kids/.test(x))return'family';
+  return'concert';}
+var BIG=/stadium|arena|bukit jalil|axiata|unifi|mega star|idea live|xox/i;
+var ROUTES=[
+  [/bukit jalil|axiata|unifi arena|stadium nasional|national stadium|hockey stadium/i,'🚆 LRT Bukit Jalil (Sri Petaling line) is walking distance.'],
+  [/dewan filharmonik|klcc|petronas/i,'🚆 LRT KLCC, then walk through Suria KLCC.'],
+  [/zepp|lalaport|bbcc/i,'🚆 MRT/LRT Hang Tuah is next to Bukit Bintang City Centre.'],
+  [/stadium merdeka/i,'🚆 MRT Merdeka is right beside the stadium.'],
+  [/world trade centre|wtc kuala|pwtc/i,'🚆 LRT PWTC station is next door.'],
+  [/rexkl/i,'🚆 MRT/LRT Pasar Seni, then a short walk.'],
+  [/istana budaya/i,'🚆 Titiwangsa station (LRT/Monorail/MRT), short walk.']
+];
+function evTip(e){var v=e.venue+' '+e.title,r='';ROUTES.some(function(x){if(x[0].test(v)){r=x[1];return true;} });
+  if(BIG.test(v))r+=(r?' ':'')+'Big crowd: leave early, Grab prices jump after the show.';return r;}
+function cleanEvents(d){var t=klNow().iso;return((d&&d.modules&&d.modules.events)||[]).filter(function(e){
+  if(!e||!e.title||!/^https?:\/\//.test(e.link||''))return false;if(OUT.test((e.venue||'')+' '+e.title))return false;
+  var end=e.end_iso||e.date_iso;return !!e.date_iso&&end>=t;}).sort(function(a,b){return a.date_iso<b.date_iso?-1:1;});}
+function onDay(e,iso){return e.date_iso<=iso&&(e.end_iso||e.date_iso)>=iso;}
+function inRange(e,a,b){return e.date_iso<=b&&(e.end_iso||e.date_iso)>=a;}
+function evCard(e,showDate){var src=(e.link.split('/')[2]||'').replace('www.','');var tip=evTip(e);
+  return '<div class="card ev"><span class="tag t-ev">'+esc(showDate?dayLabel(e.date_iso)+(e.end_iso&&e.end_iso!==e.date_iso?' – '+dayLabel(e.end_iso):''):'Tonight')+'</span>'+(e.time?'<span class="tag t-q">'+esc(e.time)+'</span>':'')+
+  '<div class="name">'+esc(e.title)+'</div><div class="meta">📍 '+esc(e.venue)+'</div>'+(tip?'<div class="tip">'+esc(tip)+'</div>':'')+
+  '<div class="acts"><a class="btn p" href="'+esc(e.link)+'" target="_blank" rel="noopener">🎟 Tickets & info</a><a class="btn" href="'+esc(mapsDir(null,null,e.venue))+'" target="_blank" rel="noopener">🧭 Directions</a></div>'+
+  '<div class="meta" style="font-size:.7rem;margin-top:6px">Source: '+esc(src)+'</div></div>';}
+function renderEvents(){
+  var k=klNow(),t=k.iso,evs=cleanEvents(DATA),list,a,b;
+  var dow=k.dow,toSat=(6-dow+7)%7,fri=addDays(t,Math.max(0,toSat-1)),sun=addDays(t,toSat+1);if(dow===0){fri=t;sun=t;}
+  var W=[['tonight','Tonight',t,t],['tomorrow','Tomorrow',addDays(t,1),addDays(t,1)],['weekend','This weekend',fri,sun],['next','Next 14 days',t,addDays(t,14)],['month','All upcoming',t,addDays(t,60)]];
+  $('when').innerHTML=W.map(function(w){var n=evs.filter(function(e){return inRange(e,w[2],w[3]);}).length;return '<button class="chip'+(WHEN===w[0]?' on':'')+'" data-w="'+w[0]+'">'+w[1]+' <span style="opacity:.7">'+n+'</span></button>';}).join('');
+  $('kind').innerHTML=KINDS.map(function(x){return '<button class="chip'+(KIND===x[0]?' on':'')+'" data-k="'+x[0]+'">'+x[1]+'</button>';}).join('');
+  var w=W.filter(function(x){return x[0]===WHEN;})[0];
+  list=evs.filter(function(e){return inRange(e,w[2],w[3])&&(KIND==='all'||evKind(e)===KIND);});
+  $('events').innerHTML=list.length?list.slice(0,30).map(function(e){return evCard(e,true);}).join(''):
+    '<div class="empty"><b>🦗</b>Wah, quiet '+(WHEN==='tonight'?'tonight':'for this pick')+'. Try <a href="#" data-w="next" style="color:var(--dorange);font-weight:700">next 14 days</a>.</div>';
+}
+document.addEventListener('click',function(ev){var el=ev.target.closest('[data-w],[data-k]');if(!el)return;ev.preventDefault();if(el.dataset.w)WHEN=el.dataset.w;if(el.dataset.k)KIND=el.dataset.k;renderEvents();});
+
+/* ── 3. PASAR MALAM (verified weekly schedule) ── */
+var PM=[
+ {n:'Bangsar Baru Sunday Market',d:0,a:'Jalan Telawi area, Bangsar Baru',h:'about 4:30pm – 9pm',la:3.1322,lo:101.6712,src:'https://www.loopme.my/post/best-pasar-malam-kl/'},
+ {n:'Pasar Malam TTDI',d:0,a:'Jalan Tun Mohd Fuad, TTDI',h:'Sunday evening',la:3.1407,lo:101.6294,src:'https://www.loopme.my/post/best-pasar-malam-kl/'},
+ {n:'Pasar Malam SS2',d:1,a:'Jalan SS 2/60–2/64, Petaling Jaya',h:'about 5pm – 10pm',la:3.1185,lo:101.6211,src:'https://klfoodie.com/night-market-kl-klang-valley/'},
+ {n:'Pasar Malam Sri Petaling',d:2,a:'Jalan Radin Anum, Sri Petaling',h:'about 5pm – 10:30pm',la:3.0691,lo:101.6920,src:'https://klfoodie.com/night-market-kl-klang-valley/'},
+ {n:'Pasar Malam Taman Connaught',d:3,a:'Jalan Cerdas, Cheras',h:'about 5pm – late · KL’s biggest',la:3.0769,lo:101.7420,src:'https://www.timeout.com/kuala-lumpur/shops/taman-connaught-night-market'},
+ {n:'Pasar Malam OUG',d:4,a:'Jalan Hujan Emas, Taman OUG',h:'about 5pm – midnight',la:3.0710,lo:101.6771,src:'https://erisgoesto.com/2022/06/12/pasar-malam-oug-oug-night-market-kuala-lumpur/'},
+ {n:'Pasar Malam Lorong TAR',d:6,a:'Lorong Tuanku Abdul Rahman, City Centre',h:'about 5pm – late',la:3.1605,lo:101.6973,src:'https://www.thestar.com.my/metro/metro-news/2024/01/13/saturday-night-fever-in-the-city'},
+ {n:'Pasar Malam Setia Alam',d:6,a:'Jalan Setia Prima A U13/A, Shah Alam',h:'about 5pm – 10pm',la:null,lo:null,src:'https://klfoodie.com/night-market-kl-klang-valley/'}
+];
+var DAYN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+function pmItems(){var k=klNow(),late=k.h>=23;return PM.map(function(p){var inD=(p.d-k.dow+7)%7;if(inD===0&&late)inD=7;
+  return{p:p,inD:inD,dist:(POS.real&&p.la!=null)?hav(POS.lat,POS.lng,p.la,p.lo):null};}).sort(function(a,b){return a.inD-b.inD||((a.dist||99)-(b.dist||99));});}
+function pmCard(x){var p=x.p,lbl=x.inD===0?'<span class="tag t-now">Tonight</span>':x.inD===1?'<span class="tag t-soon">Tomorrow</span>':'<span class="tag t-soon">'+DAYN[p.d]+'</span>';
+  return '<div class="card pm">'+lbl+(x.dist!=null?'<span class="tag t-q">'+fmtDist(x.dist)+' away</span>':'')+'<div class="name">🏮 '+esc(p.n)+'</div><div class="meta">📍 '+esc(p.a)+'</div><div class="meta">🕔 '+esc(p.h)+'</div>'+
+  (x.inD===0?'<div class="tip">Go before 7pm for parking and shorter queues. Bring cash and a bag.</div>':'')+
+  '<div class="acts"><a class="btn p" href="'+esc(p.la!=null?mapsDir(p.la,p.lo):mapsSearch(p.n+' '+p.a))+'" target="_blank" rel="noopener">🧭 Directions</a><a class="btn" href="'+esc(p.src)+'" target="_blank" rel="noopener">ℹ️ Source</a></div></div>';}
+
+/* ── 4. MAKAN NEAR YOU (OpenStreetMap, no chains, right meal for the hour) ── */
+var CHAINRE=/starbucks|coolblog|cool blog|tealive|chatime|zus coffee|kenangan|gigi coffee|mcdonald|\bkfc\b|marrybrown|secret recipe|subway|domino|pizza hut|texas chicken|a&w|oldtown|old town white|nando|sushi king|familymart|family mart|7-eleven|mixue|baskin|llaollao|tim hortons|coffee bean|dunkin|krispy|burger king|4fingers|wingstop|sukiya|yoshinoya|ayam penyet ria|bask bear|inside scoop|boost juice|richiamo|san francisco coffee|pak li kopitiam|kopitiam express|the chicken rice shop|kyochon|bonchon|shihlin|daily fresh|sushi mentai|genki sushi|pappa rich|papparich|hometown hainan|tutti frutti|haidilao|beutea|chagee|luckin|kopi saigon|fuh coffee/i;
+var BF=/kopitiam|kopi ?tiam|dim ?sum|nasi lemak|roti canai|roti|bakery|bakehouse|boulangerie|breakfast|brunch|bak kut teh|congee|porridge|cheong fun|toast|kaya|half.boiled|pau\b|yong tau foo/i;
+var HAWK=/medan selera|food ?court|hawker|gerai|warung|stall|pasar|kedai makan|mamak|nasi kandar|char kuey|kuey teow|laksa|satay|food centre|street food|ikan bakar|lok lok/i;
+var LUN=/nasi campur|economy rice|mixed rice|chap fan|chicken rice|banana leaf|nasi padang|nasi kerabu|claypot|wantan|wan tan|noodle|mee|pan mee|biryani|thali|set meal/i;
+var SUP=/mamak|nasi kandar|24|lok lok|bak kut teh|tomyam|tom yam|ikan bakar|satay|steamboat|dim sum|roti/i;
+var DIDX={Mo:0,Tu:1,We:2,Th:3,Fr:4,Sa:5,Su:6};
+function expandDays(spec){var out=[],parts=spec.split(','),i,m,a,b,d,g;for(i=0;i<parts.length;i++){m=parts[i].trim().match(/^(Mo|Tu|We|Th|Fr|Sa|Su)(?:-(Mo|Tu|We|Th|Fr|Sa|Su))?$/);if(!m)return null;a=DIDX[m[1]];b=m[2]?DIDX[m[2]]:a;d=a;for(g=0;g<8;g++){out[d]=true;if(d===b)break;d=(d+1)%7;} }return out;}
+function parseRanges(spec){var parts=spec.split(','),res=[],i,m,o,c;for(i=0;i<parts.length;i++){m=parts[i].trim().match(/^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/);if(!m)return null;o=+m[1]*60+(+m[2]);c=+m[3]*60+(+m[4]);if(c<=o)c+=1440;res.push([o,c]);}return res;}
+function parseOH(str){if(!str)return null;var s=String(str).trim();if(/^24\/7$/i.test(s))return{always:true};var days=[[],[],[],[],[],[],[]],seen=false,rules=s.split(';'),i,r,m,ds,rest,rg,d;
+  for(i=0;i<rules.length;i++){r=rules[i].trim();if(!r||/^(PH|SH)\b/.test(r))continue;r=r.replace(/,\s*(PH|SH)\b/g,'');if(/\b(PH|SH|sunrise|sunset|dawn|dusk|week|month|easter)\b|\[|\+/i.test(r))return null;
+  if(/^\d/.test(r)){ds=[1,1,1,1,1,1,1];rest=r;}else{m=r.match(/^([A-Za-z][A-Za-z,\- ]*?)\s+(\d.*|off|closed)$/i);if(!m)return null;ds=expandDays(m[1].replace(/\s+/g,''));if(!ds)return null;rest=m[2];}
+  if(/^(off|closed)$/i.test(rest))rg=[];else{rg=parseRanges(rest);if(!rg)return null;}for(d=0;d<7;d++)if(ds[d]){days[d]=rg;seen=true;} }return seen?{days:days}:null;}
+function openAt(oh,day,cur){if(!oh)return{open:null};if(oh.always)return{open:true,always:true};var tr=oh.days[day],yr=oh.days[(day+6)%7],i;
+  for(i=0;i<tr.length;i++)if(cur>=tr[i][0]&&cur<tr[i][1])return{open:true,until:tr[i][1]%1440};for(i=0;i<yr.length;i++)if(yr[i][1]>1440&&cur<yr[i][1]-1440)return{open:true,until:yr[i][1]-1440};return{open:false};}
+function meal(h){if(h>=6&&h<11)return['breakfast','Breakfast near you','☕'];if(h>=11&&h<15)return['lunch','Lunch near you','🍜'];if(h>=15&&h<18)return['cafe','Kopi & cafés near you','🧋'];if(h>=18&&h<22)return['dinner','Dinner near you','🍽'];return['supper','Supper spots near you','🌙'];}
+function fits(t,m){var x=((t.name||'')+' '+(t.cuisine||'')).toLowerCase(),a=t.amenity;
+  if(m==='breakfast')return BF.test(x)||(a==='cafe'&&/brunch|breakfast/.test(x));
+  if(m==='lunch')return LUN.test(x)||HAWK.test(x)||a==='food_court';
+  if(m==='cafe')return a==='cafe'||a==='ice_cream'||/dessert|cendol|ais kacang|tong sui/.test(x);
+  if(m==='supper')return SUP.test(x)||HAWK.test(x);
+  return a==='restaurant'||a==='food_court'||HAWK.test(x);}
+function loadPlaces(){return fetch(BASE+'places.tsv').then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(txt){
+  var L=txt.split('\n'),H=L[0].split('\t'),out=[],i,j,c,t;
+  for(i=1;i<L.length;i++){c=L[i].split('\t');if(c.length<3)continue;t={};for(j=2;j<H.length;j++)if(c[j])t[H[j]]=c[j].replace(/\r$/,'');
+    if(!t.name)continue;var kn=t.name.toLowerCase().trim();CHAINS[kn]=(CHAINS[kn]||0)+1;
+    if(!/^(restaurant|cafe|food_court|ice_cream)$/.test(t.amenity||''))continue;out.push({lat:+c[0],lng:+c[1],t:t});}
+  PLACES=out;});}
+function renderMakan(){
+  var k=klNow(),m=meal(k.h),day=(k.dow+6)%7,res=[];
+  $('makanHead').textContent=m[1];
+  PLACES.forEach(function(p){var t=p.t,nm=t.name.toLowerCase().trim();if(CHAINRE.test(t.name)||(CHAINS[nm]||0)>=3)return;if(!fits(t,m[0]))return;
+    var st=openAt(parseOH(t.opening_hours),day,k.min);if(st.open===false)return;var d=hav(POS.lat,POS.lng,p.lat,p.lng);if(d>3)return;res.push({p:p,st:st,d:d});});
+  res.sort(function(a,b){return (a.st.open?0:1)-(b.st.open?0:1)||a.d-b.d;});
+  var top=res.slice(0,6);
+  if(!top.length){$('makan').innerHTML='<div class="empty"><b>🍜</b>Takde match within 3 km for this hour lah. Try the pasar malam above.</div>';return;}
+  $('makan').innerHTML=top.map(function(x){var t=x.p.t,cu=String(t.cuisine||'').split(';').slice(0,2).map(function(s){return s.replace(/_/g,' ');}).join(' · ');
+    var area=[t['addr:street'],t['addr:suburb']||t['addr:city']].filter(Boolean).join(', ');
+    var tag=x.st.open?'<span class="tag t-ok">'+(x.st.always?'Open 24h':x.st.until!=null?'Open till '+fmtTime(x.st.until):'Open now')+'</span>':'<span class="tag t-q">Hours not listed · call first</span>';
+    var ph=(t.phone||t['contact:phone']||t['contact:mobile']||'').split(/[;,]/)[0].replace(/[^\d+]/g,'');
+    return '<div class="card food">'+tag+'<span class="tag t-q">'+fmtDist(x.d)+'</span><div class="name">'+esc(t.name)+'</div><div class="meta">'+esc([t.amenity==='food_court'?'Hawker / food court':t.amenity==='cafe'?'Café':'Restaurant',cu,t['diet:halal']==='yes'?'Halal':''].filter(Boolean).join(' · '))+'</div>'+(area?'<div class="meta">📍 '+esc(area)+'</div>':'')+
+    '<div class="acts"><a class="btn p" href="'+esc(mapsDir(x.p.lat,x.p.lng))+'" target="_blank" rel="noopener">🧭 Directions</a>'+(ph.length>=9?'<a class="btn" href="tel:'+esc(ph)+'">📞 Call</a>':'')+'<a class="btn" href="'+esc(mapsSearch(t.name+' '+(area||'Kuala Lumpur')))+'" target="_blank" rel="noopener">⭐ Reviews</a></div></div>';}).join('')+
+    '<div class="meta" style="font-size:.7rem;margin:-2px 2px 0">Chains hidden. Hours from OpenStreetMap volunteers, check before going.</div>';
+}
+
+/* ── 5. TONIGHT block ── */
+function renderTonight(){
+  var k=klNow(),items=pmItems(),pmT=items.filter(function(x){return x.inD===0;}),evs=cleanEvents(DATA).filter(function(e){return onDay(e,k.iso);});
+  var tomorrow=k.h<5?'':'',html='';
+  $('tonightHead').textContent=k.h<12?'Today & tonight in KL':'Tonight in KL';
+  html+=pmT.length?pmT.map(pmCard).join(''):pmCard(items[0]);
+  html+=evs.slice(0,3).map(function(e){return evCard(e,false);}).join('');
+  if(evs.length>3)html+='<button class="btn more" data-w="tonight">+ '+(evs.length-3)+' more tonight</button>';
+  if(!evs.length)html+='<div class="empty"><b>🦗</b>No ticketed shows listed for tonight. See what’s on this weekend below.</div>';
+  $('tonight').innerHTML=html;
+  $('week').innerHTML=items.filter(function(x){return x.inD!==0;}).map(pmCard).join('');
+}
+
+/* ── 6. Footer, freshness, share ── */
+function renderFoot(){
+  var at=DATA&&(DATA.events_checked_at||DATA.generated_at),age=null,m;
+  if(at&&(m=String(at).match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}):(\d{2})/))){age=(Date.now()-new Date(m[1]+'T'+m[2]+':'+m[3]+':00+08:00').getTime())/36e5;}
+  $('warn').innerHTML=age!=null&&age>80?'<div class="warn">⚠️ Event list last checked '+Math.round(age/24)+' days ago. Confirm on the ticket link.</div>':'';
+  $('foot').innerHTML='Events checked '+(at?esc(dayLabel(String(at).slice(0,10))+', '+String(at).slice(11,16)):'—')+' from <a href="https://klconcert.com/concerts" target="_blank" rel="noopener">KL Concert</a> and <a href="https://allevents.in/kuala-lumpur/all" target="_blank" rel="noopener">AllEvents</a>; every event links to its source. Pasar malam schedule from Time Out, KL Foodie, The Star and others. Places © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors. Weather & air quality: <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>, live.<br>This is a test page. <a href="../">Back to JomOut KL</a>';
+}
+$('wa').onclick=function(){var k=klNow(),pm=pmItems().filter(function(x){return x.inD===0;}).map(function(x){return '🏮 '+x.p.n;}),ev=cleanEvents(DATA).filter(function(e){return onDay(e,k.iso);}).slice(0,3).map(function(e){return '🎤 '+e.title+' @ '+e.venue;});
+  var txt='KL tonight '+($('hl').textContent?'('+$('hl').textContent+')':'')+'\n'+pm.concat(ev).join('\n')+'\nMore: https://www.jomout.com';
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');};
+
+/* ── boot ── */
+function setLoc(txt){$('loc').innerHTML=txt;}
+function renderAllPlaces(){if(PLACES)renderMakan();renderTonight();}
+function useDefault(msg){POS={lat:KLCC.lat,lng:KLCC.lng,real:false};setLoc('📍 Near KLCC · <button id="locBtn">Use my location</button>');var b=$('locBtn');if(b)b.onclick=askLoc;}
+function askLoc(){if(!navigator.geolocation){useDefault();return;}setLoc('📍 Finding you…');
+  navigator.geolocation.getCurrentPosition(function(p){POS={lat:p.coords.latitude,lng:p.coords.longitude,real:true};
+    var far=hav(POS.lat,POS.lng,KLCC.lat,KLCC.lng)>60;if(far){useDefault();setLoc('📍 You’re outside KL · showing KLCC');}else setLoc('📍 Near you');
+    loadWx();renderAllPlaces();},function(){useDefault();loadWx();renderAllPlaces();},{timeout:8000,maximumAge:300000});}
+useDefault();
+fetch(BASE+'data.json?t='+Date.now()).then(function(r){return r.text();}).then(function(raw){raw=raw.replace(/```json|```/g,'').trim();DATA=JSON.parse(raw.slice(raw.indexOf('{')));})
+  .catch(function(){DATA=null;}).then(function(){renderEvents();renderTonight();renderFoot();if(!DATA)$('events').innerHTML='<div class="empty"><b>👀</b>Aiyo, takde event data right now lah. Data pakcik on break ☕</div>';});
+loadPlaces().then(function(){renderMakan();}).catch(function(){$('makan').innerHTML='<div class="empty"><b>☕</b>Data pakcik on break. Places will load in a bit.</div>';});
+loadWx();askLoc();
+setInterval(function(){if(WX)loadWx();},15*60*1000);
+})();
+</script>
+</body>
+</html>
