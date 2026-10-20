@@ -604,6 +604,7 @@
   function sanitize(d){
     if(!d||!d.modules)return d;var m=d.modules,today=klToday2(),stale=guideAgeH(d)>20;
     m.events=(m.events||[]).filter(function(ev){var end=(ev.end_iso||ev.date_iso||'');return /^https?:\/\//.test(ev.link||'')&&(!end||end>=today);});
+    m.events.forEach(function(ev){var a=ev.date_iso,b=ev.end_iso||a;if(!/^\d{4}-\d{2}-\d{2}$/.test(a||''))return;var f=function(x,o){return new Date(x+'T12:00:00+08:00').toLocaleDateString('en-GB',o);};var tz='Asia/Kuala_Lumpur';ev.date=(a===b)?f(a,{weekday:'short',day:'numeric',month:'short',timeZone:tz}):(f(a,{weekday:'short',day:'numeric',month:'short',timeZone:tz})+' – '+f(b,{weekday:'short',day:'numeric',month:'short',timeZone:tz}));});
     m.news=stale?[]:(m.news||[]).filter(function(n){return /^https?:\/\//.test(n.url||'');});
     (m.transit||[]).forEach(function(t){if(stale||!/^https?:\/\//.test(t.url||'')){t.status='No disruption reported';t.verdict='';} });
     if(d.quality_check)d.quality_check.warnings=[];
