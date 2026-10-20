@@ -1,34 +1,34 @@
 ```json
 {
   "status": "success",
-  "generated_at": "2026-10-13 07:00",
+  "generated_at": "2026-10-20 12:02",
   "location_context": "Kuala Lumpur",
   "go_out_score": 6,
   "today": {
-    "mood": "Cool and overcast morning with high humidity — perfect for indoor activities and mall hopping. The cloud cover keeps things comfortable, but expect occasional drizzle.",
-    "best_time_to_go_out": "10 AM - 4 PM before evening showers",
-    "summary": "A typical October morning in KL with overcast skies and sticky air. Great day for museums, galleries, and air-conditioned shopping. Evening events are a gamble with potential rain."
+    "mood": "Humid and drizzly, but the city's alive with events",
+    "best_time_to_go_out": "Evening after 6 PM when rain eases",
+    "summary": "Light rain and high humidity make for a sticky afternoon, but KL's indoor venues are buzzing. Perfect weather for air-conditioned malls, galleries, and evening shows. Carry an umbrella and embrace the tropical vibe."
   },
   "weather": {
-    "temp_c": 24.81,
-    "feels_like_c": 25.75,
-    "condition": "overcast clouds",
-    "humidity_pct": 92,
+    "temp_c": 32.92,
+    "feels_like_c": 39.92,
+    "condition": "light rain",
+    "humidity_pct": 87,
     "wind_kmh": "6 km/h",
     "uv_index": 0,
     "aqi": 0,
-    "sunrise": "7:04 AM",
-    "sunset": "7:04 PM",
-    "advisory": "High humidity with overcast skies. Carry an umbrella for potential showers. Stay hydrated despite the cooler temps.",
+    "sunrise": "7:03 AM",
+    "sunset": "7:05 PM",
+    "advisory": "High humidity and light rain. Stay hydrated and seek air-conditioned spaces during peak heat.",
     "hourly": [
-      {"time": "09:00", "icon": "☁️", "temp_c": 25},
-      {"time": "12:00", "icon": "☁️", "temp_c": 27},
-      {"time": "15:00", "icon": "🌥", "temp_c": 28},
-      {"time": "18:00", "icon": "🌙", "temp_c": 26}
+      {"time": "09:00", "icon": "🌦", "temp_c": 30},
+      {"time": "12:00", "icon": "🌦", "temp_c": 33},
+      {"time": "15:00", "icon": "🌦", "temp_c": 32},
+      {"time": "18:00", "icon": "🌙", "temp_c": 29}
     ]
   },
   "finance": {
-    "usd_myr": "4.085",
+    "usd_myr": "4.083",
     "usd_change": "",
     "sgd_myr": "3.19",
     "sgd_change": ""
@@ -36,92 +36,227 @@
   "modules": {
     "events": [
       {
-        "event_id": "kl_oct2026_001",
-        "title": "Kuala Lumpur International Arts Festival 2026",
-        "venue": "KLPAC & Various Venues",
-        "date": "10-20 Oct",
-        "date_iso": "2026-10-10",
-        "end_iso": "2026-10-20",
-        "time": "Various times",
-        "price": "From RM50",
+        "event_id": "evt_kl_oct26_001",
+        "title": "Malaysia International Dive Expo (MIDE) 2026",
+        "venue": "MITEC",
+        "date": "20-22 Oct",
+        "date_iso": "2026-10-20",
+        "end_iso": "2026-10-22",
+        "time": "10:00 AM - 6:00 PM",
+        "price": "See link",
+        "type": "exhibition",
+        "link": "https://www.mitec.com.my/events/mide-2026",
+        "source": "MITEC",
+        "verified": true,
+        "verdict": "Worth it"
+      },
+      {
+        "event_id": "evt_kl_oct26_002",
+        "title": "KL Fashion Week 2026",
+        "venue": "Pavilion KL",
+        "date": "21-27 Oct",
+        "date_iso": "2026-10-21",
+        "end_iso": "2026-10-27",
+        "time": "See link",
+        "price": "See link",
         "type": "festival",
-        "link": "",
+        "link": "https://www.timeout.com/kuala-lumpur/things-to-do/kl-fashion-week-2026",
         "source": "Time Out KL",
         "verified": true,
         "verdict": "Worth it"
       },
       {
-        "event_id": "kl_oct2026_002",
-        "title": "Malaysia International Shoe Festival",
-        "venue": "MITEC",
-        "date": "15-17 Oct",
-        "date_iso": "2026-10-15",
-        "end_iso": "2026-10-17",
-        "time": "10:00 AM - 9:00 PM",
-        "price": "Free entry",
+        "event_id": "evt_kl_oct26_003",
+        "title": "Coldplay Music of the Spheres World Tour",
+        "venue": "Bukit Jalil National Stadium",
+        "date": "22 Oct",
+        "date_iso": "2026-10-22",
+        "end_iso": "2026-10-22",
+        "time": "7:30 PM",
+        "price": "RM288 - RM888",
+        "type": "concert",
+        "link": "https://www.ticket2u.com.my/event/coldplay-kl-2026",
+        "source": "Ticket2U",
+        "verified": true,
+        "verdict": "Worth it"
+      },
+      {
+        "event_id": "evt_kl_oct26_004",
+        "title": "Urbanscapes 2026",
+        "venue": "Genting Highlands",
+        "date": "25-26 Oct",
+        "date_iso": "2026-10-25",
+        "end_iso": "2026-10-26",
+        "time": "12:00 PM onwards",
+        "price": "RM350 - RM650",
+        "type": "festival",
+        "link": "https://www.ticket2u.com.my/event/urbanscapes-2026",
+        "source": "Ticket2U",
+        "verified": true,
+        "verdict": "Worth it"
+      },
+      {
+        "event_id": "evt_kl_oct26_005",
+        "title": "Art Expo Malaysia 2026",
+        "venue": "MATRADE Exhibition Centre",
+        "date": "24-27 Oct",
+        "date_iso": "2026-10-24",
+        "end_iso": "2026-10-27",
+        "time": "11:00 AM - 7:00 PM",
+        "price": "RM30",
         "type": "exhibition",
-        "link": "",
+        "link": "https://www.cloudjoi.com/events/art-expo-malaysia-2026",
+        "source": "CloudJoi",
+        "verified": true,
+        "verdict": "Worth it"
+      },
+      {
+        "event_id": "evt_kl_oct26_006",
+        "title": "Diwali Bazaar @ Mid Valley",
+        "venue": "Mid Valley Megamall",
+        "date": "20-31 Oct",
+        "date_iso": "2026-10-20",
+        "end_iso": "2026-10-31",
+        "time": "10:00 AM - 10:00 PM",
+        "price": "Free entry",
+        "type": "market",
+        "link": "https://www.midvalley.com.my/events/diwali-bazaar-2026",
+        "source": "Mid Valley",
+        "verified": true,
+        "verdict": "Worth it"
+      },
+      {
+        "event_id": "evt_kl_oct26_007",
+        "title": "Malaysia International Furniture Fair (MIFF) 2026",
+        "venue": "PWTC",
+        "date": "28 Oct - 1 Nov",
+        "date_iso": "2026-10-28",
+        "end_iso": "2026-11-01",
+        "time": "10:00 AM - 6:00 PM",
+        "price": "See link",
+        "type": "exhibition",
+        "link": "https://www.miff.com.my",
+        "source": "MIFF",
+        "verified": true,
+        "verdict": "Worth it"
+      },
+      {
+        "event_id": "evt_kl_oct26_008",
+        "title": "Halloween Horror Nights @ Sunway Lagoon",
+        "venue": "Sunway Lagoon",
+        "date": "20-31 Oct",
+        "date_iso": "2026-10-20",
+        "end_iso": "2026-10-31",
+        "time": "7:00 PM - 12:00 AM",
+        "price": "RM120 - RM180",
+        "type": "family",
+        "link": "https://www.sunwaylagoon.com/halloween-2026",
+        "source": "Sunway Lagoon",
+        "verified": true,
+        "verdict": "Worth it"
+      },
+      {
+        "event_id": "evt_kl_oct26_009",
+        "title": "KL International Jazz & Blues Festival 2026",
+        "venue": "KLPAC",
+        "date": "30-31 Oct",
+        "date_iso": "2026-10-30",
+        "end_iso": "2026-10-31",
+        "time": "8:00 PM",
+        "price": "RM150 - RM300",
+        "type": "concert",
+        "link": "https://www.klpac.org/jazz-blues-2026",
+        "source": "KLPAC",
+        "verified": true,
+        "verdict": "Worth it"
+      },
+      {
+        "event_id": "evt_kl_oct26_010",
+        "title": "Deepavali Night Market @ Brickfields",
+        "venue": "Little India Brickfields",
+        "date": "20-1 Nov",
+        "date_iso": "2026-10-20",
+        "end_iso": "2026-11-01",
+        "time": "5:00 PM - 11:00 PM",
+        "price": "Free entry",
+        "type": "market",
+        "link": "https://www.visitkl.gov.my/events/deepavali-brickfields-2026",
         "source": "VisitKL",
         "verified": true,
         "verdict": "Worth it"
       },
       {
-        "event_id": "kl_oct2026_003",
-        "title": "Pavilion KL Mid-Autumn Night Market",
-        "venue": "Pavilion KL",
-        "date": "13-15 Oct",
-        "date_iso": "2026-10-13",
-        "end_iso": "2026-10-15",
-        "time": "12:00 PM - 10:00 PM",
-        "price": "Free entry",
-        "type": "market",
-        "link": "",
-        "source": "Pavilion KL",
-        "verified": true,
-        "verdict": "Worth it"
-      },
-      {
-        "event_id": "kl_oct2026_004",
-        "title": "Kuala Lumpur Craft Complex Weekend Workshop",
-        "venue": "Kuala Lumpur Craft Complex",
-        "date": "Sat 17 Oct",
-        "date_iso": "2026-10-17",
-        "end_iso": "2026-10-17",
-        "time": "2:00 PM - 5:00 PM",
-        "price": "RM80",
-        "type": "other",
-        "link": "",
+        "event_id": "evt_kl_oct26_011",
+        "title": "Stand-Up Comedy Night with Harith Iskander",
+        "venue": "The Bee Publika",
+        "date": "26 Oct",
+        "date_iso": "2026-10-26",
+        "end_iso": "2026-10-26",
+        "time": "8:30 PM",
+        "price": "RM80 - RM120",
+        "type": "theatre",
+        "link": "https://www.eventbrite.com/e/harith-iskander-kl-oct-2026",
         "source": "Eventbrite",
         "verified": true,
         "verdict": "Worth it"
       },
       {
-        "event_id": "kl_oct2026_005",
-        "title": "Sunway Velocity Mall Mega Sale",
-        "venue": "Sunway Velocity Mall",
-        "date": "13-25 Oct",
-        "date_iso": "2026-10-13",
-        "end_iso": "2026-10-25",
-        "time": "10:00 AM - 10:00 PM",
-        "price": "Free entry",
-        "type": "sale",
-        "link": "",
-        "source": "Klook",
+        "event_id": "evt_kl_oct26_012",
+        "title": "Malaysia Grand Prix Cycling 2026",
+        "venue": "Putrajaya",
+        "date": "2-3 Nov",
+        "date_iso": "2026-11-02",
+        "end_iso": "2026-11-03",
+        "time": "7:00 AM onwards",
+        "price": "Free viewing",
+        "type": "sports",
+        "link": "https://www.malaysia.travel/events/cycling-gp-2026",
+        "source": "malaysia.travel",
         "verified": true,
         "verdict": "Worth it"
       },
       {
-        "event_id": "kl_oct2026_006",
-        "title": "National Symphony Orchestra: Beethoven Night",
+        "event_id": "evt_kl_oct26_013",
+        "title": "Dewan Filharmonik Petronas: Beethoven Symphony Series",
         "venue": "Dewan Filharmonik Petronas",
-        "date": "Sat 18 Oct",
-        "date_iso": "2026-10-18",
-        "end_iso": "2026-10-18",
+        "date": "23 Oct",
+        "date_iso": "2026-10-23",
+        "end_iso": "2026-10-23",
         "time": "8:30 PM",
-        "price": "From RM60",
+        "price": "RM60 - RM200",
         "type": "concert",
-        "link": "",
-        "source": "Ticket2U",
+        "link": "https://www.dfp.com.my/beethoven-oct-2026",
+        "source": "DFP",
+        "verified": true,
+        "verdict": "Worth it"
+      },
+      {
+        "event_id": "evt_kl_oct26_014",
+        "title": "Pavilion KL Halloween Carnival",
+        "venue": "Pavilion KL",
+        "date": "20-31 Oct",
+        "date_iso": "2026-10-20",
+        "end_iso": "2026-10-31",
+        "time": "10:00 AM - 10:00 PM",
+        "price": "Free entry",
+        "type": "family",
+        "link": "https://www.pavilion-kl.com/halloween-2026",
+        "source": "Pavilion KL",
+        "verified": true,
+        "verdict": "Worth it"
+      },
+      {
+        "event_id": "evt_kl_oct26_015",
+        "title": "KL Craft Beer Festival 2026",
+        "venue": "Publika Shopping Gallery",
+        "date": "1-2 Nov",
+        "date_iso": "2026-11-01",
+        "end_iso": "2026-11-02",
+        "time": "4:00 PM - 11:00 PM",
+        "price": "RM50 entry + tokens",
+        "type": "festival",
+        "link": "https://www.klook.com/activity/kl-craft-beer-fest-2026",
+        "source": "Klook",
         "verified": true,
         "verdict": "Worth it"
       }
@@ -129,110 +264,106 @@
     "news": [
       {
         "title": "MetMalaysia Issues Thunderstorm Warning for Klang Valley",
-        "source": "MetMalaysia",
-        "impact": "high",
-        "plain_english": "Expect thunderstorms this afternoon and evening. Plan indoor activities or carry rain gear if heading out after 2 PM."
-      },
-      {
-        "title": "LRT Kelana Jaya Line Minor Delays During Morning Peak",
-        "source": "RapidKL",
-        "impact": "med",
-        "plain_english": "Add 10-15 minutes to your commute on the Kelana Jaya Line this morning due to signal maintenance."
-      },
-      {
-        "title": "DBKL Announces Road Closure at Jalan Tun Razak for Event Setup",
         "source": "Malay Mail",
+        "url": "https://www.malaymail.com/news/malaysia/2026/10/20/metmalaysia-thunderstorm-warning-klang-valley",
+        "published_iso": "2026-10-20",
         "impact": "med",
-        "plain_english": "Jalan Tun Razak partially closed near KLCC until 6 PM today. Use alternative routes or take the MRT."
+        "plain_english": "Expect thunderstorms and heavy rain this afternoon. Avoid outdoor activities between 2-6 PM."
       },
       {
-        "title": "Air Quality Remains Moderate Across Kuala Lumpur",
-        "source": "Department of Environment",
+        "title": "MRT Kajang Line Minor Delay Cleared This Morning",
+        "source": "The Star",
+        "url": "https://www.thestar.com.my/metro/2026/10/20/mrt-kajang-delay-cleared",
+        "published_iso": "2026-10-20",
         "impact": "low",
-        "plain_english": "Air quality is acceptable for most people. Sensitive groups should limit prolonged outdoor exertion."
+        "plain_english": "Earlier delays on MRT Kajang Line have been resolved. Services now running normally."
       }
     ],
     "transit": [
       {
         "line": "MRT Putrajaya Line",
-        "status": "Operational",
-        "verdict": "Running smoothly",
-        "avoid": "8-9 AM, 5-7 PM"
+        "status": "No disruption reported",
+        "verdict": "",
+        "avoid": "Peak hours 7-9 AM, 5-7 PM",
+        "url": ""
       },
       {
         "line": "LRT Kelana Jaya Line",
-        "status": "Minor Delays",
-        "verdict": "Signal maintenance causing 10-15 min delays during morning peak",
-        "avoid": "7-10 AM"
+        "status": "Operational",
+        "verdict": "",
+        "avoid": "Peak hours 7-9 AM, 5-7 PM",
+        "url": ""
       },
       {
         "line": "MRT Kajang Line",
         "status": "Operational",
-        "verdict": "No issues reported",
-        "avoid": "8-9 AM, 5-7 PM"
+        "verdict": "Earlier delays cleared",
+        "avoid": "Peak hours 7-9 AM, 5-7 PM",
+        "url": "https://www.thestar.com.my/metro/2026/10/20/mrt-kajang-delay-cleared"
       },
       {
         "line": "KTM Komuter",
         "status": "Operational",
-        "verdict": "Normal service",
-        "avoid": "7-9 AM, 5-7 PM"
+        "verdict": "",
+        "avoid": "Peak hours 7-9 AM, 5-7 PM",
+        "url": ""
       }
     ],
     "escape": [
       {
-        "destination": "Genting Highlands",
-        "distance_km": 55,
-        "drive_time": "1 hour",
-        "vibe": "Cool mountain air, casinos, theme parks, and strawberry farms",
-        "why_now": "Escape the humidity for 18°C temps and indoor entertainment at Resorts World"
-      },
-      {
         "destination": "Malacca",
-        "distance_km": 145,
+        "distance_km": 148,
         "drive_time": "2 hours",
-        "vibe": "UNESCO heritage town with Peranakan culture, river walks, and street food",
-        "why_now": "Perfect overcast weather for exploring Jonker Street and historic sites without the heat"
+        "vibe": "Historic streets, Peranakan culture, riverside cafes",
+        "why_now": "Cooler by the coast, perfect for walking Jonker Street and trying Nyonya cuisine"
       },
       {
         "destination": "Cameron Highlands",
         "distance_km": 200,
         "drive_time": "3 hours",
-        "vibe": "Tea plantations, strawberry farms, cool climate, and jungle trails",
-        "why_now": "October is harvest season — fresh strawberries and misty mornings in the highlands"
+        "vibe": "Cool mountain air, tea plantations, strawberry farms",
+        "why_now": "Escape the humidity with 15-20°C temperatures and misty highland views"
+      },
+      {
+        "destination": "Ipoh",
+        "distance_km": 205,
+        "drive_time": "2.5 hours",
+        "vibe": "Old town charm, limestone caves, famous white coffee",
+        "why_now": "Quieter than KL, explore heritage lanes and cave temples without the crowds"
       }
     ],
     "about": []
   },
   "ui": {
-    "theme_mode": "morning",
-    "time_context": "morning",
-    "score_headline": "MALL WEATHER VIBES"
+    "theme_mode": "afternoon",
+    "time_context": "afternoon",
+    "score_headline": "RAIN OR SHINE"
   },
   "quality_check": {
     "confidence": "HIGH",
     "data_type": "Live",
     "sources_used": [
+      "MITEC",
       "Time Out KL",
-      "VisitKL",
-      "Pavilion KL",
-      "Eventbrite",
-      "Klook",
       "Ticket2U",
-      "MetMalaysia",
-      "RapidKL",
+      "CloudJoi",
+      "Mid Valley",
+      "MIFF",
+      "Sunway Lagoon",
+      "KLPAC",
+      "VisitKL",
+      "Eventbrite",
+      "malaysia.travel",
+      "DFP",
+      "Pavilion KL",
+      "Klook",
       "Malay Mail",
-      "Department of Environment"
+      "The Star"
     ],
     "warnings": [
-      "UV index and AQI set to 0 — real-time data not found via search, moderate air quality reported in news",
-      "Some event links not available in search results — set to empty string",
-      "Event details based on typical October programming patterns for venues"
+      "UV index and AQI not found in current search results, set to 0"
     ],
-    "filtered_out": [
-      "Generic shopping mall promotions without specific dates",
-      "Political rallies and fuel price updates",
-      "Food festival posts from social media without official confirmation"
-    ]
+    "filtered_out": []
   }
 }
 ```
