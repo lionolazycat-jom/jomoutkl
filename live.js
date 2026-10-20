@@ -650,3 +650,22 @@
   setTimeout(loadWx,1500);setInterval(loadWx,20*60000);
   var st3=document.createElement('style');st3.textContent='.pm-head{font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:14px 2px 8px}.pm-card{border-left-color:#7c3aed!important}.pm-tonight{background:#7c3aed;color:#fff;border-radius:100px;padding:3px 10px;font-size:.66rem;font-weight:800;letter-spacing:.5px}.pm-soon{background:rgba(124,58,237,.12);color:#5b21b6;border-radius:100px;padding:3px 10px;font-size:.66rem;font-weight:700}.pm-day{background:var(--bg2,#f2ece6);color:var(--muted);border-radius:100px;padding:3px 10px;font-size:.66rem;font-weight:700}';document.head.appendChild(st3);
 })();
+
+/* ── KL catchy phrases: loading, failure and empty states ── */
+(function(){
+var LOAD=['Jap ah, tengah check cuaca… ☁️','Sabar jap, kopi tengah bancuh ☕','Asking the mamak uncle what’s on… 🫖','Scanning KL for tonight’s plans 🎟','Loading lah, don’t rush 🐢'];
+var FAIL=[['AIYO, TAKDE DATA','Data pakcik on break ☕ We’ll try again in a bit.'],['DATA PAKCIK ON BREAK','Aiyo, takde data right now lah 👀 Auto-retrying.'],['WAH, QUIET TODAY','Feed is napping 🦗 Refresh in a minute.']];
+var EMPTY=[['👀','Aiyo, takde data today lah'],['☕','Data pakcik on break'],['🦗','Wah, quiet today'],['🙏','Nothing here yet — check back later lah']];
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+var orig=window.noData;
+window.noData=function(msg){var p=pick(EMPTY);return '<div class="nodata"><div class="nodata-emoji">'+p[0]+'</div><div class="nodata-msg">'+p[1]+'</div><div style="font-size:.78rem;color:var(--muted);margin-top:6px">'+String(msg||'').replace(' or check social media','')+'</div></div>';};
+try{noData=window.noData;}catch(e){}
+function swapLoading(){document.querySelectorAll('.nodata-msg').forEach(function(el){var t=el.textContent;var m=t.match(/^Loading (.+?)\.\.\.$/);if(m)el.textContent='Jap ah… loading '+m[1]+' ⏳';});}
+swapLoading();
+var hl=document.getElementById('scoreHl'),sub=document.getElementById('scoreSub'),loaded=false,i=0;
+function tick(){if(loaded||!sub)return;var t=sub.textContent;if(/^Loading|^Fetching|Jap ah|Sabar|Asking|Scanning|Loading lah/.test(t)){sub.textContent=LOAD[i++%LOAD.length];} }
+tick();var iv=setInterval(function(){if(loaded){clearInterval(iv);return;}tick();},2200);
+if(hl){new MutationObserver(function(){var t=hl.textContent;if(t==='Data updating'){var f=pick(FAIL);hl.textContent=f[0];if(sub)sub.textContent=f[1];var sn=document.getElementById('scoreNum');if(sn)sn.innerHTML='🙈';}else if(t==='Refreshing…'){hl.textContent='JAP AH…';}else if(t&&t!=='GO OUT EARLY'){loaded=true;} }).observe(hl,{childList:true,characterData:true,subtree:true});}
+if(window.DATA&&typeof window.renderAll==='function'){try{window.renderAll(window.DATA);}catch(e){} }
+var _ra=window.renderAll;if(typeof _ra==='function'){window.renderAll=function(d){loaded=true;return _ra.apply(this,arguments);};}
+})();
