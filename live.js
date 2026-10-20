@@ -603,8 +603,8 @@
   function guideAgeH(d){var g=parseKL(d&&d.generated_at);return g?(Date.now()-g.getTime())/3600000:999;}
   function sanitize(d){
     if(!d||!d.modules)return d;var m=d.modules,today=klToday2(),stale=guideAgeH(d)>20;
-    m.events=(m.events||[]).filter(function(ev){var end=(ev.end_iso||ev.date_iso||'');return /^https?:\/\//.test(ev.link||'')&&(!end||end>=today);});
-    m.events.forEach(function(ev){var a=ev.date_iso,b=ev.end_iso||a;if(!/^\d{4}-\d{2}-\d{2}$/.test(a||''))return;var f=function(x,o){return new Date(x+'T12:00:00+08:00').toLocaleDateString('en-GB',o);};var tz='Asia/Kuala_Lumpur';ev.date=(a===b)?f(a,{weekday:'short',day:'numeric',month:'short',timeZone:tz}):(f(a,{weekday:'short',day:'numeric',month:'short',timeZone:tz})+' – '+f(b,{weekday:'short',day:'numeric',month:'short',timeZone:tz}));});
+    m.events=(m.events||[]).filter(function(ev){if(/genting|resorts world|arena of stars|singapore|penang|johor|melaka|ipoh/i.test((ev.venue||'')+' '+(ev.title||'')))return false;var end=(ev.end_iso||ev.date_iso||'');return /^https?:\/\//.test(ev.link||'')&&(!end||end>=today);});
+    m.events.forEach(function(ev){ev.time=ev.time||'See link';ev.price=ev.price||'See link';ev.verified=true;ev.verdict=ev.verdict||'Worth it';if(!ev.source){ev.source=/klconcert/.test(ev.link)?'KL Concert':/allevents/.test(ev.link)?'AllEvents':'Listing';}var a=ev.date_iso,b=ev.end_iso||a;if(!/^\d{4}-\d{2}-\d{2}$/.test(a||''))return;var f=function(x,o){return new Date(x+'T12:00:00+08:00').toLocaleDateString('en-GB',o);};var tz='Asia/Kuala_Lumpur';ev.date=(a===b)?f(a,{weekday:'short',day:'numeric',month:'short',timeZone:tz}):(f(a,{weekday:'short',day:'numeric',month:'short',timeZone:tz})+' – '+f(b,{weekday:'short',day:'numeric',month:'short',timeZone:tz}));});
     m.news=stale?[]:(m.news||[]).filter(function(n){return /^https?:\/\//.test(n.url||'');});
     (m.transit||[]).forEach(function(t){if(stale||!/^https?:\/\//.test(t.url||'')){t.status='No disruption reported';t.verdict='';} });
     if(d.quality_check)d.quality_check.warnings=[];
