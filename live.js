@@ -602,14 +602,17 @@
   function klToday2(){try{return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Kuala_Lumpur'});}catch(x){return '';} }
   function guideAgeH(d){var g=parseKL(d&&d.generated_at);return g?(Date.now()-g.getTime())/3600000:999;}
   function sanitize(d){
-    if(!d||!d.modules)return d;var m=d.modules,today=klToday2(),stale=guideAgeH(d)>20;
-    m.events=(m.events||[]).filter(function(ev){if(/genting|resorts world|arena of stars|singapore|penang|johor|melaka|ipoh/i.test((ev.venue||'')+' '+(ev.title||'')))return false;var end=(ev.end_iso||ev.date_iso||'');return /^https?:\/\//.test(ev.link||'')&&(!end||end>=today);});
+    if(!d||!d.modules)return d;var m=d.modules,today=klToday2(),stale=guideAgeH(d)>80;
+    m.events=(m.events||[]).filter(function(ev){if(!srcOk(ev))return false;if(/genting|resorts world|arena of stars|singapore|penang|johor|melaka|ipoh/i.test((ev.venue||'')+' '+(ev.title||'')))return false;var end=(ev.end_iso||ev.date_iso||'');return /^https?:\/\//.test(ev.link||'')&&(!end||end>=today);});
     m.events.forEach(function(ev){ev.time=ev.time||'See link';ev.price=ev.price||'See link';ev.verified=true;ev.verdict=ev.verdict||'Worth it';if(!ev.source){ev.source=/klconcert/.test(ev.link)?'KL Concert':/allevents/.test(ev.link)?'AllEvents':'Listing';}var a=ev.date_iso,b=ev.end_iso||a;if(!/^\d{4}-\d{2}-\d{2}$/.test(a||''))return;var f=function(x,o){return new Date(x+'T12:00:00+08:00').toLocaleDateString('en-GB',o);};var tz='Asia/Kuala_Lumpur';ev.date=(a===b)?f(a,{weekday:'short',day:'numeric',month:'short',timeZone:tz}):(f(a,{weekday:'short',day:'numeric',month:'short',timeZone:tz})+' – '+f(b,{weekday:'short',day:'numeric',month:'short',timeZone:tz}));});
     m.news=stale?[]:(m.news||[]).filter(function(n){return /^https?:\/\//.test(n.url||'');});
     (m.transit||[]).forEach(function(t){if(stale||!/^https?:\/\//.test(t.url||'')){t.status='No disruption reported';t.verdict='';} });
     if(d.quality_check)d.quality_check.warnings=[];
     d._stale=stale;return d;
   }
+  /* source check: drop any event whose link or venue does not match the fetched listing pages */
+  var SRC=null;function srcOk(ev){if(!SRC||SRC.length<5000)return true;var l=String(ev.link||'').replace(/^https?:\/\/(www\.)?klconcert\.com/,'');var i=SRC.indexOf(l+'>');if(i<0)i=SRC.indexOf(l);if(i<0)return false;var r=SRC.slice(i+l.length,i+l.length+600);var j=r.search(/<a href=(\/concert\/|https:\/\/allevents\.in\/kuala-lumpur\/)/);if(j>0)r=r.slice(0,j);return !/genting|resorts world|arena of stars|singapore|penang|johor|melaka|ipoh/i.test(r);}
+  fetch('sources.txt?t='+Date.now()).then(function(r){return r.ok?r.text():'';}).then(function(t){SRC=t;if(t.length>5000&&window.DATA&&window.renderAll){try{window.renderAll(window.DATA);}catch(x){} } }).catch(function(){});
   var oRA=window.renderAll;
   if(oRA){window.renderAll=function(d){try{sanitize(d);}catch(x){}oRA(d);try{afterRender(d);}catch(x){} };}
   function afterRender(d){
