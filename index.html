@@ -394,7 +394,7 @@ function fits(t,m){var x=((t.name||'')+' '+(t.cuisine||'')).toLowerCase(),am=t.a
 function loadPlaces(){return fetch(BASE+'places.tsv').then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(txt){
   var L=txt.split('\n'),H=L[0].split('\t'),out=[],i,j,c,t;
   for(i=1;i<L.length;i++){c=L[i].split('\t');if(c.length<3)continue;t={};for(j=2;j<H.length;j++)if(c[j])t[H[j]]=c[j].replace(/\r$/,'');
-    if(!t.name)continue;var kn=t.name.toLowerCase().trim();CHAINS[kn]=(CHAINS[kn]||0)+1;
+    if(!t.name||/toto|magnum|da ?ma ?cai|\b4d\b|lottery|casino|betting/i.test(t.name))continue;var kn=t.name.toLowerCase().trim();CHAINS[kn]=(CHAINS[kn]||0)+1;
     var w=wellType(t);if(w){WELL.push({lat:+c[0],lng:+c[1],t:t,w:w});continue;}
     if(!/^(restaurant|cafe|food_court|ice_cream)$/.test(t.amenity||''))continue;out.push({lat:+c[0],lng:+c[1],t:t});}
   PLACES=out;});}
