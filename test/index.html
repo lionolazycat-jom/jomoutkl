@@ -16,7 +16,7 @@ a{color:inherit}button{font-family:inherit}
 /* original header + pill tabs */
 .top{position:sticky;top:0;z-index:30;background:rgba(255,243,238,.96);backdrop-filter:blur(14px);padding-top:10px}
 .hdr{display:flex;align-items:center;justify-content:space-between;background:rgba(255,243,238,.95);border-radius:16px;padding:9px 14px 8px;box-shadow:0 2px 12px rgba(255,101,53,.08);border:1px solid rgba(255,101,53,.1)}
-.logo{font-size:1.5rem;font-weight:700;line-height:1}.logo b{color:var(--orange);font-weight:700}.logo small{font-size:.95rem;font-weight:500;margin-left:3px}
+.logo{font-size:1.5rem;font-weight:700;line-height:1;display:inline-flex;align-items:baseline}.logo .out{color:var(--orange)}.logo .kl{font-size:.92rem;font-weight:500;color:var(--t2);margin-left:3px}
 .hdr-date{font-size:.72rem;color:var(--muted);margin-top:3px}
 .test{font-size:.56rem;font-weight:700;background:#FFF0B8;color:#7A5600;border-radius:99px;padding:1px 6px;margin-left:5px;vertical-align:middle}
 .loc{border:1px solid rgba(255,101,53,.25);background:#fff;border-radius:99px;padding:5px 10px;font-size:.74rem;font-weight:600;color:var(--od);cursor:pointer;max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -129,7 +129,7 @@ a{color:inherit}button{font-family:inherit}
 </head>
 <body>
 <div class="top"><div class="wrap">
-  <div class="hdr"><div><span class="logo">Jom<b>Out</b><small>KL</small></span><span class="test">TEST</span><div class="hdr-date" id="hdrDate"></div></div><div style="display:flex;align-items:center;min-width:0"><button class="loc" id="loc">📍 Finding you…</button><button class="share" id="wa" aria-label="Share today on WhatsApp">📲</button></div></div>
+  <div class="hdr"><div><span class="logo">Jom<span class="out">Out</span><span class="kl"> KL</span></span><span class="test">TEST</span><div class="hdr-date" id="hdrDate"></div></div><div style="display:flex;align-items:center;min-width:0"><button class="loc" id="loc">📍 Finding you…</button><button class="share" id="wa" aria-label="Share today on WhatsApp">📲</button></div></div>
   <nav class="tabs" id="tabs">
     <button data-tab="about"><i>🧡</i>About</button>
     <button data-tab="tonight" class="on"><i>☀️</i>Today</button>
@@ -509,7 +509,7 @@ function renderFoot(){
 $('wa').onclick=function(){var k=klNow(),td=pmToday(),pm=PM.filter(function(p){return p.d===td;}).map(function(p){return '🏮 '+p.n+' ('+p.h+')';}),
   ev=cleanEvents().filter(function(e){return inRange(e,k.iso,k.iso);}).slice(0,3).map(function(e){return '🎤 '+e.title+' @ '+e.venue;});
   var txt='KL tonight (JomOut)\n'+(pm.concat(ev).join('\n')||'Quiet night, good for supper')+'\nhttps://www.jomout.com';
-  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');};
+  location.href='https://api.whatsapp.com/send?text='+encodeURIComponent(txt);};
 
 /* ── boot ── */
 function updLoc(){var l=$('loc');l.textContent=(l.dataset.wx?l.dataset.wx+' · ':'')+(POS.real?'📍 Near you':'📍 KLCC · use my location');}
