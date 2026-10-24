@@ -8,21 +8,24 @@
 <title>JomOut KL (test)</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#FFF3EE;--card:#FFFFFF;--warm:#FFF8F2;--orange:#F97316;--odark:#F97316;--peach:#FFD8C4;--ink:#1F1A17;--muted:#6B5F57;--line:#F1E4DC;--green:#1F7A45;--sh:0 2px 12px rgba(194,65,12,.08)}
+:root{--bg:#FFF3EE;--card:#fff;--warm:#FFF8F2;--orange:#FF6535;--odark:#FF6535;--od:#C94410;--amber:#F4A800;--peach:#FFD8C4;--ink:#1a1a1a;--t2:#3d3d3d;--muted:#888;--line:rgba(0,0,0,.07);--green:#2d9e5c;--sh:0 2px 12px rgba(0,0,0,.07)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;font-size:15px;line-height:1.45}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.5}
 a{color:inherit}button{font-family:inherit}
-.wrap{max-width:560px;margin:0 auto;padding:0 14px}
-.top{position:sticky;top:0;z-index:30;background:#fff;box-shadow:0 2px 10px rgba(194,65,12,.08)}
-.hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 0 6px}
-.logo{font-weight:800;font-size:1.25rem;letter-spacing:-.5px}.logo b{color:var(--orange)}.logo small{font-size:.8rem;color:var(--muted);font-weight:700;margin-left:2px}
-.test{font-size:.58rem;font-weight:800;background:#FFF0B8;color:#7A5600;border-radius:99px;padding:1px 7px;margin-left:5px;vertical-align:middle}
-.loc{border:1.5px solid var(--peach);background:#fff;border-radius:99px;padding:5px 10px;font-size:.76rem;font-weight:700;color:var(--odark);cursor:pointer;max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tabs{display:flex}
-.tabs button{flex:1;min-width:0;border:none;background:none;padding:6px 1px 8px;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.7rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;position:relative}
-.tabs button i{font-style:normal;font-size:1.2rem;line-height:1.1}
-.tabs button.on{color:var(--odark);font-weight:800;border-bottom-color:var(--orange)}
-.tabs .dot{position:absolute;top:2px;left:calc(50% + 8px);background:var(--odark);color:#fff;font-size:.56rem;font-weight:800;border-radius:99px;padding:0 5px;min-width:15px}
+.wrap{max-width:480px;margin:0 auto;padding:0 16px}
+/* original header + pill tabs */
+.top{position:sticky;top:0;z-index:30;background:rgba(255,243,238,.96);backdrop-filter:blur(14px);padding-top:10px}
+.hdr{display:flex;align-items:center;justify-content:space-between;background:rgba(255,243,238,.95);border-radius:16px;padding:9px 14px 8px;box-shadow:0 2px 12px rgba(255,101,53,.08);border:1px solid rgba(255,101,53,.1)}
+.logo{font-size:1.5rem;font-weight:700;line-height:1}.logo b{color:var(--orange);font-weight:700}.logo small{font-size:.95rem;font-weight:500;margin-left:3px}
+.hdr-date{font-size:.72rem;color:var(--muted);margin-top:3px}
+.test{font-size:.56rem;font-weight:700;background:#FFF0B8;color:#7A5600;border-radius:99px;padding:1px 6px;margin-left:5px;vertical-align:middle}
+.loc{border:1px solid rgba(255,101,53,.25);background:#fff;border-radius:99px;padding:5px 10px;font-size:.74rem;font-weight:600;color:var(--od);cursor:pointer;max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.share{border:none;background:var(--orange);color:#fff;border-radius:99px;width:32px;height:32px;margin-left:6px;font-size:.9rem;cursor:pointer;flex-shrink:0}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;padding:7px 0;border-bottom:1.5px solid rgba(255,101,53,.1)}.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;font-size:.78rem;font-weight:500;padding:6px 12px;border-radius:22px;cursor:pointer;border:1.5px solid transparent;color:var(--t2);background:transparent;white-space:nowrap;position:relative}
+.tabs button i{font-style:normal}
+.tabs button.on{background:var(--orange);color:#fff;border-color:var(--orange)}
+.tabs .dot{position:absolute;top:-4px;right:-2px;background:var(--od);color:#fff;font-size:.56rem;font-weight:800;border-radius:99px;padding:0 5px;min-width:15px}
 .panel{display:none;padding:12px 0 40px}.panel.on{display:block}
 .card{background:var(--card);border-radius:18px;box-shadow:var(--sh);padding:14px;margin-bottom:10px}
 .sh{display:flex;align-items:center;gap:8px;font-size:.7rem;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);margin:16px 2px 8px}
@@ -67,30 +70,39 @@ a{color:inherit}button{font-family:inherit}
 .tile .big{font-weight:800;font-family:DM Sans,sans-serif;font-size:1.6rem}
 .scale{height:6px;border-radius:3px;margin:6px 0;background:linear-gradient(90deg,#3BAA4A,#F2C230,#F08A24,#D8322E,#8E3FA8)}
 /* original go-out score + weather layout */
-.score-card{background:linear-gradient(135deg,#F97316,#FDBA74);border-radius:20px;padding:22px 20px;margin-bottom:12px;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(249,115,22,.25);min-height:200px}
-.score-weather-emoji{position:absolute;right:16px;top:12px;font-size:3.5rem;line-height:1}
+.score-card{background:linear-gradient(135deg,#FF8C00,#F4C842);border-radius:20px;padding:14px 20px 16px;margin-bottom:10px;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(255,140,0,.22)}
+.score-weather-emoji{position:absolute;right:16px;top:10px;font-size:2.6rem;line-height:1}
 .score-num{font-size:5rem;font-weight:800;color:#fff;line-height:1;letter-spacing:-2px;text-shadow:0 1px 6px rgba(154,52,18,.25)}
 .score-denom{font-size:1.4rem;font-weight:400;opacity:.75;letter-spacing:0}
 .score-lbl{font-size:.66rem;font-weight:800;letter-spacing:1.4px;color:rgba(255,255,255,.95);text-transform:uppercase;margin-bottom:2px}
-.score-hl{font-size:1.15rem;font-weight:800;color:#fff;margin:7px 0 5px;text-transform:uppercase;letter-spacing:.3px;max-width:68%}
-.score-sub{font-size:.84rem;color:#fff;line-height:1.55;max-width:66%;text-shadow:0 1px 3px rgba(154,52,18,.3)}
-.score-best{font-size:.78rem;color:#fff;font-weight:700;background:rgba(154,52,18,.22);border-radius:10px;padding:5px 10px;margin-top:10px;display:inline-block}
-.mascot{position:absolute;bottom:6px;right:8px;height:112px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.15))}
+.score-hl{font-size:1.15rem;font-weight:700;color:#fff;margin:4px 0 3px;text-transform:uppercase;max-width:64%}
+.score-sub{font-size:.82rem;color:rgba(255,255,255,.95);line-height:1.55;max-width:62%;text-shadow:0 1px 3px rgba(154,52,18,.25)}
+.score-best{font-size:.78rem;color:#fff;font-weight:600;background:rgba(154,52,18,.18);border-radius:10px;padding:5px 10px;margin-top:10px;display:inline-block}
+.mascot{position:absolute;bottom:6px;right:6px;height:116px;width:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.15))}
 .nala{display:flex;align-items:center;gap:12px;background:#FFF8F2;border:1px solid var(--peach);border-radius:16px;padding:8px 14px;margin-bottom:12px}
 .nala img{height:62px;width:auto;flex-shrink:0}.nala div{font-size:.84rem;line-height:1.45}.nala b{color:var(--odark)}
-.wx-card{background:#fff;border-radius:20px;padding:18px;margin-bottom:12px;box-shadow:var(--sh)}
-.wx-card .wx-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+.wx-card{background:#fff;border-radius:20px;padding:14px 18px;margin-bottom:10px;box-shadow:var(--sh);border:1px solid var(--line)}
+.wx-card .wx-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:10px}
 .wx-card .wx-ico{font-size:2.6rem;line-height:1.1}
-.wx-temp{font-size:2.6rem;font-weight:800;color:var(--ink);line-height:1.1}
+.wx-temp{font-size:2.6rem;font-weight:800;color:var(--ink);line-height:1.05}
 .wx-feels{font-size:.75rem;color:var(--muted);margin-top:2px}
-.wx-cond{font-size:.86rem;font-weight:700;margin-top:2px}
+.wx-cond{font-size:.84rem;font-weight:600;color:var(--t2);margin-top:2px}
 .wx-stats{text-align:right;display:flex;flex-direction:column;gap:3px}
-.wx-stat{font-size:.76rem;color:#3d3d3d}
-.wx-hourly{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;border-top:1px solid var(--line);padding-top:12px}
+.wx-stat{font-size:.73rem;color:var(--t2)}
+.wx-hourly{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;border-top:1px solid var(--line);padding-top:8px}
 .wx-hourly::-webkit-scrollbar{display:none}
-.wx-hr{display:flex;flex-direction:column;align-items:center;gap:3px;flex:0 0 52px}
+.wx-hr{display:flex;flex-direction:column;align-items:center;gap:1px;flex:0 0 52px;border-radius:10px;padding:3px 0}.wx-hr.wet{background:#FFF1E0}
 .wx-hr-t{font-size:.64rem;color:var(--muted)}.wx-hr-i{font-size:1.1rem}.wx-hr-d{font-size:.78rem;font-weight:700;color:#3d3d3d}.wx-hr-p{font-size:.62rem;color:#2F5E9E;font-weight:700}
-.advisory{margin-top:12px;background:#FFFBF0;border-left:3px solid #F4A800;border-radius:0 8px 8px 0;padding:9px 12px;font-size:.8rem;color:#7a5500}
+.advisory{margin-top:8px;background:#FFFBF0;border-left:3px solid #F4A800;border-radius:0 8px 8px 0;padding:9px 12px;font-size:.8rem;color:#7a5500}
+/* today tiles + mascot intros */
+.tiles4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.tl{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);padding:8px 4px 9px;text-align:center;cursor:pointer;text-decoration:none;color:inherit;display:block}
+.tl img{height:42px;width:auto;display:block;margin:0 auto 3px}
+.tl b{display:block;font-size:.72rem;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tl small{display:block;font-size:.62rem;color:var(--muted);line-height:1.25;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.intro{display:flex;align-items:center;gap:12px;background:var(--warm);border:1px solid var(--peach);border-radius:16px;padding:8px 14px;margin-bottom:10px}
+.intro img{height:64px;width:auto;flex-shrink:0}.intro div{font-size:.82rem;color:var(--t2);line-height:1.45}.intro b{color:var(--od)}
+.cast{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.cast div{background:#fff;border-radius:14px;box-shadow:var(--sh);padding:8px 4px;text-align:center;font-size:.68rem;color:var(--muted);line-height:1.3}.cast img{height:70px;width:auto;display:block;margin:0 auto 4px}
+#p-tonight.on{padding-bottom:10px}
 /* list cards */
 .it .tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px}
 .tag{font-size:.64rem;font-weight:800;letter-spacing:.3px;text-transform:uppercase;border-radius:99px;padding:2px 8px}
@@ -100,7 +112,7 @@ a{color:inherit}button{font-family:inherit}
 .it .why{font-size:.82rem;margin-top:6px;background:#FFF8E6;border-left:3px solid #F4A800;border-radius:8px;padding:5px 8px;color:#5C4500}
 .acts{display:flex;gap:7px;margin-top:10px}
 .btn{flex:1;text-align:center;text-decoration:none;font-weight:700;font-size:.8rem;border-radius:11px;padding:9px 6px;border:1.5px solid var(--peach);background:#fff;color:var(--odark);cursor:pointer;white-space:nowrap}
-.btn.p{background:var(--odark);border-color:var(--odark);color:#fff}
+.btn.p{background:var(--orange);border-color:var(--orange);color:#fff}
 .more{width:100%;margin:2px 0 6px}
 .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -14px 8px;padding:2px 14px}
 .chips::-webkit-scrollbar{display:none}
@@ -110,17 +122,17 @@ a{color:inherit}button{font-family:inherit}
 .empty{background:var(--warm);border:1.5px dashed var(--peach);border-radius:16px;padding:16px;text-align:center;font-size:.86rem;color:var(--muted)}
 .empty b{display:block;font-size:1.5rem}
 .note{font-size:.72rem;color:var(--muted);margin:6px 2px 0;line-height:1.5}.note a{color:var(--odark)}
-.warn{background:#FFF0E0;border:1px solid #F6C9A0;color:#8A3B00;border-radius:12px;padding:8px 12px;font-size:.8rem;margin-bottom:10px}
+.warn{background:#FFF0E0;border:1px solid #F6C9A0;color:#8A3B00;border-radius:12px;padding:6px 12px;font-size:.74rem;margin-bottom:8px}
 .skel{height:90px;border-radius:18px;margin-bottom:10px;background:linear-gradient(90deg,#fff 0,#FFF8F2 50%,#fff 100%);background-size:200% 100%;animation:sk 1.2s infinite}
 @keyframes sk{to{background-position:-200% 0} }
 </style>
 </head>
 <body>
 <div class="top"><div class="wrap">
-  <div class="hdr"><div><span class="logo">Jom<b>Out</b><small>KL</small></span><span class="test">TEST</span></div><div style="display:flex;align-items:center;min-width:0"><button class="loc" id="loc">📍 Finding you…</button></div></div>
+  <div class="hdr"><div><span class="logo">Jom<b>Out</b><small>KL</small></span><span class="test">TEST</span><div class="hdr-date" id="hdrDate"></div></div><div style="display:flex;align-items:center;min-width:0"><button class="loc" id="loc">📍 Finding you…</button><button class="share" id="wa" aria-label="Share today on WhatsApp">📲</button></div></div>
   <nav class="tabs" id="tabs">
     <button data-tab="about"><i>🧡</i>About</button>
-    <button data-tab="tonight" class="on"><i>🌙</i><span id="tonightLbl">Tonight</span></button>
+    <button data-tab="tonight" class="on"><i>☀️</i>Today</button>
     <button data-tab="food"><i>🍜</i>Food<span class="dot" id="pmDot" hidden></span></button>
     <button data-tab="events"><i>🎟</i>Events<span class="dot" id="evDot" hidden></span></button>
     <button data-tab="transit"><i>🚆</i>Transit</button>
@@ -132,17 +144,13 @@ a{color:inherit}button{font-family:inherit}
   <section class="panel on" id="p-tonight">
     <div id="warn"></div>
     <div class="score-card" id="hero"><div class="score-lbl">Go-out score</div><div class="score-num">–<span class="score-denom">/10</span></div><div class="score-hl">Loading…</div></div>
-    <div class="nala"><img src="../mascots/nala.png" alt="Nala the JomOut tiger" onerror="this.style.display='none'"><div><b>Nala</b> here! I lined up tonight’s food, night markets and events below. Tap <b>Food</b> when you’re hungry. 🍚</div></div>
     <div class="wx-card" id="wxCard"><div class="skel" style="box-shadow:none"></div></div>
-    <div class="sh" id="picksHead">Tonight's picks</div>
-    <div id="picks"><div class="skel"></div><div class="skel"></div></div>
-    <button class="btn p" id="wa" style="width:100%">📲 Send tonight's plan on WhatsApp</button>
-    <div class="note" id="foot"></div>
+    <div class="tiles4" id="tiles4"></div>
   </section>
   <section class="panel" id="p-food">
+    <div class="intro" id="foodIntro"></div>
     <div class="chips" id="meals"></div>
     <div id="pmWrap" hidden>
-    <div class="note" style="margin:0 2px 8px">A <b>pasar malam</b> is a night market: street food, snacks and stalls, usually from about 5pm. Bring cash.</div>
     <div class="chips" id="days"></div>
     <div id="pm"></div>
     <div class="note">Weekly schedule from Time Out, KL Foodie, The Star and others. Days can change in heavy rain or on public holidays.</div>
@@ -151,11 +159,13 @@ a{color:inherit}button{font-family:inherit}
     <div class="note">Local favourites only, no big chains. Opening hours can change, so check before you go.</div></div>
   </section>
   <section class="panel" id="p-events">
+    <div class="intro"><img src="../mascots/remy-jom.png" alt=""><div><b>Remy</b> here. Jom! Every show below links to its official ticket page.</div></div>
     <div class="chips" id="evTabs"></div>
     <div id="events"><div class="skel"></div></div>
     <div class="note">Every event links straight to its official ticket page.</div>
   </section>
   <section class="panel" id="p-transit">
+    <div class="intro"><img src="../mascots/rail.png" alt=""><div><b>Rail</b> here. Trains beat KL jams most evenings. Check alerts before you go.</div></div>
     <div class="sh">🚆 Train updates</div>
     <div id="trains"></div>
     <div class="sh">🚗 Traffic now</div>
@@ -165,21 +175,25 @@ a{color:inherit}button{font-family:inherit}
     <div class="note">The traffic map is live from Waze. Train notices come straight from the operators; we don't run our own live train feed.</div>
   </section>
   <section class="panel" id="p-explore">
+    <div class="intro"><img src="../mascots/duke.png" alt=""><div><b>Duke</b> here. Need a break from the city? Pick a spot, then tap Directions.</div></div>
     <div class="chips" id="exChips"></div>
     <div id="explore"></div>
     <div class="note" id="exNote"></div>
   </section>
   <section class="panel" id="p-about">
     <div class="card about">
-      <img src="../mascots/remy-jom.png" alt="Remy the JomOut tiger" style="float:right;height:96px;margin:0 0 6px 8px" onerror="this.style.display='none'"><h3>🧡 About JomOut KL</h3>
+      <img src="../mascots/remy-jom.png" alt="Remy the JomOut tiger" style="float:right;height:110px;margin:0 0 6px 8px" onerror="this.style.display='none'"><h3>🧡 About JomOut KL</h3>
       <p>Your local friend who knows Kuala Lumpur and tells you where to go, right now. KL has endless options and no time to sift through them, so JomOut KL cuts the noise: live weather, tonight's night markets, real events and good food near you, for locals, tourists and expats alike.</p>
       <p>Built by a KL local tired of group chats asking "where to eat?" every single day.</p>
       <h3>✅ How we keep it honest</h3>
       <p>Every event links straight to its official ticket page, and anything we can’t double-check stays off the list. Weather is live. Big chains are left out so you find the local spots. Spotted something wrong? Tell us below.</p>
       <button class="btn p" style="width:100%" onclick="window.open('https://forms.gle/vRxSDF6GL1CEzfBr6','_blank')">💬 Send feedback or a missing spot</button>
     </div>
+    <div class="sh">Meet the JomOut gang</div>
+    <div class="cast"><div><img src="../mascots/remy-jom.png" alt=""><b>Remy</b><br>the tiger who says Jom!</div><div><img src="../mascots/nala.png" alt=""><b>Nala</b><br>nasi lemak, food guide</div><div><img src="../mascots/taffy.png" alt=""><b>Taffy</b><br>iced teh tarik</div><div><img src="../mascots/skye.png" alt=""><b>Skye</b><br>satay, night markets</div><div><img src="../mascots/lola.png" alt=""><b>Lola</b><br>laksa, lunch</div><div><img src="../mascots/dimi.png" alt=""><b>Dimi</b><br>dim sum, late night</div><div><img src="../mascots/kay.png" alt=""><b>Kay</b><br>kaya toast, breakfast</div><div><img src="../mascots/duke.png" alt=""><b>Duke</b><br>durian, day trips</div><div><img src="../mascots/rail.png" alt=""><b>Rail</b><br>LRT, getting around</div></div>
     <div class="sh">KL glossary</div>
     <div class="card" id="glossary"></div>
+    <div class="note" id="foot"></div>
     <div class="note">JomOut KL is independent. Not affiliated with Rapid KL, DBKL or Tourism Malaysia.</div>
   </section>
 </main>
@@ -267,12 +281,12 @@ function headline(M){var k=M.k,c=M.c.weather_code,feels=M.c.apparent_temperature
   return{s:s,e:v[0],hl:v[1],sub:v[2],cap:cap};}
 function bestTime(M){var k=M.k,run=null,i;for(i=0;i<M.hrs.length;i++){if(M.hrs[i].p>=50){run=M.hrs[i].h;break;} }
   var feels=M.c.apparent_temperature;if(M.c.weather_code>=61)return 'after the rain clears';if(run!=null&&i>0)return 'now, before about '+fmtTime(run*60);if(run!=null)return 'later, once the rain passes';if(k.h>=11&&k.h<17&&feels>=35)return 'after 5pm';if(k.h>=22||k.h<5)return 'now, for supper';return 'now';}
-function mascotFor(M){var k=M.k,c=M.c.weather_code,feels=M.c.apparent_temperature;if(c<61&&k.h>=11&&k.h<17&&feels>=35)return 'taffy';if(k.h>=21||k.h<5||c>=61)return 'nala';if(k.h>=5&&k.h<10)return 'jom-hike';return 'remy-jom';}
+function mascotFor(M){return (M.c.apparent_temperature>=35&&M.c.is_day)?'remy-hot':'remy-chill';}
 function wxCardHTML(M){var c=M.c,night=!c.is_day,w=wmo(c.weather_code,night),u=M.uv!=null?uvLbl(M.uv):null,q=M.aqi!=null?aqiLbl(M.aqi):null;
-  return '<div class="wx-top"><div><span class="wx-ico">'+w[0]+'</span><div class="wx-temp">'+Math.round(c.temperature_2m)+'°<span style="font-size:1.5rem;font-weight:400">c</span></div><div class="wx-feels">Feels like '+Math.round(c.apparent_temperature)+'°C · H '+M.hi+'° L '+M.lo+'°</div><div class="wx-cond">'+esc(w[1])+'</div></div>'+
+  return '<div class="wx-top"><div><div class="wx-temp"><span class="wx-ico" style="font-size:2.2rem;margin-right:6px">'+w[0]+'</span>'+Math.round(c.temperature_2m)+'°<span style="font-size:1.5rem;font-weight:400">c</span></div><div class="wx-feels">Feels like '+Math.round(c.apparent_temperature)+'°C · H '+M.hi+'° L '+M.lo+'°</div><div class="wx-cond">'+esc(w[1])+'</div></div>'+
   '<div class="wx-stats"><div class="wx-stat">💧 '+c.relative_humidity_2m+'%</div><div class="wx-stat">🌬 '+Math.round(c.wind_speed_10m)+' km/h</div><div class="wx-stat">☀️ UV '+(u?Math.round(M.uv)+' '+u[0]:'–')+'</div><div class="wx-stat">🫁 Air '+(q?'<span class="lvl" style="background:'+q[1]+'"></span>'+M.aqi+' '+(M.aqi<=100?q[0]:'Poor'):'–')+'</div><div class="wx-stat">🌅 '+M.sr+' · 🌇 '+M.ss+'</div></div></div>'+
-  '<div class="wx-hourly">'+M.hrs.map(function(x){var ww=wmo(x.c,x.h>=19||x.h<7);return '<div class="wx-hr"><div class="wx-hr-t">'+fmtTime(x.h*60)+'</div><div class="wx-hr-i">'+ww[0]+'</div><div class="wx-hr-d">'+x.t+'°</div><div class="wx-hr-p">'+(x.p>=20?'💧'+x.p+'%':'&nbsp;')+'</div></div>';}).join('')+'</div>'+
-  '<div class="advisory">'+esc(advisory(M))+'</div><div class="src">Live weather from Open-Meteo. 💧 = chance of rain that hour. Air quality is a US AQI estimate.</div>';}
+  '<div class="wx-hourly">'+M.hrs.map(function(x){var ww=wmo(x.c,x.h>=19||x.h<7);return '<div class="wx-hr'+(x.p>=50?' wet':'')+'"><div class="wx-hr-t">'+fmtTime(x.h*60)+'</div><div class="wx-hr-i">'+ww[0]+'</div><div class="wx-hr-d">'+x.t+'°</div><div class="wx-hr-p">'+(x.p>=20?x.p+'%':'')+'</div></div>';}).join('')+'</div>'+
+  '<div class="advisory">'+esc((advisory(M).match(/^[^.]*\./)||[advisory(M)])[0])+'</div>';}
 function renderWx(){var M=wxModel(),H=headline(M);
   $('hero').innerHTML='<div class="score-weather-emoji">'+H.e+'</div><div class="score-lbl">Go-out score</div><div class="score-num">'+H.s+'<span class="score-denom">/10</span></div><div class="score-hl">'+esc(H.cap)+'</div><div class="score-sub">'+esc(H.hl.split(':')[0]+(H.sub?'. '+H.sub:'.'))+'</div><span class="score-best">⏰ Best time: '+esc(bestTime(M))+'</span><img class="mascot" src="../mascots/'+mascotFor(M)+'.png" alt="" onerror="this.style.display=\'none\'">';
   $('wxCard').innerHTML=wxCardHTML(M);
@@ -319,7 +333,7 @@ function renderEvents(){
   out=l.slice(0,lim).map(function(e){return evCard(e,t);}).join('')+(l.length>lim?'<button class="btn more" data-more="events">Show '+Math.min(6,l.length-lim)+' more</button>':'');
   $('events').innerHTML=out||'<div class="empty"><b>🦗</b>Nothing listed for '+(EVT==='tonight'?'tonight':EVT==='weekend'?'this weekend':'the coming weeks')+' yet. Try another tab.</div>';
   var n=evs.filter(function(e){return inRange(e,t,t);}).length,d=$('evDot');d.hidden=!n;d.textContent=n;}
-function checkedLbl(){var at=DATA&&(DATA.events_checked_at||DATA.generated_at);return at?dayLabel(String(at).slice(0,10)):'recently';}
+function checkedLbl(){var at=DATA&&(DATA.events_checked_at||DATA.generated_at),m=String(at||'').match(/[ T](\d{2}):(\d{2})/);return at?dayLabel(String(at).slice(0,10))+(m?', '+fmtTime(+m[1]*60+(+m[2])):''):'recently';}
 
 /* ── 3. NIGHT MARKETS ── */
 var PM=[
@@ -353,6 +367,7 @@ var SUP=/mamak|nasi kandar|24|lok lok|bak kut teh|tomyam|tom yam|ikan bakar|sata
 var GLOSS=[[/mamak|nasi kandar/i,'Mamak: Indian-Muslim eatery, often open late'],[/kopitiam|kopi ?tiam/i,'Kopitiam: traditional coffee shop'],[/medan selera|food ?court|hawker|food centre/i,'Food court: many hawker stalls under one roof'],[/nasi lemak/i,'Nasi lemak: coconut rice, Malaysia’s national dish'],[/bak kut teh/i,'Bak kut teh: herbal pork-rib soup'],[/banana leaf/i,'Banana leaf: South Indian rice meal served on a leaf'],[/warung|gerai/i,'Warung: small local food stall']];
 var MEALS=[['breakfast','☕ Breakfast',[6,11]],['lunch','🍜 Lunch',[11,15]],['cafe','🧋 Coffee & dessert',[15,18]],['dinner','🍽 Dinner',[18,22]],['supper','🌙 Late night',[22,30]]];
 var MCHIPS=MEALS.concat([['markets','🏮 Night markets']]);
+var MASC={breakfast:['kay','Kay','Morning! Kopitiams and breakfast spots near you.'],lunch:['lola','Lola','Lunch time. Local favourites close by.'],cafe:['taffy','Taffy','Stay cool lah. Coffee, teh and desserts nearby.'],dinner:['nala','Nala','Makan first, plan later. Dinner near you.'],supper:['dimi','Dimi','Still hungry? Late-night spots that are open.'],markets:['skye','Skye','Pasar malam means night market: street food from about 5pm. Bring cash.']};
 var DIDX={Mo:0,Tu:1,We:2,Th:3,Fr:4,Sa:5,Su:6};
 function expandDays(spec){var out=[],parts=spec.split(','),i,m,x,y,d,g;for(i=0;i<parts.length;i++){m=parts[i].trim().match(/^(Mo|Tu|We|Th|Fr|Sa|Su)(?:-(Mo|Tu|We|Th|Fr|Sa|Su))?$/);if(!m)return null;x=DIDX[m[1]];y=m[2]?DIDX[m[2]]:x;d=x;for(g=0;g<8;g++){out[d]=true;if(d===y)break;d=(d+1)%7;} }return out;}
 function parseRanges(spec){var parts=spec.split(','),res=[],i,m,o,c;for(i=0;i<parts.length;i++){m=parts[i].trim().match(/^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/);if(!m)return null;o=+m[1]*60+(+m[2]);c=+m[3]*60+(+m[4]);if(c<=o)c+=1440;res.push([o,c]);}return res;}
@@ -391,7 +406,7 @@ function eatCard(x){var t=x.p.t,cu=String(t.cuisine||'').split(';').slice(0,2).m
   var g='',txt=t.name+' '+(t.cuisine||'');GLOSS.some(function(x){if(x[0].test(txt)){g=x[1];return true;} });
   return card({tags:open+tag('t-q',fmtDist(x.d)),name:t.name,meta:[kind,cu,t['diet:halal']==='yes'?'Halal':''].filter(Boolean).join(' · '),meta2:area?'📍 '+area:'',why:g||(x.st.open?'':'Hours not listed: call or check reviews before going.'),
     acts:btn(mapsDir(x.p.lat,x.p.lng),'🧭 Directions',1)+(ph.length>=9?'<a class="btn" href="tel:'+esc(ph)+'">📞 Call</a>':'')+btn(mapsSearch(t.name+' '+(area||'Kuala Lumpur')),'⭐ Reviews')});}
-function renderEat(){var k=klNow();if(!MEAL)MEAL=mealNow(k.h);var mk=MEAL==='markets';$('pmWrap').hidden=!mk;$('eatWrap').hidden=mk;
+function renderEat(){var k=klNow();if(!MEAL)MEAL=mealNow(k.h);var mk=MEAL==='markets',mi=MASC[MEAL];$('foodIntro').innerHTML='<img src="../mascots/'+mi[0]+'.png" alt=""><div><b>'+mi[1]+'</b>: '+esc(mi[2])+'</div>';$('pmWrap').hidden=!mk;$('eatWrap').hidden=mk;
   $('meals').innerHTML=MCHIPS.map(function(m){return '<button class="chip'+(MEAL===m[0]?' on':'')+'" data-m="'+m[0]+'">'+m[1]+(m[0]===mealNow(k.h)?' · now':'')+(m[0]==='markets'&&PM.some(function(p){return p.d===pmToday();})?' · tonight':'')+'</button>';}).join('');
   centerChip('meals');if(mk){renderPM();return;}if(!PLACES)return;var l=eatList(MEAL);
   $('eat').innerHTML=l.length?l.slice(0,LIM.eat).map(eatCard).join('')+(l.length>LIM.eat?'<button class="btn more" data-more="eat">Show '+Math.min(5,l.length-LIM.eat)+' more nearby</button>':''):'<div class="empty"><b>🍜</b>No match within 3 km for this meal. Try another meal or the Markets tab.</div>';}
@@ -475,24 +490,22 @@ function renderTransit(){var k=klNow(),wd=k.dow>0&&k.dow<6,rush=wd&&((k.h>=7&&k.
 
 /* ── 6b. TONIGHT picks ── */
 function renderPicks(){
-  var k=klNow(),t=k.iso,td=pmToday(),out=[],evs=cleanEvents(),day=k.h>=5&&k.h<15;
-  $('picksHead').textContent=day?'Today’s picks':'Tonight’s picks';$('tonightLbl').textContent=day?'Today':'Tonight';
-  var pm=PM.filter(function(p){return p.d===td;});
-  if(pm.length)out.push(pmCard(pm[0],true));
-  else{for(var i=1;i<7;i++){var nx=PM.filter(function(p){return p.d===(td+i)%7;});if(nx.length){out.push(card({tags:tag('t-soon','Next night market · '+(i===1?'tomorrow':DN[(td+i)%7])),name:'🏮 '+nx[0].n,meta:'🕔 '+nx[0].h,acts:'<a class="btn p" href="#markets" data-go="markets">See all night markets</a>'}));break;} } }
-  var R={concert:0,comedy:1,family:2,market:3},tn=evs.filter(function(e){return inRange(e,t,t);}).sort(function(x,y){return (BIG.test(y.venue)?1:0)-(BIG.test(x.venue)?1:0)||R[evKind(x)]-R[evKind(y)];});
-  tn.slice(0,2).forEach(function(e){out.push(evCard(e,t));});
-  if(!tn.length&&evs[0])out.push(evCard(evs[0],t));
-  if(tn.length>2)out.push('<button class="btn more" data-go="events">See all '+tn.length+' events tonight</button>');
-  if(PLACES){var f=eatList(mealNow(k.h))[0];if(f)out.push(eatCard(f));}else out.push('<div class="skel"></div>');
-  $('picks').innerHTML=out.join('');renderTransit();}
+  var k=klNow(),t=k.iso,td=pmToday(),evs=cleanEvents(),pm=PM.filter(function(p){return p.d===td;}),nx=null,i;
+  if(!pm.length)for(i=1;i<7;i++){var l=PM.filter(function(p){return p.d===(td+i)%7;});if(l.length){nx=[l[0],i];break;} }
+  var tn=evs.filter(function(e){return inRange(e,t,t);}).length,wd=k.dow>0&&k.dow<6,rush=wd&&((k.h>=7&&k.h<10)||(k.h>=17&&k.h<20)),m=mealNow(k.h),ML={breakfast:'Breakfast',lunch:'Lunch',cafe:'Coffee & dessert',dinner:'Dinner',supper:'Late-night makan'};
+  function T(go,img,b,sm){return '<a class="tl" href="#'+go+'" data-go="'+go+'"><img src="../mascots/'+img+'.png" alt="">'+'<b>'+esc(b)+'</b><small>'+esc(sm)+'</small></a>';}
+  $('tiles4').innerHTML=T('food',MASC[m][0],ML[m],'near you')+
+    T('markets','skye',pm.length?'Night market':'Next market',pm.length?pm[0].n.replace(' Night Market','').replace(' Sunday Market',''):(nx?(nx[1]===1?'Tomorrow':DN[(td+nx[1])%7].slice(0,3))+': '+nx[0].n.replace(' Night Market',''):'See list'))+
+    T('events','remy-jom',tn?tn+' events':'Events',tn?'on tonight':'this week')+
+    T('transit','rail',rush?'Rush hour':'Transit',rush?'take the train':'trains, traffic');
+  renderTransit();}
 
 /* ── footer, freshness, share ── */
 function renderFoot(){
   var at=DATA&&(DATA.events_checked_at||DATA.generated_at),age=null,m;
   if(at&&(m=String(at).match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}):(\d{2})/))){age=(Date.now()-new Date(m[1]+'T'+m[2]+':'+m[3]+':00+08:00').getTime())/36e5;}
-  $('warn').innerHTML=age!=null&&age>80?'<div class="warn">⚠️ Events last checked '+Math.round(age/24)+' days ago. Confirm on the ticket page.</div>':'';
-  $('foot').innerHTML='Events checked '+esc(checkedLbl())+'. Weather data by <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>. Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors. Test page · <a href="../">back to JomOut KL</a>';}
+  $('warn').innerHTML=age!=null&&age>30?'<div class="warn">⚠️ Events last checked '+esc(checkedLbl())+'. Confirm on ticket pages.</div>':'';
+  $('foot').innerHTML='Updated '+esc(checkedLbl())+' · No sponsored listings · Not affiliated with Rapid KL or any venue listed · We collect no personal data. Weather data by <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>. Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors.';}
 $('wa').onclick=function(){var k=klNow(),td=pmToday(),pm=PM.filter(function(p){return p.d===td;}).map(function(p){return '🏮 '+p.n+' ('+p.h+')';}),
   ev=cleanEvents().filter(function(e){return inRange(e,k.iso,k.iso);}).slice(0,3).map(function(e){return '🎤 '+e.title+' @ '+e.venue;});
   var txt='KL tonight (JomOut)\n'+(pm.concat(ev).join('\n')||'Quiet night, good for supper')+'\nhttps://www.jomout.com';
@@ -505,6 +518,7 @@ function askLoc(){if(!navigator.geolocation)return;
   navigator.geolocation.getCurrentPosition(function(p){var np={lat:p.coords.latitude,lng:p.coords.longitude,real:true};
     if(hav(np.lat,np.lng,KLCC.lat,KLCC.lng)>60){updLoc();return;}POS=np;updLoc();loadWx();renderPicks();renderPM();if(PLACES){renderEat();renderExplore();} },function(){updLoc();},{timeout:8000,maximumAge:300000});}
 updLoc();
+$('hdrDate').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',timeZone:'Asia/Kuala_Lumpur'});
 var h0=(location.hash||'').slice(1);show(h0||(store('tab')||'tonight'),true);
 renderPM();renderEat();
 fetch(BASE+'sources.txt?t='+Date.now()).then(function(r){return r.ok?r.text():'';}).catch(function(){return'';}).then(function(t){SRC=t;return fetch(BASE+'data.json?t='+Date.now());}).then(function(r){return r.text();}).then(function(raw){raw=raw.replace(/```json|```/g,'').trim();DATA=JSON.parse(raw.slice(raw.indexOf('{')));})
