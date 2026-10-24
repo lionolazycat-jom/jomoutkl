@@ -19,7 +19,7 @@ a{color:inherit}button{font-family:inherit}
 .test{font-size:.58rem;font-weight:800;background:#FFF0B8;color:#7A5600;border-radius:99px;padding:1px 7px;margin-left:5px;vertical-align:middle}
 .loc{border:1.5px solid var(--peach);background:#fff;border-radius:99px;padding:5px 10px;font-size:.76rem;font-weight:700;color:var(--odark);cursor:pointer;max-width:190px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tabs{display:flex}
-.tabs button{flex:1;min-width:0;border:none;background:none;padding:6px 1px 8px;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.68rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;position:relative}
+.tabs button{flex:1;min-width:0;border:none;background:none;padding:6px 1px 8px;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.74rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;position:relative}
 .tabs button i{font-style:normal;font-size:1.2rem;line-height:1.1}
 .tabs button.on{color:var(--odark);font-weight:800;border-bottom-color:var(--orange)}
 .tabs .dot{position:absolute;top:2px;left:calc(50% + 8px);background:var(--odark);color:#fff;font-size:.56rem;font-weight:800;border-radius:99px;padding:0 5px;min-width:15px}
@@ -32,6 +32,14 @@ a{color:inherit}button{font-family:inherit}
 .wx-ico{font-size:3rem;line-height:1}
 .wx-t{font-family:Arvo,serif;font-size:3.1rem;line-height:1;color:var(--ink)}.wx-t small{font-size:1.2rem;color:var(--muted)}
 .wx-c{font-weight:700}.wx-f{font-size:.82rem;color:var(--muted)}
+.hero{background:linear-gradient(135deg,#FFD9BD,#FFEBDB);border-radius:20px;padding:16px;margin-bottom:10px;box-shadow:var(--sh);position:relative}
+.hero .em{position:absolute;right:16px;top:12px;font-size:2.4rem}
+.hero .num{font-family:Arvo,serif;font-size:4.6rem;line-height:1;color:#9A3412}.hero .num small{font-size:1.4rem;color:#B45309}
+.hero .lbl{font-size:.68rem;font-weight:800;letter-spacing:1.2px;color:#9A3412;text-transform:uppercase}
+.hero .hh{font-weight:800;font-size:1.35rem;letter-spacing:.5px;color:var(--ink);margin-top:6px;text-transform:uppercase}
+.hero .hs{font-size:.9rem;color:#4A3A30;margin-top:2px}
+#wxCard,#wxCard2{background:#FFF6EE}
+.evh{margin-top:14px}
 .verdict{display:flex;gap:10px;align-items:center;background:#FFF1E6;border:1.5px solid #FFD9BF;border-radius:14px;padding:10px 12px;margin-top:12px}
 .verdict .ve{font-size:1.8rem;line-height:1}
 .hl{font-weight:800;color:var(--ink);font-size:1rem;line-height:1.25}.hls{font-size:.8rem;color:var(--muted)}
@@ -87,10 +95,9 @@ a{color:inherit}button{font-family:inherit}
   <div class="hdr"><div><span class="logo">Jom<b>Out</b><small>KL</small></span><span class="test">TEST</span></div><div style="display:flex;align-items:center;min-width:0"><button class="loc" id="loc">📍 Finding you…</button><button class="info" data-go="about" aria-label="About JomOut KL and glossary">i</button></div></div>
   <nav class="tabs" id="tabs">
     <button data-tab="tonight" class="on"><i>🌙</i><span id="tonightLbl">Tonight</span></button>
-    <button data-tab="food"><i>🍜</i>Food</button>
+    <button data-tab="food"><i>🍜</i>Food<span class="dot" id="pmDot" hidden></span></button>
     <button data-tab="events"><i>🎟</i>Events<span class="dot" id="evDot" hidden></span></button>
-    <button data-tab="markets"><i>🏮</i>Markets<span class="dot" id="pmDot" hidden></span></button>
-    <button data-tab="explore"><i>🧭</i>Explore</button>
+    <button data-tab="explore"><i>🗺</i>Escape</button>
     <button data-tab="weather"><i>⛅</i>Weather</button>
   </nav>
 </div></div>
@@ -98,6 +105,7 @@ a{color:inherit}button{font-family:inherit}
 <main class="wrap">
   <section class="panel on" id="p-tonight">
     <div id="warn"></div>
+    <div class="hero" id="hero"><div class="lbl">Go-out score</div><div class="num">–<small>/10</small></div><div class="hh">Loading…</div></div>
     <div class="card" id="wxCard"><div class="skel" style="box-shadow:none"></div><div class="adv">Loading live weather…</div></div>
     <div class="sh" id="picksHead">Tonight's picks</div>
     <div id="picks"><div class="skel"></div><div class="skel"></div></div>
@@ -106,20 +114,18 @@ a{color:inherit}button{font-family:inherit}
   </section>
   <section class="panel" id="p-food">
     <div class="chips" id="meals"></div>
-    <div id="eat"><div class="skel"></div><div class="skel"></div></div>
-    <div class="note">Independent places only (chains hidden). Opening hours come from OpenStreetMap volunteers, so check before you go.</div>
-  </section>
-  <section class="panel" id="p-events">
-    <div class="chips" id="when"></div>
-    <div class="chips" id="kind"></div>
-    <div id="events"><div class="skel"></div></div>
-    <div class="note">Every event links to its ticket page and is checked against KL Concert and AllEvents listings.</div>
-  </section>
-  <section class="panel" id="p-markets">
+    <div id="pmWrap" hidden>
     <div class="note" style="margin:0 2px 8px">A <b>pasar malam</b> is a night market: street food, snacks and stalls, usually from about 5pm. Bring cash.</div>
     <div class="chips" id="days"></div>
     <div id="pm"></div>
     <div class="note">Weekly schedule from Time Out, KL Foodie, The Star and others. Days can change in heavy rain or on public holidays.</div>
+    </div>
+    <div id="eatWrap"><div id="eat"><div class="skel"></div><div class="skel"></div></div>
+    <div class="note">Independent places only (chains hidden). Opening hours come from OpenStreetMap volunteers, so check before you go.</div></div>
+  </section>
+  <section class="panel" id="p-events">
+    <div id="events"><div class="skel"></div></div>
+    <div class="note">Every event links to its ticket page and is checked against KL Concert and AllEvents listings.</div>
   </section>
   <section class="panel" id="p-explore">
     <div class="chips" id="exChips"></div>
@@ -156,7 +162,7 @@ var BASE='../';
 var KLCC={lat:3.1579,lng:101.7123};
 var POS={lat:KLCC.lat,lng:KLCC.lng,real:false};
 var DATA=null,PLACES=null,WX=null,CHAINS={},SRC=null,WELL=[],EX='sights';
-var TAB='tonight',WHEN='tonight',KIND='all',MEAL=null,DAY=null,LIM={eat:5,events:5};
+var TAB='tonight',WHEN='tonight',KIND='all',MEAL=null,DAY=null,LIM={eat:5,events:10};
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function $(id){return document.getElementById(id);}
@@ -176,18 +182,18 @@ function card(o){return '<div class="card it"><div class="tags">'+(o.tags||'')+'
 function tag(cls,t){return '<span class="tag '+cls+'">'+esc(t)+'</span>';}
 
 /* ── tabs (top, sticky, URL hash) ── */
-var ORDER=['tonight','food','events','markets','explore','weather','about'];
-function show(t,noScroll){if(ORDER.indexOf(t)<0)t='tonight';TAB=t;ORDER.forEach(function(x){$('p-'+x).classList.toggle('on',x===t);});
+var ORDER=['tonight','food','events','explore','weather','about'];
+function show(t,noScroll){if(t==='markets'||t==='escape'){if(t==='markets'){MEAL='markets';renderEat();}t=t==='markets'?'food':'explore';}if(ORDER.indexOf(t)<0)t='tonight';TAB=t;ORDER.forEach(function(x){$('p-'+x).classList.toggle('on',x===t);});
   [].forEach.call(document.querySelectorAll('#tabs button'),function(b){b.classList.toggle('on',b.dataset.tab===t);});
   if(!noScroll)window.scrollTo(0,0);store('tab',t);try{history.replaceState(null,'','#'+t);}catch(e){}
-  ['meals','when','days'].forEach(centerChip);}
+  ['meals','days','exChips'].forEach(centerChip);}
 $('tabs').addEventListener('click',function(e){var b=e.target.closest('button');if(b)show(b.dataset.tab);});
 function centerChip(id){var c=$(id),on=c&&c.querySelector('.chip.on');if(on)c.scrollLeft=Math.max(0,on.offsetLeft-c.clientWidth/2+on.offsetWidth/2);}
 document.addEventListener('click',function(e){
   var g=e.target.closest('[data-go]');if(g){e.preventDefault();show(g.dataset.go);return;}
   var x=e.target.closest('[data-ex]');if(x){EX=x.dataset.ex;renderExplore();return;}
   var c=e.target.closest('[data-w],[data-k],[data-m],[data-d],[data-more]');if(!c)return;e.preventDefault();
-  if(c.dataset.more){LIM[c.dataset.more]+=5;c.dataset.more==='eat'?renderEat():renderEvents();return;}
+  if(c.dataset.more&&c.dataset.more.charAt(0)==='g'){GLIM[c.dataset.more.slice(1)]=999;renderEvents();return;}if(c.dataset.more){LIM[c.dataset.more]+=5;c.dataset.more==='eat'?renderEat():renderEvents();return;}
   if(c.dataset.w){WHEN=c.dataset.w;LIM.events=5;}if(c.dataset.k){KIND=c.dataset.k;LIM.events=5;}if(c.dataset.m){MEAL=c.dataset.m;LIM.eat=5;}if(c.dataset.d)DAY=+c.dataset.d;
   if(c.dataset.w||c.dataset.k)renderEvents();if(c.dataset.m)renderEat();if(c.dataset.d)renderPM();
 });
@@ -227,17 +233,18 @@ function advisory(M){
 function headline(M){var k=M.k,c=M.c.weather_code,feels=M.c.apparent_temperature,p3=Math.max.apply(null,M.hrs.slice(0,3).map(function(x){return x.p;}).concat([0])),s=10;
   if(c>=95)s-=5;else if(c>=61)s-=3;if(p3>=70)s-=3;else if(p3>=40)s-=2;else if(p3>=20)s-=1;if(feels>=39)s-=2;else if(feels>=35)s-=1;if(M.aqi>150)s-=3;else if(M.aqi>100)s-=1;s=Math.max(1,Math.min(10,s));
   var v=c>=95?['⛈','Storm now: stay indoors for a bit','Malls, museums and food courts are your friends.']:c>=61?['☔','Rainy: pick indoor plans','Malls, museums and covered food courts.']:p3>=60?['🌂','Rain coming: go out early','Bring an umbrella just in case.']:(k.h>=22||k.h<5)?(s>=7?['🌙','Clear night for supper','Mamak and 24-hour spots are open.']:['🌙','Late night: keep it close','Mamak and 24-hour spots are open.']):k.h>=17?(s>=7?['🎉','Great evening to go out','Night markets and shows are on.']:['🙂','Okay evening, keep a backup plan','Have an indoor option nearby.']):k.h>=11?(feels>=35?['🥵','Hot afternoon: stay cool','Aircon lunch now, head out after 5pm.']:['😎','Good day to go out','']):['🌅','Great morning to go out','Beat the heat before 11am.'];
-  return{s:s,e:v[0],hl:v[1],sub:v[2]};}
+  var cap=c>=95?'Dodge the storm':c>=61?'Rainy: go indoors':p3>=60?'Go out early':(k.h>=22||k.h<5)?(s>=7?'Supper sky clear':'Night owl mode'):k.h>=17?(s>=7?'City comes alive':'Easy evening'):k.h>=11?(feels>=35?'Good indoor day':'Good day out'):'Go out early';
+  return{s:s,e:v[0],hl:v[1],sub:v[2],cap:cap};}
 function wxCardHTML(M,full){var c=M.c,night=!c.is_day,w=wmo(c.weather_code,night),H=headline(M),u=M.uv!=null?uvLbl(M.uv):null,q=M.aqi!=null?aqiLbl(M.aqi):null;
   return '<div class="wx-top"><div class="wx-ico">'+w[0]+'</div><div><div class="wx-t">'+Math.round(c.temperature_2m)+'<small>°C</small></div><div class="wx-c">'+esc(w[1])+'</div><div class="wx-f">Feels like '+Math.round(c.apparent_temperature)+'°C · H '+M.hi+'° L '+M.lo+'°</div></div></div>'+
-  '<div class="verdict"><div class="ve">'+H.e+'</div><div><div class="hl">'+esc(H.hl)+'</div>'+(H.sub?'<div class="hls">'+esc(H.sub)+'</div>':'')+'</div></div><div class="adv" style="margin-top:8px">'+esc(advisory(M))+'</div>'+
+  '<div class="adv" style="margin-top:10px">'+esc(advisory(M))+'</div>'+
   '<div class="stats"><div class="stat">💧 Humidity<b>'+c.relative_humidity_2m+'%</b></div><div class="stat">🌬 Wind<b>'+Math.round(c.wind_speed_10m)+' km/h</b></div>'+
   '<div class="stat">☀️ UV<b>'+(u?'<span class="lvl" style="background:'+u[1]+'"></span>'+Math.round(M.uv)+' '+u[0]:'–')+'</b></div>'+
   '<div class="stat">🫁 Air (US AQI est.)<b>'+(q?'<span class="lvl" style="background:'+q[1]+'"></span>'+M.aqi+' '+(M.aqi<=100?q[0]:'Poor'):'–')+'</b></div>'+
   '<div class="stat">🌅 Sunrise<b>'+M.sr+'</b></div><div class="stat">🌇 Sunset<b>'+M.ss+'</b></div></div>'+
   '<div class="hours">'+M.hrs.map(function(x){var ww=wmo(x.c,x.h>=19||x.h<7);return '<div class="hr'+(x.p>=50?' wet':'')+'">'+fmtTime(x.h*60)+'<i>'+ww[0]+'</i><b>'+x.t+'°</b><small>'+x.p+'%</small></div>';}).join('')+'</div>'+
   (full?'':'<div class="src">Rain % = chance of rain that hour. <a href="#weather" data-go="weather">7-day forecast ›</a></div>');}
-function renderWx(){var M=wxModel();$('wxCard').innerHTML=wxCardHTML(M,false);$('wxCard2').innerHTML=wxCardHTML(M,true);
+function renderWx(){var M=wxModel(),H=headline(M);$('hero').innerHTML='<div class="em">'+H.e+'</div><div class="lbl">Go-out score</div><div class="num">'+H.s+'<small>/10</small></div><div class="hh">'+esc(H.cap)+'</div><div class="hs">'+esc(H.hl.split(':')[0]+(H.sub?'. '+H.sub:''))+'</div>';$('wxCard').innerHTML=wxCardHTML(M,false);$('wxCard2').innerHTML=wxCardHTML(M,true);
   var D=M.D,mn=Math.min.apply(null,D.temperature_2m_min),mx=Math.max.apply(null,D.temperature_2m_max),rg=Math.max(1,mx-mn);
   $('week').innerHTML=D.time.map(function(t,i){var lo=D.temperature_2m_min[i],hi=D.temperature_2m_max[i];return '<div class="day"><span class="d">'+(i===0?'Today':dayLabel(t).split(/[ ,]/)[0])+'</span><span class="i">'+wmo(D.weather_code[i])[0]+'</span><span class="p">💧'+(D.precipitation_probability_max[i]||0)+'%</span><span class="lo">'+Math.round(lo)+'°</span><span class="bar"><b style="left:'+((lo-mn)/rg*100)+'%;right:'+((mx-hi)/rg*100)+'%"></b></span><span class="hi">'+Math.round(hi)+'°</span></div>';}).join('');
   var u=M.uv!=null?uvLbl(M.uv):null,q=M.aqi!=null?aqiLbl(M.aqi):null;
@@ -275,14 +282,13 @@ function evCard(e,today){var src=(e.link.split('/')[2]||'').replace('www.',''),m
   return card({tags:when+(e.time?tag('t-q',e.time):''),name:e.title,meta:'📍 '+e.venue,why:evTip(e),acts:btn(e.link,'🎟 Tickets & info',1)+btn(mapsDir(null,null,e.venue),'🧭 Directions'),src:'Source: '+esc(src)+' · checked '+esc(checkedLbl())});}
 function windows(){var k=klNow(),t=k.iso,dow=k.dow,toSat=(6-dow+7)%7,fri=addDays(t,Math.max(0,toSat-1)),sun=addDays(t,toSat+1);if(dow===0){fri=t;sun=t;}
   return[['tonight','Tonight',t,t],['tomorrow','Tomorrow',addDays(t,1),addDays(t,1)],['weekend','This weekend',fri,sun],['next','Next 2 weeks',t,addDays(t,14)],['month','Everything',t,addDays(t,90)]];}
+var GLIM={};
 function renderEvents(){
-  var t=klNow().iso,evs=cleanEvents(),W=windows();
-  $('when').innerHTML=W.map(function(w){var n=evs.filter(function(e){return inRange(e,w[2],w[3]);}).length;return '<button class="chip'+(WHEN===w[0]?' on':'')+'" data-w="'+w[0]+'">'+w[1]+'<small>'+n+'</small></button>';}).join('');
-  $('kind').innerHTML=KINDS.map(function(x){return '<button class="chip'+(KIND===x[0]?' on':'')+'" data-k="'+x[0]+'">'+x[1]+'</button>';}).join('');
-  centerChip('when');var w=W.filter(function(x){return x[0]===WHEN;})[0];
-  var list=evs.filter(function(e){return inRange(e,w[2],w[3])&&(KIND==='all'||evKind(e)===KIND);});
-  $('events').innerHTML=list.length?list.slice(0,LIM.events).map(function(e){return evCard(e,t);}).join('')+(list.length>LIM.events?'<button class="btn more" data-more="events">Show '+Math.min(5,list.length-LIM.events)+' more of '+(list.length-LIM.events)+'</button>':''):
-    '<div class="empty"><b>🦗</b>Nothing listed for this pick. Try <a href="#" data-w="next" style="color:var(--odark);font-weight:700">next 2 weeks</a>.</div>';
+  var k=klNow(),t=k.iso,evs=cleanEvents(),W=windows(),tm=addDays(t,1),we=W[2],used={},out='';
+  var G=[['🌙 Tonight',function(e){return inRange(e,t,t);}],['Tomorrow',function(e){return inRange(e,tm,tm);}],['This weekend',function(e){return inRange(e,we[2],we[3]);}],['Next 2 weeks',function(e){return inRange(e,t,addDays(t,14));}],['Later this month and beyond',function(){return true;}]];
+  G.forEach(function(g,gi){var l=evs.filter(function(e){return !used[e.link+e.date_iso]&&g[1](e);});if(!l.length)return;l.forEach(function(e){used[e.link+e.date_iso]=1;});
+    var lim=GLIM[gi]||4;out+='<div class="sh evh">'+g[0]+' <small style="font-weight:600">· '+l.length+'</small></div>'+l.slice(0,lim).map(function(e){return evCard(e,t);}).join('')+(l.length>lim?'<button class="btn more" data-more="g'+gi+'">Show all '+l.length+'</button>':'');});
+  $('events').innerHTML=out||'<div class="empty"><b>🦗</b>No events listed right now. Please check back soon.</div>';
   var n=evs.filter(function(e){return inRange(e,t,t);}).length,d=$('evDot');d.hidden=!n;d.textContent=n;}
 function checkedLbl(){var at=DATA&&(DATA.events_checked_at||DATA.generated_at);return at?dayLabel(String(at).slice(0,10)):'recently';}
 
@@ -317,6 +323,7 @@ var LUN=/nasi campur|economy rice|mixed rice|chap fan|chicken rice|banana leaf|n
 var SUP=/mamak|nasi kandar|24|lok lok|bak kut teh|tomyam|tom yam|ikan bakar|satay|steamboat|dim sum|roti/i;
 var GLOSS=[[/mamak|nasi kandar/i,'Mamak: Indian-Muslim eatery, often open late'],[/kopitiam|kopi ?tiam/i,'Kopitiam: traditional coffee shop'],[/medan selera|food ?court|hawker|food centre/i,'Food court: many hawker stalls under one roof'],[/nasi lemak/i,'Nasi lemak: coconut rice, Malaysia’s national dish'],[/bak kut teh/i,'Bak kut teh: herbal pork-rib soup'],[/banana leaf/i,'Banana leaf: South Indian rice meal served on a leaf'],[/warung|gerai/i,'Warung: small local food stall']];
 var MEALS=[['breakfast','☕ Breakfast',[6,11]],['lunch','🍜 Lunch',[11,15]],['cafe','🧋 Coffee & dessert',[15,18]],['dinner','🍽 Dinner',[18,22]],['supper','🌙 Late night',[22,30]]];
+var MCHIPS=[['markets','🏮 Night markets']].concat(MEALS);
 var DIDX={Mo:0,Tu:1,We:2,Th:3,Fr:4,Sa:5,Su:6};
 function expandDays(spec){var out=[],parts=spec.split(','),i,m,x,y,d,g;for(i=0;i<parts.length;i++){m=parts[i].trim().match(/^(Mo|Tu|We|Th|Fr|Sa|Su)(?:-(Mo|Tu|We|Th|Fr|Sa|Su))?$/);if(!m)return null;x=DIDX[m[1]];y=m[2]?DIDX[m[2]]:x;d=x;for(g=0;g<8;g++){out[d]=true;if(d===y)break;d=(d+1)%7;} }return out;}
 function parseRanges(spec){var parts=spec.split(','),res=[],i,m,o,c;for(i=0;i<parts.length;i++){m=parts[i].trim().match(/^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/);if(!m)return null;o=+m[1]*60+(+m[2]);c=+m[3]*60+(+m[4]);if(c<=o)c+=1440;res.push([o,c]);}return res;}
@@ -355,9 +362,9 @@ function eatCard(x){var t=x.p.t,cu=String(t.cuisine||'').split(';').slice(0,2).m
   var g='',txt=t.name+' '+(t.cuisine||'');GLOSS.some(function(x){if(x[0].test(txt)){g=x[1];return true;} });
   return card({tags:open+tag('t-q',fmtDist(x.d)),name:t.name,meta:[kind,cu,t['diet:halal']==='yes'?'Halal':''].filter(Boolean).join(' · '),meta2:area?'📍 '+area:'',why:g||(x.st.open?'':'Hours not listed: call or check reviews before going.'),
     acts:btn(mapsDir(x.p.lat,x.p.lng),'🧭 Directions',1)+(ph.length>=9?'<a class="btn" href="tel:'+esc(ph)+'">📞 Call</a>':'')+btn(mapsSearch(t.name+' '+(area||'Kuala Lumpur')),'⭐ Reviews')});}
-function renderEat(){if(!PLACES)return;var k=klNow();if(!MEAL)MEAL=mealNow(k.h);
-  $('meals').innerHTML=MEALS.map(function(m){return '<button class="chip'+(MEAL===m[0]?' on':'')+'" data-m="'+m[0]+'">'+m[1]+(m[0]===mealNow(k.h)?' · now':'')+'</button>';}).join('');
-  centerChip('meals');var l=eatList(MEAL);
+function renderEat(){var k=klNow();if(!MEAL)MEAL=mealNow(k.h);var mk=MEAL==='markets';$('pmWrap').hidden=!mk;$('eatWrap').hidden=mk;
+  $('meals').innerHTML=MCHIPS.map(function(m){return '<button class="chip'+(MEAL===m[0]?' on':'')+'" data-m="'+m[0]+'">'+m[1]+(m[0]===mealNow(k.h)?' · now':'')+(m[0]==='markets'&&PM.some(function(p){return p.d===pmToday();})?' · tonight':'')+'</button>';}).join('');
+  centerChip('meals');if(mk){renderPM();return;}if(!PLACES)return;var l=eatList(MEAL);
   $('eat').innerHTML=l.length?l.slice(0,LIM.eat).map(eatCard).join('')+(l.length>LIM.eat?'<button class="btn more" data-more="eat">Show '+Math.min(5,l.length-LIM.eat)+' more nearby</button>':''):'<div class="empty"><b>🍜</b>No match within 3 km for this meal. Try another meal or the Markets tab.</div>';}
 
 /* ── 5. EXPLORE: places to visit, outdoors, wellness ── */
@@ -383,10 +390,20 @@ var OUTD=[
  ['Taman Tugu','Near the National Monument','Quiet forest trail in the city centre, close to the National Monument.','Good for a short morning walk.','Easy · about 1 hour'],
  ['Bukit Gasing','Petaling Jaya','Forest hill with a suspension bridge and city views.','Wear proper shoes; trails can be muddy after rain.','Moderate · 1–2 hours'],
  ['Broga Hill','Semenyih, about 50 km from KL','Classic sunrise hike with panoramic views over the hills.','Start before dawn; small entry fee.','Moderate · 1.5–2 hours']];
-function renderExplore(){var k=klNow(),C=[['sights','🏛 Places to visit'],['outdoors','🌳 Outdoors'],['wellness','💆 Wellness']],out='';
+var TRIPS=[
+ ['Melaka','About 2 hours south by car or bus','UNESCO heritage city: Jonker Street, Dutch Square, river cruise and chicken rice balls.','Jonker Walk night market runs on Friday to Sunday evenings.'],
+ ['Ipoh','About 2.5 hours by ETS train from KL Sentral','Old town cafés, white coffee, street murals and cave temples.','Book ETS tickets early on weekends.'],
+ ['Cameron Highlands','About 3.5 hours by car or bus','Cool hill station with tea plantations, strawberry farms and mossy forest.','Bring a jacket; roads get busy on weekends.'],
+ ['Fraser’s Hill','About 2 hours by car','Quiet colonial-era hill station, great for birdwatching and misty walks.','Best as a slow overnight trip.'],
+ ['Kuala Selangor fireflies','About 1.5 hours by car','Evening boat rides to see fireflies along the river, plus seafood dinners.','Go on a dark, dry night; check boat times before leaving.'],
+ ['Port Dickson','About 1.5 hours by car','Nearest beach town to KL for a quick sea breeze.','Go on a weekday to avoid crowds.'],
+ ['Genting Highlands','About 1 hour by car or bus','Cool mountain resort with theme park, casino, outlets and the Awana Skyway cable car.','Bring a light jacket.']];
+function renderExplore(){var k=klNow(),C=[['sights','🏛 Places to visit'],['trips','🚗 Day trips'],['outdoors','🌳 Outdoors'],['wellness','💆 Wellness']],out='';
   $('exChips').innerHTML=C.map(function(c){return '<button class="chip'+(EX===c[0]?' on':'')+'" data-ex="'+c[0]+'">'+c[1]+'</button>';}).join('');
   if(EX==='sights'){out=SIGHTS.map(function(x){return card({tags:tag('t-q',x[1]),name:x[0],meta:x[2],why:x[3],meta2:'🚆 '+x[4],acts:btn(mapsSearch(x[0]+' Kuala Lumpur'),'🧭 Directions',1)+btn(mapsSearch(x[0]+' Kuala Lumpur'),'⭐ Reviews & hours')});}).join('');
     $('exNote').textContent='Always check opening hours and dress codes before visiting places of worship.';}
+  else if(EX==='trips'){out=TRIPS.map(function(x){return card({tags:tag('t-q',x[1]),name:x[0],meta:x[2],why:x[3],acts:btn(mapsDir(null,null,x[0]).replace('+Kuala%20Lumpur','').replace(encodeURIComponent(' Kuala Lumpur'),encodeURIComponent(' Malaysia')),'🧭 Directions',1)+btn(mapsSearch(x[0]+' Malaysia things to do'),'⭐ Things to do')});}).join('');
+    $('exNote').textContent='Travel times are typical by road from central KL; weekends and holidays take longer.';}
   else if(EX==='outdoors'){var dark=k.h>=19||k.h<6;out=(dark?'<div class="warn">🌙 It’s dark now. Parks are fine for an evening stroll, but leave the hikes for an early start tomorrow.</div>':'')+OUTD.map(function(x){return card({tags:tag('t-q',x[4]),name:x[0],meta:'📍 '+x[1],why:x[2]+' '+x[3],acts:btn(mapsSearch(x[0]+' Malaysia'),'🧭 Directions',1)+btn(mapsSearch(x[0]+' Malaysia'),'⭐ Reviews & hours')});}).join('');
     $('exNote').textContent='Bring water, start early, and avoid trails during thunderstorms.';}
   else{var day=(k.dow+6)%7,res=WELL.map(function(p){return{p:p,d:hav(POS.lat,POS.lng,p.lat,p.lng),st:openAt(parseOH(p.t.opening_hours),day,k.min)};}).filter(function(x){return x.d<=3&&x.st.open!==false&&!CHAINRE.test(x.p.t.name)&&!/anytime fitness|fitness first|celebrity fitness|chi fitness|jetts|true fitness|snap fitness|gold'?s( gym)?$|golds gym/i.test(x.p.t.name)&&(CHAINS[x.p.t.name.toLowerCase().trim()]||0)<3;}).sort(function(a,b){return (a.st.open?0:1)-(b.st.open?0:1)||a.d-b.d;}).slice(0,10);
@@ -429,8 +446,8 @@ function askLoc(){if(!navigator.geolocation)return;
   navigator.geolocation.getCurrentPosition(function(p){var np={lat:p.coords.latitude,lng:p.coords.longitude,real:true};
     if(hav(np.lat,np.lng,KLCC.lat,KLCC.lng)>60){updLoc();return;}POS=np;updLoc();loadWx();renderPicks();renderPM();if(PLACES){renderEat();renderExplore();} },function(){updLoc();},{timeout:8000,maximumAge:300000});}
 updLoc();
-var h0=(location.hash||'').slice(1);show(ORDER.indexOf(h0)>-1?h0:(store('tab')||'tonight'),true);
-renderPM();
+var h0=(location.hash||'').slice(1);show(h0||(store('tab')||'tonight'),true);
+renderPM();renderEat();
 fetch(BASE+'sources.txt?t='+Date.now()).then(function(r){return r.ok?r.text():'';}).catch(function(){return'';}).then(function(t){SRC=t;return fetch(BASE+'data.json?t='+Date.now());}).then(function(r){return r.text();}).then(function(raw){raw=raw.replace(/```json|```/g,'').trim();DATA=JSON.parse(raw.slice(raw.indexOf('{')));})
   .catch(function(){DATA=null;}).then(function(){renderEvents();renderPicks();renderFoot();if(!DATA)$('events').innerHTML='<div class="empty"><b>👀</b>Events are not available right now. Please check back soon.</div>';});
 renderExplore();renderGlossary();
