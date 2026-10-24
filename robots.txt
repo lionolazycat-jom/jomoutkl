@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /test/
+Disallow: /old/
+Sitemap: https://www.jomout.com/sitemap.xml
