@@ -17,9 +17,9 @@ a{color:inherit}button{font-family:inherit}
 .hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 0 6px}
 .logo{font-weight:800;font-size:1.25rem;letter-spacing:-.5px}.logo b{color:var(--orange)}.logo small{font-size:.8rem;color:var(--muted);font-weight:700;margin-left:2px}
 .test{font-size:.58rem;font-weight:800;background:#FFF0B8;color:#7A5600;border-radius:99px;padding:1px 7px;margin-left:5px;vertical-align:middle}
-.loc{border:1.5px solid var(--peach);background:#fff;border-radius:99px;padding:5px 10px;font-size:.76rem;font-weight:700;color:var(--odark);cursor:pointer;max-width:190px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.loc{border:1.5px solid var(--peach);background:#fff;border-radius:99px;padding:5px 10px;font-size:.76rem;font-weight:700;color:var(--odark);cursor:pointer;max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tabs{display:flex}
-.tabs button{flex:1;min-width:0;border:none;background:none;padding:6px 1px 8px;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.74rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;position:relative}
+.tabs button{flex:1;min-width:0;border:none;background:none;padding:6px 1px 8px;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.7rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;position:relative}
 .tabs button i{font-style:normal;font-size:1.2rem;line-height:1.1}
 .tabs button.on{color:var(--odark);font-weight:800;border-bottom-color:var(--orange)}
 .tabs .dot{position:absolute;top:2px;left:calc(50% + 8px);background:var(--odark);color:#fff;font-size:.56rem;font-weight:800;border-radius:99px;padding:0 5px;min-width:15px}
@@ -43,7 +43,7 @@ a{color:inherit}button{font-family:inherit}
 .verdict{display:flex;gap:10px;align-items:center;background:#FFF1E6;border:1.5px solid #FFD9BF;border-radius:14px;padding:10px 12px;margin-top:12px}
 .verdict .ve{font-size:1.8rem;line-height:1}
 .hl{font-weight:800;color:var(--ink);font-size:1rem;line-height:1.25}.hls{font-size:.8rem;color:var(--muted)}
-.info{border:none;background:#FFF1E6;color:var(--odark);font-weight:800;border-radius:99px;width:32px;height:32px;font-size:.95rem;cursor:pointer;margin-left:6px}
+.info{border:none;background:#FFF1E6;color:var(--odark);font-weight:800;border-radius:99px;padding:0 11px;height:30px;font-size:.76rem;cursor:pointer;margin-left:6px}
 .gl{padding:9px 0;border-bottom:1px solid var(--line);font-size:.88rem}.gl:last-child{border-bottom:none}.gl b{color:var(--odark)}
 .about h3{font-size:1rem;margin:4px 0 6px}.about p{font-size:.9rem;margin-bottom:8px}
 .adv{font-size:.88rem;margin-top:4px;color:var(--ink)}
@@ -92,11 +92,12 @@ a{color:inherit}button{font-family:inherit}
 </head>
 <body>
 <div class="top"><div class="wrap">
-  <div class="hdr"><div><span class="logo">Jom<b>Out</b><small>KL</small></span><span class="test">TEST</span></div><div style="display:flex;align-items:center;min-width:0"><button class="loc" id="loc">📍 Finding you…</button><button class="info" data-go="about" aria-label="About JomOut KL and glossary">i</button></div></div>
+  <div class="hdr"><div><span class="logo">Jom<b>Out</b><small>KL</small></span><span class="test">TEST</span></div><div style="display:flex;align-items:center;min-width:0"><button class="loc" id="loc">📍 Finding you…</button><button class="info" data-go="about">About</button></div></div>
   <nav class="tabs" id="tabs">
     <button data-tab="tonight" class="on"><i>🌙</i><span id="tonightLbl">Tonight</span></button>
     <button data-tab="food"><i>🍜</i>Food<span class="dot" id="pmDot" hidden></span></button>
     <button data-tab="events"><i>🎟</i>Events<span class="dot" id="evDot" hidden></span></button>
+    <button data-tab="transit"><i>🚆</i>Transit</button>
     <button data-tab="explore"><i>🗺</i>Escape</button>
     <button data-tab="weather"><i>⛅</i>Weather</button>
   </nav>
@@ -110,6 +111,7 @@ a{color:inherit}button{font-family:inherit}
     <div class="sh" id="picksHead">Tonight's picks</div>
     <div id="picks"><div class="skel"></div><div class="skel"></div></div>
     <button class="btn p" id="wa" style="width:100%">📲 Send tonight's plan on WhatsApp</button>
+    <button class="btn" data-go="about" style="width:100%;margin-top:8px">🧡 About us &amp; KL glossary</button>
     <div class="note" id="foot"></div>
   </section>
   <section class="panel" id="p-food">
@@ -126,6 +128,15 @@ a{color:inherit}button{font-family:inherit}
   <section class="panel" id="p-events">
     <div id="events"><div class="skel"></div></div>
     <div class="note">Every event links to its ticket page and is checked against KL Concert and AllEvents listings.</div>
+  </section>
+  <section class="panel" id="p-transit">
+    <div class="sh">🚆 Train updates</div>
+    <div id="trains"></div>
+    <div class="sh">🚗 Traffic now</div>
+    <div id="traffic"></div>
+    <div class="card" style="padding:0;overflow:hidden"><iframe id="waze" src="https://embed.waze.com/iframe?zoom=13&lat=3.1390&lon=101.6869&ct=livemap&pin=1" width="100%" height="300" style="border:0;display:block" loading="lazy" title="Waze live traffic map of KL"></iframe></div>
+    <div class="acts" style="margin-top:0"><a class="btn p" target="_blank" rel="noopener" href="https://www.waze.com/ul?ll=3.1390,101.6869&navigate=yes">🚗 Open Waze</a><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/@3.139,101.6869,13z/data=!5m1!1e1">🗺 Google traffic</a></div>
+    <div class="note">The traffic map is live from Waze. Train notices come straight from the operators; we don't run our own live train feed.</div>
   </section>
   <section class="panel" id="p-explore">
     <div class="chips" id="exChips"></div>
@@ -182,7 +193,7 @@ function card(o){return '<div class="card it"><div class="tags">'+(o.tags||'')+'
 function tag(cls,t){return '<span class="tag '+cls+'">'+esc(t)+'</span>';}
 
 /* ── tabs (top, sticky, URL hash) ── */
-var ORDER=['tonight','food','events','explore','weather','about'];
+var ORDER=['tonight','food','events','transit','explore','weather','about'];
 function show(t,noScroll){if(t==='markets'||t==='escape'){if(t==='markets'){MEAL='markets';renderEat();}t=t==='markets'?'food':'explore';}if(ORDER.indexOf(t)<0)t='tonight';TAB=t;ORDER.forEach(function(x){$('p-'+x).classList.toggle('on',x===t);});
   [].forEach.call(document.querySelectorAll('#tabs button'),function(b){b.classList.toggle('on',b.dataset.tab===t);});
   if(!noScroll)window.scrollTo(0,0);store('tab',t);try{history.replaceState(null,'','#'+t);}catch(e){}
@@ -282,12 +293,13 @@ function evCard(e,today){var src=(e.link.split('/')[2]||'').replace('www.',''),m
   return card({tags:when+(e.time?tag('t-q',e.time):''),name:e.title,meta:'📍 '+e.venue,why:evTip(e),acts:btn(e.link,'🎟 Tickets & info',1)+btn(mapsDir(null,null,e.venue),'🧭 Directions'),src:'Source: '+esc(src)+' · checked '+esc(checkedLbl())});}
 function windows(){var k=klNow(),t=k.iso,dow=k.dow,toSat=(6-dow+7)%7,fri=addDays(t,Math.max(0,toSat-1)),sun=addDays(t,toSat+1);if(dow===0){fri=t;sun=t;}
   return[['tonight','Tonight',t,t],['tomorrow','Tomorrow',addDays(t,1),addDays(t,1)],['weekend','This weekend',fri,sun],['next','Next 2 weeks',t,addDays(t,14)],['month','Everything',t,addDays(t,90)]];}
+function isExpo(e){return /^(exhibition|expo)$/.test(e.type||'')||/\b(expo|convention|fair|exhibition)\b|mitec|matrade/i.test(e.title+' '+e.venue);}
 var GLIM={};
 function renderEvents(){
   var k=klNow(),t=k.iso,evs=cleanEvents(),W=windows(),tm=addDays(t,1),we=W[2],used={},out='';
-  var G=[['🌙 Tonight',function(e){return inRange(e,t,t);}],['Tomorrow',function(e){return inRange(e,tm,tm);}],['This weekend',function(e){return inRange(e,we[2],we[3]);}],['Next 2 weeks',function(e){return inRange(e,t,addDays(t,14));}],['Later this month and beyond',function(){return true;}]];
+  var G=[['🌙 Tonight',function(e){return inRange(e,t,t)&&!isExpo(e);}],['This weekend',function(e){return inRange(e,we[2],we[3])&&!isExpo(e);}],['Coming up',function(e){return !isExpo(e);}],['🏢 Expos & conventions',isExpo]];
   G.forEach(function(g,gi){var l=evs.filter(function(e){return !used[e.link+e.date_iso]&&g[1](e);});if(!l.length)return;l.forEach(function(e){used[e.link+e.date_iso]=1;});
-    var lim=GLIM[gi]||4;out+='<div class="sh evh">'+g[0]+' <small style="font-weight:600">· '+l.length+'</small></div>'+l.slice(0,lim).map(function(e){return evCard(e,t);}).join('')+(l.length>lim?'<button class="btn more" data-more="g'+gi+'">Show all '+l.length+'</button>':'');});
+    var lim=GLIM[gi]||3;out+='<div class="sh evh">'+g[0]+' <small style="font-weight:600">· '+l.length+'</small></div>'+l.slice(0,lim).map(function(e){return evCard(e,t);}).join('')+(l.length>lim?'<button class="btn more" data-more="g'+gi+'">Show all '+l.length+'</button>':'');});
   $('events').innerHTML=out||'<div class="empty"><b>🦗</b>No events listed right now. Please check back soon.</div>';
   var n=evs.filter(function(e){return inRange(e,t,t);}).length,d=$('evDot');d.hidden=!n;d.textContent=n;}
 function checkedLbl(){var at=DATA&&(DATA.events_checked_at||DATA.generated_at);return at?dayLabel(String(at).slice(0,10)):'recently';}
@@ -323,7 +335,7 @@ var LUN=/nasi campur|economy rice|mixed rice|chap fan|chicken rice|banana leaf|n
 var SUP=/mamak|nasi kandar|24|lok lok|bak kut teh|tomyam|tom yam|ikan bakar|satay|steamboat|dim sum|roti/i;
 var GLOSS=[[/mamak|nasi kandar/i,'Mamak: Indian-Muslim eatery, often open late'],[/kopitiam|kopi ?tiam/i,'Kopitiam: traditional coffee shop'],[/medan selera|food ?court|hawker|food centre/i,'Food court: many hawker stalls under one roof'],[/nasi lemak/i,'Nasi lemak: coconut rice, Malaysia’s national dish'],[/bak kut teh/i,'Bak kut teh: herbal pork-rib soup'],[/banana leaf/i,'Banana leaf: South Indian rice meal served on a leaf'],[/warung|gerai/i,'Warung: small local food stall']];
 var MEALS=[['breakfast','☕ Breakfast',[6,11]],['lunch','🍜 Lunch',[11,15]],['cafe','🧋 Coffee & dessert',[15,18]],['dinner','🍽 Dinner',[18,22]],['supper','🌙 Late night',[22,30]]];
-var MCHIPS=[['markets','🏮 Night markets']].concat(MEALS);
+var MCHIPS=MEALS.concat([['markets','🏮 Night markets']]);
 var DIDX={Mo:0,Tu:1,We:2,Th:3,Fr:4,Sa:5,Su:6};
 function expandDays(spec){var out=[],parts=spec.split(','),i,m,x,y,d,g;for(i=0;i<parts.length;i++){m=parts[i].trim().match(/^(Mo|Tu|We|Th|Fr|Sa|Su)(?:-(Mo|Tu|We|Th|Fr|Sa|Su))?$/);if(!m)return null;x=DIDX[m[1]];y=m[2]?DIDX[m[2]]:x;d=x;for(g=0;g<8;g++){out[d]=true;if(d===y)break;d=(d+1)%7;} }return out;}
 function parseRanges(spec){var parts=spec.split(','),res=[],i,m,o,c;for(i=0;i<parts.length;i++){m=parts[i].trim().match(/^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/);if(!m)return null;o=+m[1]*60+(+m[2]);c=+m[3]*60+(+m[4]);if(c<=o)c+=1440;res.push([o,c]);}return res;}
@@ -415,6 +427,22 @@ var GLOSS2=[['Jom','Let’s go! The friendly nudge to get out the door.'],['Maka
 function renderGlossary(){$('glossary').innerHTML=GLOSS2.map(function(g){return '<div class="gl"><b>'+esc(g[0])+'</b>: '+esc(g[1])+'</div>';}).join('');}
 
 /* ── 6. TONIGHT picks ── */
+/* ── 5b. TRANSIT ── */
+var LINES=[['#E0115F','LRT Kelana Jaya line','KLCC, Kampung Baru, Masjid Jamek, Pasar Seni, KL Sentral'],['#F7941D','LRT Ampang / Sri Petaling line','Masjid Jamek, Hang Tuah, Titiwangsa, Bukit Jalil'],['#00843D','MRT Kajang line','Pasar Seni, Merdeka, Bukit Bintang, TRX'],['#FFCB05','MRT Putrajaya line','Titiwangsa, Persiaran KLCC, TRX'],['#84C341','KL Monorail','KL Sentral, Bukit Bintang, Hang Tuah, Titiwangsa']],WZ=0;
+function renderTransit(){var k=klNow(),wd=k.dow>0&&k.dow<6,rush=wd&&((k.h>=7&&k.h<10)||(k.h>=17&&k.h<20)),T=[],items=(DATA&&DATA.modules&&DATA.modules.transit)||[];
+  var tr=items.filter(function(x){return x&&(x.title||x.line);}).map(function(x){return card({tags:tag('t-soon',x.status||'Notice'),name:x.title||x.line,meta:x.plain_english||x.note||'',acts:btn(x.link||'https://myrapid.com.my/','ℹ️ Details',1)});}).join('');
+  $('trains').innerHTML=tr+'<div class="card it"><div class="n">Check before you go</div><div class="m">Delays and closures are posted by the operators. Trains run roughly 6am to midnight; last trains differ by line. Pay with a Touch ’n Go card, or tap a contactless bank card at most Rapid KL gates.</div><div class="acts">'+btn('https://myrapid.com.my/','🚇 Rapid KL updates',1)+btn('https://x.com/MyRapidKL','📢 Live alerts')+btn('https://www.ktmb.com.my/','🚆 KTM')+'</div></div>'+
+    '<div class="card">'+LINES.map(function(l){return '<div class="gl"><span class="lvl" style="background:'+l[0]+';width:10px;height:10px"></span><b style="color:var(--ink)">'+esc(l[1])+'</b><div class="m" style="font-size:.8rem;color:var(--muted)">'+esc(l[2])+'</div></div>';}).join('')+'</div>';
+  if(rush)T.push('⏰ Rush hour now (weekdays 7–10am and 5–8pm): roads are slow, the train is often faster.');
+  else if(wd&&k.h>=15&&k.h<17)T.push('⏰ Evening rush starts around 5pm. Leave before then or after 8pm.');
+  else T.push('✅ Outside rush hour. Roads are usually easier now, but check the live map below.');
+  if(k.dow===5&&k.h>=15&&k.h<21)T.push('📅 Friday evening is usually the worst traffic of the week.');
+  if(WX){var M=wxModel(),wet=M.c.weather_code>=61||M.hrs.slice(0,3).some(function(x){return x.p>=60;});if(wet)T.push('🌧 Rain around: KL jams get worse in rain. Add 15–30 minutes or take the train.');}
+  cleanEvents().filter(function(e){return inRange(e,k.iso,k.iso)&&BIG.test(e.venue);}).slice(0,3).forEach(function(e){T.push('🎤 Big show tonight at '+e.venue+': expect jams nearby before and after.');} );
+  $('traffic').innerHTML='<div class="card"><div class="adv">'+T.map(esc).join('<br><br>')+'</div></div>';
+  if(POS.real&&!WZ){WZ=1;$('waze').src='https://embed.waze.com/iframe?zoom=14&lat='+POS.lat.toFixed(4)+'&lon='+POS.lng.toFixed(4)+'&ct=livemap&pin=1';} }
+
+/* ── 6b. TONIGHT picks ── */
 function renderPicks(){
   var k=klNow(),t=k.iso,td=pmToday(),out=[],evs=cleanEvents(),day=k.h>=5&&k.h<15;
   $('picksHead').textContent=day?'Today’s picks':'Tonight’s picks';$('tonightLbl').textContent=day?'Today':'Tonight';
@@ -426,7 +454,7 @@ function renderPicks(){
   if(!tn.length&&evs[0])out.push(evCard(evs[0],t));
   if(tn.length>2)out.push('<button class="btn more" data-go="events">See all '+tn.length+' events tonight</button>');
   if(PLACES){var f=eatList(mealNow(k.h))[0];if(f)out.push(eatCard(f));}else out.push('<div class="skel"></div>');
-  $('picks').innerHTML=out.join('');}
+  $('picks').innerHTML=out.join('');renderTransit();}
 
 /* ── footer, freshness, share ── */
 function renderFoot(){
