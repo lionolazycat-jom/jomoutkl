@@ -148,12 +148,12 @@ a{color:inherit}button{font-family:inherit}
     <div class="note">Weekly schedule from Time Out, KL Foodie, The Star and others. Days can change in heavy rain or on public holidays.</div>
     </div>
     <div id="eatWrap"><div id="eat"><div class="skel"></div><div class="skel"></div></div>
-    <div class="note">Independent places only (chains hidden). Opening hours come from OpenStreetMap volunteers, so check before you go.</div></div>
+    <div class="note">Local favourites only, no big chains. Opening hours can change, so check before you go.</div></div>
   </section>
   <section class="panel" id="p-events">
     <div class="chips" id="evTabs"></div>
     <div id="events"><div class="skel"></div></div>
-    <div class="note">Every event links to its ticket page and is checked against KL Concert and AllEvents listings.</div>
+    <div class="note">Every event links straight to its official ticket page.</div>
   </section>
   <section class="panel" id="p-transit">
     <div class="sh">🚆 Train updates</div>
@@ -175,7 +175,7 @@ a{color:inherit}button{font-family:inherit}
       <p>Your local friend who knows Kuala Lumpur and tells you where to go, right now. KL has endless options and no time to sift through them, so JomOut KL cuts the noise: live weather, tonight's night markets, real events and good food near you, for locals, tourists and expats alike.</p>
       <p>Built by a KL local tired of group chats asking "where to eat?" every single day.</p>
       <h3>✅ How we keep it honest</h3>
-      <p>Events come only from public listings (KL Concert, AllEvents) and every event links to its ticket page; anything we can't match to its source is hidden. Weather is live. Places come from OpenStreetMap, with chains hidden. If something looks wrong, tell us below.</p>
+      <p>Every event links straight to its official ticket page, and anything we can’t double-check stays off the list. Weather is live. Big chains are left out so you find the local spots. Spotted something wrong? Tell us below.</p>
       <button class="btn p" style="width:100%" onclick="window.open('https://forms.gle/vRxSDF6GL1CEzfBr6','_blank')">💬 Send feedback or a missing spot</button>
     </div>
     <div class="sh">KL glossary</div>
@@ -305,7 +305,7 @@ function cleanEvents(){var t=klNow().iso;return((DATA&&DATA.modules&&DATA.module
 function inRange(e,x,y){return e.date_iso<=y&&(e.end_iso||e.date_iso)>=x;}
 function evCard(e,today){var src=(e.link.split('/')[2]||'').replace('www.',''),multi=e.end_iso&&e.end_iso!==e.date_iso;
   var when=inRange(e,today,today)?tag('t-now',multi?'On today':'Tonight'):tag('t-soon',dayLabel(e.date_iso)+(multi?' – '+dayLabel(e.end_iso):''));
-  return card({tags:when+(isExpo(e)?tag('t-ok','Expo'):'')+(e.time?tag('t-q',e.time):''),name:e.title,meta:'📍 '+e.venue,why:evTip(e),acts:btn(e.link,'🎟 Tickets & info',1)+btn(mapsDir(null,null,e.venue),'🧭 Directions'),src:'Source: '+esc(src)+' · checked '+esc(checkedLbl())});}
+  return card({tags:when+(isExpo(e)?tag('t-ok','Expo'):'')+(e.time?tag('t-q',e.time):''),name:e.title,meta:'📍 '+e.venue,why:evTip(e),acts:btn(e.link,'🎟 Tickets & info',1)+btn(mapsDir(null,null,e.venue),'🧭 Directions'),src:'Checked '+esc(checkedLbl())});}
 function windows(){var k=klNow(),t=k.iso,dow=k.dow,toSat=(6-dow+7)%7,fri=addDays(t,Math.max(0,toSat-1)),sun=addDays(t,toSat+1);if(dow===0){fri=t;sun=t;}
   return[['tonight','Tonight',t,t],['tomorrow','Tomorrow',addDays(t,1),addDays(t,1)],['weekend','This weekend',fri,sun],['next','Next 2 weeks',t,addDays(t,14)],['month','Everything',t,addDays(t,90)]];}
 function isExpo(e){return /^(exhibition|expo)$/.test(e.type||'')||/\b(expo|convention|fair|exhibition)\b|mitec|matrade/i.test(e.title+' '+e.venue);}
@@ -420,25 +420,39 @@ var OUTD=[
  ['Bukit Gasing','Petaling Jaya','Forest hill with a suspension bridge and city views.','Wear proper shoes; trails can be muddy after rain.','Moderate · 1–2 hours'],
  ['Broga Hill','Semenyih, about 50 km from KL','Classic sunrise hike with panoramic views over the hills.','Start before dawn; small entry fee.','Moderate · 1.5–2 hours']];
 var TRIPS=[
- ['Melaka','About 2 hours south by car or bus','UNESCO heritage city: Jonker Street, Dutch Square, river cruise and chicken rice balls.','Jonker Walk night market runs on Friday to Sunday evenings.'],
- ['Ipoh','About 2.5 hours by ETS train from KL Sentral','Old town cafés, white coffee, street murals and cave temples.','Book ETS tickets early on weekends.'],
- ['Cameron Highlands','About 3.5 hours by car or bus','Cool hill station with tea plantations, strawberry farms and mossy forest.','Bring a jacket; roads get busy on weekends.'],
- ['Fraser’s Hill','About 2 hours by car','Quiet colonial-era hill station, great for birdwatching and misty walks.','Best as a slow overnight trip.'],
- ['Kuala Selangor fireflies','About 1.5 hours by car','Evening boat rides to see fireflies along the river, plus seafood dinners.','Go on a dark, dry night; check boat times before leaving.'],
- ['Port Dickson','About 1.5 hours by car','Nearest beach town to KL for a quick sea breeze.','Go on a weekday to avoid crowds.'],
- ['Genting Highlands','About 1 hour by car or bus','Cool mountain resort with theme park, casino, outlets and the Awana Skyway cable car.','Bring a light jacket.']];
+ ['Putrajaya','About 40 min by car or KLIA Transit',0,'Planned capital with the pink Putra Mosque, grand bridges and lake cruises.','Go late afternoon for golden-hour photos.'],
+ ['Genting Highlands','About 1 hour by car or bus',0,'Cool mountain resort with theme park, casino, outlets and the Awana Skyway cable car.','Bring a light jacket.'],
+ ['Bukit Tinggi & Colmar Tropicale','About 1 hour by car',0,'French-style hilltop village with cool air, a Japanese garden and photo spots.','Weekday mornings are quietest.'],
+ ['Janda Baik','About 1 hour by car',0,'Quiet riverside village in the hills, popular for cafés, glamping and cool-water dips.','Many spots are private retreats: book a stay or café first.'],
+ ['Bentong','About 1 hour by car',0,'Small town with Chamang Waterfall, local food and famous durian orchards.','Durian is seasonal; ask locals what’s in season.'],
+ ['Kuala Kubu Bharu','About 1 hour by car',0,'Gateway to Fraser’s Hill with river rafting, a scenic dam and old-town food.','Book rafting with a licensed operator.'],
+ ['Kuala Selangor fireflies','About 1.5 hours by car',1,'Evening boat rides to see fireflies along the river, plus seafood dinners.','Go on a dark, dry night; check boat times before leaving.'],
+ ['Port Dickson','About 1.5 hours by car',1,'Nearest beach town to KL for a quick sea breeze.','Go on a weekday to avoid crowds.'],
+ ['Pulau Ketam','About 1.5 hours (drive or KTM to Port Klang, then ferry)',1,'Fishing village on stilts known for seafood and slow island life.','Check the last ferry back before you go.'],
+ ['Tanjung Sepat','About 1.5 hours by car',1,'Seaside town with a lovers’ bridge, tea farm and seafood.','Pair it with Sekinchan for a full coastal day.'],
+ ['Sekinchan paddy fields','About 2 hours by car',1,'Wide green paddy fields, a wishing tree by the beach and fresh seafood.','Fields look different by season; green or golden both photograph well.'],
+ ['Kuala Gandah Elephant Sanctuary','About 2 hours by car',1,'Wildlife department centre caring for rescued elephants; visitors can watch feeding.','Check visiting hours and rules before you go.'],
+ ['Melaka','About 2 hours south by car or bus',1,'UNESCO heritage city: Jonker Street, Dutch Square, river cruise and chicken rice balls.','Jonker Walk night market runs on Friday to Sunday evenings.'],
+ ['Fraser’s Hill','About 2 hours by car',1,'Quiet colonial-era hill station, great for birdwatching and misty walks.','Best as a slow overnight trip.'],
+ ['Ipoh','About 2.5 hours by ETS train from KL Sentral',2,'Old town cafés, white coffee, street murals and cave temples.','Book ETS tickets early on weekends.'],
+ ['Gopeng','About 2.5 hours by car',2,'Adventure base for white-water rafting and the Gua Tempurung cave tours.','Wear clothes that can get wet and muddy.'],
+ ['Cameron Highlands','About 3.5 hours by car or bus',2,'Cool hill station with tea plantations, strawberry farms and mossy forest.','Bring a jacket; roads get busy on weekends.'],
+ ['Taiping','About 3 hours by car or ETS',2,'Charming rain town with Lake Gardens, old shophouses and a night safari zoo.','Afternoon showers are common; go in the morning.'],
+ ['Cherating','About 3.5 hours by car',2,'Laid-back east coast beach village with turtles, river cruises and surf season at year end.','Year-end monsoon brings big waves: swim only where it’s safe.'],
+ ['Pangkor Island','About 3.5 hours by car to Lumut, then ferry',2,'Easy island trip with beaches, fishing villages and seafood.','Check ferry times from Lumut jetty.'],
+ ['Penang (George Town)','About 4 hours by car or ETS',2,'UNESCO street art, heritage shophouses and some of Malaysia’s best hawker food.','Stay at least one night to enjoy the food.']];
 function renderExplore(){var k=klNow(),C=[['sights','🏛 Places to visit'],['trips','🚗 Day trips'],['outdoors','🌳 Outdoors'],['wellness','💆 Wellness']],out='';
   $('exChips').innerHTML=C.map(function(c){return '<button class="chip'+(EX===c[0]?' on':'')+'" data-ex="'+c[0]+'">'+c[1]+'</button>';}).join('');
   if(EX==='sights'){out=SIGHTS.map(function(x){return card({tags:tag('t-q',x[1]),name:x[0],meta:x[2],why:x[3],meta2:'🚆 '+x[4],acts:btn(mapsSearch(x[0]+' Kuala Lumpur'),'🧭 Directions',1)+btn(mapsSearch(x[0]+' Kuala Lumpur'),'⭐ Reviews & hours')});}).join('');
     $('exNote').textContent='Always check opening hours and dress codes before visiting places of worship.';}
-  else if(EX==='trips'){out=TRIPS.map(function(x){return card({tags:tag('t-q',x[1]),name:x[0],meta:x[2],why:x[3],acts:btn(mapsDir(null,null,x[0]).replace('+Kuala%20Lumpur','').replace(encodeURIComponent(' Kuala Lumpur'),encodeURIComponent(' Malaysia')),'🧭 Directions',1)+btn(mapsSearch(x[0]+' Malaysia things to do'),'⭐ Things to do')});}).join('');
+  else if(EX==='trips'){var GH=['About 1 hour or less','About 1.5 to 2 hours','2.5 to 4 hours'];out=[0,1,2].map(function(g){return '<div class="sh">'+GH[g]+'</div>'+TRIPS.filter(function(x){return x[2]===g;}).map(function(x){return card({tags:tag('t-q',x[1]),name:x[0],meta:x[3],why:x[4],acts:btn(mapsSearch(x[0]+' Malaysia'),'🧭 Directions',1)+btn(mapsSearch(x[0]+' Malaysia things to do'),'⭐ Things to do')});}).join('');}).join('');
     $('exNote').textContent='Travel times are typical by road from central KL; weekends and holidays take longer.';}
   else if(EX==='outdoors'){var dark=k.h>=19||k.h<6;out=(dark?'<div class="warn">🌙 It’s dark now. Parks are fine for an evening stroll, but leave the hikes for an early start tomorrow.</div>':'')+OUTD.map(function(x){return card({tags:tag('t-q',x[4]),name:x[0],meta:'📍 '+x[1],why:x[2]+' '+x[3],acts:btn(mapsSearch(x[0]+' Malaysia'),'🧭 Directions',1)+btn(mapsSearch(x[0]+' Malaysia'),'⭐ Reviews & hours')});}).join('');
     $('exNote').textContent='Bring water, start early, and avoid trails during thunderstorms.';}
   else{var day=(k.dow+6)%7,res=WELL.map(function(p){return{p:p,d:hav(POS.lat,POS.lng,p.lat,p.lng),st:openAt(parseOH(p.t.opening_hours),day,k.min)};}).filter(function(x){return x.d<=3&&x.st.open!==false&&!CHAINRE.test(x.p.t.name)&&!/anytime fitness|fitness first|celebrity fitness|chi fitness|jetts|true fitness|snap fitness|gold'?s( gym)?$|golds gym/i.test(x.p.t.name)&&(CHAINS[x.p.t.name.toLowerCase().trim()]||0)<3;}).sort(function(a,b){return (a.st.open?0:1)-(b.st.open?0:1)||a.d-b.d;}).slice(0,10);
     out=res.length?res.map(function(x){var t=x.p.t,area=[t['addr:street'],t['addr:suburb']||t['addr:city']].filter(Boolean).join(', ');var ph=(t.phone||t['contact:phone']||t['contact:mobile']||'').split(/[;,]/)[0].replace(/[^\d+]/g,'');
       return card({tags:(x.st.open?tag('t-ok',x.st.always?'Open 24 hours':x.st.until!=null?'Open until '+fmtTime(x.st.until):'Open now'):tag('t-q','Hours not listed'))+tag('t-q',fmtDist(x.d))+tag('t-soon',x.p.w),name:t.name,meta:area?'📍 '+area:'',acts:btn(mapsDir(x.p.lat,x.p.lng),'🧭 Directions',1)+(ph.length>=9?'<a class="btn" href="tel:'+esc(ph)+'">📞 Call to book</a>':'')+btn(mapsSearch(t.name+' '+(area||'Kuala Lumpur')),'⭐ Reviews')});}).join(''):(PLACES?'<div class="empty"><b>💆</b>No spas, gyms or yoga studios listed within 3 km. Try another area.</div>':'<div class="skel"></div>');
-    $('exNote').textContent='Spas, massage, gyms and yoga near you from OpenStreetMap. Call ahead to book.';}
+    $('exNote').textContent='Spas, massage, gyms and yoga near you. Call ahead to book.';}
   $('explore').innerHTML=out;}
 var GLOSS2=[['Jom','Let’s go! The friendly nudge to get out the door.'],['Makan','To eat, or food in general. “Let’s makan” = let’s grab a bite.'],['Mamak','Indian-Muslim eatery, many open 24 hours. Roti canai and teh tarik.'],['Teh tarik','“Pulled tea”: sweet milky tea poured back and forth until frothy.'],['Roti canai','Flaky flatbread served with curry dip.'],['Nasi lemak','Coconut rice with sambal, egg, peanuts and anchovies: the national dish.'],['Pasar malam','Night market. Pop-up street stalls, usually on one fixed night a week.'],['Kopitiam','Traditional coffee shop serving kopi, kaya toast and soft-boiled eggs.'],['Hawker / Medan Selera','Food court with many small stalls under one roof.'],['Tapau','Takeaway. “Tapau one” = pack it to go.'],['Lepak','To chill or hang out with no rush.'],['Supper','A late-night meal after 10pm. A big KL habit.'],['Lah','Friendly word added to the end of a sentence: “Okay lah!”'],['Panas','Hot, as in the KL afternoon sun.'],['Grab','Malaysia’s main ride-hailing and food-delivery app.'],['Touch ’n Go','Card and e-wallet used for trains, buses, tolls and parking.']];
 function renderGlossary(){$('glossary').innerHTML=GLOSS2.map(function(g){return '<div class="gl"><b>'+esc(g[0])+'</b>: '+esc(g[1])+'</div>';}).join('');}
@@ -478,7 +492,7 @@ function renderFoot(){
   var at=DATA&&(DATA.events_checked_at||DATA.generated_at),age=null,m;
   if(at&&(m=String(at).match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}):(\d{2})/))){age=(Date.now()-new Date(m[1]+'T'+m[2]+':'+m[3]+':00+08:00').getTime())/36e5;}
   $('warn').innerHTML=age!=null&&age>80?'<div class="warn">⚠️ Events last checked '+Math.round(age/24)+' days ago. Confirm on the ticket page.</div>':'';
-  $('foot').innerHTML='Weather: live from <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>. Events checked '+esc(checkedLbl())+' from KL Concert & AllEvents. Places © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors. <a href="#about" data-go="about">About & glossary</a> · Test page · <a href="../">back to JomOut KL</a>';}
+  $('foot').innerHTML='Events checked '+esc(checkedLbl())+'. Weather data by <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>. Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors. Test page · <a href="../">back to JomOut KL</a>';}
 $('wa').onclick=function(){var k=klNow(),td=pmToday(),pm=PM.filter(function(p){return p.d===td;}).map(function(p){return '🏮 '+p.n+' ('+p.h+')';}),
   ev=cleanEvents().filter(function(e){return inRange(e,k.iso,k.iso);}).slice(0,3).map(function(e){return '🎤 '+e.title+' @ '+e.venue;});
   var txt='KL tonight (JomOut)\n'+(pm.concat(ev).join('\n')||'Quiet night, good for supper')+'\nhttps://www.jomout.com';
