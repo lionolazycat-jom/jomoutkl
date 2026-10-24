@@ -236,7 +236,8 @@ function tag(cls,t){return '<span class="tag '+cls+'">'+esc(t)+'</span>';}
 
 /* ── tabs (top, sticky, URL hash) ── */
 var ORDER=['about','tonight','food','events','transit','explore'];
-function show(t,noScroll){if(t==='weather')t='tonight';if(t==='markets'||t==='escape'){if(t==='markets'){MEAL='markets';renderEat();}t=t==='markets'?'food':'explore';}if(ORDER.indexOf(t)<0)t='tonight';TAB=t;ORDER.forEach(function(x){$('p-'+x).classList.toggle('on',x===t);});
+function gc(p,t,ev){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:p,title:t||p,event:!!ev});}catch(e){} }
+function show(t,noScroll){if(t==='weather')t='tonight';if(t==='markets'||t==='escape'){if(t==='markets'){MEAL='markets';renderEat();}t=t==='markets'?'food':'explore';}if(ORDER.indexOf(t)<0)t='tonight';TAB=t;gc('/'+t,t);ORDER.forEach(function(x){$('p-'+x).classList.toggle('on',x===t);});
   [].forEach.call(document.querySelectorAll('#tabs button'),function(b){b.classList.toggle('on',b.dataset.tab===t);});
   if(!noScroll)window.scrollTo(0,0);store('tab',t);try{history.replaceState(null,'','#'+t);}catch(e){}
   ['meals','days','exChips','evTabs'].forEach(centerChip);}
@@ -529,8 +530,8 @@ function renderFoot(){
   var at=DATA&&(DATA.events_checked_at||DATA.generated_at),age=null,m;
   if(at&&(m=String(at).match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}):(\d{2})/))){age=(Date.now()-new Date(m[1]+'T'+m[2]+':'+m[3]+':00+08:00').getTime())/36e5;}
   $('warn').innerHTML=age!=null&&age>30?'<div class="warn">⚠️ Events last checked '+esc(checkedLbl())+'. Confirm on ticket pages.</div>':'';
-  $('foot').innerHTML='Updated '+esc(checkedLbl())+' · No sponsored listings · Not affiliated with Rapid KL or any venue listed · We collect no personal data. Weather data by <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>. Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors.';}
-$('wa').onclick=function(){var k=klNow(),td=pmToday(),pm=PM.filter(function(p){return p.d===td;}).map(function(p){return '🏮 '+p.n+' ('+p.h+')';}),
+  $('foot').innerHTML='Updated '+esc(checkedLbl())+' · No sponsored listings · Not affiliated with Rapid KL or any venue listed · We collect no personal data: visits are counted anonymously, with no cookies, by GoatCounter. Weather data by <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>. Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors.';}
+$('wa').onclick=function(){gc('share-whatsapp','WhatsApp share',1);var k=klNow(),td=pmToday(),pm=PM.filter(function(p){return p.d===td;}).map(function(p){return '🏮 '+p.n+' ('+p.h+')';}),
   ev=cleanEvents().filter(function(e){return inRange(e,k.iso,k.iso);}).slice(0,3).map(function(e){return '🎤 '+e.title+' @ '+e.venue;});
   var txt='KL tonight (JomOut)\n'+(pm.concat(ev).join('\n')||'Quiet night, good for supper')+'\nhttps://www.jomout.com/?v=3';
   location.href='https://api.whatsapp.com/send?text='+encodeURIComponent(txt);};
@@ -553,5 +554,6 @@ loadWx();askLoc();
 setInterval(function(){if(WX)loadWx();},15*60*1000);
 })();
 </script>
+<script data-goatcounter="https://jomout.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
