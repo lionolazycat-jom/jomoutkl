@@ -424,7 +424,7 @@ function wellType(t){if(/brothel|stripclub|swinger|love_hotel|sex/i.test((t.amen
 function eatList(m){var k=klNow(),day=(k.dow+6)%7,live=(m===mealNow(k.h)),res=[];
   PLACES.forEach(function(p){var t=p.t,nm=t.name.toLowerCase().trim();if(CHAINRE.test(t.name)||(CHAINS[nm]||0)>=3)return;if(!fits(t,m))return;
     var oh=parseOH(t.opening_hours),st=live?openAt(oh,day,k.min):(m==='supper'?openAt(oh,day,1380):{open:null});if(st.open===false)return;if(m==='supper'&&st.open==null&&!SUP.test((t.name||'')+' '+(t.cuisine||'')))return;var d=hav(POS.lat,POS.lng,p.lat,p.lng);if(d>3)return;res.push({p:p,st:st,d:d});});
-  res.sort(function(x,y){return (x.st.open?0:1)-(y.st.open?0:1)||x.d-y.d;});var seen=[];res=res.filter(function(x){var n=x.p.t.name.toLowerCase().replace(/\bpasar\b/g,'').replace(/\s+/g,' ').trim();for(var i=0;i<seen.length;i++)if(seen[i].n===n&&hav(seen[i].la,seen[i].lo,x.p.lat,x.p.lng)<0.6)return false;seen.push({n:n,la:x.p.lat,lo:x.p.lng});return true;});return res;}
+  res.sort(function(x,y){return (x.st.open?0:1)-(y.st.open?0:1)||x.d-y.d;});var seen=[];res=res.filter(function(x){var n=x.p.t.name.toLowerCase().replace(/\bpasar\b/g,'').replace(/\s+/g,' ').trim();for(var i=0;i<seen.length;i++)if(seen[i].n===n&&hav(seen[i].la,seen[i].lo,x.p.lat,x.p.lng)<0.15)return false;seen.push({n:n,la:x.p.lat,lo:x.p.lng});return true;});return res;}
 function eatCard(x){var t=x.p.t,cu=String(t.cuisine||'').split(';').slice(0,2).map(function(s){return s.replace(/_/g,' ');}).join(', ');
   var area=[t['addr:street'],t['addr:suburb']||t['addr:city']].filter(Boolean).join(', ');
   var open=x.st.open?tag('t-ok',x.st.always?'Open 24 hours':x.st.until!=null?'Open until '+fmtTime(x.st.until):'Open now'):tag('t-q','Hours not listed');
