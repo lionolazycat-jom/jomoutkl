@@ -333,6 +333,7 @@ function srcOk(ev){if(!SRC||SRC.length<5000)return true;var l=String(ev.link||''
   return dd;}
 function cleanEvents(){var t=klNow().iso;return((DATA&&DATA.modules&&DATA.modules.events)||[]).filter(function(e){
   if(!e||!e.title||!/^https?:\/\//.test(e.link||''))return false;if(!srcOk(e))return false;if(OUT.test((e.venue||'')+' '+e.title))return false;
+  if(/[\u3400-\u9fff]/.test(e.title)&&/[A-Za-z]{3}/.test(e.title)){var q=e.title.replace(/[\u3000-\u9fff\uff00-\uffef]+/g,' ').replace(/\s+/g,' ').split(/\s+[-–|:]\s+/).map(function(z){return z.trim();}).filter(function(z,i,a){return z&&a.findIndex(function(y){return y.toLowerCase()===z.toLowerCase();})===i;}).join(' - ');if(q.length>=3)e.title=q;}
   var end=e.end_iso||e.date_iso;return !!e.date_iso&&end>=t;}).sort(function(x,y){return x.date_iso<y.date_iso?-1:1;});}
 function inRange(e,x,y){return e.date_iso<=y&&(e.end_iso||e.date_iso)>=x;}
 function evCard(e,today){var src=(e.link.split('/')[2]||'').replace('www.',''),multi=e.end_iso&&e.end_iso!==e.date_iso;
