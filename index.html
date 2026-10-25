@@ -337,7 +337,7 @@ function cleanEvents(){var t=klNow().iso;return((DATA&&DATA.modules&&DATA.module
 function inRange(e,x,y){return e.date_iso<=y&&(e.end_iso||e.date_iso)>=x;}
 function evCard(e,today){var src=(e.link.split('/')[2]||'').replace('www.',''),multi=e.end_iso&&e.end_iso!==e.date_iso;
   var when=inRange(e,today,today)?tag('t-now',multi?'On today':'Tonight'):tag('t-soon',dayLabel(e.date_iso)+(multi?' – '+dayLabel(e.end_iso):''));
-  return card({tags:when+(isExpo(e)?tag('t-ok','Expo'):'')+(e.time?tag('t-q',e.time):''),name:e.title,meta:'📍 '+e.venue,why:evTip(e),acts:btn(e.link,'🎟 Tickets & info',1)+btn(mapsDir(null,null,e.venue),'🧭 Directions'),src:'Checked '+esc(checkedLbl())});}
+  return card({tags:when+(isExpo(e)?tag('t-ok','Expo'):'')+tag('t-q',e.time?e.time:'Time: see tickets'),name:e.title,meta:'📍 '+e.venue,why:evTip(e),acts:btn(e.link,'🎟 Tickets & info',1)+btn(mapsDir(null,null,e.venue),'🧭 Directions'),src:'Checked '+esc(checkedLbl())});}
 function windows(){var k=klNow(),t=k.iso,dow=k.dow,toSat=(6-dow+7)%7,fri=addDays(t,Math.max(0,toSat-1)),sun=addDays(t,toSat+1);if(dow===0){fri=t;sun=t;}
   return[['tonight','Tonight',t,t],['tomorrow','Tomorrow',addDays(t,1),addDays(t,1)],['weekend','This weekend',fri,sun],['next','Next 2 weeks',t,addDays(t,14)],['month','Everything',t,addDays(t,90)]];}
 function isExpo(e){return /^(exhibition|expo)$/.test(e.type||'')||/\b(expo|convention|fair|exhibition)\b|mitec|matrade/i.test(e.title+' '+e.venue);}
@@ -393,7 +393,7 @@ function renderTour(){var L=TOUR.filter(function(x){return !TH||x[4]==='H';}),h=
   ['c','k','p','d'].forEach(function(g){var G=L.filter(function(x){return x[0]===g;});if(G.length)h+='<div class="sh">'+TOURG[g]+'</div>'+G.map(tourCard).join('');});
   $('tour').innerHTML=h+'<div class="note">Famous stalls picked from the Michelin Guide, Time Out KL, KL Foodie, Malay Mail and other food press. Last checked Oct 2026. Hawker hours change often, so check Maps before you go. “Muslim-owned” means run by Muslims; we could not confirm a JAKIM halal certificate.</div>';}
 
-var MASC={breakfast:['kay','Kay','Morning! Kopitiams and breakfast spots near you.'],lunch:['lola','Lola','Lunch time. Local favourites close by.'],cafe:['taffy','Taffy','Stay cool lah. Coffee, teh and desserts nearby.'],dinner:['nala','Nala','Makan first, plan later. Dinner near you.'],supper:['dimi','Dimi','Still hungry? Late-night spots that are open.'],tourist:['remy-jom','Remy','Visiting KL? These are the famous stalls locals queue for.'],markets:['skye','Skye','Pasar malam means night market: street food from about 5pm. Bring cash.']};
+var MASC={breakfast:['kay','Kay','Morning! Kopitiams and breakfast spots near you.'],lunch:['lola','Lola','Lunch time. Local favourites close by.'],cafe:['taffy','Taffy','Stay cool lah. Coffee, teh and desserts nearby.'],dinner:['nala','Nala','Makan first, plan later. Dinner near you.'],supper:['dimi','Dimi','Still hungry? Late-night mamaks and supper spots. Hours vary, so check before you go.'],tourist:['remy-jom','Remy','Visiting KL? These are the famous stalls locals queue for.'],markets:['skye','Skye','Pasar malam means night market: street food from about 5pm. Bring cash.']};
 var DIDX={Mo:0,Tu:1,We:2,Th:3,Fr:4,Sa:5,Su:6};
 function expandDays(spec){var out=[],parts=spec.split(','),i,m,x,y,d,g;for(i=0;i<parts.length;i++){m=parts[i].trim().match(/^(Mo|Tu|We|Th|Fr|Sa|Su)(?:-(Mo|Tu|We|Th|Fr|Sa|Su))?$/);if(!m)return null;x=DIDX[m[1]];y=m[2]?DIDX[m[2]]:x;d=x;for(g=0;g<8;g++){out[d]=true;if(d===y)break;d=(d+1)%7;} }return out;}
 function parseRanges(spec){var parts=spec.split(','),res=[],i,m,o,c;for(i=0;i<parts.length;i++){m=parts[i].trim().match(/^(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})$/);if(!m)return null;o=+m[1]*60+(+m[2]);c=+m[3]*60+(+m[4]);if(c<=o)c+=1440;res.push([o,c]);}return res;}
@@ -422,8 +422,8 @@ function wellType(t){if(/brothel|stripclub|swinger|love_hotel|sex/i.test((t.amen
   if(t.amenity==='spa')return 'Spa';if(t.leisure==='sauna')return 'Sauna';if(t.sport==='yoga'||t.leisure==='yoga')return 'Yoga';if(t.leisure==='fitness_centre')return 'Gym';return null;}
 function eatList(m){var k=klNow(),day=(k.dow+6)%7,live=(m===mealNow(k.h)),res=[];
   PLACES.forEach(function(p){var t=p.t,nm=t.name.toLowerCase().trim();if(CHAINRE.test(t.name)||(CHAINS[nm]||0)>=3)return;if(!fits(t,m))return;
-    var st=live?openAt(parseOH(t.opening_hours),day,k.min):{open:null};if(st.open===false)return;var d=hav(POS.lat,POS.lng,p.lat,p.lng);if(d>3)return;res.push({p:p,st:st,d:d});});
-  res.sort(function(x,y){return (x.st.open?0:1)-(y.st.open?0:1)||x.d-y.d;});return res;}
+    var oh=parseOH(t.opening_hours),st=live?openAt(oh,day,k.min):(m==='supper'?openAt(oh,day,1380):{open:null});if(st.open===false)return;if(m==='supper'&&st.open==null&&!SUP.test((t.name||'')+' '+(t.cuisine||'')))return;var d=hav(POS.lat,POS.lng,p.lat,p.lng);if(d>3)return;res.push({p:p,st:st,d:d});});
+  res.sort(function(x,y){return (x.st.open?0:1)-(y.st.open?0:1)||x.d-y.d;});var seen=[];res=res.filter(function(x){var n=x.p.t.name.toLowerCase().replace(/\bpasar\b/g,'').replace(/\s+/g,' ').trim();for(var i=0;i<seen.length;i++)if(seen[i].n===n&&hav(seen[i].la,seen[i].lo,x.p.lat,x.p.lng)<0.6)return false;seen.push({n:n,la:x.p.lat,lo:x.p.lng});return true;});return res;}
 function eatCard(x){var t=x.p.t,cu=String(t.cuisine||'').split(';').slice(0,2).map(function(s){return s.replace(/_/g,' ');}).join(', ');
   var area=[t['addr:street'],t['addr:suburb']||t['addr:city']].filter(Boolean).join(', ');
   var open=x.st.open?tag('t-ok',x.st.always?'Open 24 hours':x.st.until!=null?'Open until '+fmtTime(x.st.until):'Open now'):tag('t-q','Hours not listed');
