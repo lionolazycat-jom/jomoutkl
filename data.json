@@ -1,43 +1,52 @@
 ```json
 {
   "status": "success",
-  "generated_at": "2026-10-27 07:00",
-  "events_checked_at": "2026-10-27 07:00",
+  "generated_at": "2026-10-28 07:00",
+  "events_checked_at": "2026-10-28 07:00",
   "location_context": "Kuala Lumpur",
-  "go_out_score": 6,
+  "go_out_score": 7,
   "today": {
-    "mood": "Humid and overcast",
-    "best_time_to_go_out": "Evening after the humidity drops",
-    "summary": "It's a warm and humid Tuesday morning with few clouds. Temperature sits at 25.5°C but feels like 26.6°C with 95% humidity. Light winds at 2 km/h make it feel sticky, so plan indoor activities or wait for cooler evening hours."
+    "mood": "Pleasant morning with light clouds",
+    "best_time_to_go_out": "Early morning or late afternoon",
+    "summary": "A comfortable 25°C morning with few clouds and high humidity. Perfect for outdoor activities before the midday heat sets in."
   },
   "weather": {
-    "temp_c": 25.47,
-    "feels_like_c": 26.55,
+    "temp_c": 24.91,
+    "feels_like_c": 25.86,
     "condition": "few clouds",
-    "humidity_pct": 95,
-    "wind_kmh": "2 km/h",
+    "humidity_pct": 92,
+    "wind_kmh": "4 km/h",
     "uv_index": 0,
     "aqi": 0,
     "sunrise": "7:03 AM",
     "sunset": "7:04 PM",
-    "advisory": "High humidity today; stay hydrated and seek air-conditioned spaces.",
+    "advisory": "High humidity expected throughout the day",
     "hourly": []
   },
   "finance": {
-    "usd_myr": "4.085",
+    "usd_myr": "4.087",
     "usd_change": "",
-    "sgd_myr": "3.195",
+    "sgd_myr": "3.191",
     "sgd_change": ""
   },
   "modules": {
     "events": [
+      {
+        "title": "Malaysian Philharmonic Youth Orchestra - A Symphonic Splendour",
+        "venue": "Dewan Filharmonik PETRONAS",
+        "date_iso": "2026-10-28",
+        "end_iso": "2026-10-28",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/a-symphonic-splendour-mpo"
+      },
       {
         "title": "Laspice Halloween Comedy Special",
         "venue": "KL Comedy Corner, Selangor",
         "date_iso": "2026-10-28",
         "end_iso": "2026-10-28",
         "time": "",
-        "type": "other",
+        "type": "concert",
         "link": "https://klconcert.com/concert/laspice-halloween-comedy-special-suan-la-xiu"
       },
       {
@@ -66,6 +75,15 @@
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/crystal-halloween-the-sirens"
+      },
+      {
+        "title": "DRIP KL Halloween: The Circus",
+        "venue": "Drip Kuala Lumpur",
+        "date_iso": "2026-10-30",
+        "end_iso": "2026-10-30",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/drip-kl-halloween-the-circus"
       },
       {
         "title": "Konsert Elegant Selamanya",
@@ -100,7 +118,7 @@
         "date_iso": "2026-10-30",
         "end_iso": "2026-10-30",
         "time": "",
-        "type": "other",
+        "type": "concert",
         "link": "https://klconcert.com/concert/okb-orang-kunak-baru-di-kuala-lumpur"
       },
       {
@@ -113,39 +131,12 @@
         "link": "https://klconcert.com/concert/tribute-to-brian-tan-with-the-klpac-orchestra"
       },
       {
-        "title": "Jugaad: Bollywood Halloween Night",
-        "venue": "Vox Live KL",
-        "date_iso": "2026-10-30",
-        "end_iso": "2026-10-30",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/jugaad-bollywood-halloween-night"
-      },
-      {
-        "title": "Shanti People Live in Malaysia",
-        "venue": "Marquis Sky Lounge, Kuala Lumpur",
-        "date_iso": "2026-10-30",
-        "end_iso": "2026-10-30",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/shanti-people-live-in-malaysia"
-      },
-      {
-        "title": "The Greatest Singles' Hike 8.0",
-        "venue": "Bukit Seri Bintang",
-        "date_iso": "2026-10-31",
-        "end_iso": "2026-10-31",
-        "time": "6:30 AM",
-        "type": "other",
-        "link": "https://allevents.in/kuala-lumpur/the-greatest-singles-hike-80-by-take-the-leap/100001996541113215"
-      },
-      {
         "title": "euphoria 2.0",
         "venue": "D Theatre Malaysia, Selangor",
         "date_iso": "2026-10-31",
         "end_iso": "2026-10-31",
         "time": "",
-        "type": "other",
+        "type": "concert",
         "link": "https://klconcert.com/concert/euphoria-2-0-the-after-school-annual-concert"
       },
       {
@@ -159,7 +150,7 @@
       },
       {
         "title": "Halloween Concert 2026 - Moe Magic Night",
-        "venue": "DPAC Theatre, Selangor",
+        "venue": "DPAC, Empire Damansara, Selangor",
         "date_iso": "2026-10-31",
         "end_iso": "2026-10-31",
         "time": "",
@@ -167,21 +158,12 @@
         "link": "https://klconcert.com/concert/halloween-concert-2026-moe-magic-night"
       },
       {
-        "title": "A Tribute to JJ Lin, Jay Chou, Jam Hsiao",
-        "venue": "Pao Mo Live, Selangor",
-        "date_iso": "2026-10-31",
-        "end_iso": "2026-10-31",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/a-tribute-to-jj-lin-jay-chou-jam-hsiao"
-      },
-      {
         "title": "Aunty Henn Happy Go Hell Talkshow",
         "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-10-31",
         "end_iso": "2026-10-31",
         "time": "",
-        "type": "other",
+        "type": "concert",
         "link": "https://klconcert.com/concert/aunty-henn-happy-go-hell-talkshow-2026"
       },
       {
@@ -194,7 +176,7 @@
         "link": "https://klconcert.com/concert/beats-of-borneo-alena-murang-with-the-mpo"
       },
       {
-        "title": "Insomniacks Album Tour 2026 - Kuala Lumpur",
+        "title": "Insomniacks Album Tour 2026",
         "venue": "ODEON KL",
         "date_iso": "2026-10-31",
         "end_iso": "2026-10-31",
@@ -221,43 +203,16 @@
         "link": "https://klconcert.com/concert/konsert-muzik-dras-dadali-repvblik-armada-samsons"
       },
       {
-        "title": "Soundtrack from the Movie - 5th IPA Concert",
-        "venue": "TUTAN Skyline, Kuala Lumpur",
+        "title": "SONIC BLISS 3 - Halloween Psytrance Night",
+        "venue": "Kuna Rooftop Bar KL, Kuala Lumpur",
         "date_iso": "2026-10-31",
         "end_iso": "2026-10-31",
         "time": "",
         "type": "concert",
-        "link": "https://klconcert.com/concert/soundtrack-from-the-movie-5th-ipa-annual-concert"
+        "link": "https://klconcert.com/concert/sonic-bliss-3-halloween-psytrance-night"
       },
       {
-        "title": "Suara Kita",
-        "venue": "BE.KL, Cheras, Kuala Lumpur",
-        "date_iso": "2026-10-31",
-        "end_iso": "2026-10-31",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/suara-kita-atas-angin"
-      },
-      {
-        "title": "Gig For Good: The Black Parade",
-        "venue": "BoboKL, Kuala Lumpur",
-        "date_iso": "2026-10-31",
-        "end_iso": "2026-10-31",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/gig-for-good-the-black-parade"
-      },
-      {
-        "title": "Music for Land",
-        "venue": "HELP University Hall, Subang 2, Selangor",
-        "date_iso": "2026-11-01",
-        "end_iso": "2026-11-01",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/music-for-land"
-      },
-      {
-        "title": "Vijay Antony Live in Concert 2026",
+        "title": "VIJAY ANTONY LIVE IN CONCERT 2026",
         "venue": "National Hockey Stadium, Bukit Jalil",
         "date_iso": "2026-11-01",
         "end_iso": "2026-11-01",
@@ -284,13 +239,13 @@
         "link": "https://klconcert.com/concert/lany-soft-world-tour"
       },
       {
-        "title": "The Weeknd in Kuala Lumpur",
-        "venue": "TM Stadium Nasional",
+        "title": "The Weeknd After Hours Til Dawn",
+        "venue": "TM Stadium Nasional, Bukit Jalil",
         "date_iso": "2026-11-04",
         "end_iso": "2026-11-04",
-        "time": "8:30 PM",
+        "time": "8:00 PM",
         "type": "concert",
-        "link": "https://allevents.in/kuala-lumpur/the-weeknd-in-kuala-lumpur/3300030336038502"
+        "link": "https://klconcert.com/concert/the-weeknd-after-hours-til-dawn"
       },
       {
         "title": "Ghibli Jazz with WVC",
@@ -302,13 +257,49 @@
         "link": "https://klconcert.com/concert/ghibli-jazz-with-wvc"
       },
       {
-        "title": "TCGKL Convention 2026",
+        "title": "FLOW NARUTO THE ROCK WORLD TOUR 2026",
+        "venue": "JioSpace, KL",
+        "date_iso": "2026-11-06",
+        "end_iso": "2026-11-06",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/flow-naruto-the-rock-world-tour-2026-kuala-lumpur"
+      },
+      {
+        "title": "TCGKL CONVENTION 2026",
         "venue": "KLCC Convention Centre",
         "date_iso": "2026-11-06",
         "end_iso": "2026-11-06",
         "time": "10:00 AM",
         "type": "expo",
         "link": "https://allevents.in/kuala-lumpur/tcgkl-convention-2026/200030587704352"
+      },
+      {
+        "title": "ACG Matsuri 2026",
+        "venue": "Lalaport BBCC",
+        "date_iso": "2026-11-07",
+        "end_iso": "2026-11-07",
+        "time": "11:00 AM",
+        "type": "expo",
+        "link": "https://allevents.in/kuala-lumpur/acg-matsuri-2026-lalaport-bbcc/200030848668056"
+      },
+      {
+        "title": "Yves 2026 Asia & Australia Tour",
+        "venue": "Vox Live KL",
+        "date_iso": "2026-11-07",
+        "end_iso": "2026-11-07",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/yves-2026-asia-australia-tour"
+      },
+      {
+        "title": "YoungCaptain I AM WHAT I AM World Tour",
+        "venue": "Unifi Arena (Axiata Arena), KL",
+        "date_iso": "2026-11-07",
+        "end_iso": "2026-11-07",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/youngcaptain-i-am-what-i-am-world-tour-kuala-lumpur"
       }
     ],
     "news": [],
