@@ -1,63 +1,36 @@
 ```json
 {
   "status": "success",
-  "generated_at": "2026-10-28 07:00",
-  "events_checked_at": "2026-10-28 07:00",
+  "generated_at": "2026-10-29 07:00",
+  "events_checked_at": "2026-10-29 07:00",
   "location_context": "Kuala Lumpur",
-  "go_out_score": 7,
+  "go_out_score": 6,
   "today": {
-    "mood": "Pleasant morning with light clouds",
-    "best_time_to_go_out": "Early morning or late afternoon",
-    "summary": "A comfortable 25°C morning with few clouds and high humidity. Perfect for outdoor activities before the midday heat sets in."
+    "mood": "Humid and overcast",
+    "best_time_to_go_out": "Evening after the humidity drops",
+    "summary": "Thursday morning in KL is warm at 25°C but very humid at 97% with few clouds. The air feels sticky, so indoor activities or evening outings are more comfortable."
   },
   "weather": {
     "temp_c": 24.91,
-    "feels_like_c": 25.86,
+    "feels_like_c": 25.99,
     "condition": "few clouds",
-    "humidity_pct": 92,
-    "wind_kmh": "4 km/h",
+    "humidity_pct": 97,
+    "wind_kmh": "0 km/h",
     "uv_index": 0,
     "aqi": 0,
     "sunrise": "7:03 AM",
-    "sunset": "7:04 PM",
-    "advisory": "High humidity expected throughout the day",
+    "sunset": "7:10 PM",
+    "advisory": "Very high humidity today; stay hydrated and seek air-conditioned spaces.",
     "hourly": []
   },
   "finance": {
-    "usd_myr": "4.087",
+    "usd_myr": "4.089",
     "usd_change": "",
     "sgd_myr": "3.191",
     "sgd_change": ""
   },
   "modules": {
     "events": [
-      {
-        "title": "Malaysian Philharmonic Youth Orchestra - A Symphonic Splendour",
-        "venue": "Dewan Filharmonik PETRONAS",
-        "date_iso": "2026-10-28",
-        "end_iso": "2026-10-28",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/a-symphonic-splendour-mpo"
-      },
-      {
-        "title": "Laspice Halloween Comedy Special",
-        "venue": "KL Comedy Corner, Selangor",
-        "date_iso": "2026-10-28",
-        "end_iso": "2026-10-28",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/laspice-halloween-comedy-special-suan-la-xiu"
-      },
-      {
-        "title": "No Borders Feat Parallel Worlds",
-        "venue": "ykō Bukit Damansara, Kuala Lumpur",
-        "date_iso": "2026-10-28",
-        "end_iso": "2026-10-28",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/no-borders-feat-parallel-worlds"
-      },
       {
         "title": "WVC Presents: Jazz Bach",
         "venue": "BoboKL, Kuala Lumpur",
@@ -95,13 +68,22 @@
         "link": "https://klconcert.com/concert/konsert-elegant-selamanya"
       },
       {
+        "title": "SKYLA TYLAA LIVE AT SENSE3 KL",
+        "venue": "Sense3 KL, Kuala Lumpur",
+        "date_iso": "2026-10-30",
+        "end_iso": "2026-10-30",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/skyla-tylaa-live-at-sense3-kl"
+      },
+      {
         "title": "The Return of Dash Berlin",
         "venue": "XOX Arena, The Arch Galeries, KL",
         "date_iso": "2026-10-30",
         "end_iso": "2026-10-30",
         "time": "8:00 PM",
         "type": "concert",
-        "link": "https://allevents.in/kuala-lumpur/the-return-of-dash-berlin/200030754542607"
+        "link": "https://klconcert.com/concert/the-return-of-dash-berlin"
       },
       {
         "title": "A Bollywood & Sufi Experience",
@@ -131,6 +113,24 @@
         "link": "https://klconcert.com/concert/tribute-to-brian-tan-with-the-klpac-orchestra"
       },
       {
+        "title": "Jugaad: Bollywood Halloween Night",
+        "venue": "Vox Live KL",
+        "date_iso": "2026-10-30",
+        "end_iso": "2026-10-30",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/jugaad-bollywood-halloween-night"
+      },
+      {
+        "title": "SHANTI PEOPLE LIVE IN MALAYSIA",
+        "venue": "Marquis Sky Lounge, Kuala Lumpur",
+        "date_iso": "2026-10-30",
+        "end_iso": "2026-10-30",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/shanti-people-live-in-malaysia"
+      },
+      {
         "title": "euphoria 2.0",
         "venue": "D Theatre Malaysia, Selangor",
         "date_iso": "2026-10-31",
@@ -158,6 +158,15 @@
         "link": "https://klconcert.com/concert/halloween-concert-2026-moe-magic-night"
       },
       {
+        "title": "A Tribute to JJ Lin, Jay Chou, Jam Hsiao",
+        "venue": "Pao Mo Live, Selangor",
+        "date_iso": "2026-10-31",
+        "end_iso": "2026-10-31",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/a-tribute-to-jj-lin-jay-chou-jam-hsiao"
+      },
+      {
         "title": "Aunty Henn Happy Go Hell Talkshow",
         "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-10-31",
@@ -176,7 +185,7 @@
         "link": "https://klconcert.com/concert/beats-of-borneo-alena-murang-with-the-mpo"
       },
       {
-        "title": "Insomniacks Album Tour 2026",
+        "title": "Insomniacks Album Tour 2026 — Kuala Lumpur",
         "venue": "ODEON KL",
         "date_iso": "2026-10-31",
         "end_iso": "2026-10-31",
@@ -185,7 +194,7 @@
         "link": "https://klconcert.com/concert/insomniacks-album-tour-2026-kuala-lumpur"
       },
       {
-        "title": "Jason Mraz Live in Kuala Lumpur",
+        "title": "Jason Mraz (Live in Kuala Lumpur)",
         "venue": "National Hockey Stadium, Bukit Jalil",
         "date_iso": "2026-10-31",
         "end_iso": "2026-10-31",
@@ -203,7 +212,7 @@
         "link": "https://klconcert.com/concert/konsert-muzik-dras-dadali-repvblik-armada-samsons"
       },
       {
-        "title": "SONIC BLISS 3 - Halloween Psytrance Night",
+        "title": "SONIC BLISS 3 — Halloween Psytrance Night",
         "venue": "Kuna Rooftop Bar KL, Kuala Lumpur",
         "date_iso": "2026-10-31",
         "end_iso": "2026-10-31",
@@ -212,13 +221,49 @@
         "link": "https://klconcert.com/concert/sonic-bliss-3-halloween-psytrance-night"
       },
       {
+        "title": "SOUNDTRACK FROM THE MOVIE (5th IPA Annual Concert)",
+        "venue": "TUTAN Skyline, Kuala Lumpur",
+        "date_iso": "2026-10-31",
+        "end_iso": "2026-10-31",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/soundtrack-from-the-movie-5th-ipa-annual-concert"
+      },
+      {
+        "title": "Suara Kita",
+        "venue": "BE.KL, Cheras, Kuala Lumpur",
+        "date_iso": "2026-10-31",
+        "end_iso": "2026-10-31",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/suara-kita-atas-angin"
+      },
+      {
+        "title": "Gig For Good: The Black Parade",
+        "venue": "BoboKL, Kuala Lumpur",
+        "date_iso": "2026-10-31",
+        "end_iso": "2026-10-31",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/gig-for-good-the-black-parade"
+      },
+      {
+        "title": "Music for Land",
+        "venue": "HELP University Hall, Subang 2, Selangor",
+        "date_iso": "2026-11-01",
+        "end_iso": "2026-11-01",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/music-for-land"
+      },
+      {
         "title": "VIJAY ANTONY LIVE IN CONCERT 2026",
         "venue": "National Hockey Stadium, Bukit Jalil",
         "date_iso": "2026-11-01",
         "end_iso": "2026-11-01",
         "time": "4:00 PM",
         "type": "concert",
-        "link": "https://allevents.in/kuala-lumpur/vijay-antony-live-in-concert-2026/200030537546754"
+        "link": "https://klconcert.com/concert/vijay-antony-live-in-concert-2026"
       },
       {
         "title": "40FINGERS Asian Tour 2026 Live in Malaysia",
@@ -243,7 +288,7 @@
         "venue": "TM Stadium Nasional, Bukit Jalil",
         "date_iso": "2026-11-04",
         "end_iso": "2026-11-04",
-        "time": "8:00 PM",
+        "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/the-weeknd-after-hours-til-dawn"
       },
@@ -257,15 +302,6 @@
         "link": "https://klconcert.com/concert/ghibli-jazz-with-wvc"
       },
       {
-        "title": "FLOW NARUTO THE ROCK WORLD TOUR 2026",
-        "venue": "JioSpace, KL",
-        "date_iso": "2026-11-06",
-        "end_iso": "2026-11-06",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/flow-naruto-the-rock-world-tour-2026-kuala-lumpur"
-      },
-      {
         "title": "TCGKL CONVENTION 2026",
         "venue": "KLCC Convention Centre",
         "date_iso": "2026-11-06",
@@ -273,33 +309,6 @@
         "time": "10:00 AM",
         "type": "expo",
         "link": "https://allevents.in/kuala-lumpur/tcgkl-convention-2026/200030587704352"
-      },
-      {
-        "title": "ACG Matsuri 2026",
-        "venue": "Lalaport BBCC",
-        "date_iso": "2026-11-07",
-        "end_iso": "2026-11-07",
-        "time": "11:00 AM",
-        "type": "expo",
-        "link": "https://allevents.in/kuala-lumpur/acg-matsuri-2026-lalaport-bbcc/200030848668056"
-      },
-      {
-        "title": "Yves 2026 Asia & Australia Tour",
-        "venue": "Vox Live KL",
-        "date_iso": "2026-11-07",
-        "end_iso": "2026-11-07",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/yves-2026-asia-australia-tour"
-      },
-      {
-        "title": "YoungCaptain I AM WHAT I AM World Tour",
-        "venue": "Unifi Arena (Axiata Arena), KL",
-        "date_iso": "2026-11-07",
-        "end_iso": "2026-11-07",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/youngcaptain-i-am-what-i-am-world-tour-kuala-lumpur"
       }
     ],
     "news": [],
@@ -310,7 +319,7 @@
   "ui": {
     "theme_mode": "morning",
     "time_context": "morning",
-    "score_headline": "GO OUT"
+    "score_headline": "HUMID BUT HAPPENING"
   },
   "quality_check": {
     "confidence": "HIGH",
