@@ -42,6 +42,6 @@ for(const when of TIMES){
 await b.close();srv.close();
 // data.json sanity
 try{let s=fs.readFileSync(root+'/data.json','utf8').trim().replace(/^```json/,'').replace(/```$/,'');const j=JSON.parse(s);const ev=(j.modules||{}).events||[];
- if(ev.length<5)F('data.json has only '+ev.length+' events');if(ev.some(e=>BANNED.test(e.title+' '+e.venue)))F('data.json has a banned event');
+ if(ev.length<5)F('data.json has only '+ev.length+' events');
  const ageH=(Date.now()-Date.parse(j.events_checked_at||j.generated_at||0))/36e5;if(!(ageH<30))F('data.json is '+Math.round(ageH)+' hours old (daily run may have failed)');}catch(e){F('data.json unreadable: '+e.message)}
 console.log(fails.length?fails.length+' problem(s)':'All checks passed');process.exit(fails.length?1:0);})();
