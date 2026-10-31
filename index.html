@@ -343,13 +343,18 @@ function windows(){var k=klNow(),t=k.iso,dow=k.dow,toSat=(6-dow+7)%7,fri=addDays
   return[['tonight','Tonight',t,t],['tomorrow','Tomorrow',addDays(t,1),addDays(t,1)],['weekend','This weekend',fri,sun],['next','Next 2 weeks',t,addDays(t,14)],['month','Everything',t,addDays(t,90)]];}
 function isExpo(e){return /^(exhibition|expo)$/.test(e.type||'')||/\b(expo|convention|fair|exhibition)\b|mitec|matrade/i.test(e.title+' '+e.venue);}
 var GLIM={},EVT=null;
+var SALES=[],SALES_CHK='';
+function loadSales(){return fetch(BASE+'sales.json?'+Date.now()).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){SALES=(j&&j.sales)||[];SALES_CHK=(j&&j.checked)||'';if(DATA)renderEvents();}).catch(function(){});}
+function salesNow(t){var lim=addDays(t,14);return SALES.filter(function(x){return x&&x.title&&x.end>=t&&(!x.start||x.start<=lim);}).sort(function(x,y){return x.end<y.end?-1:x.end>y.end?1:0;});}
+function saleCard(x,t){var on=!x.start||x.start<=t,when=on?tag('t-now','On now'):tag('t-soon','Starts '+dayLabel(x.start)),range=(x.start?dayLabel(x.start)+' to ':'Until ')+dayLabel(x.end);
+  return card({tags:when+tag('t-q',range)+(x.scope?tag('t-q',x.scope):''),name:x.title,meta:'📍 '+x.venue,why:x.offer,acts:btn(x.link,'🏷 Sale details',1)+btn(mapsDir(null,null,x.map||x.venue),'🧭 Directions'),src:'Hand-checked '+esc(SALES_CHK?dayLabel(SALES_CHK):'recently')+' · '+esc(x.source||'')});}
 function renderEvents(){
   var k=klNow(),t=k.iso,evs=cleanEvents(),W=windows(),tm=addDays(t,1),we=W[2],used={},out='';
   var G={tonight:function(e){return inRange(e,t,t);},weekend:function(e){return inRange(e,we[2],we[3]);},upcoming:function(e){return e.date_iso>we[3];} },N={};
-  Object.keys(G).forEach(function(x){N[x]=evs.filter(G[x]).length;});if(!EVT)EVT=N.tonight?'tonight':N.weekend?'weekend':'upcoming';
-  $('evTabs').innerHTML=[['tonight','🌙 Tonight'],['weekend','This weekend'],['upcoming','Upcoming']].map(function(x){return '<button class="chip'+(EVT===x[0]?' on':'')+'" data-evt="'+x[0]+'">'+x[1]+'<small>'+N[x[0]]+'</small></button>';}).join('');
-  var l=evs.filter(G[EVT]),lim=LIM.events;
-  out=l.slice(0,lim).map(function(e){return evCard(e,t);}).join('')+(l.length>lim?'<button class="btn more" data-more="events">Show '+Math.min(6,l.length-lim)+' more</button>':'');
+  Object.keys(G).forEach(function(x){N[x]=evs.filter(G[x]).length;});N.sales=salesNow(t).length;if(EVT==='sales'&&!N.sales)EVT=null;if(!EVT)EVT=N.tonight?'tonight':N.weekend?'weekend':'upcoming';
+  $('evTabs').innerHTML=[['tonight','🌙 Tonight'],['weekend','This weekend'],['upcoming','Upcoming']].concat(N.sales?[['sales','🛍 Big sales']]:[]).map(function(x){return '<button class="chip'+(EVT===x[0]?' on':'')+'" data-evt="'+x[0]+'">'+x[1]+'<small>'+N[x[0]]+'</small></button>';}).join('');
+  var sl=EVT==='sales',l=sl?salesNow(t):evs.filter(G[EVT]),lim=LIM.events;
+  out=(sl?'<div class="m" style="padding:0 4px 8px">Big sales in KL and Klang Valley, checked by hand '+esc(SALES_CHK?dayLabel(SALES_CHK):'recently')+'. Sale dates can change, so confirm with the store before you go.</div>':'')+l.slice(0,lim).map(function(e){return sl?saleCard(e,t):evCard(e,t);}).join('')+(l.length>lim?'<button class="btn more" data-more="events">Show '+Math.min(6,l.length-lim)+' more</button>':'');
   $('events').innerHTML=out||'<div class="empty"><b>🦗</b>Nothing listed for '+(EVT==='tonight'?'tonight':EVT==='weekend'?'this weekend':'the coming weeks')+' yet. Try another tab.</div>';
   var n=evs.filter(function(e){return inRange(e,t,t);}).length,d=$('evDot');d.hidden=!n;d.textContent=n;}
 function checkedLbl(){var at=DATA&&(DATA.events_checked_at||DATA.generated_at),m=String(at||'').match(/[ T](\d{2}):(\d{2})/);return at?dayLabel(String(at).slice(0,10))+(m?', '+fmtTime(+m[1]*60+(+m[2])):''):'recently';}
@@ -551,6 +556,7 @@ renderPM();renderEat();
 fetch(BASE+'sources.txt?t='+Date.now()).then(function(r){return r.ok?r.text():'';}).catch(function(){return'';}).then(function(t){SRC=t;return fetch(BASE+'data.json?t='+Date.now());}).then(function(r){return r.text();}).then(function(raw){raw=raw.replace(/```json|```/g,'').trim();DATA=JSON.parse(raw.slice(raw.indexOf('{')));})
   .catch(function(){DATA=null;}).then(function(){renderEvents();renderPicks();renderFoot();if(!DATA)$('events').innerHTML='<div class="empty"><b>👀</b>Events are not available right now. Please check back soon.</div>';});
 renderExplore();renderGlossary();
+loadSales();
 loadPlaces().then(function(){renderEat();renderPicks();renderExplore();}).catch(function(){$('eat').innerHTML='<div class="empty"><b>☕</b>Places are still loading. Please refresh in a moment.</div>';});
 loadWx();askLoc();
 setInterval(function(){if(WX)loadWx();},15*60*1000);

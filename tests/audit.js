@@ -44,4 +44,8 @@ await b.close();srv.close();
 try{let s=fs.readFileSync(root+'/data.json','utf8').trim().replace(/^```json/,'').replace(/```$/,'');const j=JSON.parse(s);const ev=(j.modules||{}).events||[];
  if(ev.length<5)F('data.json has only '+ev.length+' events');
  const ageH=(Date.now()-Date.parse(j.events_checked_at||j.generated_at||0))/36e5;if(!(ageH<30))F('data.json is '+Math.round(ageH)+' hours old (daily run may have failed)');}catch(e){F('data.json unreadable: '+e.message)}
+try{const sj=JSON.parse(fs.readFileSync(root+'/sales.json','utf8'));const ageD=(Date.now()-Date.parse(sj.checked+'T12:00:00+08:00'))/864e5;
+ if(!(ageD<=8))F('sales.json was last hand-checked '+Math.round(ageD)+' days ago: refresh the Big sales list');
+ const live=(sj.sales||[]).filter(x=>x.end>=kl);if(!live.length)F('sales.json has no sale that is still on');
+ (sj.sales||[]).forEach(x=>{if(!/^https:\/\//.test(x.link||'')||!x.end||!x.venue||!x.title)F('sales.json entry incomplete: '+(x.title||'?'))});}catch(e){F('sales.json unreadable: '+e.message)}
 console.log(fails.length?fails.length+' problem(s)':'All checks passed');process.exit(fails.length?1:0);})();
