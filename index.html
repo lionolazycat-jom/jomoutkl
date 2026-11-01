@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="tnJLubathJuMguYUJ8uIHhDWkHD5x-UOEJUzH8FN5ys" />
 <meta charset="utf-8">
+<meta name="google-site-verification" content="tnJLubathJuMguYUJ8uIHhDWkHD5x-UOEJUzH8FN5ys" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#FF6535">
 <title>JomOut KL: what's good in Kuala Lumpur today</title>
@@ -135,10 +135,19 @@ a{color:inherit}button{font-family:inherit}
 .warn{background:#FFF0E0;border:1px solid #F6C9A0;color:#8A3B00;border-radius:12px;padding:6px 12px;font-size:.74rem;margin-bottom:8px}
 .skel{height:90px;border-radius:18px;margin-bottom:10px;background:linear-gradient(90deg,#fff 0,#FFF8F2 50%,#fff 100%);background-size:200% 100%;animation:sk 1.2s infinite}
 @keyframes sk{to{background-position:-200% 0} }
+
+/* a11y + robustness (no visual change) */
+html{-webkit-text-size-adjust:none;text-size-adjust:none}
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+.tabs button,.share,.info{position:relative}
+.tabs button::after,.share::after,.info::after{content:"";position:absolute;inset:-7px 0}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<div class="top"><div class="wrap">
+<header class="top"><div class="wrap">
+  <h1 class="vh">JomOut KL: what's good in Kuala Lumpur today</h1>
   <div class="hdr"><div><span class="logo">Jom<span class="out">Out</span><span class="kl"> KL</span></span><div class="hdr-date" id="hdrDate"></div></div><div style="display:flex;align-items:center;min-width:0"><button class="loc" id="loc">📍 Finding you…</button><button class="share" id="wa" aria-label="Share today on WhatsApp">📲</button></div></div>
   <nav class="tabs" id="tabs">
     <button data-tab="about"><i>🧡</i>About</button>
@@ -148,7 +157,7 @@ a{color:inherit}button{font-family:inherit}
     <button data-tab="transit"><i>🚆</i>Transit</button>
     <button data-tab="explore"><i>🗺</i>Escape</button>
   </nav>
-</div></div>
+</div></header>
 
 <main class="wrap">
   <section class="panel on" id="p-tonight">
@@ -204,7 +213,7 @@ a{color:inherit}button{font-family:inherit}
     <div class="cast"><div><img src="mascots/remy-jom.png" alt=""><b>Remy</b><br>the tiger who says Jom!</div><div><img src="mascots/nala.png" alt=""><b>Nala</b><br>nasi lemak, food guide</div><div><img src="mascots/taffy.png" alt=""><b>Taffy</b><br>iced teh tarik</div><div><img src="mascots/skye.png" alt=""><b>Skye</b><br>satay, night markets</div><div><img src="mascots/lola.png" alt=""><b>Lola</b><br>laksa, lunch</div><div><img src="mascots/dimi.png" alt=""><b>Dimi</b><br>dim sum, late night</div><div><img src="mascots/kay.png" alt=""><b>Kay</b><br>kaya toast, breakfast</div><div><img src="mascots/duke.png" alt=""><b>Duke</b><br>durian, day trips</div><div><img src="mascots/rail.png" alt=""><b>Rail</b><br>LRT, getting around</div></div>
     <div class="sh">KL glossary</div>
     <div class="card" id="glossary"></div>
-    <div class="note" id="foot"></div>
+    <footer class="note" id="foot"></footer>
     <div class="note">JomOut KL is independent. Not affiliated with Rapid KL, DBKL or Tourism Malaysia.</div>
   </section>
 </main>
