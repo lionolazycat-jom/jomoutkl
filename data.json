@@ -1,26 +1,26 @@
 ```json
 {
   "status": "success",
-  "generated_at": "2026-11-02 07:00",
-  "events_checked_at": "2026-11-02 07:00",
+  "generated_at": "2026-11-03 07:00",
+  "events_checked_at": "2026-11-03 07:00",
   "location_context": "Kuala Lumpur",
-  "go_out_score": 8,
+  "go_out_score": 7,
   "today": {
-    "mood": "Pleasant morning with light clouds",
+    "mood": "Pleasant morning with comfortable temperatures",
     "best_time_to_go_out": "Morning to early afternoon before humidity peaks",
-    "summary": "A comfortable Monday morning at 24°C with few clouds and gentle winds. Perfect conditions for outdoor activities before the tropical humidity builds up later in the day."
+    "summary": "A pleasant Tuesday morning with temperatures around 23°C and few clouds. Humidity is moderate at 78% with calm winds, making it comfortable for outdoor activities."
   },
   "weather": {
-    "temp_c": 23.68,
-    "feels_like_c": 24.06,
+    "temp_c": 23.26,
+    "feels_like_c": 23.68,
     "condition": "few clouds",
-    "humidity_pct": 75,
-    "wind_kmh": "4 km/h",
+    "humidity_pct": 78,
+    "wind_kmh": "0 km/h",
     "uv_index": 0,
     "aqi": 0,
     "sunrise": "7:03 AM",
-    "sunset": "7:06 PM",
-    "advisory": "Light winds and pleasant temperatures make it ideal for outdoor plans",
+    "sunset": "7:03 PM",
+    "advisory": "Calm conditions with light cloud cover",
     "hourly": []
   },
   "finance": {
@@ -36,7 +36,7 @@
         "venue": "TM Stadium Nasional, Bukit Jalil",
         "date_iso": "2026-11-04",
         "end_iso": "2026-11-04",
-        "time": "",
+        "time": "8:30 PM",
         "type": "concert",
         "link": "https://klconcert.com/concert/the-weeknd-after-hours-til-dawn"
       },
@@ -86,13 +86,22 @@
         "link": "https://klconcert.com/concert/youngcaptain-i-am-what-i-am-world-tour-kuala-lumpur"
       },
       {
-        "title": "ACG Matsuri 2026",
-        "venue": "Lalaport BBCC",
+        "title": "YESUNG (Super Junior) - 10th Anniversary Tour",
+        "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-11-07",
         "end_iso": "2026-11-07",
-        "time": "11:00 AM",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/yesung-10th-anniversary-tour-about-the-things-we-called-ordinary"
+      },
+      {
+        "title": "My Travel Fair",
+        "venue": "MyTOWN Shopping Centre",
+        "date_iso": "2026-11-08",
+        "end_iso": "2026-11-08",
+        "time": "10:00 AM",
         "type": "expo",
-        "link": "https://allevents.in/kuala-lumpur/acg-matsuri-2026-lalaport-bbcc/200030848668056"
+        "link": "https://allevents.in/kuala-lumpur/my-travel-fair/200030541208400"
       },
       {
         "title": "EXISTS - MEMENTO MORI 2.0",
@@ -104,15 +113,6 @@
         "link": "https://klconcert.com/concert/exists-memento-mori-2-0"
       },
       {
-        "title": "Mawi - THE JOURNEY OF MAWI WORLD",
-        "venue": "Mega Star Arena, KL",
-        "date_iso": "2026-11-08",
-        "end_iso": "2026-11-08",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/mawi-world-the-journey"
-      },
-      {
         "title": "Noh Salleh - Cadenza of the Soul",
         "venue": "Idea Live Arena, Petaling Jaya",
         "date_iso": "2026-11-08",
@@ -120,15 +120,6 @@
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/noh-salleh-cadenza-of-the-soul"
-      },
-      {
-        "title": "My Travel Fair",
-        "venue": "MyTOWN Shopping Centre",
-        "date_iso": "2026-11-08",
-        "end_iso": "2026-11-08",
-        "time": "10:00 AM",
-        "type": "expo",
-        "link": "https://allevents.in/kuala-lumpur/my-travel-fair/200030541208400"
       },
       {
         "title": "Trevor Noah - Asia Tour 2026",
@@ -171,7 +162,7 @@
         "venue": "Unifi Arena (Axiata Arena), KL",
         "date_iso": "2026-11-14",
         "end_iso": "2026-11-14",
-        "time": "",
+        "time": "5:00 PM",
         "type": "concert",
         "link": "https://klconcert.com/concert/babymonster-hello-monsters-world-tour"
       },
@@ -212,11 +203,20 @@
         "link": "https://klconcert.com/concert/5-seconds-of-summer-everyones-a-star-asia-tour"
       },
       {
+        "title": "Malaysia International Marine Expo (MIMEX) 2026",
+        "venue": "KLCC Convention Centre",
+        "date_iso": "2026-11-17",
+        "end_iso": "2026-11-17",
+        "time": "10:00 AM",
+        "type": "expo",
+        "link": "https://allevents.in/kuala-lumpur/malaysia-international-marine-expo-mimex-2026/200030587705903"
+      },
+      {
         "title": "My Chemical Romance Live in Kuala Lumpur",
         "venue": "TM Stadium Nasional, Bukit Jalil",
         "date_iso": "2026-11-19",
         "end_iso": "2026-11-19",
-        "time": "",
+        "time": "8:00 PM",
         "type": "concert",
         "link": "https://klconcert.com/concert/my-chemical-romance-live-in-kl-1"
       },
@@ -230,33 +230,6 @@
         "link": "https://klconcert.com/concert/attack-on-titan-symphony-from-paradis-kuala-lumpur"
       },
       {
-        "title": "D'MASIV - Asia Home Run",
-        "venue": "Mega Star Arena, KL",
-        "date_iso": "2026-11-20",
-        "end_iso": "2026-11-20",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/dmasiv-asia-home-run-live-in-kuala-lumpur"
-      },
-      {
-        "title": "Atsuko Okatsuka - The Big Bowl Tour",
-        "venue": "Jeffrey Cheah Performing Arts Centre, Sunway",
-        "date_iso": "2026-11-21",
-        "end_iso": "2026-11-21",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/atsuko-okatsuka-big-bowl-tour-malaysia-2026"
-      },
-      {
-        "title": "理想混蛋 Bestards - 不是因為天氣晴朗才見面",
-        "venue": "Zepp Kuala Lumpur",
-        "date_iso": "2026-11-21",
-        "end_iso": "2026-11-21",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/bestards-bu-shi-yin-wei-tian-qi-kuala-lumpur"
-      },
-      {
         "title": "Simple Plan - Bigger Than You Think Tour",
         "venue": "Idea Live Arena, Petaling Jaya",
         "date_iso": "2026-11-21",
@@ -266,7 +239,16 @@
         "link": "https://klconcert.com/concert/simple-plan-bigger-than-you-think-tour"
       },
       {
-        "title": "3DIVA - TIMELESS Live in Malaysia",
+        "title": "Bestards - 不是因為天氣 Kuala Lumpur",
+        "venue": "Zepp Kuala Lumpur",
+        "date_iso": "2026-11-21",
+        "end_iso": "2026-11-21",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/bestards-bu-shi-yin-wei-tian-qi-kuala-lumpur"
+      },
+      {
+        "title": "3DIVA Live in Malaysia 2026 - TIMELESS",
         "venue": "Unifi Arena (Axiata Arena), KL",
         "date_iso": "2026-11-22",
         "end_iso": "2026-11-22",
@@ -327,24 +309,6 @@
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/evanescence-live-in-kuala-lumpur"
-      },
-      {
-        "title": "Ejen Ali in Concert 2026",
-        "venue": "Plenary Hall, KL Convention Centre",
-        "date_iso": "2026-11-28",
-        "end_iso": "2026-11-29",
-        "time": "",
-        "type": "family",
-        "link": "https://klconcert.com/concert/ejen-ali-in-concert-2026"
-      },
-      {
-        "title": "Rizky Febian - Malam Rawan Diorama",
-        "venue": "Zepp Kuala Lumpur",
-        "date_iso": "2026-11-29",
-        "end_iso": "2026-11-29",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/malam-rawan-diorama-by-rizky-febian-live-in-kuala-lumpur"
       }
     ],
     "news": [],
