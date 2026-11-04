@@ -1,30 +1,30 @@
 ```json
 {
   "status": "success",
-  "generated_at": "2026-11-04 07:00",
-  "events_checked_at": "2026-11-04 07:00",
+  "generated_at": "2026-11-05 07:00",
+  "events_checked_at": "2026-11-05 07:00",
   "location_context": "Kuala Lumpur",
-  "go_out_score": 6,
+  "go_out_score": 8,
   "today": {
-    "mood": "Rainy morning vibes",
-    "best_time_to_go_out": "Late afternoon when rain clears",
-    "summary": "Light rain greets the morning with 23°C and high humidity. Expect wet conditions early, but the day may brighten up later."
+    "mood": "Pleasant morning with light clouds",
+    "best_time_to_go_out": "Morning to early afternoon",
+    "summary": "A comfortable Thursday morning with temperatures around 24°C and few clouds. Humidity is moderate at 75%, with gentle winds making it ideal for outdoor activities."
   },
   "weather": {
-    "temp_c": 22.84,
-    "feels_like_c": 23.22,
-    "condition": "light rain",
-    "humidity_pct": 78,
-    "wind_kmh": "6 km/h",
+    "temp_c": 23.68,
+    "feels_like_c": 24.06,
+    "condition": "few clouds",
+    "humidity_pct": 75,
+    "wind_kmh": "4 km/h",
     "uv_index": 0,
     "aqi": 0,
     "sunrise": "7:10 AM",
     "sunset": "7:10 PM",
-    "advisory": "Light rain expected, carry an umbrella",
+    "advisory": "Pleasant conditions for outdoor events",
     "hourly": []
   },
   "finance": {
-    "usd_myr": "4.07",
+    "usd_myr": "4.077",
     "usd_change": "",
     "sgd_myr": "3.182",
     "sgd_change": ""
@@ -32,10 +32,10 @@
   "modules": {
     "events": [
       {
-        "title": "The Weeknd - After Hours Til Dawn",
+        "title": "The Weeknd - After Hours Til Dawn (Day 2)",
         "venue": "TM Stadium Nasional, Bukit Jalil",
-        "date_iso": "2026-11-04",
-        "end_iso": "2026-11-04",
+        "date_iso": "2026-11-05",
+        "end_iso": "2026-11-05",
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/the-weeknd-after-hours-til-dawn"
@@ -50,22 +50,13 @@
         "link": "https://klconcert.com/concert/flow-naruto-the-rock-world-tour-2026-kuala-lumpur"
       },
       {
-        "title": "TCGKL Convention 2026",
+        "title": "TCGKL CONVENTION 2026",
         "venue": "KLCC Convention Centre",
         "date_iso": "2026-11-06",
         "end_iso": "2026-11-06",
         "time": "10:00 AM",
         "type": "expo",
         "link": "https://allevents.in/kuala-lumpur/tcgkl-convention-2026/200030587704352"
-      },
-      {
-        "title": "QWER - ROCKATION: ROCKET LAUNCH Tour",
-        "venue": "Mega Star Arena, KL",
-        "date_iso": "2026-11-07",
-        "end_iso": "2026-11-07",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/qwer-rockation-rocket-launch-tour"
       },
       {
         "title": "Yves (이브) - 2026 Asia & Australia Tour",
@@ -77,8 +68,17 @@
         "link": "https://klconcert.com/concert/yves-2026-asia-australia-tour"
       },
       {
+        "title": "YESUNG (Super Junior) - 10th Anniversary Tour",
+        "venue": "Zepp Kuala Lumpur",
+        "date_iso": "2026-11-07",
+        "end_iso": "2026-11-07",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/yesung-10th-anniversary-tour-about-the-things-we-called-ordinary"
+      },
+      {
         "title": "YoungCaptain - I AM WHAT I AM World Tour",
-        "venue": "Unifi Arena (Axiata Arena), KL",
+        "venue": "Unifi Arena (Axiata Arena)",
         "date_iso": "2026-11-07",
         "end_iso": "2026-11-07",
         "time": "",
@@ -95,22 +95,22 @@
         "link": "https://allevents.in/kuala-lumpur/acg-matsuri-2026-lalaport-bbcc/200030848668056"
       },
       {
+        "title": "My Travel Fair",
+        "venue": "MyTOWN Shopping Centre",
+        "date_iso": "2026-11-08",
+        "end_iso": "2026-11-08",
+        "time": "10:00 AM",
+        "type": "expo",
+        "link": "https://allevents.in/kuala-lumpur/my-travel-fair/200030541208400"
+      },
+      {
         "title": "EXISTS - MEMENTO MORI 2.0",
-        "venue": "Unifi Arena (Axiata Arena), KL",
+        "venue": "Unifi Arena (Axiata Arena)",
         "date_iso": "2026-11-08",
         "end_iso": "2026-11-08",
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/exists-memento-mori-2-0"
-      },
-      {
-        "title": "Mawi - THE JOURNEY OF MAWI WORLD",
-        "venue": "Mega Star Arena, KL",
-        "date_iso": "2026-11-08",
-        "end_iso": "2026-11-08",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/mawi-world-the-journey"
       },
       {
         "title": "Noh Salleh - Cadenza of the Soul",
@@ -120,15 +120,6 @@
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/noh-salleh-cadenza-of-the-soul"
-      },
-      {
-        "title": "My Travel Fair",
-        "venue": "MyTOWN Shopping Centre",
-        "date_iso": "2026-11-08",
-        "end_iso": "2026-11-08",
-        "time": "10:00 AM",
-        "type": "expo",
-        "link": "https://allevents.in/kuala-lumpur/my-travel-fair/200030541208400"
       },
       {
         "title": "Trevor Noah - Asia Tour 2026",
@@ -177,7 +168,7 @@
       },
       {
         "title": "BABYMONSTER - HELLO MONSTERS WORLD TOUR",
-        "venue": "Unifi Arena (Axiata Arena), KL",
+        "venue": "Unifi Arena (Axiata Arena)",
         "date_iso": "2026-11-14",
         "end_iso": "2026-11-14",
         "time": "",
@@ -221,8 +212,8 @@
         "link": "https://klconcert.com/concert/for-revenge-titik-sadrah-live-in-kuala-lumpur"
       },
       {
-        "title": "5 Seconds of Summer - EVERYONE'S A STAR ASIA TOUR",
-        "venue": "Unifi Arena (Axiata Arena), KL",
+        "title": "5 Seconds of Summer - Everyone's a Star Asia Tour",
+        "venue": "Unifi Arena (Axiata Arena)",
         "date_iso": "2026-11-17",
         "end_iso": "2026-11-17",
         "time": "",
@@ -258,7 +249,7 @@
       },
       {
         "title": "3DIVA Live in Malaysia 2026 - Timeless",
-        "venue": "Unifi Arena (Axiata Arena), KL",
+        "venue": "Unifi Arena (Axiata Arena)",
         "date_iso": "2026-11-22",
         "end_iso": "2026-11-22",
         "time": "",
@@ -293,6 +284,15 @@
         "link": "https://klconcert.com/concert/mpo-benefit-concert-sheila-majid-35th-legenda-anniversary"
       },
       {
+        "title": "SEA SHOP - Malaysia Retail Technology Expo",
+        "venue": "MITEC",
+        "date_iso": "2026-11-27",
+        "end_iso": "2026-11-29",
+        "time": "10:00 AM",
+        "type": "expo",
+        "link": "https://allevents.in/kuala-lumpur/sea-shop-and-the-4th-malaysia-retail-technology-and-supermarket-equipment-expo/100001992110383784"
+      },
+      {
         "title": "Evanescence Live in Kuala Lumpur",
         "venue": "National Hockey Stadium, Bukit Jalil",
         "date_iso": "2026-11-28",
@@ -300,6 +300,15 @@
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/evanescence-live-in-kuala-lumpur"
+      },
+      {
+        "title": "Ejen Ali in Concert 2026",
+        "venue": "Plenary Hall, KL Convention Centre",
+        "date_iso": "2026-11-28",
+        "end_iso": "2026-11-29",
+        "time": "",
+        "type": "family",
+        "link": "https://klconcert.com/concert/ejen-ali-in-concert-2026"
       }
     ],
     "news": [],
@@ -310,7 +319,7 @@
   "ui": {
     "theme_mode": "morning",
     "time_context": "morning",
-    "score_headline": "RAINY START AHEAD"
+    "score_headline": "PERFECT MORNING VIBES"
   },
   "quality_check": {
     "confidence": "HIGH",
