@@ -1,72 +1,36 @@
 ```json
 {
   "status": "success",
-  "generated_at": "2026-11-06 07:00",
-  "events_checked_at": "2026-11-06 07:00",
+  "generated_at": "2026-11-07 07:00",
+  "events_checked_at": "2026-11-07 07:00",
   "location_context": "Kuala Lumpur",
-  "go_out_score": 7,
+  "go_out_score": 6,
   "today": {
-    "mood": "Pleasant and breezy",
-    "best_time_to_go_out": "Morning or evening",
-    "summary": "A comfortable morning with few clouds, 23°C feeling like 24°C. Humidity is high at 81% but there's no wind, making it pleasant for outdoor activities."
+    "mood": "Humid and overcast",
+    "best_time_to_go_out": "Evening after the clouds clear",
+    "summary": "It's a warm and humid morning with few clouds and very light winds. The high humidity might feel sticky, but temperatures are comfortable for indoor activities or evening outings."
   },
   "weather": {
-    "temp_c": 23.26,
-    "feels_like_c": 23.76,
+    "temp_c": 23.75,
+    "feels_like_c": 24.63,
     "condition": "few clouds",
-    "humidity_pct": 81,
+    "humidity_pct": 94,
     "wind_kmh": "0 km/h",
     "uv_index": 0,
     "aqi": 0,
     "sunrise": "7:03 AM",
     "sunset": "7:03 PM",
-    "advisory": "High humidity but calm conditions. Stay hydrated.",
+    "advisory": "Very high humidity; stay hydrated",
     "hourly": []
   },
   "finance": {
-    "usd_myr": "4.065",
+    "usd_myr": "4.046",
     "usd_change": "",
-    "sgd_myr": "3.179",
+    "sgd_myr": "3.167",
     "sgd_change": ""
   },
   "modules": {
     "events": [
-      {
-        "title": "FLOW NARUTO THE ROCK WORLD TOUR 2026",
-        "venue": "JioSpace, KL",
-        "date_iso": "2026-11-06",
-        "end_iso": "2026-11-06",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/flow-naruto-the-rock-world-tour-2026-kuala-lumpur"
-      },
-      {
-        "title": "yung kai stay with the ocean, i'll find you",
-        "venue": "The Platform Performing Arts Theatre, TTDI",
-        "date_iso": "2026-11-06",
-        "end_iso": "2026-11-06",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/yung-kai-stay-with-the-ocean-ill-find-you-asia-2026"
-      },
-      {
-        "title": "TCGKL CONVENTION 2026",
-        "venue": "KLCC Convention Centre",
-        "date_iso": "2026-11-06",
-        "end_iso": "2026-11-06",
-        "time": "10:00 AM",
-        "type": "expo",
-        "link": "https://allevents.in/kuala-lumpur/tcgkl-convention-2026/200030587704352"
-      },
-      {
-        "title": "QWER ROCKATION: ROCKET LAUNCH Tour",
-        "venue": "Mega Star Arena, KL",
-        "date_iso": "2026-11-07",
-        "end_iso": "2026-11-07",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/qwer-rockation-rocket-launch-tour"
-      },
       {
         "title": "Yves (이브) 2026 Asia & Australia Tour",
         "venue": "Vox Live KL",
@@ -77,7 +41,7 @@
         "link": "https://klconcert.com/concert/yves-2026-asia-australia-tour"
       },
       {
-        "title": "YESUNG 10th Anniversary Tour",
+        "title": "YESUNG (Super Junior) 10th Anniversary Tour",
         "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-11-07",
         "end_iso": "2026-11-07",
@@ -95,15 +59,6 @@
         "link": "https://klconcert.com/concert/youngcaptain-i-am-what-i-am-world-tour-kuala-lumpur"
       },
       {
-        "title": "ACG Matsuri 2026",
-        "venue": "Lalaport BBCC",
-        "date_iso": "2026-11-07",
-        "end_iso": "2026-11-07",
-        "time": "11:00 AM",
-        "type": "expo",
-        "link": "https://allevents.in/kuala-lumpur/acg-matsuri-2026-lalaport-bbcc/200030848668056"
-      },
-      {
         "title": "My Travel Fair",
         "venue": "MyTOWN Shopping Centre",
         "date_iso": "2026-11-08",
@@ -111,15 +66,6 @@
         "time": "10:00 AM",
         "type": "expo",
         "link": "https://allevents.in/kuala-lumpur/my-travel-fair/200030541208400"
-      },
-      {
-        "title": "Mass of the Fermenting Dregs Iwaou The Tour",
-        "venue": "Nero Event Space, PJPAC",
-        "date_iso": "2026-11-08",
-        "end_iso": "2026-11-08",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/mass-of-the-fermenting-dregs-iwaou-the-tour-kuala-lumpur"
       },
       {
         "title": "EXISTS MEMENTO MORI 2.0",
@@ -158,15 +104,6 @@
         "link": "https://klconcert.com/concert/reality-club-10th-anniversary-live-in-kuala-lumpur"
       },
       {
-        "title": "Symphonic Rock 3",
-        "venue": "PJPAC (Stage 1), Petaling Jaya",
-        "date_iso": "2026-11-13",
-        "end_iso": "2026-11-13",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/symphonic-rock-3"
-      },
-      {
         "title": "Three Missing One 2026 Tour",
         "venue": "Idea Live Arena, Petaling Jaya",
         "date_iso": "2026-11-13",
@@ -185,7 +122,16 @@
         "link": "https://allevents.in/kuala-lumpur/deathcon-2026/100001993171567814"
       },
       {
-        "title": "BABYMONSTER HELLO MONSTERS WORLD TOUR",
+        "title": "BIG HOME Expo",
+        "venue": "Stadium Bukit Jalil, CarPark B",
+        "date_iso": "2026-11-13",
+        "end_iso": "2026-11-15",
+        "time": "11:00 AM",
+        "type": "expo",
+        "link": "https://allevents.in/kuala-lumpur/big-home-expo-13-15-nov-stadium-bukit-jalil-tickets/80001459645404"
+      },
+      {
+        "title": "BABYMONSTER HELLO MONSTERS World Tour",
         "venue": "Unifi Arena (Axiata Arena)",
         "date_iso": "2026-11-14",
         "end_iso": "2026-11-14",
@@ -212,6 +158,15 @@
         "link": "https://klconcert.com/concert/kunto-aji-simfoni-mantra-bersama-mpo"
       },
       {
+        "title": "J2COS (Jalan-Jalan Cosplay)",
+        "venue": "Lalaport",
+        "date_iso": "2026-11-14",
+        "end_iso": "2026-11-14",
+        "time": "10:00 AM",
+        "type": "expo",
+        "link": "https://allevents.in/kuala-lumpur/j2cos-jalan-jalan-cosplay/200030351588531"
+      },
+      {
         "title": "for Revenge Titik Sadrah Live",
         "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-11-15",
@@ -221,7 +176,7 @@
         "link": "https://klconcert.com/concert/for-revenge-titik-sadrah-live-in-kuala-lumpur"
       },
       {
-        "title": "5 Seconds of Summer Everyone's a Star Asia Tour",
+        "title": "5 Seconds of Summer EVERYONE'S A STAR Tour",
         "venue": "Unifi Arena (Axiata Arena)",
         "date_iso": "2026-11-17",
         "end_iso": "2026-11-17",
@@ -230,7 +185,7 @@
         "link": "https://klconcert.com/concert/5-seconds-of-summer-everyones-a-star-asia-tour"
       },
       {
-        "title": "My Chemical Romance Live in KL",
+        "title": "My Chemical Romance Live in Kuala Lumpur",
         "venue": "TM Stadium Nasional, Bukit Jalil",
         "date_iso": "2026-11-19",
         "end_iso": "2026-11-19",
@@ -246,6 +201,15 @@
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/attack-on-titan-symphony-from-paradis-kuala-lumpur"
+      },
+      {
+        "title": "Atsuko Okatsuka Big Bowl Tour",
+        "venue": "The Grand Theatre, JCPAC, Sunway",
+        "date_iso": "2026-11-21",
+        "end_iso": "2026-11-21",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/atsuko-okatsuka-big-bowl-tour-malaysia-2026"
       },
       {
         "title": "Simple Plan Bigger Than You Think Tour",
@@ -296,10 +260,19 @@
         "title": "SEA SHOP & Malaysia Retail Tech Expo",
         "venue": "MITEC",
         "date_iso": "2026-11-27",
-        "end_iso": "2026-11-27",
+        "end_iso": "2026-11-29",
         "time": "10:00 AM",
         "type": "expo",
         "link": "https://allevents.in/kuala-lumpur/sea-shop-and-the-4th-malaysia-retail-technology-and-supermarket-equipment-expo/100001992110383784"
+      },
+      {
+        "title": "Alan Tam Unforgettable World Tour",
+        "venue": "Unifi Arena (Axiata Arena)",
+        "date_iso": "2026-11-28",
+        "end_iso": "2026-11-28",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/alan-tam-unforgettable-world-tour-in-malaysia"
       },
       {
         "title": "Evanescence Live in Kuala Lumpur",
@@ -309,6 +282,33 @@
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/evanescence-live-in-kuala-lumpur"
+      },
+      {
+        "title": "Ejen Ali in Concert 2026",
+        "venue": "Plenary Hall, KL Convention Centre",
+        "date_iso": "2026-11-28",
+        "end_iso": "2026-11-29",
+        "time": "",
+        "type": "family",
+        "link": "https://klconcert.com/concert/ejen-ali-in-concert-2026"
+      },
+      {
+        "title": "Malam Rawan Diorama by Rizky Febian",
+        "venue": "Zepp Kuala Lumpur",
+        "date_iso": "2026-11-29",
+        "end_iso": "2026-11-29",
+        "time": "08:00 PM",
+        "type": "concert",
+        "link": "https://allevents.in/kuala-lumpur/malam-rawan-diorama-by-rizky-febian/200030736651407"
+      },
+      {
+        "title": "FKJ in Kuala Lumpur",
+        "venue": "Zepp Kuala Lumpur",
+        "date_iso": "2026-12-01",
+        "end_iso": "2026-12-01",
+        "time": "07:00 PM",
+        "type": "concert",
+        "link": "https://allevents.in/kuala-lumpur/fkj-in-kuala-lumpur/3300030390058427"
       }
     ],
     "news": [],
@@ -319,7 +319,7 @@
   "ui": {
     "theme_mode": "morning",
     "time_context": "morning",
-    "score_headline": "GOOD TO GO OUT"
+    "score_headline": "HUMID BUT HAPPENING"
   },
   "quality_check": {
     "confidence": "HIGH",
