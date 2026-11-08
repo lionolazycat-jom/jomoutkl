@@ -1,30 +1,30 @@
 ```json
 {
   "status": "success",
-  "generated_at": "2026-11-08 07:00",
-  "events_checked_at": "2026-11-08 07:00",
+  "generated_at": "2026-11-09 07:00",
+  "events_checked_at": "2026-11-09 07:00",
   "location_context": "Kuala Lumpur",
   "go_out_score": 6,
   "today": {
-    "mood": "Humid and overcast",
-    "best_time_to_go_out": "Early morning or late evening",
-    "summary": "It's a warm and very humid morning with few clouds overhead. The air is still, so it might feel a bit sticky, but conditions are calm for outdoor plans."
+    "mood": "humid and overcast",
+    "best_time_to_go_out": "evening",
+    "summary": "Warm and humid morning with few clouds. Expect sticky conditions throughout the day with temperatures around 23°C and very high humidity."
   },
   "weather": {
-    "temp_c": 24.1,
-    "feels_like_c": 25.1,
+    "temp_c": 23.31,
+    "feels_like_c": 24.23,
     "condition": "few clouds",
     "humidity_pct": 97,
     "wind_kmh": "0 km/h",
     "uv_index": 0,
     "aqi": 0,
-    "sunrise": "7:03 AM",
-    "sunset": "7:03 PM",
-    "advisory": "Very high humidity; stay hydrated and seek shade during midday.",
+    "sunrise": "7:04 AM",
+    "sunset": "7:04 PM",
+    "advisory": "Very high humidity, stay hydrated",
     "hourly": []
   },
   "finance": {
-    "usd_myr": "4.057",
+    "usd_myr": "4.056",
     "usd_change": "",
     "sgd_myr": "3.165",
     "sgd_change": ""
@@ -32,43 +32,7 @@
   "modules": {
     "events": [
       {
-        "title": "Mass of the Fermenting Dregs - Iwaou The Tour",
-        "venue": "Nero Event Space, PJPAC, Petaling Jaya",
-        "date_iso": "2026-11-08",
-        "end_iso": "2026-11-08",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/mass-of-the-fermenting-dregs-iwaou-the-tour-kuala-lumpur"
-      },
-      {
-        "title": "EXISTS MEMENTO MORI 2.0",
-        "venue": "Unifi Arena (Axiata Arena), Kuala Lumpur",
-        "date_iso": "2026-11-08",
-        "end_iso": "2026-11-08",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/exists-memento-mori-2-0"
-      },
-      {
-        "title": "Mawi - The Journey of Mawi World",
-        "venue": "Mega Star Arena, KL",
-        "date_iso": "2026-11-08",
-        "end_iso": "2026-11-08",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/mawi-world-the-journey"
-      },
-      {
-        "title": "Noh Salleh - Cadenza of the Soul",
-        "venue": "Idea Live Arena, Petaling Jaya",
-        "date_iso": "2026-11-08",
-        "end_iso": "2026-11-08",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/noh-salleh-cadenza-of-the-soul"
-      },
-      {
-        "title": "Trevor Noah Asia Tour 2026",
+        "title": "Trevor Noah - Asia Tour 2026",
         "venue": "Idea Live Arena, Petaling Jaya",
         "date_iso": "2026-11-09",
         "end_iso": "2026-11-09",
@@ -77,7 +41,52 @@
         "link": "https://klconcert.com/concert/trevor-noah-asia-tour-2026"
       },
       {
-        "title": "Reality Club Live - 10th Anniversary",
+        "title": "Jetaime V - Tam Romance And Love",
+        "venue": "PJPAC (Stage 1), Petaling Jaya",
+        "date_iso": "2026-11-09",
+        "end_iso": "2026-11-09",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/tam-romance-and-love-jetaime-v"
+      },
+      {
+        "title": "Wings, Kristal, Muzza - 35 Years, One Legendary Night",
+        "venue": "Hard Rock Cafe Kuala Lumpur",
+        "date_iso": "2026-11-09",
+        "end_iso": "2026-11-09",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/35-years-one-legendary-night-hard-rock-cafe-kl"
+      },
+      {
+        "title": "Buildexpo Malaysia 2026",
+        "venue": "MITEC",
+        "date_iso": "2026-11-10",
+        "end_iso": "2026-11-10",
+        "time": "9:00 AM",
+        "type": "expo",
+        "link": "https://allevents.in/kuala-lumpur/buildexpo-malaysia-2026/200031001814003"
+      },
+      {
+        "title": "2000s Dolls & Divas - Janelle & Anais",
+        "venue": "BoboKL, Kuala Lumpur",
+        "date_iso": "2026-11-12",
+        "end_iso": "2026-11-12",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/2000s-dolls-and-divas"
+      },
+      {
+        "title": "DEATHCon 2026",
+        "venue": "Intermark Mall",
+        "date_iso": "2026-11-13",
+        "end_iso": "2026-11-13",
+        "time": "9:00 AM",
+        "type": "expo",
+        "link": "https://allevents.in/kuala-lumpur/deathcon-2026/100001993171567814"
+      },
+      {
+        "title": "Reality Club - 10th Anniversary Live",
         "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-11-13",
         "end_iso": "2026-11-13",
@@ -86,7 +95,16 @@
         "link": "https://klconcert.com/concert/reality-club-10th-anniversary-live-in-kuala-lumpur"
       },
       {
-        "title": "Three Missing One 2026 Tour",
+        "title": "Symphonic Rock 3",
+        "venue": "PJPAC (Stage 1), Petaling Jaya",
+        "date_iso": "2026-11-13",
+        "end_iso": "2026-11-13",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/symphonic-rock-3"
+      },
+      {
+        "title": "Three Missing One - 2026 Tour",
         "venue": "Idea Live Arena, Petaling Jaya",
         "date_iso": "2026-11-13",
         "end_iso": "2026-11-13",
@@ -95,11 +113,11 @@
         "link": "https://klconcert.com/concert/three-missing-one-2026-tour-in-kuala-lumpur"
       },
       {
-        "title": "BABYMONSTER - CHOOM World Tour",
-        "venue": "Unifi Arena (Axiata Arena), Kuala Lumpur",
+        "title": "BABYMONSTER - HELLO MONSTERS World Tour",
+        "venue": "Unifi Arena (Axiata Arena), KL",
         "date_iso": "2026-11-14",
         "end_iso": "2026-11-14",
-        "time": "5:00 PM",
+        "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/babymonster-hello-monsters-world-tour"
       },
@@ -127,7 +145,7 @@
         "date_iso": "2026-11-14",
         "end_iso": "2026-11-14",
         "time": "10:00 AM",
-        "type": "festival",
+        "type": "expo",
         "link": "https://allevents.in/kuala-lumpur/j2cos-jalan-jalan-cosplay/200030351588531"
       },
       {
@@ -141,7 +159,7 @@
       },
       {
         "title": "5 Seconds of Summer - Everyone's A Star Asia Tour",
-        "venue": "Unifi Arena (Axiata Arena), Kuala Lumpur",
+        "venue": "Unifi Arena (Axiata Arena), KL",
         "date_iso": "2026-11-17",
         "end_iso": "2026-11-17",
         "time": "",
@@ -153,9 +171,18 @@
         "venue": "TM Stadium Nasional, Bukit Jalil",
         "date_iso": "2026-11-19",
         "end_iso": "2026-11-19",
-        "time": "8:00 PM",
+        "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/my-chemical-romance-live-in-kl-1"
+      },
+      {
+        "title": "That's Entertainment! KASIH KITA",
+        "venue": "PJPAC (Stage 1), Petaling Jaya",
+        "date_iso": "2026-11-19",
+        "end_iso": "2026-11-19",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/thats-entertainment-kasih-kita"
       },
       {
         "title": "Attack on Titan - Symphony from Paradis",
@@ -167,7 +194,25 @@
         "link": "https://klconcert.com/concert/attack-on-titan-symphony-from-paradis-kuala-lumpur"
       },
       {
-        "title": "Bestards - 不是因為天氣晴朗才見面 演唱會",
+        "title": "A Fantasy World II: Anime x Classical",
+        "venue": "KLPac, Kuala Lumpur",
+        "date_iso": "2026-11-20",
+        "end_iso": "2026-11-20",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/a-fantasy-world-ii-anime-x-classical"
+      },
+      {
+        "title": "Atsuko Okatsuka - The Big Bowl Tour",
+        "venue": "The Grand Theatre, JCPAC, Sunway",
+        "date_iso": "2026-11-21",
+        "end_iso": "2026-11-21",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/atsuko-okatsuka-big-bowl-tour-malaysia-2026"
+      },
+      {
+        "title": "Bestards - 不是因為天氣晴朗才見面",
         "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-11-21",
         "end_iso": "2026-11-21",
@@ -186,7 +231,7 @@
       },
       {
         "title": "3DIVA Live in Malaysia 2026 [TIMELESS]",
-        "venue": "Unifi Arena (Axiata Arena), Kuala Lumpur",
+        "venue": "Unifi Arena (Axiata Arena), KL",
         "date_iso": "2026-11-22",
         "end_iso": "2026-11-22",
         "time": "",
@@ -203,16 +248,7 @@
         "link": "https://klconcert.com/concert/wave-to-earth-the-pieces-tour"
       },
       {
-        "title": "Fabio Asher The Romanticist Live",
-        "venue": "Mega Star Arena, KL",
-        "date_iso": "2026-11-22",
-        "end_iso": "2026-11-22",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/fabio-asher-the-romanticist-live-in-kuala-lumpur"
-      },
-      {
-        "title": "DOMi & JD BECK - Who Asked Tour",
+        "title": "DOMi & JD BECK - WHO ASKED? Tour",
         "venue": "Vox Live KL",
         "date_iso": "2026-11-26",
         "end_iso": "2026-11-26",
@@ -233,19 +269,28 @@
         "title": "SEA SHOP & Malaysia Retail Tech Expo",
         "venue": "MITEC",
         "date_iso": "2026-11-27",
-        "end_iso": "2026-11-29",
+        "end_iso": "2026-11-27",
         "time": "10:00 AM",
         "type": "expo",
         "link": "https://allevents.in/kuala-lumpur/sea-shop-and-the-4th-malaysia-retail-technology-and-supermarket-equipment-expo/100001992110383784"
       },
       {
         "title": "Alan Tam - Unforgettable World Tour",
-        "venue": "Unifi Arena (Axiata Arena), Kuala Lumpur",
+        "venue": "Unifi Arena (Axiata Arena), KL",
         "date_iso": "2026-11-28",
         "end_iso": "2026-11-28",
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/alan-tam-unforgettable-world-tour-in-malaysia"
+      },
+      {
+        "title": "Ejen Ali in Concert - 10th Anniversary",
+        "venue": "Plenary Hall, KL Convention Centre",
+        "date_iso": "2026-11-28",
+        "end_iso": "2026-11-28",
+        "time": "",
+        "type": "family",
+        "link": "https://klconcert.com/concert/ejen-ali-in-concert-2026"
       },
       {
         "title": "Evanescence Live in Kuala Lumpur",
@@ -257,40 +302,22 @@
         "link": "https://klconcert.com/concert/evanescence-live-in-kuala-lumpur"
       },
       {
-        "title": "Ejen Ali in Concert 2026",
-        "venue": "Plenary Hall, KL Convention Centre",
-        "date_iso": "2026-11-28",
-        "end_iso": "2026-11-29",
-        "time": "",
-        "type": "family",
-        "link": "https://klconcert.com/concert/ejen-ali-in-concert-2026"
-      },
-      {
-        "title": "Rizky Febian - Malam Rawan Diorama",
+        "title": "Malam Rawan Diorama by Rizky Febian",
         "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-11-29",
         "end_iso": "2026-11-29",
-        "time": "8:00 PM",
+        "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/malam-rawan-diorama-by-rizky-febian-live-in-kuala-lumpur"
       },
       {
-        "title": "The Mersey Beatles Far East Tour 2026",
+        "title": "The Mersey Beatles - Far East Tour 2026",
         "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-11-30",
         "end_iso": "2026-11-30",
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/the-mersey-beatles-far-east-tour-2026"
-      },
-      {
-        "title": "FKJ in Kuala Lumpur",
-        "venue": "Zepp Kuala Lumpur",
-        "date_iso": "2026-12-01",
-        "end_iso": "2026-12-01",
-        "time": "7:00 PM",
-        "type": "concert",
-        "link": "https://allevents.in/kuala-lumpur/fkj-in-kuala-lumpur/3300030390058427"
       }
     ],
     "news": [],
@@ -301,7 +328,7 @@
   "ui": {
     "theme_mode": "morning",
     "time_context": "morning",
-    "score_headline": "HUMID BUT CALM"
+    "score_headline": "HUMID BUT ALIVE"
   },
   "quality_check": {
     "confidence": "HIGH",
