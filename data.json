@@ -1,45 +1,36 @@
 ```json
 {
   "status": "success",
-  "generated_at": "2026-11-23 07:00",
-  "events_checked_at": "2026-11-23 07:00",
+  "generated_at": "2026-11-24 07:00",
+  "events_checked_at": "2026-11-24 07:00",
   "location_context": "Kuala Lumpur",
   "go_out_score": 6,
   "today": {
-    "mood": "humid and overcast",
-    "best_time_to_go_out": "evening",
-    "summary": "It's a warm and humid morning with few clouds overhead. Expect temperatures around 25°C but feeling warmer due to 95% humidity."
+    "mood": "Humid and overcast",
+    "best_time_to_go_out": "Evening after the heat subsides",
+    "summary": "It's a warm and humid morning with few clouds. The temperature feels sticky at 26.7°C with 92% humidity and no wind, so indoor activities might be more comfortable until evening."
   },
   "weather": {
-    "temp_c": 25.07,
-    "feels_like_c": 26.11,
+    "temp_c": 25.71,
+    "feels_like_c": 26.74,
     "condition": "few clouds",
-    "humidity_pct": 95,
-    "wind_kmh": "4 km/h",
+    "humidity_pct": 92,
+    "wind_kmh": "0 km/h",
     "uv_index": 0,
     "aqi": 0,
-    "sunrise": "7:00 AM",
-    "sunset": "7:11 PM",
+    "sunrise": "7:07 AM",
+    "sunset": "7:05 PM",
     "advisory": "High humidity today, stay hydrated",
     "hourly": []
   },
   "finance": {
-    "usd_myr": "4.113",
+    "usd_myr": "4.112",
     "usd_change": "",
-    "sgd_myr": "3.189",
+    "sgd_myr": "3.19",
     "sgd_change": ""
   },
   "modules": {
     "events": [
-      {
-        "title": "Attack on Titan - Symphony from Paradis",
-        "venue": "Dewan Filharmonik PETRONAS",
-        "date_iso": "2026-11-23",
-        "end_iso": "2026-11-23",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/attack-on-titan-symphony-from-paradis-kuala-lumpur"
-      },
       {
         "title": "Kebaya Jazz with Ida & WVC",
         "venue": "BoboKL, Kuala Lumpur",
@@ -50,7 +41,7 @@
         "link": "https://klconcert.com/concert/kebaya-jazz-with-ida-wvc"
       },
       {
-        "title": "Christmas with James Bond: Diamonds, Martinis & Mistletoe",
+        "title": "Melissa Indot: Christmas with James Bond",
         "venue": "BoboKL, Kuala Lumpur",
         "date_iso": "2026-11-25",
         "end_iso": "2026-11-25",
@@ -68,7 +59,7 @@
         "link": "https://klconcert.com/concert/domi-jd-beck-who-asked-tour"
       },
       {
-        "title": "Sheila Majid 35th Legenda Anniversary",
+        "title": "MPO Benefit Concert - Sheila Majid 35th Anniversary",
         "venue": "Dewan Filharmonik PETRONAS",
         "date_iso": "2026-11-27",
         "end_iso": "2026-11-27",
@@ -78,7 +69,7 @@
       },
       {
         "title": "Butterfly Lovers The Musical",
-        "venue": "Jeffrey Cheah Performing Arts Centre, Sunway",
+        "venue": "JCPAC, Sunway",
         "date_iso": "2026-11-27",
         "end_iso": "2026-11-27",
         "time": "",
@@ -87,11 +78,11 @@
       },
       {
         "title": "Fadzri Rashid: The Big 40",
-        "venue": "The Platform Performing Arts Theatre, TTDI",
+        "venue": "The Platform Theatre, TTDI",
         "date_iso": "2026-11-27",
         "end_iso": "2026-11-27",
         "time": "",
-        "type": "other",
+        "type": "concert",
         "link": "https://klconcert.com/concert/fadzri-rashid-the-big-40"
       },
       {
@@ -104,13 +95,13 @@
         "link": "https://klconcert.com/concert/tokyo-afterglow-midnight-city-pop"
       },
       {
-        "title": "SEA SHOP & Malaysia Retail Technology Expo",
-        "venue": "MITEC",
+        "title": "WORLD BACHATA FESTIVAL KUALA LUMPUR",
+        "venue": "Saloma Kuala Lumpur",
         "date_iso": "2026-11-27",
-        "end_iso": "2026-11-29",
+        "end_iso": "2026-11-27",
         "time": "10:00 AM",
-        "type": "expo",
-        "link": "https://allevents.in/kuala-lumpur/sea-shop-and-the-4th-malaysia-retail-technology-and-supermarket-equipment-expo/100001992110383784"
+        "type": "festival",
+        "link": "https://allevents.in/kuala-lumpur/world-bachata-festival-kuala-lumpur-celebrating-16-years/100001977690564717"
       },
       {
         "title": "MYHOME 2026",
@@ -122,17 +113,26 @@
         "link": "https://allevents.in/kuala-lumpur/myhome-27-29-november-2026-mitec/200031038814302"
       },
       {
+        "title": "SEA SHOP 2026 - Retail Tech & Supermarket Expo",
+        "venue": "MITEC",
+        "date_iso": "2026-11-27",
+        "end_iso": "2026-11-29",
+        "time": "10:00 AM",
+        "type": "expo",
+        "link": "https://allevents.in/kuala-lumpur/sea-shop-and-the-4th-malaysia-retail-technology-and-supermarket-equipment-expo/100001992110383784"
+      },
+      {
         "title": "Ding Yuxi Fanmeeting",
         "venue": "Inspire Live Arena, IOI Mall Damansara",
         "date_iso": "2026-11-28",
         "end_iso": "2026-11-28",
         "time": "",
-        "type": "other",
+        "type": "concert",
         "link": "https://klconcert.com/concert/wespark-ding-yuxi-fanmeeting-kuala-lumpur"
       },
       {
-        "title": "510 Renegades Showcase",
-        "venue": "Odeon KL, Jalan Tuanku Abdul Rahman",
+        "title": "510 - Renegades Showcase",
+        "venue": "Odeon KL",
         "date_iso": "2026-11-28",
         "end_iso": "2026-11-28",
         "time": "",
@@ -167,13 +167,22 @@
         "link": "https://klconcert.com/concert/evanescence-live-in-kuala-lumpur"
       },
       {
-        "title": "An Evening of Love, Soul & Everything in between",
+        "title": "An Evening of Love, Soul with Gideon Yogan",
         "venue": "BoboKL, Kuala Lumpur",
         "date_iso": "2026-11-28",
         "end_iso": "2026-11-28",
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/an-evening-of-love-soul-everything-in-between-with-gideon-yogan"
+      },
+      {
+        "title": "Ruang Temu: The Impatient Sisters",
+        "venue": "Five Arts Centre, GMBB",
+        "date_iso": "2026-11-28",
+        "end_iso": "2026-11-28",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/ruang-temu-the-impatient-sisters"
       },
       {
         "title": "Ejen Ali in Concert - Family Fun Day",
@@ -183,6 +192,24 @@
         "time": "",
         "type": "family",
         "link": "https://klconcert.com/concert/ejen-ali-in-concert-2026-day-2"
+      },
+      {
+        "title": "Choral Celebration 1",
+        "venue": "Menara KEN TTDI",
+        "date_iso": "2026-11-29",
+        "end_iso": "2026-11-29",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/choral-celebration-1-menara-ken-ttdi"
+      },
+      {
+        "title": "BlueBeard with Billie Blue Blackstone",
+        "venue": "BoboKL, Kuala Lumpur",
+        "date_iso": "2026-11-29",
+        "end_iso": "2026-11-29",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/bluebeard-billie-blue-blackstone-bobokl"
       },
       {
         "title": "Lucid Express - Instant Comfort Asia Tour",
@@ -198,7 +225,7 @@
         "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-11-29",
         "end_iso": "2026-11-29",
-        "time": "",
+        "time": "8:00 PM",
         "type": "concert",
         "link": "https://klconcert.com/concert/malam-rawan-diorama-by-rizky-febian-live-in-kuala-lumpur"
       },
@@ -212,6 +239,15 @@
         "link": "https://klconcert.com/concert/odyssey-a-journey-beyond-horizons-sri-kl-wind-band"
       },
       {
+        "title": "Panggung Suria: Aku Mat Rock",
+        "venue": "Auditorium Bandaraya, DBKL",
+        "date_iso": "2026-11-29",
+        "end_iso": "2026-11-29",
+        "time": "",
+        "type": "theatre",
+        "link": "https://klconcert.com/concert/panggung-suria-aku-mat-rock"
+      },
+      {
         "title": "The Mersey Beatles Far East Tour",
         "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-11-30",
@@ -221,11 +257,20 @@
         "link": "https://klconcert.com/concert/the-mersey-beatles-far-east-tour-2026"
       },
       {
+        "title": "Douglas Lim: WIP it Good!",
+        "venue": "BoboKL, Kuala Lumpur",
+        "date_iso": "2026-11-30",
+        "end_iso": "2026-11-30",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/douglas-lim-wip-it-good"
+      },
+      {
         "title": "FKJ - Tyber Tour",
         "venue": "Zepp Kuala Lumpur",
         "date_iso": "2026-12-01",
         "end_iso": "2026-12-01",
-        "time": "",
+        "time": "7:00 PM",
         "type": "concert",
         "link": "https://klconcert.com/concert/fkj-tyber-tour"
       },
@@ -237,6 +282,15 @@
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/joji-solaris-tour-2026-kuala-lumpur"
+      },
+      {
+        "title": "Love Me Like It's 1999 - Nazar Zulkifli",
+        "venue": "BoboKL, Kuala Lumpur",
+        "date_iso": "2026-12-03",
+        "end_iso": "2026-12-03",
+        "time": "",
+        "type": "concert",
+        "link": "https://klconcert.com/concert/love-me-like-its-1999-nazar-zulkifli"
       },
       {
         "title": "Above & Beyond presents Anjunabeats Warehouse",
@@ -255,51 +309,6 @@
         "time": "",
         "type": "concert",
         "link": "https://klconcert.com/concert/5-seconds-of-summer-everyones-a-star-asia-tour"
-      },
-      {
-        "title": "Slowdive Live in Malaysia",
-        "venue": "Zepp Kuala Lumpur",
-        "date_iso": "2026-12-04",
-        "end_iso": "2026-12-04",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/slowdive-live-in-malaysia-2026"
-      },
-      {
-        "title": "A Chorale Spectacular",
-        "venue": "Dewan Filharmonik PETRONAS",
-        "date_iso": "2026-12-05",
-        "end_iso": "2026-12-05",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/a-chorale-spectacular"
-      },
-      {
-        "title": "izna - WHO DAT GIRL? Concert Tour",
-        "venue": "Zepp Kuala Lumpur",
-        "date_iso": "2026-12-05",
-        "end_iso": "2026-12-05",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/izna-who-dat-girl-concert-tour"
-      },
-      {
-        "title": "Konsert Sooka 2026",
-        "venue": "Idea Live Arena, Petaling Jaya",
-        "date_iso": "2026-12-05",
-        "end_iso": "2026-12-05",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/konsert-sooka-2026"
-      },
-      {
-        "title": "Ella - Majlis Tertinggi Rockqueen 2026",
-        "venue": "Unifi Arena (Axiata Arena)",
-        "date_iso": "2026-12-05",
-        "end_iso": "2026-12-05",
-        "time": "",
-        "type": "concert",
-        "link": "https://klconcert.com/concert/majlis-tertinggi-rockqueen-ella-2026-sidang-penutup"
       }
     ],
     "news": [],
@@ -310,7 +319,7 @@
   "ui": {
     "theme_mode": "morning",
     "time_context": "morning",
-    "score_headline": "HUMID BUT ALIVE"
+    "score_headline": "HUMID BUT HAPPENING"
   },
   "quality_check": {
     "confidence": "HIGH",
